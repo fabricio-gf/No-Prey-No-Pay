@@ -4,24 +4,34 @@ using UnityEngine;
 
 public class MenuActions : MonoBehaviour {
 
+	public static MenuActions instance;
+
 	[Header("References")]
 	[SerializeField] private GameObject MusicManager;
 	[SerializeField] private GameObject SFXManager;
 	[SerializeField] private GameObject VoiceManager;
 	[SerializeField] private GameObject NarratorManager;
 
-	private GameObject ActivePanel;
+	[SerializeField] private GameObject ActivePanel;
 	private GameObject ActiveWindow;
 
+	public void Awake(){
+		if (instance == null)
+			instance = this;
+		else if (instance != this)
+			Destroy(gameObject);
+	}
 
 	public void ChangePanel(GameObject panel){
-		//deactivate current panel
+		ActivePanel?.SetActive(false);
 		panel.SetActive(true);
+		ActivePanel = panel;
 	}
 
 	public void TriggerWindow(GameObject window){
-		//deactivate current window
+		ActiveWindow?.SetActive(false);
 		window.SetActive(true);
+		ActiveWindow = window;
 	}
 
 	public void MuteAll(bool mute){
@@ -41,6 +51,10 @@ public class MenuActions : MonoBehaviour {
 	}
 
 	public void ChangeNarratorVolume(float volume){
+		
+	}
+
+	public void ExitGame(){
 		
 	}
 }
