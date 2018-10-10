@@ -12,7 +12,7 @@ public class MainMenuScreen : MonoBehaviour {
 	[SerializeField] private GameObject[] Buttons;
 
 	private int index = 0;
-	private bool AnalogPushed = false;
+	private bool DirectionPressed = false;
 	private EventSystem eventSystem;
 
 	void Start(){
@@ -20,20 +20,42 @@ public class MainMenuScreen : MonoBehaviour {
 		eventSystem.SetSelectedGameObject(Buttons[index]);
 	}
 
+	void OnEnable(){
+		eventSystem = EventSystem.current;
+		eventSystem.SetSelectedGameObject(Buttons[index]);
+	}
+
 	// Update is called once per frame
 	void Update () {
-		float vertical = InputManager.GetAxis(1, InputManager.Axis.VERTICAL);
+		float vertical = InputManager.GetAxis(InputManager.Axis.VERTICAL);
+		bool up = InputManager.GetButton(InputManager.Buttons.UP);
+		bool down = InputManager.GetButton(InputManager.Buttons.DOWN);
 		
-		if(vertical == 0){
-			AnalogPushed = false;
+		print(down + " " + up);
+		if(!down && !up){
+			DirectionPressed = false;
 		}
-		else if(vertical < 0.3f && AnalogPushed == false){
-			AnalogPushed = true;
+		/*
+		if(vertical == 0){
+			DirectionPressed = false;
+		}
+		else if(vertical < 0.3f && DirectionPressed == false){
+			DirectionPressed = true;
 			MoveSelection(1);
 		}
-		else if(vertical > 0.3f && AnalogPushed == false){
-			AnalogPushed = true;
+		else if(vertical > 0.3f && DirectionPressed == false){
+			DirectionPressed = true;
 			MoveSelection(-1);
+		}
+		*/
+		if(down && DirectionPressed == false){
+			MoveSelection(1);
+			DirectionPressed = true;
+		}
+		if(up && DirectionPressed == false){
+			MoveSelection(-1);
+			DirectionPressed = true;
+
 		}
 		
 		
@@ -50,7 +72,7 @@ public class MainMenuScreen : MonoBehaviour {
 				break;
 		}*/
 
-		if(InputManager.GetButton(1, InputManager.Buttons.SELECT)){
+		if(InputManager.GetButton(InputManager.Buttons.SELECT)){
 			SelectButton();
 		}
 	}

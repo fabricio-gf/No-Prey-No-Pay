@@ -19,7 +19,11 @@ public class InputManager : MonoBehaviour
         GRAB,
         START,
         SELECT,
-        BACK
+        BACK,
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
     }
 
     public enum XBoxButtons
@@ -68,6 +72,10 @@ public class InputManager : MonoBehaviour
     public XBoxButtons m_startButton;
     public XBoxButtons m_selectButton;
     public XBoxButtons m_backButton;
+    public XBoxButtons m_leftButton;
+    public XBoxButtons m_rightButton;
+    public XBoxButtons m_upButton;
+    public XBoxButtons m_downButton;
 
     public float m_triggMinRatio = .3f;
     
@@ -114,6 +122,52 @@ public class InputManager : MonoBehaviour
                 return GetButton(gamePadState, m_manager.m_selectButton);
             case Buttons.BACK:
                 return GetButton(gamePadState, m_manager.m_backButton);
+            case Buttons.LEFT:
+                return GetButton(gamePadState, m_manager.m_leftButton);
+            case Buttons.RIGHT:
+                return GetButton(gamePadState, m_manager.m_rightButton);
+            case Buttons.UP:
+                return GetButton(gamePadState, m_manager.m_upButton);
+            case Buttons.DOWN:
+                return GetButton(gamePadState, m_manager.m_downButton);
+        }
+
+        return false;
+    }
+
+    public static bool GetButton(Buttons _button)
+    {
+
+        for(int i = 0; i < 4; i++){
+            GamePadState gamePadState = GamePad.GetState((PlayerIndex)i);
+
+            switch (_button)
+            {
+                case Buttons.ATTACK:
+                    return GetButton(gamePadState, m_manager.m_attackButton);
+                case Buttons.DASH:
+                    return GetButton(gamePadState, m_manager.m_dashButton);
+                case Buttons.GRAB:
+                    return GetButton(gamePadState, m_manager.m_grabButton);
+                case Buttons.TOSS:
+                    return GetButton(gamePadState, m_manager.m_tossButton);
+                case Buttons.JUMP:
+                    return GetButton(gamePadState, m_manager.m_jumpButton);
+                case Buttons.START:
+                    return GetButton(gamePadState, m_manager.m_startButton);
+                case Buttons.SELECT:
+                    return GetButton(gamePadState, m_manager.m_selectButton);
+                case Buttons.BACK:
+                    return GetButton(gamePadState, m_manager.m_backButton);
+                case Buttons.LEFT:
+                    return GetButton(gamePadState, m_manager.m_leftButton);
+                case Buttons.RIGHT:
+                    return GetButton(gamePadState, m_manager.m_rightButton);
+                case Buttons.UP:
+                    return GetButton(gamePadState, m_manager.m_upButton);
+                case Buttons.DOWN:
+                    return GetButton(gamePadState, m_manager.m_downButton);
+            }
         }
 
         return false;
@@ -134,6 +188,23 @@ public class InputManager : MonoBehaviour
                 return gamePadState.ThumbSticks.Left.X;
             case Axis.VERTICAL:
                 return gamePadState.ThumbSticks.Left.Y;
+        }
+
+        return 0f;
+    }
+
+    public static float GetAxis(Axis _axis)
+    {
+        for(int i = 0; i < 4; i++){
+            GamePadState gamePadState = GamePad.GetState((PlayerIndex)i);
+
+            switch (_axis)
+            {
+                case Axis.HORIZONTAL:
+                    return gamePadState.ThumbSticks.Left.X;
+                case Axis.VERTICAL:
+                    return gamePadState.ThumbSticks.Left.Y;
+            }
         }
 
         return 0f;
