@@ -85,7 +85,6 @@ public class MainMenuScreen : MonoBehaviour {
 		else if(index < 0){
 			index = Buttons.Length-1;
 		}
-		print(index);
 		
 		eventSystem.SetSelectedGameObject(Buttons[index]);
 	}

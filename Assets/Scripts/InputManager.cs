@@ -99,10 +99,10 @@ public class InputManager : MonoBehaviour
     // ======================================================================================
     public static bool GetButton(int _player, Buttons _button)
     {
-        if (_player > 4 || _player <= 0)
+        if (_player >= 4 || _player < 0)
             return false;
 
-        GamePadState gamePadState = GamePad.GetState( (PlayerIndex) (_player - 1) );
+        GamePadState gamePadState = GamePad.GetState( (PlayerIndex) (_player) );
 
         switch (_button)
         {

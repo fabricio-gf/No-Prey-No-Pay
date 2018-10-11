@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class CharacterSelection : MonoBehaviour {
 
-	public int PlayerCount;
-	private List<Character> SelectedCharacters;
+	public GameObject MainMenuScreen;
 
-	private bool DirectionPressed1 = false;
+	public int PlayerCount;
+	private bool[] ActivePlayers;
+	private Character[] SelectedCharacters;
+	public GameObject[] CharacterPortraits;
+
+	/*private bool DirectionPressed1 = false;
 	private bool DirectionPressed2 = false;
 	private bool DirectionPressed3 = false;
-	private bool DirectionPressed4 = false;
+	private bool DirectionPressed4 = false;*/
 
 
 	// Use this for initialization
 	void Start () {
-		
+		ActivePlayers = new bool[4];
+		for(int i = 0; i < 4; i++){
+			ActivePlayers[i] = false;
+		}	
 	}
 	
 	// Update is called once per frame
@@ -24,52 +31,47 @@ public class CharacterSelection : MonoBehaviour {
 
 		GetExitPlayers();
 
-		GetCharacterSwap();
+		//GetCharacterSwap();
 
 		GetColorSwap();
 	}
 
 	private void GetNewPlayers(){
-		if(InputManager.GetButton(1, InputManager.Buttons.START)){
-			AddPlayer(1);
-		}
-		if(InputManager.GetButton(2, InputManager.Buttons.START)){
-			AddPlayer(2);
-		}
-		if(InputManager.GetButton(3, InputManager.Buttons.START)){
-			AddPlayer(3);			
-		}
-		if(InputManager.GetButton(4, InputManager.Buttons.START)){
-			AddPlayer(4);			
+		for(int i = 0; i < 4; i++){
+			if(!ActivePlayers[i] && InputManager.GetButton(i, InputManager.Buttons.START)){
+				AddPlayer(i);
+			}
 		}
 	}
 
 	private void GetExitPlayers(){
-		if(InputManager.GetButton(1, InputManager.Buttons.BACK)){
-			RemovePlayer(1);
+		int inactive = 0;		
+		
+		for(int i = 0; i < 4; i++){
+			if(!ActivePlayers[i]){
+				inactive++;
+			}
+			else if(ActivePlayers[i] && InputManager.GetButton(i, InputManager.Buttons.BACK)){
+				RemovePlayer(i);
+			}
 		}
-		if(InputManager.GetButton(2, InputManager.Buttons.BACK)){
-			RemovePlayer(2);
-		}
-		if(InputManager.GetButton(3, InputManager.Buttons.BACK)){
-			RemovePlayer(3);			
-		}
-		if(InputManager.GetButton(4, InputManager.Buttons.BACK)){
-			RemovePlayer(4);			
+		
+		if(inactive == 4 && InputManager.GetButton(InputManager.Buttons.BACK)){
+			MenuActions.instance.ChangePanel(MainMenuScreen);
 		}
 	}
 
-	private void GetCharacterSwap(){
+	/*private void GetCharacterSwap(){
 		
 		bool right1 = InputManager.GetButton(1, InputManager.Buttons.RIGHT);
 		bool left1 = InputManager.GetButton(1, InputManager.Buttons.LEFT);
 		
 		if(right1 && !DirectionPressed1){
-			ChangeCharacter(1);
+			ChangeCharacter(1, 1);
 			DirectionPressed1 = true;
 		}
 		if(left1 && !DirectionPressed1){
-			ChangeCharacter(1);
+			ChangeCharacter(1, -1);
 			DirectionPressed1 = true;
 		}
 
@@ -77,11 +79,11 @@ public class CharacterSelection : MonoBehaviour {
 		bool left2 = InputManager.GetButton(2, InputManager.Buttons.LEFT);
 
 		if(right2 && !DirectionPressed2){
-			ChangeCharacter(2);
+			ChangeCharacter(2, 1);
 			DirectionPressed1 = true;
 		}
 		if(left2 && !DirectionPressed2){
-			ChangeCharacter(2);
+			ChangeCharacter(2, -1);
 			DirectionPressed1 = true;
 		}
 
@@ -89,11 +91,11 @@ public class CharacterSelection : MonoBehaviour {
 		bool left3 = InputManager.GetButton(3, InputManager.Buttons.LEFT);
 		
 		if(right3 && !DirectionPressed3){
-			ChangeCharacter(3);
+			ChangeCharacter(3, 1);
 			DirectionPressed1 = true;
 		}
 		if(left3 && !DirectionPressed3){
-			ChangeCharacter(3);
+			ChangeCharacter(3, -1);
 			DirectionPressed1 = true;
 		}
 		
@@ -101,39 +103,34 @@ public class CharacterSelection : MonoBehaviour {
 		bool left4 = InputManager.GetButton(4, InputManager.Buttons.LEFT);
 
 		if(right4 && !DirectionPressed4){
-			ChangeCharacter(4);
+			ChangeCharacter(4, 1);
 			DirectionPressed1 = true;
 		}
 		if(left4 && !DirectionPressed4){
-			ChangeCharacter(4);
+			ChangeCharacter(4, -1);
 			DirectionPressed1 = true;
 		}
-	}
+	}*/
 
 	private void GetColorSwap(){
-		if(InputManager.GetButton(1, InputManager.Buttons.ATTACK)){
-			ChangeColor(1);
-		}
-		if(InputManager.GetButton(2, InputManager.Buttons.ATTACK)){
-			ChangeColor(2);
-		}
-		if(InputManager.GetButton(3, InputManager.Buttons.ATTACK)){
-			ChangeColor(3);			
-		}
-		if(InputManager.GetButton(4, InputManager.Buttons.ATTACK)){
-			ChangeColor(4);
+		for(int i = 0; i < 4; i++){
+			if(ActivePlayers[i] && InputManager.GetButton(i, InputManager.Buttons.ATTACK)){
+				CharacterPortraits[i].GetComponent<CharacterPortrait>().ChangeColor();
+			}
 		}
 	}
 
 	public void AddPlayer(int controller){
-
+		ActivePlayers[controller] = true;
+		PlayerCount++;
 	}
 
 	public void RemovePlayer(int controller){
-
+		ActivePlayers[controller] = false;
+		PlayerCount--;
 	}
 
-	public void ChangeCharacter(int player){
+	public void ChangeCharacter(int player, int direction){
 		
 	}
 
