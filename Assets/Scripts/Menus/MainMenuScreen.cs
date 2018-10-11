@@ -48,11 +48,11 @@ public class MainMenuScreen : MonoBehaviour {
 			MoveSelection(-1);
 		}
 		*/
-		if(down && DirectionPressed == false){
+		if(down && !DirectionPressed){
 			MoveSelection(1);
 			DirectionPressed = true;
 		}
-		if(up && DirectionPressed == false){
+		if(up && !DirectionPressed){
 			MoveSelection(-1);
 			DirectionPressed = true;
 
