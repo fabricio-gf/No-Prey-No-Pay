@@ -36,6 +36,8 @@ public class LevelLoader : MonoBehaviour {
 			instance = this;
 		else if (instance != this)
 			Destroy(gameObject);
+
+		DontDestroyOnLoad(this.gameObject);
 	}
 
 	/// <summary>

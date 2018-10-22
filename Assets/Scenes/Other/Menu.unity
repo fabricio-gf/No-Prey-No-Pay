@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -271,7 +271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &152109118
 RectTransform:
   m_ObjectHideFlags: 0
@@ -948,7 +948,7 @@ MonoBehaviour:
   charIndex: 0
   colorIndex: 1
   PressStart: {fileID: 1020891765}
-  Selected: {fileID: 0}
+  Selected: {fileID: 1849383590}
 --- !u!1 &327030761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1785,9 +1785,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d091bbeaa800e6478bd1e6b10ccc3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartText: {fileID: 827748807}
-  StartTextActiveColor: {r: 0, g: 0, b: 0, a: 0}
-  StartTextNonActiveColor: {r: 0.44313726, g: 0.44313726, b: 0.44313726, a: 0}
+  StartText: {fileID: 651783312}
+  StartTextActiveColor: {r: 0, g: 0, b: 0, a: 1}
+  StartTextNonActiveColor: {r: 0.44313726, g: 0.44313726, b: 0.44313726, a: 1}
 --- !u!1 &555403321
 GameObject:
   m_ObjectHideFlags: 0
@@ -3918,7 +3918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1196329479
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3955,13 +3955,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ad75ea7c28da142bc35d4da0544e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainMenuScreen: {fileID: 199372013}
-  PlayerCount: 0
   Portraits:
   - {fileID: 1474012923}
   - {fileID: 2015997261}
   - {fileID: 288061270}
   - {fileID: 1586941889}
+  MainMenuScreen: {fileID: 199372013}
 --- !u!1 &1209229956
 GameObject:
   m_ObjectHideFlags: 0
@@ -5217,7 +5216,7 @@ MonoBehaviour:
   charIndex: 0
   colorIndex: 1
   PressStart: {fileID: 1392547749}
-  Selected: {fileID: 0}
+  Selected: {fileID: 1192421573}
 --- !u!1 &1495088733
 GameObject:
   m_ObjectHideFlags: 0
@@ -5672,7 +5671,7 @@ MonoBehaviour:
   charIndex: 0
   colorIndex: 1
   PressStart: {fileID: 1257381446}
-  Selected: {fileID: 0}
+  Selected: {fileID: 177429852}
 --- !u!1 &1605778226
 GameObject:
   m_ObjectHideFlags: 0
@@ -7660,7 +7659,7 @@ MonoBehaviour:
   charIndex: 0
   colorIndex: 1
   PressStart: {fileID: 770315118}
-  Selected: {fileID: 0}
+  Selected: {fileID: 1358584547}
 --- !u!1 &2030117729
 GameObject:
   m_ObjectHideFlags: 0
