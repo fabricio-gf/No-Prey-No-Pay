@@ -24,6 +24,8 @@ public class InputMgr : MonoBehaviour
         SUBMIT,
         PREVIOUS,
         PAUSE,
+        CHANGE_COLOR,
+
         LEFT,
         RIGHT,
         UP,
@@ -68,6 +70,7 @@ public class InputMgr : MonoBehaviour
     public eXBoxButton m_submitButton;
     public eXBoxButton m_previousButton;
     public eXBoxButton m_pauseButton;
+    public eXBoxButton m_changeColorButton;
 
 
 
@@ -148,6 +151,9 @@ public class InputMgr : MonoBehaviour
                     break;
                 case eMenuButton.DOWN:
                     isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_DOWN)   || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
+                    break;
+                case eMenuButton.CHANGE_COLOR:
+                    isPressed |= GetButton(gamePadState, m_manager.m_changeColorButton);
                     break;
             }
         }

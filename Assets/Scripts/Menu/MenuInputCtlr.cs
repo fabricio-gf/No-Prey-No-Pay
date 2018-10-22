@@ -8,6 +8,7 @@ public class MenuInputCtlr : MonoBehaviour
     private bool m_submitTrigger;
     private bool m_previousTrigger;
     private bool m_pauseTrigger;
+    private bool m_changeCollorTrigger;
 
     private bool m_upTrigger;
     private bool m_downTrigger;
@@ -23,6 +24,8 @@ public class MenuInputCtlr : MonoBehaviour
         m_submitTrigger     = !InputMgr.GetMenuButton(InputMgr.eMenuButton.SUBMIT)      || m_submitTrigger;
         m_previousTrigger   = !InputMgr.GetMenuButton(InputMgr.eMenuButton.PREVIOUS)    || m_previousTrigger;
         m_pauseTrigger      = !InputMgr.GetMenuButton(InputMgr.eMenuButton.PAUSE)       || m_pauseTrigger;
+        m_changeCollorTrigger = !InputMgr.GetMenuButton(InputMgr.eMenuButton.CHANGE_COLOR) || m_changeCollorTrigger;
+
 
         m_upTrigger         = !InputMgr.GetMenuButton(InputMgr.eMenuButton.UP)          || m_upTrigger;
         m_downTrigger       = !InputMgr.GetMenuButton(InputMgr.eMenuButton.DOWN)        || m_downTrigger;
@@ -60,6 +63,18 @@ public class MenuInputCtlr : MonoBehaviour
         if (m_pauseTrigger && InputMgr.GetMenuButton(InputMgr.eMenuButton.PAUSE))
         {
             m_pauseTrigger = false;
+            return true;
+        }
+
+        return false;
+    }
+
+    // ======================================================================================
+    public bool GetChangeColor()
+    {
+        if (m_changeCollorTrigger && InputMgr.GetMenuButton(InputMgr.eMenuButton.CHANGE_COLOR))
+        {
+            m_changeCollorTrigger = false;
             return true;
         }
 
