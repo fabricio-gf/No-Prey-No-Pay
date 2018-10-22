@@ -120,6 +120,8 @@ public class InputMgr : MonoBehaviour
     // ======================================================================================
     public static bool GetMenuButton(eMenuButton _menuButton)
     {
+        bool isPressed = false;
+
         for (int player = 0; player < 4; player++)
         {
             GamePadState gamePadState = GamePad.GetState((PlayerIndex)(player));
@@ -127,22 +129,30 @@ public class InputMgr : MonoBehaviour
             switch (_menuButton)
             {
                 case eMenuButton.SUBMIT:
-                    return GetButton(gamePadState, m_manager.m_submitButton);
+                    isPressed |= GetButton(gamePadState, m_manager.m_submitButton);
+                    break;
                 case eMenuButton.PREVIOUS:
-                    return GetButton(gamePadState, m_manager.m_previousButton);
+                    isPressed |= GetButton(gamePadState, m_manager.m_previousButton);
+                    break;
                 case eMenuButton.PAUSE:
-                    return GetButton(gamePadState, m_manager.m_pauseButton);
+                    isPressed |= GetButton(gamePadState, m_manager.m_pauseButton);
+                    break;
                 case eMenuButton.LEFT:
-                    return GetButton(gamePadState, eXBoxButton.DPAD_LEFT)   || gamePadState.ThumbSticks.Left.X < -m_manager.m_triggMinRatio;
+                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_LEFT)   || gamePadState.ThumbSticks.Left.X < -m_manager.m_triggMinRatio;
+                    break;
                 case eMenuButton.RIGHT:
-                    return GetButton(gamePadState, eXBoxButton.DPAD_RIGHT)  || gamePadState.ThumbSticks.Left.X > m_manager.m_triggMinRatio;
+                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_RIGHT)  || gamePadState.ThumbSticks.Left.X > m_manager.m_triggMinRatio;
+                    break;
                 case eMenuButton.UP:
-                    return GetButton(gamePadState, eXBoxButton.DPAD_UP)     || gamePadState.ThumbSticks.Left.Y < -m_manager.m_triggMinRatio;
+                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_UP)     || gamePadState.ThumbSticks.Left.Y < -m_manager.m_triggMinRatio;
+                    break;
                 case eMenuButton.DOWN:
-                    return GetButton(gamePadState, eXBoxButton.DPAD_DOWN)   || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
+                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_DOWN)   || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
+                    break;
             }
         }
-        return false;
+
+        return isPressed;
     }
 
     // ======================================================================================
