@@ -21,12 +21,6 @@ public class PlayerStateMachine : MonoBehaviour
         Dead,
     }
 
-    public enum eDirections
-    {
-        Left,
-        Right
-    }
-
     // ------------------------------- PROTECTED ATTRIBUTES ------------------------------ //
     protected PlayerController          m_playerCtl;
     protected PlayerAnimatorController  m_playerAnimCtl;
@@ -36,7 +30,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     // ------------------------------------- ACCESSORS ----------------------------------- //
     public eStates      State           { get; protected set; }
-    public eDirections  Direction       { get; protected set; }
 
     // ======================================================================================
     // PUBLIC MEMBERS
@@ -44,8 +37,7 @@ public class PlayerStateMachine : MonoBehaviour
     public void Start()
     {
         State           = eStates.Idle;
-        Direction       = eDirections.Right;
-
+        
         m_playerCtl     = this.gameObject.GetComponent<PlayerController>();
         m_playerAnimCtl = this.gameObject.GetComponent<PlayerAnimatorController>();
     }
@@ -53,18 +45,8 @@ public class PlayerStateMachine : MonoBehaviour
     // ======================================================================================
     public void Update()
     {
-        UpdateDirection();
         UpdateStateMachine();
         UpdateAnimator();
-    }
-
-    // ======================================================================================
-    protected void UpdateDirection()
-    {
-        if (m_playerCtl.Velocity.x > 0)
-            Direction = eDirections.Right;
-        else if (m_playerCtl.Velocity.x < 0)
-            Direction = eDirections.Left;
     }
 
     // ======================================================================================
@@ -81,7 +63,7 @@ public class PlayerStateMachine : MonoBehaviour
             else
                 State = eStates.Idle;
         }
-        else if (m_playerCtl.IsWallSnapped)
+        else if (m_playerCtl.IsWallSliding)
             State = eStates.WallSliding;
         else if (m_playerCtl.IsJumping)
         {
@@ -120,12 +102,12 @@ public class PlayerStateMachine : MonoBehaviour
                 break;
         }
 
-        switch (Direction)
+        switch (m_playerCtl.ForwardDir)
         {
-            case eDirections.Left:
+            case PlayerController.eDirection.Left:
                 m_playerAnimCtl.SetDirection(PlayerAnimatorController.eDirections.Left);
                 break;
-            case eDirections.Right:
+            case PlayerController.eDirection.Right:
                 m_playerAnimCtl.SetDirection(PlayerAnimatorController.eDirections.Right);
                 break;
         }

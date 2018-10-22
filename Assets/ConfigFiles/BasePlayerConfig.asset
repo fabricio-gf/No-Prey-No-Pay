@@ -15,7 +15,7 @@ MonoBehaviour:
   m_jumpMaxSpeed: 12
   m_ratioToWalk: 0.62
   m_walkAcc: 10
-  m_walkMaxSpeed: 20
+  m_walkMaxSpeed: 15
   m_slideMaxSpeed: 4
   m_ejectDist: 1
   m_ejectMaxSpeed: 15

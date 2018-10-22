@@ -2964,6 +2964,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_configData: {fileID: 11400000, guid: 75f7d9c21fde86e44b70fdd9e7c976c9, type: 2}
+  m_gravityRatio: 5
+  m_jumpMaxSpeed: 12
+  m_ratioToWalk: 0.62
+  m_walkAcc: 10
+  m_walkMaxSpeed: 20
+  m_slideMaxSpeed: 5
+  m_ejectDist: 1
+  m_ejectMaxSpeed: 15
+  m_ejectMinSpeedRatio: 0.3
+  m_dashDist: 1
+  m_dashMaxSpeed: 40
+  m_dashMinSpeedRatio: 0.2
+  m_walkMinSpeedRatio: 0.1
+  m_ejectMinSpeed: 0.1
+  m_dashMinSpeed: 0.1
+  m_rb: {fileID: 0}
+  m_input: {fileID: 0}
+  m_snappedWallNormal: {x: 0, y: 0}
+  m_ejectTargetPosX: 0
+  m_ejectDirectionX: 0
+  m_dashTargetPos: {x: 0, y: 0}
+  m_dashDirection: {x: 0, y: 0}
+  m_minDashEventRatio: 0.2
+  m_minEjectEventRatio: 0.1
+  m_debugCapsule: {fileID: 0}
+  <IsGrounded>k__BackingField: 0
+  <IsJumping>k__BackingField: 0
+  <IsWallSnapped>k__BackingField: 0
+  <IsEjecting>k__BackingField: 0
+  <IsDashing>k__BackingField: 0
 --- !u!114 &114477753381728136
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,6 +19,17 @@ public class InputMgr : MonoBehaviour
         GRAB
     }
 
+    public enum eMenuButton
+    {
+        SUBMIT,
+        PREVIOUS,
+        PAUSE,
+        LEFT,
+        RIGHT,
+        UP,
+        DOWN
+    }
+
     public enum eXBoxButton
     {
         A,
@@ -40,6 +51,11 @@ public class InputMgr : MonoBehaviour
     }
 
     // --------------------------------- PUBLIC ATTRIBUTES ------------------------------- //
+    [Header("Global")]
+    public float m_triggMinRatio    = .3f;
+    public bool m_pcDebugMode       = false;
+
+    [Header("Locomotion")]
     public eXBoxButton m_dashButton;
 
     public eXBoxButton m_jumpButton;
@@ -48,9 +64,12 @@ public class InputMgr : MonoBehaviour
     public eXBoxButton m_attackButton;
     public eXBoxButton m_grabButton;
 
-    public float       m_triggMinRatio = .3f;
+    [Header("Menu")]
+    public eXBoxButton m_submitButton;
+    public eXBoxButton m_previousButton;
+    public eXBoxButton m_pauseButton;
 
-    public bool        m_pcDebugMode = false;
+
 
     // --------------------------------- PRIVATE ATTRIBUTES ------------------------------ //
     private static InputMgr m_manager;
@@ -95,6 +114,34 @@ public class InputMgr : MonoBehaviour
                 return GetButton(gamePadState, m_manager.m_jumpButton);
         }
 
+        return false;
+    }
+
+    // ======================================================================================
+    public static bool GetMenuButton(eMenuButton _menuButton)
+    {
+        for (int player = 0; player < 4; player++)
+        {
+            GamePadState gamePadState = GamePad.GetState((PlayerIndex)(player));
+
+            switch (_menuButton)
+            {
+                case eMenuButton.SUBMIT:
+                    return GetButton(gamePadState, m_manager.m_submitButton);
+                case eMenuButton.PREVIOUS:
+                    return GetButton(gamePadState, m_manager.m_previousButton);
+                case eMenuButton.PAUSE:
+                    return GetButton(gamePadState, m_manager.m_pauseButton);
+                case eMenuButton.LEFT:
+                    return GetButton(gamePadState, eXBoxButton.DPAD_LEFT)   || gamePadState.ThumbSticks.Left.X < -m_manager.m_triggMinRatio;
+                case eMenuButton.RIGHT:
+                    return GetButton(gamePadState, eXBoxButton.DPAD_RIGHT)  || gamePadState.ThumbSticks.Left.X > m_manager.m_triggMinRatio;
+                case eMenuButton.UP:
+                    return GetButton(gamePadState, eXBoxButton.DPAD_UP)     || gamePadState.ThumbSticks.Left.Y < -m_manager.m_triggMinRatio;
+                case eMenuButton.DOWN:
+                    return GetButton(gamePadState, eXBoxButton.DPAD_DOWN)   || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
+            }
+        }
         return false;
     }
 

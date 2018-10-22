@@ -14,6 +14,17 @@ public class JoystickPlayerInputCtlr : PlayerInputCtlr
     // ======================================================================================
     // PUBLIC MEMBERS
     // ======================================================================================
+    public void Update()
+    {
+        // reset triggers when button released
+        m_dashTrigger   = !InputMgr.GetButton((int)m_nbPlayer, InputMgr.eButton.DASH)   || m_dashTrigger;
+        m_jumpTrigger   = !InputMgr.GetButton((int)m_nbPlayer, InputMgr.eButton.JUMP)   || m_jumpTrigger;
+        m_grabTrigger   = !InputMgr.GetButton((int)m_nbPlayer, InputMgr.eButton.GRAB)   || m_grabTrigger;
+        m_tossTrigger   = !InputMgr.GetButton((int)m_nbPlayer, InputMgr.eButton.TOSS)   || m_tossTrigger;
+        m_attackTrigger = !InputMgr.GetButton((int)m_nbPlayer, InputMgr.eButton.ATTACK) || m_attackTrigger;
+    }
+
+    // ======================================================================================
     override public bool GetDash()
     {
         if (m_dashTrigger && InputMgr.GetButton((int) m_nbPlayer, InputMgr.eButton.DASH))
@@ -83,15 +94,5 @@ public class JoystickPlayerInputCtlr : PlayerInputCtlr
     override public float GetVertical()
     {
         return InputMgr.GetAxis((int) m_nbPlayer, InputMgr.eAxis.VERTICAL);
-    }
-
-    public void Update()
-    {
-        // reset triggers when button released
-        m_dashTrigger   = !InputMgr.GetButton((int) m_nbPlayer, InputMgr.eButton.DASH)    || m_dashTrigger;
-        m_jumpTrigger   = !InputMgr.GetButton((int) m_nbPlayer, InputMgr.eButton.JUMP)    || m_jumpTrigger;
-        m_grabTrigger   = !InputMgr.GetButton((int) m_nbPlayer, InputMgr.eButton.GRAB)    || m_grabTrigger;
-        m_tossTrigger   = !InputMgr.GetButton((int) m_nbPlayer, InputMgr.eButton.TOSS)    || m_tossTrigger;
-        m_attackTrigger = !InputMgr.GetButton((int) m_nbPlayer, InputMgr.eButton.ATTACK)  || m_attackTrigger;
     }
 }

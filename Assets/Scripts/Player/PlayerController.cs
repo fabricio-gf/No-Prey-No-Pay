@@ -1,11 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Runtime.CompilerServices;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputCtlr))]
 public class PlayerController : MonoBehaviour
 {
+    // -------------------------------------- ENUMS -------------------------------------- //
+    public enum eDirection
+    {
+        Left,
+        Right
+    };
+
+    // -------------------------------- PUBLIC ATTRIBUTES -------------------------------- //
     public PlayerConfig                 m_configData;
 
     // --------------------------- PROTECTED CONFIG ATTRIBUTES --------------------------- //
@@ -62,8 +67,10 @@ public class PlayerController : MonoBehaviour
     public bool IsGrounded      { get; protected set; }
     public bool IsJumping       { get; protected set; }
     public bool IsWallSnapped   { get; protected set; }
+    public bool IsWallSliding   { get { return IsWallSnapped && m_input.GetHorizontal() * m_snappedWallNormal.x < 0 && m_rb.velocity.y < 0; } }
     public bool IsEjecting      { get; protected set; }     // exclusive unstopabble event
     public bool IsDashing       { get; protected set; }     // exclusive unstopable event
+    public eDirection ForwardDir{ get; protected set; }
 
     public Vector2 Velocity     { get { return m_rb.velocity; } }
 
@@ -82,7 +89,9 @@ public class PlayerController : MonoBehaviour
         IsWallSnapped   = false;
         IsEjecting      = false;
         IsDashing       = false;
-	}
+
+        ForwardDir      = eDirection.Right;
+    }
 
     // ======================================================================================
     public void OnCollisionEnter2D(Collision2D collision)
@@ -138,6 +147,10 @@ public class PlayerController : MonoBehaviour
         // OBS: 2 Special unstopabble events are handled by the system:
         // Dash
         // Ejection
+        if (Velocity.x > 0)
+            ForwardDir = eDirection.Right;
+        else if (Velocity.x < 0)
+            ForwardDir = eDirection.Left;
     }
 
     // ======================================================================================
@@ -155,7 +168,7 @@ public class PlayerController : MonoBehaviour
         bool doDash = m_input.GetDash();
 
         // Try to Trigger Event, if possible
-        if (doDash && !IsEjecting && !IsWallSnapped)
+        if (doDash && !IsEjecting && !IsWallSliding)
             StartDash();
     }
 
@@ -178,7 +191,7 @@ public class PlayerController : MonoBehaviour
         // Try to Trigger Event, if possible
         if (doJump && IsGrounded)
             StartJump();
-        else if (doJump && IsWallSnapped)
+        else if (doJump && IsWallSliding)
             StartEjection();
     }
 
@@ -218,7 +231,7 @@ public class PlayerController : MonoBehaviour
 
         m_dashDirection = new Vector2(m_input.GetHorizontal(), m_input.GetVertical());
         if (m_dashDirection.sqrMagnitude == 0)
-            m_dashDirection = new Vector2(velocity.x >= 0 ? 1 : -1, 0);
+            m_dashDirection = new Vector2(ForwardDir == eDirection.Right ? 1 : -1, 0);
         else
             m_dashDirection.Normalize();
 
@@ -241,17 +254,17 @@ public class PlayerController : MonoBehaviour
     // ======================================================================================
     private void StartEjection()
     {
-        IsGrounded = false;
-        IsEjecting = true;
-        IsWallSnapped = false;
+        IsGrounded          = false;
+        IsEjecting          = true;
+        IsWallSnapped       = false;
 
-        m_ejectTargetPosX = m_rb.position.x + m_snappedWallNormal.x * m_ejectDist;
-        m_ejectDirectionX = m_snappedWallNormal.x;
+        m_ejectTargetPosX   = m_rb.position.x + m_snappedWallNormal.x * m_ejectDist;
+        m_ejectDirectionX   = m_snappedWallNormal.x;
 
-        Vector2 velocity = m_rb.velocity;
-        velocity.y = m_jumpMaxSpeed;
-        velocity.x = m_ejectMaxSpeed * m_ejectDirectionX;
-        m_rb.velocity = velocity;
+        Vector2 velocity    = m_rb.velocity;
+        velocity.y          = m_jumpMaxSpeed;
+        velocity.x          = m_ejectMaxSpeed * m_ejectDirectionX;
+        m_rb.velocity       = velocity;
     }
 
     // ======================================================================================
@@ -259,13 +272,18 @@ public class PlayerController : MonoBehaviour
     // ======================================================================================
     private void UpdateWalk()
     {
-        Vector2 velocity    = m_rb.velocity;
         float   speedInput  = m_input.GetHorizontal();
+        if (IsWallSnapped && speedInput * m_snappedWallNormal.x < 0)
+            return;
+
+
+        Vector2 velocity = m_rb.velocity;
+
         velocity.x          = Mathf.Lerp(velocity.x, m_walkMaxSpeed * speedInput, m_walkAcc * GameMgr.DeltaTime);
         if (speedInput == 0)
-            velocity.x = Mathf.Abs(velocity.x) < m_walkMinSpeedRatio * m_walkMaxSpeed ? 0 : velocity.x;
+            velocity.x      = Mathf.Abs(velocity.x) < m_walkMinSpeedRatio * m_walkMaxSpeed ? 0 : velocity.x;
         else
-            velocity.x = Mathf.Abs(velocity.x) < m_walkMinSpeedRatio * m_walkMaxSpeed ? m_walkMinSpeedRatio * m_walkMaxSpeed * (speedInput > 0 ? 1 : -1) : velocity.x;
+            velocity.x      = Mathf.Abs(velocity.x) < m_walkMinSpeedRatio * m_walkMaxSpeed ? m_walkMinSpeedRatio * m_walkMaxSpeed * (speedInput > 0 ? 1 : -1) : velocity.x;
 
         m_rb.velocity       = velocity;
     }
@@ -280,14 +298,18 @@ public class PlayerController : MonoBehaviour
         m_rb.velocity       = velocity;
 
         if (ratio < m_minEjectEventRatio)
-            IsEjecting = false;
+            IsEjecting      = false;
     }
 
     // ======================================================================================
     private void UpdateFalling()
     {
+        float speedInput = m_input.GetHorizontal();
+        if (IsWallSnapped && speedInput * m_snappedWallNormal.x < 0)
+            return;
+
         Vector2 velocity    = m_rb.velocity;
-        velocity.x          = Mathf.Lerp(velocity.x, m_ratioToWalk * m_walkMaxSpeed * m_input.GetHorizontal(), m_ratioToWalk * m_walkAcc * GameMgr.DeltaTime);
+        velocity.x          = Mathf.Lerp(velocity.x, m_ratioToWalk * m_walkMaxSpeed * speedInput, m_ratioToWalk * m_walkAcc * GameMgr.DeltaTime);
         m_rb.velocity       = velocity;
     }
 
@@ -319,8 +341,8 @@ public class PlayerController : MonoBehaviour
 
             velocity.y += accGravity.y;
 
-            if (IsWallSnapped && m_input.GetHorizontal() * m_snappedWallNormal.x < 0)
-                velocity.y      = Mathf.Clamp(velocity.y, -m_slideMaxSpeed, 0);
+            if (IsWallSliding)
+                velocity.y      = velocity.y < -m_slideMaxSpeed ? -m_slideMaxSpeed : velocity.y;
 
             m_rb.velocity       = velocity;
         }
@@ -351,4 +373,4 @@ public class PlayerController : MonoBehaviour
 
         m_dashMinSpeedRatio     = m_configData.m_dashMinSpeedRatio;
     }
-}
+}   
