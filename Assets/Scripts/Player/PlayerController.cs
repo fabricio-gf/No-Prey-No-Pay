@@ -1,28 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.CompilerServices;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputCtlr), typeof(PlayerStateMachine))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputCtlr))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("Physics")]
-    public float m_jumpMaxSpeed     = 10;
+    public PlayerConfig                 m_configData;
 
-    [Header("Jump")]
-    public float m_gravityRatio     = 1.0f;
+    // --------------------------- PROTECTED CONFIG ATTRIBUTES --------------------------- //
+    // physics params
+    protected float m_gravityRatio         = 1.0f;
 
-    [Header("Wall")]
-    public float m_maxSlideSpeed    = 5;
-    public float m_ejectDist        = 1;
-    public float m_ejectMaxSpeed    = 10;
-    
-    [Header("Walk")]
-    public float m_walkAcc         = 10;
-    public float m_walkMaxSpeed    = 20;
+    // jump params
+    protected float m_jumpMaxSpeed         = 10;
 
-    [Header("Fall")]
-    [Range(0,1)]
-    public float m_ratioToWalk      = 1;
+    // falling params
+    protected float m_ratioToWalk          = 1;
+
+    // walking params
+    protected float m_walkAcc              = 10;
+    protected float m_walkMaxSpeed         = 20;
+
+    // wall params
+    protected float m_slideMaxSpeed         = 5;
+    // eject params
+    protected float m_ejectDist            = 1;
+    protected float m_ejectMaxSpeed        = 10;
+    protected float m_ejectMinSpeedRatio   = .2f;
+
+    // dash params
+    protected float m_dashDist             = 1;
+    protected float m_dashMaxSpeed         = 10;
+    protected float m_dashMinSpeedRatio    = .2f;
+
+
+    // -------------------- PROTECTED CONFIG (FINE TUNING) ATTRIBUTES -------------------- //
+    protected float m_walkMinSpeedRatio        = .1f;
+    protected float m_ejectMinSpeed            = .1f;
+    protected float m_dashMinSpeed             = .1f;
 
 
     // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
@@ -30,24 +46,37 @@ public class PlayerController : MonoBehaviour
     private PlayerInputCtlr     m_input;
     private Vector2             m_snappedWallNormal;
 
-    // ejection
-    private float m_ejectTargetPosX   = 0;
-    private float m_ejectDirectionX  = 0;
+    // jump Subsystem
+    private float               m_ejectTargetPosX     = 0;
+    private float               m_ejectDirectionX     = 0;
+
+    // dash subsystem
+    private Vector2             m_dashTargetPos      = Vector2.zero;
+    private Vector2             m_dashDirection      = Vector2.zero;
+
+    // fine tunning : events
+    private float               m_minDashEventRatio  = .1f;
+    private float               m_minEjectEventRatio = .1f;
 
     // ------------------------------------- ACCESSORS ----------------------------------- //
     public bool IsGrounded      { get; protected set; }
+    public bool IsJumping       { get; protected set; }
     public bool IsWallSnapped   { get; protected set; }
-    public bool IsEjecting      { get; protected set; }
-    public bool IsDashing       { get; protected set; }
+    public bool IsEjecting      { get; protected set; }     // exclusive unstopabble event
+    public bool IsDashing       { get; protected set; }     // exclusive unstopable event
 
-    
+    public Vector2 Velocity     { get { return m_rb.velocity; } }
+
+
     // ======================================================================================
     // PUBLIC MEMBERS
     // ======================================================================================
     public void Start ()
     {
-        m_rb    = this.GetComponent<Rigidbody2D>();
-        m_input = this.GetComponent<PlayerInputCtlr>();
+        InitializeValues();
+
+        m_rb            = this.GetComponent<Rigidbody2D>();
+        m_input         = this.GetComponent<PlayerInputCtlr>();
 
         IsGrounded      = false;
         IsWallSnapped   = false;
@@ -56,134 +85,24 @@ public class PlayerController : MonoBehaviour
 	}
 
     // ======================================================================================
-    public void FixedUpdate()
-    {
-        // UNSTOPABBLE EVENTS
-        if (IsEjecting)
-        {
-            UpdateEjection();
-            UpdateGravity();
-            return;
-        }
-        else if (IsDashing)
-        {
-            UpdateDash();
-            return;
-        }
-
-        // GET INPUT
-        bool doJump = m_input.GetJump();
-        bool doDash = m_input.GetDash();
-
-        // Try to Trigger Event, if possible
-        if (doDash && !IsEjecting)
-            StartDash();
-        else if (doJump && IsGrounded)
-            StartJump();
-        else if (doJump && IsWallSnapped)
-            StartEjection();
-
-
-        // HORIZONTAL
-        if (IsGrounded)
-            UpdateWalk();
-        else
-            UpdateFalling();
-
-        // VERTICAL
-        UpdateGravity();
-    }
-
-    // ======================================================================================
-    private void StartDash()
-    {
-
-    }
-
-    // ======================================================================================
-    private void UpdateWalk()
-    {
-        Vector2 velocity    = m_rb.velocity;
-        velocity.x          = Mathf.Lerp(velocity.x, m_walkMaxSpeed * m_input.GetHorizontal(), m_walkAcc * GameMgr.DeltaTime);
-        m_rb.velocity       = velocity;
-    }
-    
-    // ======================================================================================
-    private void UpdateEjection()
-    {
-        Vector2 velocity    = m_rb.velocity;
-        float ratio         = Mathf.Clamp((m_ejectTargetPosX - m_rb.position.x) * m_ejectDirectionX, 0, m_ejectDist);
-
-        velocity.x          = Mathf.Lerp(velocity.x, 0, ratio * GameMgr.DeltaTime);
-        m_rb.velocity       = velocity;
-
-        if (ratio < 0.2f)
-            IsEjecting = false;
-    }
-
-    // ======================================================================================
-    private void UpdateFalling()
-    {
-        Vector2 velocity    = m_rb.velocity;
-        velocity.x          = Mathf.Lerp(velocity.x, m_ratioToWalk * m_walkMaxSpeed * m_input.GetHorizontal(), m_ratioToWalk * m_walkAcc * GameMgr.DeltaTime);
-        m_rb.velocity       = velocity;
-    }
-
-    // ======================================================================================
-    private void UpdateDash()
-    {
-    }
-
-    // ======================================================================================
-    private void StartJump()
-    {
-        IsGrounded = false;
-        Vector2 velocity = m_rb.velocity;
-        velocity.y = m_jumpMaxSpeed;
-        m_rb.velocity = velocity;
-    }
-
-    // ======================================================================================
-    private void StartEjection()
-    {
-        IsGrounded = false;
-        IsEjecting = true;
-        IsWallSnapped = false;
-
-        m_ejectTargetPosX = m_rb.position.x + m_snappedWallNormal.x * m_ejectDist;
-        m_ejectDirectionX = m_snappedWallNormal.x;
-
-        Vector2 velocity = m_rb.velocity;
-        velocity.y = m_jumpMaxSpeed;
-        velocity.x = m_ejectMaxSpeed * m_ejectDirectionX;
-        m_rb.velocity = velocity;
-    }
-
-    // ======================================================================================
-    public void UpdateGravity()
-    {
-        if (IsGrounded)
-        {
-            m_rb.velocity = new Vector2(m_rb.velocity.x, 0);
-            return;
-        }
-
-        Vector3 accGravity = Physics.gravity * m_gravityRatio * GameMgr.DeltaTime;
-        m_rb.velocity += new Vector2(accGravity.x, accGravity.y);
-    }
-
-    // ======================================================================================
     public void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Enter : " + collision.collider.gameObject.tag);
         switch (collision.collider.gameObject.tag)
         {
             case "Floor":
-                IsGrounded      = true;
+                IsWallSnapped   = IsWallSnapped;
                 IsEjecting      = false;
+                IsJumping       = false;
+                IsDashing       = IsDashing;
+                IsGrounded      = true;
                 break;
             case "Wall":
                 IsWallSnapped   = true;
+                IsEjecting      = false;
+                IsJumping       = false;
+                IsDashing       = false;
+                IsGrounded      = IsGrounded;
                 m_snappedWallNormal = collision.GetContact(0).normal;
                 break;
         }
@@ -205,4 +124,231 @@ public class PlayerController : MonoBehaviour
     }
 
     // ======================================================================================
+    public void FixedUpdate()
+    {
+        // Dash Subsystem : triggers Dash and runs it until the end
+        UpdateDashSubsystem();
+        // Jump Subsystem : triggers Jump and WallEjection and runs it until the end
+        UpdateJumpSubsystem();
+        // Walk Subsystem : horizontal locomotion in the ground and in the air
+        UpdateWalkSubsystem();
+        // Gravity Subystem : applies gravity in normal conditions
+        UpdateGravitySubsystem();
+
+        // OBS: 2 Special unstopabble events are handled by the system:
+        // Dash
+        // Ejection
+    }
+
+    // ======================================================================================
+    // PRIVATE MEMBERS - SUBSYSTEM HANDLERS
+    // ======================================================================================
+    private void UpdateDashSubsystem()
+    {
+        if (IsDashing)
+        {
+            UpdateDash();
+            return;
+        }
+
+        // GET INPUT
+        bool doDash = m_input.GetDash();
+
+        // Try to Trigger Event, if possible
+        if (doDash && !IsEjecting && !IsWallSnapped)
+            StartDash();
+    }
+
+    // ======================================================================================
+    private void UpdateJumpSubsystem()
+    {
+        // UNSTOPABBLE EVENTS
+        if (IsEjecting)
+        {
+            UpdateEjection();
+            UpdateGravity();
+            return;
+        }
+        else if (IsDashing)
+            return;
+
+        // GET INPUT
+        bool doJump = m_input.GetJump();
+
+        // Try to Trigger Event, if possible
+        if (doJump && IsGrounded)
+            StartJump();
+        else if (doJump && IsWallSnapped)
+            StartEjection();
+    }
+
+    // ======================================================================================
+    private void UpdateWalkSubsystem()
+    {
+        // UNSTOPABBLE EVENTS
+        if (IsEjecting || IsDashing)
+            return;
+
+
+        // HORIZONTAL
+        if (IsGrounded)
+            UpdateWalk();
+        else
+            UpdateFalling();
+    }
+
+    // ======================================================================================
+    private void UpdateGravitySubsystem()
+    {
+        if (IsEjecting || IsDashing)
+            return;
+
+        // VERTICAL
+        UpdateGravity();
+    }
+
+    // ======================================================================================
+    // PRIVATE MEMBERS - SUBSYSTEM EVENT STARTERS
+    // ======================================================================================
+    private void StartDash()
+    {
+        IsDashing = true;
+
+        Vector2 velocity = m_rb.velocity;
+
+        m_dashDirection = new Vector2(m_input.GetHorizontal(), m_input.GetVertical());
+        if (m_dashDirection.sqrMagnitude == 0)
+            m_dashDirection = new Vector2(velocity.x >= 0 ? 1 : -1, 0);
+        else
+            m_dashDirection.Normalize();
+
+        m_dashTargetPos = m_rb.position + m_dashDirection * m_dashDist;
+        
+        velocity = m_dashMaxSpeed * m_dashDirection;
+        m_rb.velocity = velocity;
+
+    }
+
+    // ======================================================================================
+    private void StartJump()
+    {
+        IsJumping           = true;
+        Vector2 velocity    = m_rb.velocity;
+        velocity.y          = m_jumpMaxSpeed;
+        m_rb.velocity       = velocity;
+    }
+
+    // ======================================================================================
+    private void StartEjection()
+    {
+        IsGrounded = false;
+        IsEjecting = true;
+        IsWallSnapped = false;
+
+        m_ejectTargetPosX = m_rb.position.x + m_snappedWallNormal.x * m_ejectDist;
+        m_ejectDirectionX = m_snappedWallNormal.x;
+
+        Vector2 velocity = m_rb.velocity;
+        velocity.y = m_jumpMaxSpeed;
+        velocity.x = m_ejectMaxSpeed * m_ejectDirectionX;
+        m_rb.velocity = velocity;
+    }
+
+    // ======================================================================================
+    // PRIVATE MEMBERS - SUBSYSTEM UPDATERS
+    // ======================================================================================
+    private void UpdateWalk()
+    {
+        Vector2 velocity    = m_rb.velocity;
+        float   speedInput  = m_input.GetHorizontal();
+        velocity.x          = Mathf.Lerp(velocity.x, m_walkMaxSpeed * speedInput, m_walkAcc * GameMgr.DeltaTime);
+        if (speedInput == 0)
+            velocity.x = Mathf.Abs(velocity.x) < m_walkMinSpeedRatio * m_walkMaxSpeed ? 0 : velocity.x;
+        else
+            velocity.x = Mathf.Abs(velocity.x) < m_walkMinSpeedRatio * m_walkMaxSpeed ? m_walkMinSpeedRatio * m_walkMaxSpeed * (speedInput > 0 ? 1 : -1) : velocity.x;
+
+        m_rb.velocity       = velocity;
+    }
+
+    // ======================================================================================
+    private void UpdateEjection()
+    {
+        Vector2 velocity    = m_rb.velocity;
+        float ratio         = Mathf.Clamp((m_ejectTargetPosX - m_rb.position.x) * m_ejectDirectionX, 0, m_ejectDist);
+
+        velocity.x          = Mathf.Lerp(m_ejectMinSpeedRatio * m_ejectMaxSpeed * m_ejectDirectionX , velocity.x, ratio);
+        m_rb.velocity       = velocity;
+
+        if (ratio < m_minEjectEventRatio)
+            IsEjecting = false;
+    }
+
+    // ======================================================================================
+    private void UpdateFalling()
+    {
+        Vector2 velocity    = m_rb.velocity;
+        velocity.x          = Mathf.Lerp(velocity.x, m_ratioToWalk * m_walkMaxSpeed * m_input.GetHorizontal(), m_ratioToWalk * m_walkAcc * GameMgr.DeltaTime);
+        m_rb.velocity       = velocity;
+    }
+
+    // ======================================================================================
+    private void UpdateDash()
+    {
+        Vector2 velocity    = m_rb.velocity;
+        float ratio         = Mathf.Clamp(Vector2.Dot((m_dashTargetPos - m_rb.position), m_dashDirection), 0, m_dashDist);
+
+        velocity            = m_dashDirection * Mathf.Lerp(m_dashMinSpeedRatio * m_dashMaxSpeed, velocity.magnitude, ratio);
+        m_rb.velocity       = velocity;
+
+        if (ratio < m_minDashEventRatio)
+            IsDashing       = false;
+    }
+
+    // ======================================================================================
+    private void UpdateGravity()
+    {
+        if (IsGrounded)
+        {
+            if (!IsJumping)
+                m_rb.velocity       = new Vector2(m_rb.velocity.x, 0);
+        }
+        else
+        { 
+            Vector3 accGravity  = Physics.gravity * m_gravityRatio * GameMgr.DeltaTime;
+            Vector2 velocity    = m_rb.velocity;
+
+            velocity.y += accGravity.y;
+
+            if (IsWallSnapped && m_input.GetHorizontal() * m_snappedWallNormal.x < 0)
+                velocity.y      = Mathf.Clamp(velocity.y, -m_slideMaxSpeed, 0);
+
+            m_rb.velocity       = velocity;
+        }
+    }
+
+    // ======================================================================================
+    private void InitializeValues()
+    {
+        Debug.Assert(m_configData != null, this.gameObject.name + " - PlayerController : Missing PlayerConfig for parameters init");
+
+        m_gravityRatio          = m_configData.m_gravityRatio;
+        m_walkMinSpeedRatio     = m_configData.m_walkMinSpeedRatio;
+        
+        m_jumpMaxSpeed          = m_configData.m_jumpMaxSpeed;
+        
+        m_ratioToWalk           = m_configData.m_ratioToWalk;
+        
+        m_walkAcc               = m_configData.m_walkAcc;
+        m_walkMaxSpeed          = m_configData.m_walkMaxSpeed;
+
+        m_slideMaxSpeed         = m_configData.m_slideMaxSpeed;
+        m_ejectDist             = m_configData.m_ejectDist;
+        m_ejectMaxSpeed         = m_configData.m_ejectMaxSpeed;
+        m_ejectMinSpeedRatio    = m_configData.m_ejectMinSpeedRatio;
+
+        m_dashDist              = m_configData.m_dashDist;
+        m_dashMaxSpeed          = m_configData.m_dashMaxSpeed;
+
+        m_dashMinSpeedRatio     = m_configData.m_dashMinSpeedRatio;
+    }
 }
