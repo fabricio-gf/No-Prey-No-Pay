@@ -3,35 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Controls the main menu screen behaviour
+/// </summary>
 public class MainMenuScreen : MonoBehaviour {
 
+	// PRIVATE ATTRIBUTES
+	private int index = 0;
+	private bool DirectionPressed = false;
+	private EventSystem eventSystem;
+
+	// SERIALIZED ATTRIBUTES
+	[Header("Screen references")]
 	[SerializeField] private GameObject CharacterSelectScreen;
 	[SerializeField] private GameObject SettingsScreen;
 	[SerializeField] private GameObject CreditsScreen;
 
-	[SerializeField] private GameObject[] Buttons;
+	[SerializeField] private GameObject SplashScreen;
 
-	private int index = 0;
-	private bool DirectionPressed = false;
-	private EventSystem eventSystem;
+	[Header("Button references")]
+	[SerializeField] private GameObject[] Buttons;
 
 	void Start(){
 		eventSystem = EventSystem.current;
 		eventSystem.SetSelectedGameObject(Buttons[index]);
 	}
 
+	// It is necessary to make the event system select a button everytime this panel is activated
 	void OnEnable(){
+		StartCoroutine(WaitOneFrame());
+	}
+
+	IEnumerator WaitOneFrame(){
+		yield return null;
 		eventSystem = EventSystem.current;
 		eventSystem.SetSelectedGameObject(Buttons[index]);
 	}
 
-	// Update is called once per frame
+	// Detects all the inputs that can be made in this screen
 	void Update () {
+
+		// Directional inputs
 		float vertical = InputManager.GetAxis(InputManager.Axis.VERTICAL);
 		bool up = InputManager.GetButton(InputManager.Buttons.UP);
 		bool down = InputManager.GetButton(InputManager.Buttons.DOWN);
 		
-		print(down + " " + up);
 		if(!down && !up){
 			DirectionPressed = false;
 		}
@@ -72,11 +88,20 @@ public class MainMenuScreen : MonoBehaviour {
 				break;
 		}*/
 
-		if(InputManager.GetButton(InputManager.Buttons.SELECT)){
+		// Button inputs
+		if(InputManager.GetButtonDown(InputManager.Buttons.SELECT)){
 			SelectButton();
+		}
+
+		if(InputManager.GetButtonDown(InputManager.Buttons.BACK)){
+			MenuActions.instance.ChangePanel(SplashScreen);
 		}
 	}
 
+	/// <summary>
+	/// Changes the selected button on the screen
+	/// </summary>
+	/// <param name="direction">1 for down, -1 for up</param>
 	private void MoveSelection(int direction){
 		index += direction;
 		if(index >= Buttons.Length){
@@ -89,19 +114,22 @@ public class MainMenuScreen : MonoBehaviour {
 		eventSystem.SetSelectedGameObject(Buttons[index]);
 	}
 
+	/// <summary>
+	/// Calls the appropriate function for the selected button
+	/// </summary>
 	private void SelectButton(){
 		switch (index)
 		{
 			case 0:
 				MenuActions.instance.ChangePanel(CharacterSelectScreen);
 				break;
-			case 1:
+			/* case 1:
 				MenuActions.instance.ChangePanel(SettingsScreen);
-				break;
-			case 2:
+				break; */
+			case 1:
 				MenuActions.instance.ChangePanel(CreditsScreen);
 				break;
-			case 3:
+			case 2:
 				MenuActions.instance.ExitGame();
 				break;
 			default:

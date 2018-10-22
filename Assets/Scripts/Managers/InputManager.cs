@@ -173,6 +173,46 @@ public class InputManager : MonoBehaviour
         return false;
     }
 
+    //preciso disso mas n sei como fazer HALP
+    public static bool GetButtonDown(Buttons _button)
+    {
+        return GetButton(_button);
+        
+        /* for(int i = 0; i < 4; i++){
+            GamePadState gamePadState = GamePad.GetState((PlayerIndex)i);
+
+            switch (_button)
+            {
+                case Buttons.ATTACK:
+                    return GetButton(gamePadState, m_manager.m_attackButton);
+                case Buttons.DASH:
+                    return GetButton(gamePadState, m_manager.m_dashButton);
+                case Buttons.GRAB:
+                    return GetButton(gamePadState, m_manager.m_grabButton);
+                case Buttons.TOSS:
+                    return GetButton(gamePadState, m_manager.m_tossButton);
+                case Buttons.JUMP:
+                    return GetButton(gamePadState, m_manager.m_jumpButton);
+                case Buttons.START:
+                    return GetButton(gamePadState, m_manager.m_startButton);
+                case Buttons.SELECT:
+                    return GetButton(gamePadState, m_manager.m_selectButton);
+                case Buttons.BACK:
+                    return GetButton(gamePadState, m_manager.m_backButton);
+                case Buttons.LEFT:
+                    return GetButton(gamePadState, m_manager.m_leftButton);
+                case Buttons.RIGHT:
+                    return GetButton(gamePadState, m_manager.m_rightButton);
+                case Buttons.UP:
+                    return GetButton(gamePadState, m_manager.m_upButton);
+                case Buttons.DOWN:
+                    return GetButton(gamePadState, m_manager.m_downButton);
+            }
+        }
+
+        return false; */
+    }
+
     // ======================================================================================
     public static float GetAxis(int _player, Axis _axis)
     {

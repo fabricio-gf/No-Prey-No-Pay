@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manager used for general actions inside the menu scene, like opening/closing windows and panels, and changing volume.
+/// Is a singleton
+/// </summary>
 public class MenuActions : MonoBehaviour {
 
 	public static MenuActions instance;
 
-	[Header("References")]
+	/* [Header("References")]
 	[SerializeField] private GameObject MusicManager;
 	[SerializeField] private GameObject SFXManager;
 	[SerializeField] private GameObject VoiceManager;
-	[SerializeField] private GameObject NarratorManager;
+	[SerializeField] private GameObject NarratorManager; */
 
 	[SerializeField] private GameObject ActivePanel;
 	private GameObject ActiveWindow;
@@ -34,7 +38,7 @@ public class MenuActions : MonoBehaviour {
 		ActiveWindow = window;
 	}
 
-	public void MuteAll(bool mute){
+	/* public void MuteAll(bool mute){
 		
 	}
 
@@ -52,9 +56,9 @@ public class MenuActions : MonoBehaviour {
 
 	public void ChangeNarratorVolume(float volume){
 		
-	}
+	} */
 
 	public void ExitGame(){
-		
+		Application.Quit();
 	}
 }

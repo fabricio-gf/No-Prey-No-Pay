@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSelection : MonoBehaviour {
+/// <summary>
+/// Controls general behaviour in character selection screen, like inputs
+/// </summary>
+public class CharacterSelectionScreen : MonoBehaviour {
 
-	public GameObject MainMenuScreen;
+	// PUBLIC ATTRIBUTES
+	public CharacterPortrait[] Portraits;
 
-	public int PlayerCount;
+	// PRIVATE ATTRIBUTES
 	private bool[] ActivePlayers;
 	private Character[] SelectedCharacters;
-	public GameObject[] CharacterPortraits;
-
-	/*private bool DirectionPressed1 = false;
-	private bool DirectionPressed2 = false;
-	private bool DirectionPressed3 = false;
-	private bool DirectionPressed4 = false;*/
 
 
-	// Use this for initialization
+	// SERIALIZED ATTRIBUTES
+	[Header("Screen references")]
+	[SerializeField] private GameObject MainMenuScreen;
+
+
 	void Start () {
 		ActivePlayers = new bool[4];
 		for(int i = 0; i < 4; i++){
@@ -25,7 +27,7 @@ public class CharacterSelection : MonoBehaviour {
 		}	
 	}
 	
-	// Update is called once per frame
+	// Calls the input recieving methods
 	void Update () {
 		GetNewPlayers();
 
@@ -34,8 +36,13 @@ public class CharacterSelection : MonoBehaviour {
 		//GetCharacterSwap();
 
 		GetColorSwap();
+
+		GetPlayerConfirm();
 	}
 
+	/// <summary>
+	/// Detects if a new player has joined
+	/// </summary>
 	private void GetNewPlayers(){
 		for(int i = 0; i < 4; i++){
 			if(!ActivePlayers[i] && InputManager.GetButton(i, InputManager.Buttons.START)){
@@ -44,6 +51,9 @@ public class CharacterSelection : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Detects if an existing player has left, and if no players are remaining, goes back to the previous screen
+	/// </summary>
 	private void GetExitPlayers(){
 		int inactive = 0;		
 		
@@ -112,33 +122,69 @@ public class CharacterSelection : MonoBehaviour {
 		}
 	}*/
 
+	/// <summary>
+	/// Detects if a player has swapped the color of it's current selected character
+	/// </summary>
 	private void GetColorSwap(){
 		for(int i = 0; i < 4; i++){
 			if(ActivePlayers[i] && InputManager.GetButton(i, InputManager.Buttons.ATTACK)){
-				CharacterPortraits[i].GetComponent<CharacterPortrait>().ChangeColor();
+				Portraits[i].ChangeColor();
 			}
 		}
 	}
 
+	/// <summary>
+	/// Detects if a player is ready and has confirmed his character
+	/// </summary>
+	private void GetPlayerConfirm(){
+		for(int i = 0; i < 4; i++){
+			if(ActivePlayers[i] && InputManager.GetButton(i, InputManager.Buttons.SELECT)){
+				ConfirmPlayer(i);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Adds a selecting player to the level loader
+	/// </summary>
+	/// <param name="controller">Controller number [0,3]</param>
 	public void AddPlayer(int controller){
 		ActivePlayers[controller] = true;
-		PlayerCount++;
+		Portraits[controller].ShowCharacter();
+		LevelLoader.instance.AddPlayerActive();
 	}
 
+	/// <summary>
+	/// Removes a selecting player from the level loader
+	/// </summary>
+	/// <param name="controller">Controller number [0,3]</param>
 	public void RemovePlayer(int controller){
 		ActivePlayers[controller] = false;
-		PlayerCount--;
+		Portraits[controller].HideCharacter();
+		LevelLoader.instance.RemovePlayerActive();
 	}
 
-	public void ChangeCharacter(int player, int direction){
+	/* 	public void ChangeCharacter(int player, int direction){
 		
+	} */
+
+	/// <summary>
+	/// Adds a ready player to the level loader
+	/// </summary>
+	/// <param name="controller">Controller number [0,3]</param>
+	public void ConfirmPlayer(int controller){
+		ActivePlayers[controller] = false;
+		Portraits[controller].ConfirmCharacter();
+		LevelLoader.instance.AddPlayerReady(controller, Portraits[controller].charIndex, Portraits[controller].colorIndex);
 	}
 
-	public void ChangeColor(int player){
-
-	}
-
-	public void ChangeColor(int index, int variant){
-		
+	/// <summary>
+	/// Removes a ready player from the level loader
+	/// </summary>
+	/// <param name="controller">Controller number [0,3]</param>
+	public void UnconfirmPlayer(int controller){
+		ActivePlayers[controller] = true;
+		Portraits[controller].UnconfirmCharacter();
+		LevelLoader.instance.RemovePlayerReady(controller, Portraits[controller].charIndex, Portraits[controller].colorIndex);
 	}
 }
