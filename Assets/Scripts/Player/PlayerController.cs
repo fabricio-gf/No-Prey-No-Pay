@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour, ICollidable
         bool doDash = m_input.GetDash();
 
         // Try to Trigger Event, if possible
-        if (doDash && !IsEjecting && !IsWallSliding)
+        if (doDash && !IsEjecting)
             StartDash();
     }
 
@@ -187,21 +187,24 @@ public class PlayerController : MonoBehaviour, ICollidable
     // ======================================================================================
     private void StartDash()
     {
-        IsDashing = true;
-
         Vector2 velocity = m_rb.velocity;
 
         m_dashDirection = new Vector2(m_input.GetHorizontal(), m_input.GetVertical());
+
         if (m_dashDirection.sqrMagnitude == 0)
             m_dashDirection = new Vector2(ForwardDir == eDirection.Right ? 1 : -1, 0);
         else
             m_dashDirection.Normalize();
-
-        m_dashTargetPos = m_rb.position + m_dashDirection * m_dashDist;
         
-        velocity = m_dashMaxSpeed * m_dashDirection;
-        m_rb.velocity = velocity;
+        if (!IsWallSnapped || m_dashDirection.x * m_snappedWallNormal.x > 0)
+        {
+            m_dashTargetPos = m_rb.position + m_dashDirection * m_dashDist;
 
+            velocity = m_dashMaxSpeed * m_dashDirection;
+            m_rb.velocity = velocity;
+
+            IsDashing = true;
+        }
     }
 
     // ======================================================================================
