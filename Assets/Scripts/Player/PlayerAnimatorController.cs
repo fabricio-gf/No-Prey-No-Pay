@@ -50,7 +50,7 @@ public class PlayerAnimatorController : MonoBehaviour
     // ======================================================================================
     // PUBLIC MEMBERS
     // ======================================================================================
-    public void Start()
+    public void Awake()
     {
         if (m_animator == null)
             m_animator = this.GetComponent<Animator>();

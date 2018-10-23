@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputCtlr))]
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputCtlr), typeof(CollisionCtlr))]
+public class PlayerController : MonoBehaviour, ICollidable
 {
     // -------------------------------------- ENUMS -------------------------------------- //
     public enum eDirection
@@ -51,8 +51,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D         m_rb;
     private PlayerInputCtlr     m_input;
     private Vector2             m_snappedWallNormal;
-    private GameObject          m_touchingWall;
-    private GameObject          m_touchingGround;
 
     // jump Subsystem
     private float               m_ejectTargetPosX     = 0;
@@ -94,49 +92,6 @@ public class PlayerController : MonoBehaviour
         IsDashing       = false;
 
         ForwardDir      = eDirection.Right;
-    }
-
-    // ======================================================================================
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if (collision.collider.gameObject.tag == "Floor" || collision.collider.gameObject.tag == "Wall")
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platforms"))
-        {
-            ContactPoint2D contact = collision.GetContact(0);
-            if (contact.normal == Vector2.up)
-            { 
-                IsWallSnapped   = IsWallSnapped;
-                IsEjecting      = false;
-                IsJumping       = false;
-                IsDashing       = IsDashing;
-                IsGrounded      = true;
-                m_touchingGround = contact.collider.gameObject;
-            }
-            else if (Vector2.Dot(contact.normal, Vector2.up) == 0)
-            { 
-                IsWallSnapped   = true;
-                IsEjecting      = false;
-                IsJumping       = false;
-                IsDashing       = false;
-                IsGrounded      = IsGrounded;
-                m_snappedWallNormal = contact.normal;
-                m_touchingWall = collision.gameObject;
-            }
-        }
-    }
-
-    // ======================================================================================
-    public void OnCollisionExit2D(Collision2D collision)
-    {
-        //Debug.Log("Exit : " + collision.collider.gameObject.tag);
-        //switch (collision.collider.gameObject.tag)
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platforms"))
-        {
-            if (IsGrounded && collision.gameObject == m_touchingGround)
-                IsGrounded = false;
-            if (IsWallSnapped && collision.gameObject == m_touchingWall)
-                IsWallSnapped = false;
-        }
     }
 
     // ======================================================================================
@@ -382,5 +337,41 @@ public class PlayerController : MonoBehaviour
         m_walkMinSpeedRatio     = m_configData.m_walkMinSpeedRatio;
         m_ejectMinSpeedRatio    = m_configData.m_ejectMinSpeedRatio;
         m_dashMinSpeedRatio     = m_configData.m_dashMinSpeedRatio;
+    }
+
+
+    // ======================================================================================
+    // PUBLIC MEMBERS - ICollidable INTERFACE FOR COLLISION DETECTION
+    // ======================================================================================
+    public void OnTouchingWall(Vector2 _normal)
+    {
+        IsWallSnapped       = true;
+        IsEjecting          = false;
+        IsJumping           = false;
+        IsDashing           = false;
+        IsGrounded          = IsGrounded;
+        m_snappedWallNormal = _normal;
+    }
+
+    // ======================================================================================
+    public void OnTouchingGround(Vector2 _normal)
+    {
+        IsWallSnapped       = IsWallSnapped;
+        IsEjecting          = false;
+        IsJumping           = false;
+        IsDashing           = IsDashing;
+        IsGrounded          = true;
+    }
+
+    // ======================================================================================
+    public void OnLeavingWall()
+    {
+        IsWallSnapped       = false;
+    }
+
+    // ======================================================================================
+    public void OnLeavingGround()
+    {
+        IsGrounded          = false;
     }
 }   

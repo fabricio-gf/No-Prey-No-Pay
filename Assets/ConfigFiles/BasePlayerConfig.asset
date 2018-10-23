@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: BasePlayerConfig
   m_EditorClassIdentifier: 
   m_gravityRatio: 5
-  m_gravityMaxSpeed: 5
+  m_gravityMaxSpeed: 9
   m_jumpMaxSpeed: 12
   m_ratioToWalk: 0.62
   m_walkAcc: 10
