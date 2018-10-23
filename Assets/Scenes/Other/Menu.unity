@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -179,7 +179,7 @@ Transform:
   m_Children:
   - {fileID: 1634798392}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &85842238
 GameObject:
@@ -947,6 +947,9 @@ MonoBehaviour:
   - {fileID: 268038859}
   charIndex: 0
   colorIndex: 1
+  Phase1: 1
+  Phase2: 0
+  Phase3: 0
   PressStart: {fileID: 1020891765}
   Selected: {fileID: 1849383590}
 --- !u!1 &327030761
@@ -1682,7 +1685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1767,12 +1770,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 526863646}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 786665570}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &526863648
 MonoBehaviour:
@@ -2364,7 +2367,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &770315118
 GameObject:
@@ -2724,9 +2727,8 @@ Transform:
   m_Children:
   - {fileID: 746196068}
   - {fileID: 824433299}
-  - {fileID: 526863647}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &824433298
 GameObject:
@@ -2905,7 +2907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -3126,7 +3128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -3308,7 +3310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -5215,6 +5217,9 @@ MonoBehaviour:
   - {fileID: 1972305096}
   charIndex: 0
   colorIndex: 1
+  Phase1: 1
+  Phase2: 0
+  Phase3: 0
   PressStart: {fileID: 1392547749}
   Selected: {fileID: 1192421573}
 --- !u!1 &1495088733
@@ -5670,6 +5675,9 @@ MonoBehaviour:
   - {fileID: 1708976010}
   charIndex: 0
   colorIndex: 1
+  Phase1: 1
+  Phase2: 0
+  Phase3: 0
   PressStart: {fileID: 1257381446}
   Selected: {fileID: 177429852}
 --- !u!1 &1605778226
@@ -6480,7 +6488,7 @@ Transform:
   m_Children:
   - {fileID: 1571057871}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1899751334
 GameObject:
@@ -7658,6 +7666,9 @@ MonoBehaviour:
   - {fileID: 3898199}
   charIndex: 0
   colorIndex: 1
+  Phase1: 1
+  Phase2: 0
+  Phase3: 0
   PressStart: {fileID: 770315118}
   Selected: {fileID: 1358584547}
 --- !u!1 &2030117729

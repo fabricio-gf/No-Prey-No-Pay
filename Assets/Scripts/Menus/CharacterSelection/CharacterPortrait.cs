@@ -12,6 +12,10 @@ public class CharacterPortrait : MonoBehaviour {
 	public int charIndex = 0;
 	public int colorIndex = 1;
 
+	public bool Phase1 = true;
+	public bool Phase2 = false;
+	public bool Phase3 = false;
+
 	// SERIALIZED ATTRIBUTES
 	[Header("Portrait images references")]
 	[SerializeField] private GameObject PressStart;
@@ -50,6 +54,8 @@ public class CharacterPortrait : MonoBehaviour {
 	public void ShowCharacter(){
 		Characters[charIndex].SetActive(true);		
 		PressStart.SetActive(false);
+		Phase1 = Phase3 = false;
+		Phase2 = true;
 	}
 
 	/// <summary>
@@ -57,7 +63,9 @@ public class CharacterPortrait : MonoBehaviour {
 	/// </summary>
 	public void HideCharacter(){
 		PressStart.SetActive(true);
-		Characters[charIndex].SetActive(false);				
+		Characters[charIndex].SetActive(false);	
+		Phase2 = Phase3 = false;
+		Phase1 = true;			
 	}
 
 	/// <summary>
@@ -66,6 +74,8 @@ public class CharacterPortrait : MonoBehaviour {
 	public void ConfirmCharacter(){
 		Selected.SetActive(true);
 		Characters[charIndex].SetActive(false);	
+		Phase1 = Phase2 = false;
+		Phase3 = true;
 	}
 
 	/// <summary>
@@ -74,5 +84,13 @@ public class CharacterPortrait : MonoBehaviour {
 	public void UnconfirmCharacter(){
 		Characters[charIndex].SetActive(true);		
 		Selected.SetActive(false);
+		Phase1 = Phase3 = false;
+		Phase2 = true;
+	}
+
+	public void ResetPortrait(){
+		charIndex = 0;
+		colorIndex = 1;
+		HideCharacter();
 	}
 }

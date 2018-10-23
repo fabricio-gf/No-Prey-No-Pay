@@ -12,8 +12,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 
 	// PRIVATE ATTRIBUTES
 	private bool[] ActivePlayers;
-	private Character[] SelectedCharacters;
-
+	private int NumReadyPlayers = 0;
 
 	// SERIALIZED ATTRIBUTES
 	[Header("Screen references")]
@@ -45,7 +44,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// </summary>
 	private void GetNewPlayers(){
 		for(int i = 0; i < 4; i++){
-			if(!ActivePlayers[i] && InputManager.GetButton(i, InputManager.Buttons.START)){
+			if(!ActivePlayers[i] && Portraits[i].Phase1 && InputManager.GetButton(i, InputManager.Buttons.START)){
 				AddPlayer(i);
 			}
 		}
@@ -59,14 +58,25 @@ public class CharacterSelectionScreen : MonoBehaviour {
 		
 		for(int i = 0; i < 4; i++){
 			if(!ActivePlayers[i]){
-				inactive++;
+				if(Portraits[i].Phase1){
+					inactive++;
+				}
+				else if(Portraits[i].Phase3){
+					if(InputManager.GetButton(i, InputManager.Buttons.BACK)){
+						UnconfirmPlayer(i);
+					}
+				}
 			}
-			else if(ActivePlayers[i] && InputManager.GetButton(i, InputManager.Buttons.BACK)){
-				RemovePlayer(i);
+			else if(ActivePlayers[i]){
+				if(InputManager.GetButton(i, InputManager.Buttons.BACK)){
+					if(Portraits[i].Phase2){
+						RemovePlayer(i);
+					}
+				}
 			}
 		}
 		
-		if(inactive == 4 && InputManager.GetButton(InputManager.Buttons.BACK)){
+		if(inactive == 4 && NumReadyPlayers == 0 && InputManager.GetButton(InputManager.Buttons.BACK)){
 			MenuActions.instance.ChangePanel(MainMenuScreen);
 		}
 	}
@@ -174,6 +184,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// <param name="controller">Controller number [0,3]</param>
 	public void ConfirmPlayer(int controller){
 		ActivePlayers[controller] = false;
+		NumReadyPlayers++;
 		Portraits[controller].ConfirmCharacter();
 		LevelLoader.instance.AddPlayerReady(controller, Portraits[controller].charIndex, Portraits[controller].colorIndex);
 	}
@@ -184,6 +195,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// <param name="controller">Controller number [0,3]</param>
 	public void UnconfirmPlayer(int controller){
 		ActivePlayers[controller] = true;
+		NumReadyPlayers--;
 		Portraits[controller].UnconfirmCharacter();
 		LevelLoader.instance.RemovePlayerReady(controller, Portraits[controller].charIndex, Portraits[controller].colorIndex);
 	}
