@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputCtlr))]
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputCtlr), typeof(CollisionCtlr))]
+public class PlayerController : MonoBehaviour, ICollidable
 {
     // -------------------------------------- ENUMS -------------------------------------- //
     public enum eDirection
@@ -51,8 +51,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D         m_rb;
     private PlayerInputCtlr     m_input;
     private Vector2             m_snappedWallNormal;
-    private GameObject          m_touchingWall;
-    private GameObject          m_touchingGround;
 
     // jump Subsystem
     private float               m_ejectTargetPosX     = 0;
@@ -97,49 +95,6 @@ public class PlayerController : MonoBehaviour
     }
 
     // ======================================================================================
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if (collision.collider.gameObject.tag == "Floor" || collision.collider.gameObject.tag == "Wall")
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platforms"))
-        {
-            ContactPoint2D contact = collision.GetContact(0);
-            if (contact.normal == Vector2.up)
-            { 
-                IsWallSnapped   = IsWallSnapped;
-                IsEjecting      = false;
-                IsJumping       = false;
-                IsDashing       = IsDashing;
-                IsGrounded      = true;
-                m_touchingGround = contact.collider.gameObject;
-            }
-            else if (Vector2.Dot(contact.normal, Vector2.up) == 0)
-            { 
-                IsWallSnapped   = true;
-                IsEjecting      = false;
-                IsJumping       = false;
-                IsDashing       = false;
-                IsGrounded      = IsGrounded;
-                m_snappedWallNormal = contact.normal;
-                m_touchingWall = collision.gameObject;
-            }
-        }
-    }
-
-    // ======================================================================================
-    public void OnCollisionExit2D(Collision2D collision)
-    {
-        //Debug.Log("Exit : " + collision.collider.gameObject.tag);
-        //switch (collision.collider.gameObject.tag)
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Platforms"))
-        {
-            if (IsGrounded && collision.gameObject == m_touchingGround)
-                IsGrounded = false;
-            if (IsWallSnapped && collision.gameObject == m_touchingWall)
-                IsWallSnapped = false;
-        }
-    }
-
-    // ======================================================================================
     public void FixedUpdate()
     {
         // Dash Subsystem : triggers Dash and runs it until the end
@@ -175,7 +130,7 @@ public class PlayerController : MonoBehaviour
         bool doDash = m_input.GetDash();
 
         // Try to Trigger Event, if possible
-        if (doDash && !IsEjecting && !IsWallSliding)
+        if (doDash && !IsEjecting)
             StartDash();
     }
 
@@ -232,21 +187,24 @@ public class PlayerController : MonoBehaviour
     // ======================================================================================
     private void StartDash()
     {
-        IsDashing = true;
-
         Vector2 velocity = m_rb.velocity;
 
         m_dashDirection = new Vector2(m_input.GetHorizontal(), m_input.GetVertical());
+
         if (m_dashDirection.sqrMagnitude == 0)
             m_dashDirection = new Vector2(ForwardDir == eDirection.Right ? 1 : -1, 0);
         else
             m_dashDirection.Normalize();
-
-        m_dashTargetPos = m_rb.position + m_dashDirection * m_dashDist;
         
-        velocity = m_dashMaxSpeed * m_dashDirection;
-        m_rb.velocity = velocity;
+        if (!IsWallSnapped || m_dashDirection.x * m_snappedWallNormal.x > 0)
+        {
+            m_dashTargetPos = m_rb.position + m_dashDirection * m_dashDist;
 
+            velocity = m_dashMaxSpeed * m_dashDirection;
+            m_rb.velocity = velocity;
+
+            IsDashing = true;
+        }
     }
 
     // ======================================================================================
@@ -382,5 +340,41 @@ public class PlayerController : MonoBehaviour
         m_walkMinSpeedRatio     = m_configData.m_walkMinSpeedRatio;
         m_ejectMinSpeedRatio    = m_configData.m_ejectMinSpeedRatio;
         m_dashMinSpeedRatio     = m_configData.m_dashMinSpeedRatio;
+    }
+
+
+    // ======================================================================================
+    // PUBLIC MEMBERS - ICollidable INTERFACE FOR COLLISION DETECTION
+    // ======================================================================================
+    public void OnTouchingWall(Vector2 _normal)
+    {
+        IsWallSnapped       = true;
+        IsEjecting          = false;
+        IsJumping           = false;
+        IsDashing           = false;
+        IsGrounded          = IsGrounded;
+        m_snappedWallNormal = _normal;
+    }
+
+    // ======================================================================================
+    public void OnTouchingGround(Vector2 _normal)
+    {
+        IsWallSnapped       = IsWallSnapped;
+        IsEjecting          = false;
+        IsJumping           = false;
+        IsDashing           = IsDashing;
+        IsGrounded          = true;
+    }
+
+    // ======================================================================================
+    public void OnLeavingWall()
+    {
+        IsWallSnapped       = false;
+    }
+
+    // ======================================================================================
+    public void OnLeavingGround()
+    {
+        IsGrounded          = false;
     }
 }   
