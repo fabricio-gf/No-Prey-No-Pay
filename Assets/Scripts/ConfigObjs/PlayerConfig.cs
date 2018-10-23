@@ -6,6 +6,7 @@ public class PlayerConfig : ScriptableObject
     [Header("------------- LOCOMOTION PARAMS -------------")]
     [Header("Physics")]
     public float m_gravityRatio             = 5.0f;
+    public float m_gravityMaxSpeed          = 6.0f;
 
     [Header("Jump")]
     public float m_jumpMaxSpeed             = 12;

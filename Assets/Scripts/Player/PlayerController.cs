@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     // --------------------------- PROTECTED CONFIG ATTRIBUTES --------------------------- //
     // physics params
     protected float m_gravityRatio         = 1.0f;
+    protected float m_gravityMaxSpeed      = 5.0f;
 
     // jump params
     protected float m_jumpMaxSpeed         = 10;
@@ -335,7 +336,7 @@ public class PlayerController : MonoBehaviour
                 m_rb.velocity       = new Vector2(m_rb.velocity.x, 0);
         }
         else
-        { 
+        {
             Vector3 accGravity  = Physics.gravity * m_gravityRatio * GameMgr.DeltaTime;
             Vector2 velocity    = m_rb.velocity;
 
@@ -343,6 +344,8 @@ public class PlayerController : MonoBehaviour
 
             if (IsWallSliding)
                 velocity.y      = velocity.y < -m_slideMaxSpeed ? -m_slideMaxSpeed : velocity.y;
+            else
+                velocity.y      = velocity.y < -m_gravityMaxSpeed ? -m_gravityMaxSpeed : velocity.y;
 
             m_rb.velocity       = velocity;
         }
@@ -354,7 +357,7 @@ public class PlayerController : MonoBehaviour
         Debug.Assert(m_configData != null, this.gameObject.name + " - PlayerController : Missing PlayerConfig for parameters init");
 
         m_gravityRatio          = m_configData.m_gravityRatio;
-        m_walkMinSpeedRatio     = m_configData.m_walkMinSpeedRatio;
+        m_gravityMaxSpeed       = m_configData.m_gravityMaxSpeed;
         
         m_jumpMaxSpeed          = m_configData.m_jumpMaxSpeed;
         
@@ -366,11 +369,12 @@ public class PlayerController : MonoBehaviour
         m_slideMaxSpeed         = m_configData.m_slideMaxSpeed;
         m_ejectDist             = m_configData.m_ejectDist;
         m_ejectMaxSpeed         = m_configData.m_ejectMaxSpeed;
-        m_ejectMinSpeedRatio    = m_configData.m_ejectMinSpeedRatio;
 
         m_dashDist              = m_configData.m_dashDist;
         m_dashMaxSpeed          = m_configData.m_dashMaxSpeed;
 
+        m_walkMinSpeedRatio     = m_configData.m_walkMinSpeedRatio;
+        m_ejectMinSpeedRatio    = m_configData.m_ejectMinSpeedRatio;
         m_dashMinSpeedRatio     = m_configData.m_dashMinSpeedRatio;
     }
 }   
