@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D         m_rb;
     private PlayerInputCtlr     m_input;
     private Vector2             m_snappedWallNormal;
+    private GameObject          m_touchingWall;
+    private GameObject          m_touchingGround;
 
     // jump Subsystem
     private float               m_ejectTargetPosX     = 0;
@@ -97,24 +99,29 @@ public class PlayerController : MonoBehaviour
     // ======================================================================================
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log("Enter : " + collision.collider.gameObject.tag);
-        switch (collision.collider.gameObject.tag)
+        //if (collision.collider.gameObject.tag == "Floor" || collision.collider.gameObject.tag == "Wall")
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Platforms"))
         {
-            case "Floor":
+            ContactPoint2D contact = collision.GetContact(0);
+            if (contact.normal == Vector2.up)
+            { 
                 IsWallSnapped   = IsWallSnapped;
                 IsEjecting      = false;
                 IsJumping       = false;
                 IsDashing       = IsDashing;
                 IsGrounded      = true;
-                break;
-            case "Wall":
+                m_touchingGround = contact.collider.gameObject;
+            }
+            else if (Vector2.Dot(contact.normal, Vector2.up) == 0)
+            { 
                 IsWallSnapped   = true;
                 IsEjecting      = false;
                 IsJumping       = false;
                 IsDashing       = false;
                 IsGrounded      = IsGrounded;
-                m_snappedWallNormal = collision.GetContact(0).normal;
-                break;
+                m_snappedWallNormal = contact.normal;
+                m_touchingWall = collision.gameObject;
+            }
         }
     }
 
@@ -122,14 +129,13 @@ public class PlayerController : MonoBehaviour
     public void OnCollisionExit2D(Collision2D collision)
     {
         //Debug.Log("Exit : " + collision.collider.gameObject.tag);
-        switch (collision.collider.gameObject.tag)
+        //switch (collision.collider.gameObject.tag)
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Platforms"))
         {
-            case "Floor":
+            if (IsGrounded && collision.gameObject == m_touchingGround)
                 IsGrounded = false;
-                break;
-            case "Wall":
+            if (IsWallSnapped && collision.gameObject == m_touchingWall)
                 IsWallSnapped = false;
-                break;
         }
     }
 

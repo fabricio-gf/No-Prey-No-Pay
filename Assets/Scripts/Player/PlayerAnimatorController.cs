@@ -25,23 +25,24 @@ public class PlayerAnimatorController : MonoBehaviour
 
     // -------------------------------- PUBLIC ATTRIBUTES -------------------------------- //
     public Animator m_animator;
-    
-    [Header("Basic Locomotion")]
-    public string   m_isRunningBoolParam    = "IsRunning";
-    public string   m_isDashingBoolParam    = "IsDashing";
-    public string   m_isJumpingBoolParam    = "IsJumping";
-    public string   m_isFallingBoolParam    = "IsFalling";
 
-    [Header("Special Locomotion")]
-    public string   m_isSlidingBoolParam    = "IsSliding";
-    public string   m_isLedgeGrabbed        = "IsLedgeGrabbed";
-    public string   m_isLedgeMoving         = "IsLedgeMoving";
+    // ------------------------------- PRIVATE ATTRIBUTES -------------------------------- //
+    // basic locomotion
+    private string m_isRunningBoolParam     = "IsRunning";
+    private string m_isDashingBoolParam     = "IsDashing";
+    private string m_isJumpingBoolParam     = "IsJumping";
+    private string m_isFallingBoolParam     = "IsFalling";
 
-    [Header("Attack")]
-    public string m_isAttackingBoolParam = "IsAttacking";
+    // special locomotion
+    private string m_isSlidingBoolParam     = "IsSliding";
+    private string m_isLedgeGrabbed         = "IsLedgeGrabbed";
+    private string m_isLedgeMoving          = "IsLedgeMoving";
 
-    [Header("Death")]
-    public string   m_onDeathTriggerParam   = "OnDeath";
+    // attack
+    private string m_isAttackingBoolParam   = "IsAttacking";
+
+    // on death
+    private string   m_onDeathTriggerParam  = "OnDeath";
     
     // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
     private Transform m_transform;

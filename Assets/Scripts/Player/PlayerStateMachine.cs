@@ -53,25 +53,27 @@ public class PlayerStateMachine : MonoBehaviour
     protected void UpdateStateMachine()
     {
         if (m_playerCtl.IsDashing)
-            State = eStates.Dashing;
+            State       = eStates.Dashing;
         else if (m_playerCtl.IsEjecting)
-            State = eStates.WallEjecting;
+            State       = eStates.WallEjecting;
         else if (m_playerCtl.IsGrounded)
         {
             if (Mathf.Abs(m_playerCtl.Velocity.x) != 0)
-                State = eStates.Walking;
+                State   = eStates.Walking;
             else
-                State = eStates.Idle;
+                State   = eStates.Idle;
         }
         else if (m_playerCtl.IsWallSliding)
-            State = eStates.WallSliding;
+            State       = eStates.WallSliding;
         else if (m_playerCtl.IsJumping)
         {
             if (m_playerCtl.Velocity.y > 0)
-                State = eStates.Jumping;
+                State   = eStates.Jumping;
             else
-                State = eStates.Falling;
+                State   = eStates.Falling;
         }
+        else if (!m_playerCtl.IsGrounded && m_playerCtl.Velocity.y < 0)
+            State       = eStates.Falling;
     }
 
     // ======================================================================================
