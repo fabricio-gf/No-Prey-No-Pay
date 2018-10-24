@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Floor
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -14,6 +16,7 @@ TagManager:
   - 
   - 
   - PostProcessing
+  - Platforms
   - 
   - 
   - 
@@ -25,11 +28,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player1
+  - Player2
+  - Player3
+  - Player4
   - 
   - 
   - 
