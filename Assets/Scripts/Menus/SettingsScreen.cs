@@ -7,12 +7,18 @@ using UnityEngine;
 /// </summary>
 public class SettingsScreen : MonoBehaviour {
 
+    private MenuInputController m_input;
+
+
 	[Header("Screen references")]
 	[SerializeField] private GameObject MainMenuScreen;
 	
-	// Update is called once per frame
+	void Awake(){
+		m_input = this.gameObject.GetComponent<MenuInputController>();
+	}
+
 	void Update () {
-		if(InputManager.GetButton(InputManager.Buttons.BACK)){
+		if(m_input.GetPrevious()){
 			MenuActions.instance.ChangePanel(MainMenuScreen);
 		}
 	}

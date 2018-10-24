@@ -13,12 +13,16 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	// PRIVATE ATTRIBUTES
 	private bool[] ActivePlayers;
 	private int NumReadyPlayers = 0;
+    private MenuInputController m_input;
+
 
 	// SERIALIZED ATTRIBUTES
 	[Header("Screen references")]
 	[SerializeField] private GameObject MainMenuScreen;
 
-
+	void Awake(){
+		m_input = this.gameObject.GetComponent<MenuInputController>();
+	}
 	void Start () {
 		ActivePlayers = new bool[4];
 		for(int i = 0; i < 4; i++){
@@ -62,13 +66,13 @@ public class CharacterSelectionScreen : MonoBehaviour {
 					inactive++;
 				}
 				else if(Portraits[i].Phase3){
-					if(InputManager.GetButton(i, InputManager.Buttons.BACK)){
+					if(m_input.GetPrevious()){
 						UnconfirmPlayer(i);
 					}
 				}
 			}
 			else if(ActivePlayers[i]){
-				if(InputManager.GetButton(i, InputManager.Buttons.BACK)){
+				if(m_input.GetPrevious()){
 					if(Portraits[i].Phase2){
 						RemovePlayer(i);
 					}
@@ -76,7 +80,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 			}
 		}
 		
-		if(inactive == 4 && NumReadyPlayers == 0 && InputManager.GetButton(InputManager.Buttons.BACK)){
+		if(inactive == 4 && NumReadyPlayers == 0 && m_input.GetPrevious()){
 			MenuActions.instance.ChangePanel(MainMenuScreen);
 		}
 	}
@@ -137,7 +141,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// </summary>
 	private void GetColorSwap(){
 		for(int i = 0; i < 4; i++){
-			if(ActivePlayers[i] && InputManager.GetButton(i, InputManager.Buttons.ATTACK)){
+			if(ActivePlayers[i] && m_input.GetChangeColor()){
 				Portraits[i].ChangeColor();
 			}
 		}
@@ -148,7 +152,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// </summary>
 	private void GetPlayerConfirm(){
 		for(int i = 0; i < 4; i++){
-			if(ActivePlayers[i] && InputManager.GetButton(i, InputManager.Buttons.SELECT)){
+			if(ActivePlayers[i] && m_input.GetSubmit()){
 				ConfirmPlayer(i);
 			}
 		}

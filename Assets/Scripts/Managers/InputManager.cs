@@ -17,9 +17,16 @@ public class InputManager : MonoBehaviour
         TOSS,
         ATTACK,
         GRAB,
-        START,
-        SELECT,
-        BACK,
+        START
+    }
+
+    public enum eMenuButton
+    {
+        SUBMIT,
+        PREVIOUS,
+        PAUSE,
+        CHANGE_COLOR,
+
         LEFT,
         RIGHT,
         UP,
@@ -70,14 +77,18 @@ public class InputManager : MonoBehaviour
     public XBoxButtons m_attackButton;
     public XBoxButtons m_grabButton;
     public XBoxButtons m_startButton;
-    public XBoxButtons m_selectButton;
-    public XBoxButtons m_backButton;
+
+    public float m_triggMinRatio = .3f;
+
+    [Header("Menu")]
+    public XBoxButtons m_submitButton;
+    public XBoxButtons m_previousButton;
+    public XBoxButtons m_pauseButton;
+    public XBoxButtons m_changeColorButton;
     public XBoxButtons m_leftButton;
     public XBoxButtons m_rightButton;
     public XBoxButtons m_upButton;
     public XBoxButtons m_downButton;
-
-    public float m_triggMinRatio = .3f;
     
 
     // --------------------------------- PUBLIC ATTRIBUTES ------------------------------- //
@@ -118,99 +129,49 @@ public class InputManager : MonoBehaviour
                 return GetButton(gamePadState, m_manager.m_jumpButton);
             case Buttons.START:
                 return GetButton(gamePadState, m_manager.m_startButton);
-            case Buttons.SELECT:
-                return GetButton(gamePadState, m_manager.m_selectButton);
-            case Buttons.BACK:
-                return GetButton(gamePadState, m_manager.m_backButton);
-            case Buttons.LEFT:
-                return GetButton(gamePadState, m_manager.m_leftButton);
-            case Buttons.RIGHT:
-                return GetButton(gamePadState, m_manager.m_rightButton);
-            case Buttons.UP:
-                return GetButton(gamePadState, m_manager.m_upButton);
-            case Buttons.DOWN:
-                return GetButton(gamePadState, m_manager.m_downButton);
         }
 
         return false;
     }
 
-    public static bool GetButton(Buttons _button)
+    public static bool GetMenuButton(eMenuButton _menuButton)
     {
+        bool isPressed = false;
 
-        for(int i = 0; i < 4; i++){
-            GamePadState gamePadState = GamePad.GetState((PlayerIndex)i);
+        for (int player = 0; player < 4; player++)
+        {
+            GamePadState gamePadState = GamePad.GetState((PlayerIndex)(player));
 
-            switch (_button)
+            switch (_menuButton)
             {
-                case Buttons.ATTACK:
-                    return GetButton(gamePadState, m_manager.m_attackButton);
-                case Buttons.DASH:
-                    return GetButton(gamePadState, m_manager.m_dashButton);
-                case Buttons.GRAB:
-                    return GetButton(gamePadState, m_manager.m_grabButton);
-                case Buttons.TOSS:
-                    return GetButton(gamePadState, m_manager.m_tossButton);
-                case Buttons.JUMP:
-                    return GetButton(gamePadState, m_manager.m_jumpButton);
-                case Buttons.START:
-                    return GetButton(gamePadState, m_manager.m_startButton);
-                case Buttons.SELECT:
-                    return GetButton(gamePadState, m_manager.m_selectButton);
-                case Buttons.BACK:
-                    return GetButton(gamePadState, m_manager.m_backButton);
-                case Buttons.LEFT:
-                    return GetButton(gamePadState, m_manager.m_leftButton);
-                case Buttons.RIGHT:
-                    return GetButton(gamePadState, m_manager.m_rightButton);
-                case Buttons.UP:
-                    return GetButton(gamePadState, m_manager.m_upButton);
-                case Buttons.DOWN:
-                    return GetButton(gamePadState, m_manager.m_downButton);
+                case eMenuButton.SUBMIT:
+                    isPressed |= GetButton(gamePadState, m_manager.m_submitButton);
+                    break;
+                case eMenuButton.PREVIOUS:
+                    isPressed |= GetButton(gamePadState, m_manager.m_previousButton);
+                    break;
+                case eMenuButton.PAUSE:
+                    isPressed |= GetButton(gamePadState, m_manager.m_pauseButton);
+                    break;
+                case eMenuButton.LEFT:
+                    isPressed |= GetButton(gamePadState, XBoxButtons.DPAD_LEFT)   || gamePadState.ThumbSticks.Left.X < -m_manager.m_triggMinRatio;
+                    break;
+                case eMenuButton.RIGHT:
+                    isPressed |= GetButton(gamePadState, XBoxButtons.DPAD_RIGHT)  || gamePadState.ThumbSticks.Left.X > m_manager.m_triggMinRatio;
+                    break;
+                case eMenuButton.UP:
+                    isPressed |= GetButton(gamePadState, XBoxButtons.DPAD_UP)     || gamePadState.ThumbSticks.Left.Y < -m_manager.m_triggMinRatio;
+                    break;
+                case eMenuButton.DOWN:
+                    isPressed |= GetButton(gamePadState, XBoxButtons.DPAD_DOWN)   || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
+                    break;
+                case eMenuButton.CHANGE_COLOR:
+                    isPressed |= GetButton(gamePadState, m_manager.m_changeColorButton);
+                    break;
             }
         }
 
-        return false;
-    }
-
-    //preciso disso mas n sei como fazer HALP
-    public static bool GetButtonDown(Buttons _button)
-    {
-        return GetButton(_button);
-        
-        /* for(int i = 0; i < 4; i++){
-            GamePadState gamePadState = GamePad.GetState((PlayerIndex)i);
-
-            switch (_button)
-            {
-                case Buttons.ATTACK:
-                    return GetButton(gamePadState, m_manager.m_attackButton);
-                case Buttons.DASH:
-                    return GetButton(gamePadState, m_manager.m_dashButton);
-                case Buttons.GRAB:
-                    return GetButton(gamePadState, m_manager.m_grabButton);
-                case Buttons.TOSS:
-                    return GetButton(gamePadState, m_manager.m_tossButton);
-                case Buttons.JUMP:
-                    return GetButton(gamePadState, m_manager.m_jumpButton);
-                case Buttons.START:
-                    return GetButton(gamePadState, m_manager.m_startButton);
-                case Buttons.SELECT:
-                    return GetButton(gamePadState, m_manager.m_selectButton);
-                case Buttons.BACK:
-                    return GetButton(gamePadState, m_manager.m_backButton);
-                case Buttons.LEFT:
-                    return GetButton(gamePadState, m_manager.m_leftButton);
-                case Buttons.RIGHT:
-                    return GetButton(gamePadState, m_manager.m_rightButton);
-                case Buttons.UP:
-                    return GetButton(gamePadState, m_manager.m_upButton);
-                case Buttons.DOWN:
-                    return GetButton(gamePadState, m_manager.m_downButton);
-            }
-        }
-
-        return false; */
+        return isPressed;
     }
 
     // ======================================================================================

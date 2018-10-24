@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class InputTest : MonoBehaviour
 {
-    private MenuInputCtlr m_input;
+    private MenuInputController m_input;
 
     private void Start()
     {
-        m_input = this.gameObject.GetComponent<MenuInputCtlr>();
+        m_input = this.gameObject.GetComponent<MenuInputController>();
     }
 
     // Update is called once per frame

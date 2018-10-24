@@ -7,12 +7,17 @@ using UnityEngine;
 /// </summary>
 public class SplashScreen : MonoBehaviour {
 
+    private MenuInputController m_input;
+
 	[Header("Screen references")]
 	[SerializeField] private GameObject MainMenuScreen;
 	
-	// Update is called once per frame
+	void Awake(){
+		m_input = this.gameObject.GetComponent<MenuInputController>();
+	}
+
 	void Update () {
-		if(InputManager.GetButton(InputManager.Buttons.START)){
+		if(m_input.GetPause()){
 			MenuActions.instance.ChangePanel(MainMenuScreen);
 		}
 	}

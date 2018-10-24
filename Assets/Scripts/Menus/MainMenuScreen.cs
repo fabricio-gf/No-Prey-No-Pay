@@ -12,6 +12,8 @@ public class MainMenuScreen : MonoBehaviour {
 	private int index = 0;
 	private bool DirectionPressed = false;
 	private EventSystem eventSystem;
+    private MenuInputController m_input;
+
 
 	// SERIALIZED ATTRIBUTES
 	[Header("Screen references")]
@@ -23,6 +25,10 @@ public class MainMenuScreen : MonoBehaviour {
 
 	[Header("Button references")]
 	[SerializeField] private GameObject[] Buttons;
+
+	void Awake(){
+		m_input = this.gameObject.GetComponent<MenuInputController>();
+	}
 
 	void Start(){
 		eventSystem = EventSystem.current;
@@ -45,12 +51,13 @@ public class MainMenuScreen : MonoBehaviour {
 
 		// Directional inputs
 		float vertical = InputManager.GetAxis(InputManager.Axis.VERTICAL);
-		bool up = InputManager.GetButton(InputManager.Buttons.UP);
-		bool down = InputManager.GetButton(InputManager.Buttons.DOWN);
+		bool up = m_input.GetUp();
+		bool down = m_input.GetDown();
 		
-		if(!down && !up){
-			DirectionPressed = false;
-		}
+		// if(!down && !up){
+		// 	DirectionPressed = false;
+		// }
+
 		/*
 		if(vertical == 0){
 			DirectionPressed = false;
@@ -64,15 +71,16 @@ public class MainMenuScreen : MonoBehaviour {
 			MoveSelection(-1);
 		}
 		*/
-		if(down && !DirectionPressed){
-			MoveSelection(1);
-			DirectionPressed = true;
-		}
-		if(up && !DirectionPressed){
-			MoveSelection(-1);
-			DirectionPressed = true;
+		
+		// if(down && !DirectionPressed){
+		// 	MoveSelection(1);
+		// 	DirectionPressed = true;
+		// }
+		// if(up && !DirectionPressed){
+		// 	MoveSelection(-1);
+		// 	DirectionPressed = true;
 
-		}
+		// }
 		
 		
 		/*switch (vertical)
@@ -89,11 +97,11 @@ public class MainMenuScreen : MonoBehaviour {
 		}*/
 
 		// Button inputs
-		if(InputManager.GetButtonDown(InputManager.Buttons.SELECT)){
+		if(m_input.GetSubmit()){
 			SelectButton();
 		}
 
-		if(InputManager.GetButtonDown(InputManager.Buttons.BACK)){
+		if(m_input.GetPrevious()){
 			MenuActions.instance.ChangePanel(SplashScreen);
 		}
 	}
