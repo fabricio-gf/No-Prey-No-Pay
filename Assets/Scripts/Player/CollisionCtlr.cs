@@ -24,9 +24,9 @@ public class CollisionCtlr : MonoBehaviour
         {
             ContactPoint2D contact = collision.GetContact(0);
             if (contact.normal == Vector2.up)
-                OnTouchingGround(collision.gameObject, contact.normal);
+                OnTouchingGround(collision.gameObject, contact.normal, collision.contacts);
             else if (Vector2.Dot(contact.normal, Vector2.up) == 0)
-                OnTouchingWall(collision.gameObject, contact.normal);
+                OnTouchingWall(collision.gameObject, contact.normal, collision.contacts);
         }
     }
     
@@ -43,23 +43,23 @@ public class CollisionCtlr : MonoBehaviour
     }
 
     // ======================================================================================
-    private void OnTouchingGround(GameObject _ground, Vector2 _normal)
+    private void OnTouchingGround(GameObject _ground, Vector2 _normal, ContactPoint2D[] _contacts)
     {
         m_isTouchingGround  = true;
         m_touchingGround    = _ground;
 
         foreach (ICollidable collidable in m_collidables)
-            collidable.OnTouchingGround(_normal);
+            collidable.OnTouchingGround(_normal, _contacts);
     }
 
     // ======================================================================================
-    private void OnTouchingWall(GameObject _wall, Vector2 _normal)
+    private void OnTouchingWall(GameObject _wall, Vector2 _normal, ContactPoint2D[] _contacts)
     {
         m_isTouchingWall    = true;
         m_touchingWall      = _wall;
 
         foreach (ICollidable collidable in m_collidables)
-            collidable.OnTouchingWall(_normal);
+            collidable.OnTouchingWall(_normal, _contacts);
     }
 
     // ======================================================================================

@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour, ICollidable
     protected float m_ejectDist            = 1;
     protected float m_ejectMaxSpeed        = 10;
     protected float m_ejectMinSpeedRatio   = .2f;
+    // ledge params
+    public Transform m_handPos;
 
     // dash params
     protected float m_dashDist             = 1;
@@ -73,6 +75,9 @@ public class PlayerController : MonoBehaviour, ICollidable
     public bool IsDashing       { get; protected set; }     // exclusive unstopable event
     public eDirection ForwardDir{ get; protected set; }
 
+    private bool IsTouchingLedge { get; set; }
+    private float MaxWallTouchingPoint { get; set; }
+
     public Vector2 Velocity     { get { return m_rb.velocity; } }
 
 
@@ -97,6 +102,11 @@ public class PlayerController : MonoBehaviour, ICollidable
     // ======================================================================================
     public void FixedUpdate()
     {
+        //UpdateLedgeGrabSubsystem();
+
+        //if (IsTouchingLedge)
+        //    return;
+
         // Dash Subsystem : triggers Dash and runs it until the end
         UpdateDashSubsystem();
         // Jump Subsystem : triggers Jump and WallEjection and runs it until the end
@@ -117,6 +127,55 @@ public class PlayerController : MonoBehaviour, ICollidable
 
     // ======================================================================================
     // PRIVATE MEMBERS - SUBSYSTEM HANDLERS
+    // ======================================================================================
+    private GameObject m_debugBall;
+    // THIS IS TERRIBLE! MUST BE REMADE!
+    private void UpdateLedgeGrabSubsystem()
+    {
+        if (IsWallSnapped)
+        {
+            if (MaxWallTouchingPoint < m_handPos.position.y || Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint) < .1f)
+            {
+                float horInput = m_input.GetHorizontal();
+                if (horInput * m_snappedWallNormal.x < 0)
+                {
+                    m_rb.isKinematic = true;
+                    m_rb.simulated = false;
+
+                    IsTouchingLedge = true;
+                    Debug.Log(MaxWallTouchingPoint);
+
+                    Debug.Log(Mathf.Lerp(transform.position.y,
+                                                                MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
+                                                                10 * GameMgr.DeltaTime));
+                    if (m_debugBall == null)
+                    {
+                        m_debugBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                        m_debugBall.transform.localScale = .1f * Vector3.one;
+                    }
+                    m_debugBall.transform.position = new Vector3(this.transform.position.x,
+                        MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
+                        0);
+
+                    if (Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint) > .1f)
+                        transform.position = new Vector2(transform.position.x,
+                                                    Mathf.Lerp(transform.position.y,
+                                                                MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
+                                                                10 * GameMgr.DeltaTime));// / Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint)));
+                    else
+                    {
+                        transform.position = new Vector2(transform.position.x, MaxWallTouchingPoint - (m_rb.position.y - m_handPos.position.y));
+                    }
+                    return;
+                }
+            }
+        }
+
+        m_rb.isKinematic = false;
+        m_rb.simulated = true;
+        IsTouchingLedge = false;
+    }
+
     // ======================================================================================
     private void UpdateDashSubsystem()
     {
@@ -346,8 +405,13 @@ public class PlayerController : MonoBehaviour, ICollidable
     // ======================================================================================
     // PUBLIC MEMBERS - ICollidable INTERFACE FOR COLLISION DETECTION
     // ======================================================================================
-    public void OnTouchingWall(Vector2 _normal)
+    public void OnTouchingWall(Vector2 _normal, ContactPoint2D[] _contacts)
     {
+        MaxWallTouchingPoint = Mathf.NegativeInfinity;
+        foreach (ContactPoint2D contact in _contacts)
+            if (contact.point.y > MaxWallTouchingPoint)
+                MaxWallTouchingPoint = contact.point.y;
+
         IsWallSnapped       = true;
         IsEjecting          = false;
         IsJumping           = false;
@@ -357,7 +421,7 @@ public class PlayerController : MonoBehaviour, ICollidable
     }
 
     // ======================================================================================
-    public void OnTouchingGround(Vector2 _normal)
+    public void OnTouchingGround(Vector2 _normal, ContactPoint2D[] _contacts)
     {
         IsWallSnapped       = IsWallSnapped;
         IsEjecting          = false;
@@ -370,6 +434,9 @@ public class PlayerController : MonoBehaviour, ICollidable
     public void OnLeavingWall()
     {
         IsWallSnapped       = false;
+
+        IsTouchingLedge     = false;
+        MaxWallTouchingPoint= Mathf.NegativeInfinity;
     }
 
     // ======================================================================================

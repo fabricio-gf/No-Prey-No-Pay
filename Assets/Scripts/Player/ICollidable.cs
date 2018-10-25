@@ -4,8 +4,8 @@ using UnityEngine;
 
 public interface ICollidable
 {
-    void OnTouchingWall(Vector2 _normal);
-    void OnTouchingGround(Vector2 _normal);
+    void OnTouchingWall(Vector2 _normal,    ContactPoint2D[] _contacts);
+    void OnTouchingGround(Vector2 _normal,  ContactPoint2D[] _contacts);
     void OnLeavingWall();
     void OnLeavingGround();
 }
