@@ -21,7 +21,6 @@ MonoBehaviour:
   m_ejectDist: 1.5
   m_ejectMaxSpeed: 9
   m_dashDist: 2
-  m_dashDist: 1.5
   m_dashMaxSpeed: 30
   m_walkMinSpeedRatio: 0.05
   m_ejectMinSpeedRatio: 0.4
