@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputCtlr), typeof(CollisionCtlr))]
-public class PlayerController : MonoBehaviour, ICollidable
+public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
 {
     // -------------------------------------- ENUMS -------------------------------------- //
     public enum eDirection
@@ -67,6 +67,8 @@ public class PlayerController : MonoBehaviour, ICollidable
     private float               m_minEjectEventRatio = .1f;
 
     // ------------------------------------- ACCESSORS ----------------------------------- //
+    public bool IsActive        { get; protected set; }
+
     public bool IsGrounded      { get; protected set; }
     public bool IsJumping       { get; protected set; }
     public bool IsWallSnapped   { get; protected set; }
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour, ICollidable
     // ======================================================================================
     // PUBLIC MEMBERS
     // ======================================================================================
-    public void Start ()
+    override protected void StartPhase ()
     {
         InitializeValues();
 
@@ -97,11 +99,17 @@ public class PlayerController : MonoBehaviour, ICollidable
         IsDashing       = false;
 
         ForwardDir      = eDirection.Right;
+
+        IsActive        = true;
     }
 
     // ======================================================================================
-    public void FixedUpdate()
+    override protected void FixedUpdatePhase()
     {
+        if (!IsActive)
+            return;
+        Debug.Log(IsActive);
+
         //UpdateLedgeGrabSubsystem();
 
         //if (IsTouchingLedge)
@@ -444,4 +452,4 @@ public class PlayerController : MonoBehaviour, ICollidable
     {
         IsGrounded          = false;
     }
-}   
+}

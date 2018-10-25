@@ -43,7 +43,7 @@ public class PlayerAttack : MonoBehaviour
     private LayerMask           playerLayer;
 
     // attack subsystem
-    private Vector2 m_attackDirection = Vector2.zero;
+    private Vector2             m_attackDirection = Vector2.zero;
 
     // ------------------------------------- ACCESSORS ----------------------------------- //
     public bool IsAttacking { get; protected set; }
@@ -145,24 +145,34 @@ public class PlayerAttack : MonoBehaviour
         {
             StartCoroutine(hitTargets[i].GetComponent<DamageBehaviour>().GetStunned());
         }
+        
         StartCoroutine(AttackDelay());
     }
 
     private void SaberAttack()
     {
+        this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
+
         Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * SaberOffset.x, SaberOffset.y, 0), 0.4f * Vector3.one, Quaternion.identity, playerLayer);
         for (int i = 0; i < hitTargets.Length; i++)
         {
             hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
         }
+
+        this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
         StartCoroutine(AttackDelay());
     }
 
     private void PistolAttack()
     {
+        this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
+
         GameObject obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
         obj.GetComponent<Projectile>().MoveProjectile(new Vector3(transform.localScale.x * 30, 0, 0));
         obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
+
+        this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
+
         StartCoroutine(AttackDelay());
     }
 }

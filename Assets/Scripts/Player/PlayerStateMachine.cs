@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerController), typeof(PlayerAnimatorController))]
+[RequireComponent(typeof(PlayerController), typeof(PlayerAnimatorController), typeof(PlayerAttack))]
 public class PlayerStateMachine : MonoBehaviour
 {
     // --------------------------------- PUBLIC AUX ENUMS -------------------------------- //
@@ -13,7 +13,7 @@ public class PlayerStateMachine : MonoBehaviour
         Jumping,            // Normal
         Falling,
         Dashing,
-        //Attack,
+        Attack,
         WallSliding,        // Wall
         WallEjecting,       // Wall
         //LedgeGrabbed,
@@ -23,6 +23,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     // ------------------------------- PROTECTED ATTRIBUTES ------------------------------ //
     protected PlayerController          m_playerCtl;
+    protected PlayerAttack              m_playerAttack;
     protected PlayerAnimatorController  m_playerAnimCtl;
 
     //// -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
@@ -39,6 +40,7 @@ public class PlayerStateMachine : MonoBehaviour
         State           = eStates.Idle;
         
         m_playerCtl     = this.gameObject.GetComponent<PlayerController>();
+        m_playerAttack  = this.gameObject.GetComponent<PlayerAttack>();
         m_playerAnimCtl = this.gameObject.GetComponent<PlayerAnimatorController>();
     }
 
@@ -52,7 +54,9 @@ public class PlayerStateMachine : MonoBehaviour
     // ======================================================================================
     protected void UpdateStateMachine()
     {
-        if (m_playerCtl.IsDashing)
+        if (m_playerAttack.IsAttacking)
+            State       = eStates.Attack;
+        else if (m_playerCtl.IsDashing)
             State       = eStates.Dashing;
         else if (m_playerCtl.IsEjecting)
             State       = eStates.WallEjecting;
@@ -81,6 +85,9 @@ public class PlayerStateMachine : MonoBehaviour
     {
         switch (State)
         {
+            case eStates.Attack:
+                m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Attack);
+                break;
             case eStates.Idle:
                 m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Idle);
                 break;

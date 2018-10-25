@@ -12,8 +12,8 @@ public class PlayerAnimatorController : MonoBehaviour
         Dashing,
         Attack,
         Sliding,        // Wall
-        LedgeGrabbed,
-        LedgeMoving,
+        //LedgeGrabbed,
+        //LedgeMoving,
         Dead,
     }
 
@@ -84,17 +84,19 @@ public class PlayerAnimatorController : MonoBehaviour
             case eStates.Dashing:
                 StartDashing();
                 break;
-
+            case eStates.Attack:
+                StartAttacking();
+                break;
             // TODO
             case eStates.Sliding:
                 StartSliding();
                 break;
-            case eStates.LedgeGrabbed:
-                StartLedgeGrabbed();
-                break;
-            case eStates.LedgeMoving:
-                StartLedgeMoving();
-                break;
+            //case eStates.LedgeGrabbed:
+            //    StartLedgeGrabbed();
+            //    break;
+            //case eStates.LedgeMoving:
+            //    StartLedgeMoving();
+            //    break;
             case eStates.Dead:
                 StartDead();
                 break;
