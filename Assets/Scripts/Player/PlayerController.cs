@@ -66,9 +66,6 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     private float               m_minDashEventRatio  = .1f;
     private float               m_minEjectEventRatio = .1f;
 
-    // ------------------------------------- ACCESSORS ----------------------------------- //
-    public bool IsActive        { get; protected set; }
-
     public bool IsGrounded      { get; protected set; }
     public bool IsJumping       { get; protected set; }
     public bool IsWallSnapped   { get; protected set; }
@@ -99,17 +96,11 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
         IsDashing       = false;
 
         ForwardDir      = eDirection.Right;
-
-        IsActive        = true;
     }
 
     // ======================================================================================
     override protected void FixedUpdatePhase()
     {
-        if (!IsActive)
-            return;
-        Debug.Log(IsActive);
-
         //UpdateLedgeGrabSubsystem();
 
         //if (IsTouchingLedge)
@@ -271,6 +262,9 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
             m_rb.velocity = velocity;
 
             IsDashing = true;
+
+            // stop any other action
+            IsJumping = false;
         }
     }
 
@@ -349,9 +343,9 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     private void UpdateDash()
     {
         Vector2 velocity    = m_rb.velocity;
-        float ratio         = Mathf.Clamp(Vector2.Dot((m_dashTargetPos - m_rb.position), m_dashDirection), 0, m_dashDist);
+        float ratio         = Mathf.Clamp(Vector2.Dot((m_dashTargetPos - m_rb.position), m_dashDirection), 0, m_dashDist)/m_dashDist;
 
-        velocity            = m_dashDirection * Mathf.Lerp(m_dashMinSpeedRatio * m_dashMaxSpeed, velocity.magnitude, ratio);
+        velocity            = m_dashDirection * Mathf.Lerp(velocity.magnitude, m_dashMinSpeedRatio * m_dashMaxSpeed, ratio);
         m_rb.velocity       = velocity;
 
         if (ratio < m_minDashEventRatio)
@@ -364,7 +358,7 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
         if (IsGrounded)
         {
             if (!IsJumping)
-                m_rb.velocity       = new Vector2(m_rb.velocity.x, 0);
+                m_rb.velocity   = new Vector2(m_rb.velocity.x, 0);
         }
         else
         {
@@ -436,6 +430,16 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
         IsJumping           = false;
         IsDashing           = IsDashing;
         IsGrounded          = true;
+    }
+
+    // ======================================================================================
+    public void OnTouchingAnother(Vector2 _normal, ContactPoint2D[] _contacts)
+    {
+        // STOP ANY EVENT
+        IsDashing       = false;
+        IsEjecting      = false;
+        IsWallSnapped   = false;
+        IsJumping       = false;
     }
 
     // ======================================================================================

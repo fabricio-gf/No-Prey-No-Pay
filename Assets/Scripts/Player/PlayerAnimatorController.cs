@@ -7,13 +7,14 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         Idle,
         Walking,
-        Jumping,        // Normal || Wall
+        Jumping,
         Falling,
         Dashing,
         Attack,
-        Sliding,        // Wall
+        WallSliding,
         //LedgeGrabbed,
         //LedgeMoving,
+        WallEjecting,
         Dead,
     }
 
@@ -34,6 +35,7 @@ public class PlayerAnimatorController : MonoBehaviour
     private string m_isFallingBoolParam     = "IsFalling";
 
     // special locomotion
+    private string m_isEjectingBoolParam    = "IsEjecting";
     private string m_isSlidingBoolParam     = "IsSliding";
     private string m_isLedgeGrabbed         = "IsLedgeGrabbed";
     private string m_isLedgeMoving          = "IsLedgeMoving";
@@ -84,13 +86,20 @@ public class PlayerAnimatorController : MonoBehaviour
             case eStates.Dashing:
                 StartDashing();
                 break;
+
             case eStates.Attack:
                 StartAttacking();
                 break;
+
             // TODO
-            case eStates.Sliding:
-                StartSliding();
+            case eStates.WallSliding:
+                StartWallSliding();
                 break;
+
+            case eStates.WallEjecting:
+                StartWallEjecting();
+                break;
+
             //case eStates.LedgeGrabbed:
             //    StartLedgeGrabbed();
             //    break;
@@ -131,6 +140,7 @@ public class PlayerAnimatorController : MonoBehaviour
         m_animator.SetBool(m_isSlidingBoolParam, false);
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
+        m_animator.SetBool(m_isEjectingBoolParam, false);
     }
 
     // ======================================================================================
@@ -144,6 +154,7 @@ public class PlayerAnimatorController : MonoBehaviour
         m_animator.SetBool(m_isSlidingBoolParam, false);
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
+        m_animator.SetBool(m_isEjectingBoolParam, false);
     }
 
     // ======================================================================================
@@ -157,6 +168,7 @@ public class PlayerAnimatorController : MonoBehaviour
         m_animator.SetBool(m_isSlidingBoolParam, false);
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
+        m_animator.SetBool(m_isEjectingBoolParam, false);
     }
 
     // ======================================================================================
@@ -170,6 +182,7 @@ public class PlayerAnimatorController : MonoBehaviour
         m_animator.SetBool(m_isSlidingBoolParam, false);
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
+        m_animator.SetBool(m_isEjectingBoolParam, false);
     }
 
     // ======================================================================================
@@ -183,6 +196,7 @@ public class PlayerAnimatorController : MonoBehaviour
         m_animator.SetBool(m_isSlidingBoolParam, false);
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
+        m_animator.SetBool(m_isEjectingBoolParam, false);
     }
 
     // ======================================================================================
@@ -196,10 +210,11 @@ public class PlayerAnimatorController : MonoBehaviour
         m_animator.SetBool(m_isSlidingBoolParam, false);
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
+        m_animator.SetBool(m_isEjectingBoolParam, false);
     }
 
     // ======================================================================================
-    protected void StartSliding()
+    protected void StartWallSliding()
     {
         m_animator.SetBool(m_isDashingBoolParam, false);
         m_animator.SetBool(m_isFallingBoolParam, false);
@@ -209,6 +224,21 @@ public class PlayerAnimatorController : MonoBehaviour
         m_animator.SetBool(m_isSlidingBoolParam, true);
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
+        m_animator.SetBool(m_isEjectingBoolParam, false);
+    }
+
+    // ======================================================================================
+    protected void StartWallEjecting()
+    {
+        m_animator.SetBool(m_isDashingBoolParam, false);
+        m_animator.SetBool(m_isFallingBoolParam, false);
+        m_animator.SetBool(m_isJumpingBoolParam, false);
+        m_animator.SetBool(m_isRunningBoolParam, false);
+        m_animator.SetBool(m_isAttackingBoolParam, false);
+        m_animator.SetBool(m_isSlidingBoolParam, false);
+        m_animator.SetBool(m_isLedgeGrabbed, false);
+        m_animator.SetBool(m_isLedgeMoving, false);
+        m_animator.SetBool(m_isEjectingBoolParam, true);
     }
 
     // ======================================================================================
@@ -222,6 +252,7 @@ public class PlayerAnimatorController : MonoBehaviour
         m_animator.SetBool(m_isSlidingBoolParam, false);
         m_animator.SetBool(m_isLedgeGrabbed, true);
         m_animator.SetBool(m_isLedgeMoving, false);
+        m_animator.SetBool(m_isEjectingBoolParam, false);
         // TODO
     }
 
@@ -236,6 +267,7 @@ public class PlayerAnimatorController : MonoBehaviour
         m_animator.SetBool(m_isSlidingBoolParam, false);
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, true);
+        m_animator.SetBool(m_isEjectingBoolParam, false);
         // TODO
     }
 

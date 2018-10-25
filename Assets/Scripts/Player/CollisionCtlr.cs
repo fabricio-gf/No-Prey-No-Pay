@@ -27,6 +27,9 @@ public class CollisionCtlr : MonoBehaviour
                 OnTouchingGround(collision.gameObject, contact.normal, collision.contacts);
             else if (Vector2.Dot(contact.normal, Vector2.up) == 0)
                 OnTouchingWall(collision.gameObject, contact.normal, collision.contacts);
+            else
+                OnTouchingAnother(collision.gameObject, contact.normal, collision.contacts);
+
         }
     }
     
@@ -60,6 +63,28 @@ public class CollisionCtlr : MonoBehaviour
 
         foreach (ICollidable collidable in m_collidables)
             collidable.OnTouchingWall(_normal, _contacts);
+    }
+
+    // ======================================================================================
+    private void OnTouchingAnother(GameObject _obj, Vector2 _normal, ContactPoint2D[] _contacts)
+    {
+        foreach (ICollidable collidable in m_collidables)
+            collidable.OnTouchingAnother(_normal, _contacts);
+
+#if UNITY_EDITOR
+        if (_obj.GetComponent<PlatformEffector2D>() == null)
+            Debug.LogError("The GameObject " + _obj.name + " is in 'Platforms' layer and seems to be a floor... check if it has a PlatformEffector!");
+        else
+        {
+            bool hasUsedByEffector = false;
+            foreach (Collider2D col in _obj.GetComponents<Collider2D>())
+                if (col.usedByEffector)
+                    hasUsedByEffector |= col.usedByEffector;
+
+            if (!hasUsedByEffector)
+                Debug.LogError("The GameObject " + _obj.name + " is in 'Platforms' layer and seems to be a floor... check if its collider is 'UsedByEffector'!");
+        }
+#endif
     }
 
     // ======================================================================================

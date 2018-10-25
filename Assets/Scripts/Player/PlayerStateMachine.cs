@@ -101,10 +101,10 @@ public class PlayerStateMachine : MonoBehaviour
                 m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Falling);
                 break;
             case eStates.WallSliding:
-                m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Sliding);
+                m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.WallSliding);
                 break;
             case eStates.WallEjecting:
-                m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Dashing);             // TO DO : Wall Eject
+                m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.WallEjecting);             // TO DO : Wall Eject
                 break;
             case eStates.Dashing:
                 m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Dashing);
