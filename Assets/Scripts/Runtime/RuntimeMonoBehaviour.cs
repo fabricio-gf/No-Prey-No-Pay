@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class RuntimeMonoBehaviour : MonoBehaviour
 {
-    // --------------------------------- PUBLIC ATTRIBUTES ------------------------------- //
-    public bool IsActive { get; protected set; }
-
     // ======================================================================================
     // PUBLIC MEMBERS
     // ======================================================================================
     public void Start ()
     {
-        IsActive = true;
         StartPhase();
 	}
 
     // ======================================================================================
     public void Update ()
     {
-        if (GameMgr.IsPaused || !IsActive)
+        if (GameMgr.IsPaused || !IsActive())
             return;
 
         UpdatePhase();
@@ -28,7 +24,7 @@ public class RuntimeMonoBehaviour : MonoBehaviour
     // ======================================================================================
     public void FixedUpdate()
     {
-        if (GameMgr.IsPaused || !IsActive)
+        if (GameMgr.IsPaused || !IsActive())
             return;
 
         FixedUpdatePhase();
@@ -52,5 +48,11 @@ public class RuntimeMonoBehaviour : MonoBehaviour
     protected virtual void FixedUpdatePhase()
     {
 
+    }
+
+    // ======================================================================================
+    protected virtual bool IsActive()
+    {
+        return enabled;
     }
 }
