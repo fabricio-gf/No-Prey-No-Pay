@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -303,6 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df7e9bcb4967c2d4f9d75d264419c2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_input: {fileID: 746196070}
   MainMenuScreen: {fileID: 199372013}
 --- !u!1 &156230347
 GameObject:
@@ -702,6 +703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a24271dd98de7641a38b367bbcc069d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_input: {fileID: 746196070}
   CharacterSelectScreen: {fileID: 1196329478}
   SettingsScreen: {fileID: 452092059}
   CreditsScreen: {fileID: 1222973603}
@@ -1485,6 +1487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a0f41dbbb4d4741af136af8844a624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_input: {fileID: 746196070}
   MainMenuScreen: {fileID: 199372013}
 --- !u!1 &466171788
 GameObject:
@@ -1788,6 +1791,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d091bbeaa800e6478bd1e6b10ccc3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerList:
+  - {fileID: 11400000, guid: 2c699aa339d8de94d928d7def31c78c9, type: 2}
+  - {fileID: 11400000, guid: 4c83777d5c1623f4f86ac488996cf395, type: 2}
+  - {fileID: 11400000, guid: b8668df8dd58eb746b2822a22c95189f, type: 2}
+  - {fileID: 11400000, guid: aaea152946e3dfc418574f288d6a4cd6, type: 2}
   StartText: {fileID: 651783312}
   StartTextActiveColor: {r: 0, g: 0, b: 0, a: 1}
   StartTextNonActiveColor: {r: 0.44313726, g: 0.44313726, b: 0.44313726, a: 1}
@@ -2275,6 +2283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 746196068}
   - component: {fileID: 746196069}
+  - component: {fileID: 746196070}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -2307,6 +2316,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActivePanel: {fileID: 152109117}
+--- !u!114 &746196070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 746196067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ace532999cc494d8f36c8c14431ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &766873783
 GameObject:
   m_ObjectHideFlags: 0
@@ -2776,13 +2796,15 @@ MonoBehaviour:
   m_attackButton: 2
   m_grabButton: 3
   m_startButton: 8
-  m_selectButton: 0
-  m_backButton: 1
+  m_triggMinRatio: 0.3
+  m_submitButton: 0
+  m_previousButton: 1
+  m_pauseButton: 8
+  m_changeColorButton: 2
   m_leftButton: 4
   m_rightButton: 5
   m_upButton: 6
   m_downButton: 7
-  m_triggMinRatio: 0.3
 --- !u!1 &827748805
 GameObject:
   m_ObjectHideFlags: 0
@@ -3914,6 +3936,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1196329479}
   - component: {fileID: 1196329480}
+  - component: {fileID: 1196329481}
   m_Layer: 0
   m_Name: CharacterSelection
   m_TagString: Untagged
@@ -3962,7 +3985,19 @@ MonoBehaviour:
   - {fileID: 2015997261}
   - {fileID: 288061270}
   - {fileID: 1586941889}
+  m_input: {fileID: 746196070}
   MainMenuScreen: {fileID: 199372013}
+--- !u!114 &1196329481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1196329478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ace532999cc494d8f36c8c14431ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1209229956
 GameObject:
   m_ObjectHideFlags: 0
@@ -4086,6 +4121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ff7501ef9735042acdf02d86194856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_input: {fileID: 746196070}
   MainMenuScreen: {fileID: 199372013}
 --- !u!1001 &1240122464
 Prefab:

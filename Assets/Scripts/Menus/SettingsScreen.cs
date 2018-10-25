@@ -7,14 +7,13 @@ using UnityEngine;
 /// </summary>
 public class SettingsScreen : MonoBehaviour {
 
-    private MenuInputController m_input;
+    [SerializeField] private MenuInputController m_input;
 
 
 	[Header("Screen references")]
 	[SerializeField] private GameObject MainMenuScreen;
 	
 	void Awake(){
-		m_input = this.gameObject.GetComponent<MenuInputController>();
 	}
 
 	void Update () {

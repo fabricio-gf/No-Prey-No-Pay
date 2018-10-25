@@ -13,7 +13,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	// PRIVATE ATTRIBUTES
 	private bool[] ActivePlayers;
 	private int NumReadyPlayers = 0;
-    private MenuInputController m_input;
+    [SerializeField] private MenuInputController m_input;
 
 
 	// SERIALIZED ATTRIBUTES
@@ -21,7 +21,6 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	[SerializeField] private GameObject MainMenuScreen;
 
 	void Awake(){
-		m_input = this.gameObject.GetComponent<MenuInputController>();
 	}
 	void Start () {
 		ActivePlayers = new bool[4];
@@ -201,6 +200,6 @@ public class CharacterSelectionScreen : MonoBehaviour {
 		ActivePlayers[controller] = true;
 		NumReadyPlayers--;
 		Portraits[controller].UnconfirmCharacter();
-		LevelLoader.instance.RemovePlayerReady(controller, Portraits[controller].charIndex, Portraits[controller].colorIndex);
+		LevelLoader.instance.RemovePlayerReady(controller);
 	}
 }

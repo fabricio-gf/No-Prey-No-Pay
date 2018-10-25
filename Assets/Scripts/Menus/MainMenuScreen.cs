@@ -10,9 +10,8 @@ public class MainMenuScreen : MonoBehaviour {
 
 	// PRIVATE ATTRIBUTES
 	private int index = 0;
-	private bool DirectionPressed = false;
 	private EventSystem eventSystem;
-    private MenuInputController m_input;
+    [SerializeField] private MenuInputController m_input;
 
 
 	// SERIALIZED ATTRIBUTES
@@ -27,7 +26,6 @@ public class MainMenuScreen : MonoBehaviour {
 	[SerializeField] private GameObject[] Buttons;
 
 	void Awake(){
-		m_input = this.gameObject.GetComponent<MenuInputController>();
 	}
 
 	void Start(){
@@ -72,15 +70,15 @@ public class MainMenuScreen : MonoBehaviour {
 		}
 		*/
 		
-		// if(down && !DirectionPressed){
-		// 	MoveSelection(1);
-		// 	DirectionPressed = true;
-		// }
-		// if(up && !DirectionPressed){
-		// 	MoveSelection(-1);
-		// 	DirectionPressed = true;
+		if(down/*  && !DirectionPressed */){
+			MoveSelection(1);
+			/* DirectionPressed = true; */
+		}
+		if(up/*  && !DirectionPressed */){
+			MoveSelection(-1);
+			/* DirectionPressed = true; */
 
-		// }
+		}
 		
 		
 		/*switch (vertical)

@@ -12,20 +12,13 @@ public class LevelLoader : MonoBehaviour {
 	// PUBLIC ATTRIBUTES
 	public static LevelLoader instance;
 
-	public struct PlayerInfo{
-		public int playerNumber;
-		public int character;
-		public int color;
-	};
-
 	// PRIVATE ATTRIBUTES
-	private List<PlayerInfo> PlayerList = new List<PlayerInfo>();
-
 	private int NumActivePlayers;
 	private int NumReadyPlayers;
 	private bool CanStart;
 
 	// SERIALIZED ATTRIBUTES
+	[SerializeField] private PlayerInfo[] PlayerList = new PlayerInfo[4];	
 	[SerializeField] private UnityEngine.UI.Text StartText;
 	[SerializeField] private Color StartTextActiveColor;
 	[SerializeField] private Color StartTextNonActiveColor;
@@ -71,23 +64,17 @@ public class LevelLoader : MonoBehaviour {
 	}
 
 	public void AddPlayerReady(int playerNumber, int character, int color){
-		PlayerInfo p;
-		p.playerNumber = playerNumber;
-		p.character = character;
-		p.color = color;
-		PlayerList.Add(p);
+		PlayerList[playerNumber].isSelected = true;
+		PlayerList[playerNumber].SelectedCharacter = (PlayerInfo.Character)character;
+		PlayerList[playerNumber].SelectedColor = color;
 
 		NumReadyPlayers ++;
 		CheckStartButton();
 
 	}
 
-	public void RemovePlayerReady(int playerNumber, int character, int color){
-		PlayerInfo p;
-		p.playerNumber = playerNumber;
-		p.character = character;
-		p.color = color;
-		PlayerList.Remove(p);
+	public void RemovePlayerReady(int playerNumber){
+		PlayerList[playerNumber].isSelected = false;
 
 		NumReadyPlayers --;
 		CheckStartButton();
