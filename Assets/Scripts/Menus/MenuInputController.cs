@@ -8,7 +8,7 @@ public class MenuInputController : MonoBehaviour
     private bool m_submitTrigger;
     private bool m_previousTrigger;
     private bool m_pauseTrigger;
-    private bool m_changeCollorTrigger;
+    private bool m_changeColorTrigger;
 
     private bool m_upTrigger;
     private bool m_downTrigger;
@@ -22,13 +22,13 @@ public class MenuInputController : MonoBehaviour
     public void Awake(){
         
     }
-    public void Update()
+    public virtual void Update()
     {
         // reset triggers when button released
         m_submitTrigger     = !InputManager.GetMenuButton(InputManager.eMenuButton.SUBMIT)      || m_submitTrigger;
         m_previousTrigger   = !InputManager.GetMenuButton(InputManager.eMenuButton.PREVIOUS)    || m_previousTrigger;
         m_pauseTrigger      = !InputManager.GetMenuButton(InputManager.eMenuButton.PAUSE)       || m_pauseTrigger;
-        m_changeCollorTrigger = !InputManager.GetMenuButton(InputManager.eMenuButton.CHANGE_COLOR) || m_changeCollorTrigger;
+        m_changeColorTrigger = !InputManager.GetMenuButton(InputManager.eMenuButton.CHANGE_COLOR) || m_changeColorTrigger;
 
 
         m_upTrigger         = !InputManager.GetMenuButton(InputManager.eMenuButton.UP)          || m_upTrigger;
@@ -61,6 +61,7 @@ public class MenuInputController : MonoBehaviour
         return false;
     }
 
+
     // ======================================================================================
     public bool GetPause()
     {
@@ -72,18 +73,18 @@ public class MenuInputController : MonoBehaviour
 
         return false;
     }
-
     // ======================================================================================
     public bool GetChangeColor()
     {
-        if (m_changeCollorTrigger && InputManager.GetMenuButton(InputManager.eMenuButton.CHANGE_COLOR))
+        if (m_changeColorTrigger && InputManager.GetMenuButton(InputManager.eMenuButton.CHANGE_COLOR))
         {
-            m_changeCollorTrigger = false;
+            m_changeColorTrigger = false;
             return true;
         }
 
         return false;
     }
+
 
     // ======================================================================================
     public bool GetUp()

@@ -13,7 +13,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	// PRIVATE ATTRIBUTES
 	private bool[] ActivePlayers;
 	private int NumReadyPlayers = 0;
-    [SerializeField] private MenuInputController m_input;
+    [SerializeField] private CharacterSelectInputController m_input;
 
 
 	// SERIALIZED ATTRIBUTES
@@ -47,7 +47,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// </summary>
 	private void GetNewPlayers(){
 		for(int i = 0; i < 4; i++){
-			if(!ActivePlayers[i] && Portraits[i].Phase1 && InputManager.GetButton(i, InputManager.Buttons.START)){
+			if(!ActivePlayers[i] && Portraits[i].Phase1 && m_input.GetPause(i)){
 				AddPlayer(i);
 			}
 		}
@@ -65,13 +65,13 @@ public class CharacterSelectionScreen : MonoBehaviour {
 					inactive++;
 				}
 				else if(Portraits[i].Phase3){
-					if(m_input.GetPrevious()){
+					if(m_input.GetPrevious(i)){
 						UnconfirmPlayer(i);
 					}
 				}
 			}
 			else if(ActivePlayers[i]){
-				if(m_input.GetPrevious()){
+				if(m_input.GetPrevious(i)){
 					if(Portraits[i].Phase2){
 						RemovePlayer(i);
 					}
@@ -140,7 +140,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// </summary>
 	private void GetColorSwap(){
 		for(int i = 0; i < 4; i++){
-			if(ActivePlayers[i] && m_input.GetChangeColor()){
+			if(ActivePlayers[i] && m_input.GetChangeColor(i)){
 				Portraits[i].ChangeColor();
 			}
 		}
@@ -151,7 +151,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// </summary>
 	private void GetPlayerConfirm(){
 		for(int i = 0; i < 4; i++){
-			if(ActivePlayers[i] && m_input.GetSubmit()){
+			if(ActivePlayers[i] && m_input.GetSubmit(i)){
 				ConfirmPlayer(i);
 			}
 		}

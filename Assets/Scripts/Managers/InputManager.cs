@@ -174,6 +174,43 @@ public class InputManager : MonoBehaviour
         return isPressed;
     }
 
+    public static bool GetMenuButton(int player, eMenuButton _menuButton)
+    {
+        bool isPressed = false;
+
+        GamePadState gamePadState = GamePad.GetState((PlayerIndex)(player));
+
+        switch (_menuButton)
+        {
+            case eMenuButton.SUBMIT:
+                isPressed |= GetButton(gamePadState, m_manager.m_submitButton);
+                break;
+            case eMenuButton.PREVIOUS:
+                isPressed |= GetButton(gamePadState, m_manager.m_previousButton);
+                break;
+            case eMenuButton.PAUSE:
+                isPressed |= GetButton(gamePadState, m_manager.m_pauseButton);
+                break;
+            case eMenuButton.LEFT:
+                isPressed |= GetButton(gamePadState, XBoxButtons.DPAD_LEFT)   || gamePadState.ThumbSticks.Left.X < -m_manager.m_triggMinRatio;
+                break;
+            case eMenuButton.RIGHT:
+                isPressed |= GetButton(gamePadState, XBoxButtons.DPAD_RIGHT)  || gamePadState.ThumbSticks.Left.X > m_manager.m_triggMinRatio;
+                break;
+            case eMenuButton.UP:
+                isPressed |= GetButton(gamePadState, XBoxButtons.DPAD_UP)     || gamePadState.ThumbSticks.Left.Y < -m_manager.m_triggMinRatio;
+                break;
+            case eMenuButton.DOWN:
+                isPressed |= GetButton(gamePadState, XBoxButtons.DPAD_DOWN)   || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
+                break;
+            case eMenuButton.CHANGE_COLOR:
+                isPressed |= GetButton(gamePadState, m_manager.m_changeColorButton);
+                break;
+        }
+
+        return isPressed;
+    }
+
     // ======================================================================================
     public static float GetAxis(int _player, Axis _axis)
     {
@@ -194,22 +231,6 @@ public class InputManager : MonoBehaviour
         return 0f;
     }
 
-    public static float GetAxis(Axis _axis)
-    {
-        for(int i = 0; i < 4; i++){
-            GamePadState gamePadState = GamePad.GetState((PlayerIndex)i);
-
-            switch (_axis)
-            {
-                case Axis.HORIZONTAL:
-                    return gamePadState.ThumbSticks.Left.X;
-                case Axis.VERTICAL:
-                    return gamePadState.ThumbSticks.Left.Y;
-            }
-        }
-
-        return 0f;
-    }
 
 
     // ======================================================================================

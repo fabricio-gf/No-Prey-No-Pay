@@ -48,51 +48,15 @@ public class MainMenuScreen : MonoBehaviour {
 	void Update () {
 
 		// Directional inputs
-		float vertical = InputManager.GetAxis(InputManager.Axis.VERTICAL);
 		bool up = m_input.GetUp();
 		bool down = m_input.GetDown();
 		
-		// if(!down && !up){
-		// 	DirectionPressed = false;
-		// }
-
-		/*
-		if(vertical == 0){
-			DirectionPressed = false;
-		}
-		else if(vertical < 0.3f && DirectionPressed == false){
-			DirectionPressed = true;
+		if(down){
 			MoveSelection(1);
 		}
-		else if(vertical > 0.3f && DirectionPressed == false){
-			DirectionPressed = true;
+		if(up){
 			MoveSelection(-1);
 		}
-		*/
-		
-		if(down/*  && !DirectionPressed */){
-			MoveSelection(1);
-			/* DirectionPressed = true; */
-		}
-		if(up/*  && !DirectionPressed */){
-			MoveSelection(-1);
-			/* DirectionPressed = true; */
-
-		}
-		
-		
-		/*switch (vertical)
-		{
-			case 0:
-				AnalogPushed = false;
-				break;
-			default:
-				if(AnalogPushed = true)
-					break;
-				AnalogPushed = true;
-				MoveSelection(vertical);
-				break;
-		}*/
 
 		// Button inputs
 		if(m_input.GetSubmit()){
