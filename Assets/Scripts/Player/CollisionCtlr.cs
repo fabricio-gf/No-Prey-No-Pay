@@ -22,21 +22,28 @@ public class CollisionCtlr : MonoBehaviour
     public void Awake()
     {
         m_collidables = this.gameObject.GetComponents<ICollidable>();
+        Physics2D.IgnoreLayerCollision(this.gameObject.layer, this.gameObject.layer, true);
     }
 
     // ======================================================================================
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        ContactPoint2D contact = collision.GetContact(0);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Platforms"))
         {
-            ContactPoint2D contact = collision.GetContact(0);
             if (contact.normal == Vector2.up)
+            {
                 OnTouchingGround(collision.gameObject, contact.normal, collision.contacts);
+                return;
+            }
             else if (Vector2.Dot(contact.normal, Vector2.up) == 0)
+            {
                 OnTouchingWall(collision.gameObject, contact.normal, collision.contacts);
-            else
-                OnTouchingAnother(collision.gameObject, contact.normal, collision.contacts);
+                return;
+            }
         }
+
+        OnTouchingAnother(collision.gameObject, contact.normal, collision.contacts);
     }
     
     // ======================================================================================
@@ -80,17 +87,20 @@ public class CollisionCtlr : MonoBehaviour
             collidable.OnTouchingAnother(_normal, _contacts);
 
 #if UNITY_EDITOR
-        if (_obj.GetComponent<PlatformEffector2D>() == null)
-            Debug.LogError("The GameObject " + _obj.name + " is in 'Platforms' layer and seems to be a floor... check if it has a PlatformEffector!");
-        else
+        if (_obj.layer == LayerMask.NameToLayer("Platforms"))
         {
-            bool hasUsedByEffector = false;
-            foreach (Collider2D col in _obj.GetComponents<Collider2D>())
-                if (col.usedByEffector)
-                    hasUsedByEffector |= col.usedByEffector;
+            if (_obj.GetComponent<PlatformEffector2D>() == null)
+                Debug.LogError("The GameObject " + _obj.name + " is in 'Platforms' layer and seems to be a floor... check if it has a PlatformEffector!");
+            else
+            {
+                bool hasUsedByEffector = false;
+                foreach (Collider2D col in _obj.GetComponents<Collider2D>())
+                    if (col.usedByEffector)
+                        hasUsedByEffector |= col.usedByEffector;
 
-            if (!hasUsedByEffector)
-                Debug.LogError("The GameObject " + _obj.name + " is in 'Platforms' layer and seems to be a floor... check if its collider is 'UsedByEffector'!");
+                if (!hasUsedByEffector)
+                    Debug.LogError("The GameObject " + _obj.name + " is in 'Platforms' layer and seems to be a floor... check if its collider is 'UsedByEffector'!");
+            }
         }
 #endif
     }

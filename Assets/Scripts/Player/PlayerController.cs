@@ -456,6 +456,7 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     // ======================================================================================
     public void OnTouchingAnother(Vector2 _normal, ContactPoint2D[] _contacts)
     {
+        // DO NOTHING
     }
 
     // ======================================================================================
@@ -472,7 +473,6 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     {
         IsGrounded          = false;
     }
-
 
     // ======================================================================================
     private IEnumerator PlatformDown()
