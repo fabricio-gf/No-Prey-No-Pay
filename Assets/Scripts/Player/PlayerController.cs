@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputCtlr), typeof(CollisionCtlr))]
 public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
@@ -51,6 +52,9 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
 
     // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
     private Rigidbody2D         m_rb;
+    private Collider2D          m_collider;
+    private CollisionCtlr       m_collisionCtlr;
+
     private PlayerInputCtlr     m_input;
     private Vector2             m_snappedWallNormal;
 
@@ -88,8 +92,22 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
         InitializeValues();
 
         m_rb            = this.GetComponent<Rigidbody2D>();
+
+        m_collider      = this.GetComponent<CompositeCollider2D>();
+        if (m_collider == null)
+        {
+#if UNITY_EDITOR
+            Debug.Assert(this.GetComponents<Collider2D>().Length == 1, this.gameObject.name + " - PlayerController : Player must have a single collider or many colliders with a composite collider!");
+#endif
+            m_collider = this.GetComponent<Collider2D>();
+        }
+
+        m_collisionCtlr = this.gameObject.GetComponent<CollisionCtlr>();
+
         m_input         = this.GetComponent<PlayerInputCtlr>();
 
+
+        // state
         IsGrounded      = false;
         IsWallSnapped   = false;
         IsEjecting      = false;
@@ -122,6 +140,9 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
             ForwardDir = eDirection.Right;
         else if (Velocity.x < 0)
             ForwardDir = eDirection.Left;
+
+        if (Velocity.y < 0 && IsGrounded)
+            StartCoroutine(PlatformDown());
     }
 
     // ======================================================================================
@@ -435,11 +456,6 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     // ======================================================================================
     public void OnTouchingAnother(Vector2 _normal, ContactPoint2D[] _contacts)
     {
-        // STOP ANY EVENT
-        IsDashing       = false;
-        IsEjecting      = false;
-        IsWallSnapped   = false;
-        IsJumping       = false;
     }
 
     // ======================================================================================
@@ -455,5 +471,24 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     public void OnLeavingGround()
     {
         IsGrounded          = false;
+    }
+
+
+    // ======================================================================================
+    private IEnumerator PlatformDown()
+    {
+        if (m_collisionCtlr.Ground != SceneMgr.Ground)
+        {
+            Collider2D[] platformColliders = m_collisionCtlr.Ground.GetComponents<Collider2D>();
+
+            foreach (Collider2D col in platformColliders)
+                Physics2D.IgnoreCollision(m_collider, col, true);
+            
+            yield return new WaitForFixedUpdate();  // wait 2 physics updates
+            yield return new WaitForFixedUpdate();
+
+            foreach (Collider2D col in platformColliders)
+                Physics2D.IgnoreCollision(m_collider, col, false);
+        }
     }
 }

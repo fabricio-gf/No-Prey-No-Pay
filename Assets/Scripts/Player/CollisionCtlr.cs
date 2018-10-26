@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class CollisionCtlr : MonoBehaviour
 {
+    // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
     private ICollidable[]   m_collidables;
 
     private GameObject      m_touchingWall;
     private GameObject      m_touchingGround;
     private bool            m_isTouchingGround;
     private bool            m_isTouchingWall;
+    
+    // ------------------------------------ ACCESSORS ------------------------------------ //
+    public GameObject       Wall                { get { return m_touchingWall; } }
+    public GameObject       Ground              { get { return m_touchingGround; } }
 
     // ======================================================================================
-    public virtual void Awake()
+    // PUBLIC MEMBERS
+    // ======================================================================================
+    public void Awake()
     {
         m_collidables = this.gameObject.GetComponents<ICollidable>();
     }
@@ -29,7 +36,6 @@ public class CollisionCtlr : MonoBehaviour
                 OnTouchingWall(collision.gameObject, contact.normal, collision.contacts);
             else
                 OnTouchingAnother(collision.gameObject, contact.normal, collision.contacts);
-
         }
     }
     
@@ -45,6 +51,8 @@ public class CollisionCtlr : MonoBehaviour
         }
     }
 
+    // ======================================================================================
+    // PRIVATE MEMBERS
     // ======================================================================================
     private void OnTouchingGround(GameObject _ground, Vector2 _normal, ContactPoint2D[] _contacts)
     {
