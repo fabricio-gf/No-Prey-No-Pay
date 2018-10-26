@@ -15,6 +15,7 @@ public class LevelLoader : MonoBehaviour {
 	// PRIVATE ATTRIBUTES
 	private int NumActivePlayers;
 	private int NumReadyPlayers;
+	[HideInInspector] public bool[] ConnectedPlayers = new bool[4];
 	private bool CanStart;
 
 	// SERIALIZED ATTRIBUTES
@@ -67,6 +68,7 @@ public class LevelLoader : MonoBehaviour {
 		PlayerList[playerNumber].isSelected = true;
 		PlayerList[playerNumber].SelectedCharacter = (PlayerInfo.Character)character;
 		PlayerList[playerNumber].SelectedColor = color;
+		ConnectedPlayers[playerNumber] = true;
 
 		NumReadyPlayers ++;
 		CheckStartButton();
@@ -75,6 +77,7 @@ public class LevelLoader : MonoBehaviour {
 
 	public void RemovePlayerReady(int playerNumber){
 		PlayerList[playerNumber].isSelected = false;
+		ConnectedPlayers[playerNumber] = false;
 
 		NumReadyPlayers --;
 		CheckStartButton();

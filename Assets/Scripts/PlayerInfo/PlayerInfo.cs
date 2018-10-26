@@ -15,5 +15,5 @@ public class PlayerInfo : ScriptableObject {
 	public bool isSelected;
 	[Range(0,3)] public int ControllerNumber;
 	public Character SelectedCharacter;
-	public int SelectedColor;
+	[Range(1,4)] public int SelectedColor;
 }

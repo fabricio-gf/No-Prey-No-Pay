@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelectionArrow : MonoBehaviour {
+public class RoundReferee : MonoBehaviour {
 
-	public bool isActive;
-	public bool isSelected;
-	public bool PlayerIndex;
-	public int SelectedItem;
+	public float RoundTime;
 
 	// Use this for initialization
 	void Start () {
@@ -16,10 +13,6 @@ public class SelectionArrow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
-
-	public void MoveArrow(string direction){
 		
 	}
 }
