@@ -58,4 +58,10 @@ public class GameMgr : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    // ======================================================================================
+
+    public void TogglePause(){
+        IsPaused = !IsPaused;
+    }
 }
