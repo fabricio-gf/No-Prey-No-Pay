@@ -55,7 +55,7 @@ public class InputMgr : MonoBehaviour
     // --------------------------------- PUBLIC ATTRIBUTES ------------------------------- //
     [Header("Global")]
     public float m_triggMinRatio    = .3f;
-    public bool m_pcDebugMode       = false;
+    public bool m_pcDebugMode       = true;
 
     [Header("Locomotion")]
     public eXBoxButton m_dashButton;
