@@ -83,16 +83,19 @@ public class CollisionCtlr : RuntimeMonoBehaviour
     // ======================================================================================
     private void OnTouchingAnother(GameObject _obj, Vector2 _normal, ContactPoint2D[] _contacts)
     {
-        foreach (ICollidable collidable in m_collidables)
-            collidable.OnTouchingAnother(_normal, _contacts);
 
-#if UNITY_EDITOR
         if (_obj.layer == LayerMask.NameToLayer("Platforms"))
         {
             if (_obj.GetComponent<PlatformEffector2D>() == null)
+            {
                 Debug.LogError("The GameObject " + _obj.name + " is in 'Platforms' layer and seems to be a floor... check if it has a PlatformEffector!");
+
+                foreach (ICollidable collidable in m_collidables)
+                    collidable.OnTouchingAnother(_normal, _contacts);
+            }
             else
             {
+#if UNITY_EDITOR
                 bool hasUsedByEffector = false;
                 foreach (Collider2D col in _obj.GetComponents<Collider2D>())
                     if (col.usedByEffector)
@@ -100,9 +103,9 @@ public class CollisionCtlr : RuntimeMonoBehaviour
 
                 if (!hasUsedByEffector)
                     Debug.LogError("The GameObject " + _obj.name + " is in 'Platforms' layer and seems to be a floor... check if its collider is 'UsedByEffector'!");
+#endif
             }
         }
-#endif
     }
 
     // ======================================================================================

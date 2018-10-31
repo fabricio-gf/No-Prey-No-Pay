@@ -449,14 +449,17 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
         IsWallSnapped       = IsWallSnapped;
         IsEjecting          = false;
         IsJumping           = false;
-        IsDashing           = IsDashing;
+        IsDashing           = false;    // otherwhise, check the dashing direction!
         IsGrounded          = true;
     }
 
     // ======================================================================================
     public void OnTouchingAnother(Vector2 _normal, ContactPoint2D[] _contacts)
     {
-        // DO NOTHING
+        // Stop any exclusive event
+        IsDashing   = false;
+        IsJumping   = false;
+        IsEjecting  = false;
     }
 
     // ======================================================================================
