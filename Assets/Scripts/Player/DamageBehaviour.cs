@@ -39,6 +39,7 @@ public class DamageBehaviour : MonoBehaviour {
         if (player != m_player.m_nbPlayer)
         {
             m_nbLives--;
+            print(m_player.m_nbPlayer + "is hurt");
 
             if (m_nbLives <= 0)
             {
