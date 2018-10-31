@@ -14,7 +14,7 @@ public class JoystickPlayerInputCtlr : PlayerInputCtlr
     // ======================================================================================
     // PUBLIC MEMBERS
     // ======================================================================================
-    public void Update()
+    override protected void UpdatePhase()
     {
         // reset triggers when button released
         m_dashTrigger   = !InputMgr.GetButton((int)m_nbPlayer, InputMgr.eButton.DASH)   || m_dashTrigger;

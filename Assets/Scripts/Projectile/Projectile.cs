@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour {
+public class Projectile : RuntimeMonoBehaviour {
 
 
     // --------------------------- PROTECTED CONFIG ATTRIBUTES --------------------------- //
@@ -25,11 +25,11 @@ public class Projectile : MonoBehaviour {
     public bool IsGrounded { get; protected set; }
     public bool IsWallSnapped { get; protected set; }
 
-    void Start(){
+    protected override void StartPhase(){
 	}
 
 	// Update is called once per frame
-	void Update () {
+	protected override void UpdatePhase () {
 		if(!isFalling){
 			transform.Translate(DirectionVector * Time.deltaTime);
 			return;

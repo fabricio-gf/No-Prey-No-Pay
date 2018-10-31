@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerController), typeof(PlayerAnimatorController), typeof(PlayerAttack))]
-public class PlayerStateMachine : MonoBehaviour
+public class PlayerStateMachine : RuntimeMonoBehaviour
 {
     // --------------------------------- PUBLIC AUX ENUMS -------------------------------- //
     public enum eStates
@@ -35,7 +35,7 @@ public class PlayerStateMachine : MonoBehaviour
     // ======================================================================================
     // PUBLIC MEMBERS
     // ======================================================================================
-    public void Start()
+    override protected void StartPhase()
     {
         State           = eStates.Idle;
         
@@ -45,7 +45,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
     // ======================================================================================
-    public void Update()
+    override protected void UpdatePhase()
     {
         UpdateStateMachine();
         UpdateAnimator();

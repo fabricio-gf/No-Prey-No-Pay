@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PlayerInputCtlr), typeof(CollisionCtlr))]
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack : PlayerRuntimeMonoBehaviour
 {
     // -------------------------------------- ENUMS -------------------------------------- //
     public enum eDirection
@@ -53,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
     // ======================================================================================
     // PUBLIC MEMBERS
     // ======================================================================================
-    void Start()
+    override protected void StartPhase()
     {
         m_control = this.GetComponent<PlayerController>();
         m_input = this.GetComponent<PlayerInputCtlr>();
@@ -63,7 +63,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     // ======================================================================================
-    void FixedUpdate()
+    override protected void FixedUpdatePhase()
     {
         // Attack Subsystem : triggers Attack and generates hurtboxes
         UpdateAttackSubsystem();

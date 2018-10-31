@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageBehaviour : MonoBehaviour {
+public class DamageBehaviour : RuntimeMonoBehaviour {
     // ------------------------------- PROTECTED ATTRIBUTES ------------------------------ //
     protected int   m_nbLives;
     protected float m_stunDuration = 0.5f;
@@ -18,7 +18,7 @@ public class DamageBehaviour : MonoBehaviour {
     // ======================================================================================
     // PUBLIC MEMBERS - DAMAGE METHODS
     // ======================================================================================
-    void Start()
+    override protected void StartPhase()
     {
         m_player = this.GetComponent<PlayerInputCtlr>();
         m_nbLives = 3;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneMgr : MonoBehaviour
+public class SceneMgr : RuntimeMonoBehaviour
 {
     // -------------------------------- PUBLIC ATTRIBUTES -------------------------------- //
     public GameObject m_ground;
@@ -16,11 +16,10 @@ public class SceneMgr : MonoBehaviour
     // ======================================================================================
     // PUBLIC MEMBERS
     // ======================================================================================
-    public void Start ()
+    override protected void StartPhase ()
     {
         Debug.Assert(m_manager == null, this.gameObject.name + " - SceneMgr : manager must be unique!");
         m_manager = this;
         Debug.Assert(m_ground != null, this.gameObject.name + " - SceneMgr : scene must have a global ground!");
 	}
-	
 }

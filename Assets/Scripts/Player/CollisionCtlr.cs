@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionCtlr : MonoBehaviour
+public class CollisionCtlr : RuntimeMonoBehaviour
 {
     // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
     private ICollidable[]   m_collidables;

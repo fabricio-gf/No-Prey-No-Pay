@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerInputCtlr : MonoBehaviour
+public abstract class PlayerInputCtlr : RuntimeMonoBehaviour
 {
     // --------------------------------------- ENUMS ------------------------------------- //
     public enum ePlayer

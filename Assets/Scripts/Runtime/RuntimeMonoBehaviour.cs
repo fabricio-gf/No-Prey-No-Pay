@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RuntimeMonoBehaviour : MonoBehaviour
 {
+    private bool m_isPaused = false;
     // ======================================================================================
     // PUBLIC MEMBERS
     // ======================================================================================
@@ -15,8 +16,22 @@ public class RuntimeMonoBehaviour : MonoBehaviour
     // ======================================================================================
     public void Update ()
     {
-        if (GameMgr.IsPaused || !IsActive())
+        // handle pause state
+        if (m_isPaused && (!GameMgr.IsPaused) && IsActive())
+        {
+            m_isPaused = false;
+            OnPlay();
+        }
+        else if (!m_isPaused && (GameMgr.IsPaused || !IsActive()))
+        {
+            m_isPaused = true;
+            OnPause();
+        }
+
+        // return if paused or inactive
+        if (m_isPaused)
             return;
+
 
         UpdatePhase();
 	}
@@ -33,6 +48,13 @@ public class RuntimeMonoBehaviour : MonoBehaviour
     // ======================================================================================
     // PROTECTED MEMBERS - TO OVERRIDE
     // ======================================================================================
+    protected virtual bool IsActive()
+    {
+        return enabled;
+    }
+
+    // ======================================================================================
+    // BASIC MESSAGES
     protected virtual void StartPhase()
     {
 
@@ -51,8 +73,15 @@ public class RuntimeMonoBehaviour : MonoBehaviour
     }
 
     // ======================================================================================
-    protected virtual bool IsActive()
+    // ACTIVATION MESSAGES MESSAGES
+    protected virtual void OnPause()
     {
-        return enabled;
+
+    }
+
+    // ======================================================================================
+    protected virtual void OnPlay()
+    {
+
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerAnimatorController : MonoBehaviour
+public class PlayerAnimatorController : RuntimeMonoBehaviour
 {
     // --------------------------------- PUBLIC AUX ENUMS -------------------------------- //
     public enum eStates
@@ -275,5 +275,17 @@ public class PlayerAnimatorController : MonoBehaviour
     protected void StartDead()
     {
         m_animator.SetTrigger(m_onDeathTriggerParam);
+    }
+
+    // ======================================================================================
+    protected override void OnPlay()
+    {
+        m_animator.speed = 1;
+    }
+
+    // ======================================================================================
+    protected override void OnPause()
+    {
+        m_animator.speed = 0;
     }
 }
