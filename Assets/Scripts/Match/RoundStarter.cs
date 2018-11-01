@@ -17,8 +17,8 @@ public class RoundStarter : MonoBehaviour {
 	}
 
 	void InitializeRound(){
-		PSpawner.PlayersToSpawn = PlayersToSpawn;
-		PSpawner.SpawnPlayers();
+		//PSpawner.PlayersToSpawn = PlayersToSpawn;
+		//PSpawner.SpawnPlayers();
 
 		//spawn weapons
 

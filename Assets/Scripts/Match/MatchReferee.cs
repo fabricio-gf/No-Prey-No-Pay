@@ -39,7 +39,8 @@ public class MatchReferee : MonoBehaviour {
 				NumOfPlayers++;
 			}
 		}
-		RStarter.PlayersToSpawn = infos;
+
+		// RStarter.PlayersToSpawn = infos;
 
 		// Set winners info
 		Wins = new int[NumOfPlayers];
