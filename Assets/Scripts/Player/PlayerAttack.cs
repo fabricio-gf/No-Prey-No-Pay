@@ -34,6 +34,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
     // attack: Pistol
     protected GameObject    ProjectilePrefab;
+    public GameObject    ProjectilePrefab;
     protected Vector2       PistolOffset;
 
     // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
@@ -60,6 +61,22 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         IsAttacking = false;
 
         EquipWeap = eWeapon.Fists;
+        playerLayer = LayerMask.GetMask("playerLayer");
+
+        EquipWeap = eWeapon.Pistol;
+
+        PunchOffset.x = 1.5f;
+        PunchOffset.y = 0.75f;
+        PunchHitboxSize.x = 0.3f;
+        PunchHitboxSize.y = 0.5f;
+
+        SaberOffset.x = 0.7f;
+        SaberOffset.y = 0.75f;
+        SaberHitboxSize.x = 0.75f;
+        SaberHitboxSize.y = 0.3f;
+
+        PistolOffset.x = 0.7f;
+        PistolOffset.y = 0.75f;
     }
 
     // ======================================================================================
@@ -68,6 +85,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         // Attack Subsystem : triggers Attack and generates hurtboxes
         UpdateAttackSubsystem();
 
+        
     }
 
     // ======================================================================================
@@ -154,6 +172,11 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
         Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * SaberOffset.x, SaberOffset.y, 0), 0.4f * Vector3.one, Quaternion.identity, playerLayer);
+=======
+        print(transform.position + (Vector3)SaberOffset);
+        //Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * SaberOffset.x, transform.localScale.y*SaberOffset.y, 0), 0.4f * Vector3.one, Quaternion.identity, playerLayer);
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + (Vector3)SaberOffset, new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 1), Quaternion.identity, playerLayer);
+>>>>>>> Battle
         for (int i = 0; i < hitTargets.Length; i++)
         {
             hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
@@ -174,5 +197,25 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
 
         StartCoroutine(AttackDelay());
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        // draws gizmos for punch and saber hitboxes
+        if (EquipWeap == eWeapon.Fists)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawCube(transform.position + (Vector3)PunchOffset, (Vector3)PunchHitboxSize);
+        }
+        if (EquipWeap == eWeapon.Saber)
+        { 
+            Gizmos.color = Color.red;
+            Gizmos.DrawCube(transform.position + (Vector3)SaberOffset, (Vector3)SaberHitboxSize);
+        }
+        if (EquipWeap == eWeapon.Pistol)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawCube(transform.position + (Vector3)PistolOffset, new Vector3(0.25f, 0.25f, 0));
+        }
     }
 }
