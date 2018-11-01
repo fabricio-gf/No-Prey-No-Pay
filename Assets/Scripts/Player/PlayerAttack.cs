@@ -33,7 +33,6 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     protected Vector2 SaberHitboxSize;
 
     // attack: Pistol
-    protected GameObject    ProjectilePrefab;
     public GameObject    ProjectilePrefab;
     protected Vector2       PistolOffset;
 
@@ -60,7 +59,6 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         m_input = this.GetComponent<PlayerInputCtlr>();
         IsAttacking = false;
 
-        EquipWeap = eWeapon.Fists;
         playerLayer = LayerMask.GetMask("playerLayer");
 
         EquipWeap = eWeapon.Pistol;
@@ -84,7 +82,6 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     {
         // Attack Subsystem : triggers Attack and generates hurtboxes
         UpdateAttackSubsystem();
-
         
     }
 
@@ -169,6 +166,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
     private void SaberAttack()
     {
+<<<<<<< HEAD
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
         Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * SaberOffset.x, SaberOffset.y, 0), 0.4f * Vector3.one, Quaternion.identity, playerLayer);
