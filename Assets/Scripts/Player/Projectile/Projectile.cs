@@ -81,9 +81,48 @@ public class Projectile : RuntimeMonoBehaviour {
 		}
 	}
 
-	//ESSA PARTE É COPIADA DO PLAYER COM PEQUENAS ALTERAÇÕES//
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // OBS : JOAO CODE FOR TEST ONLY!!!!!! --> BUT IS WORKING PERFECTLY FOR PLAYER DETECTION!
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        //if (!isFalling && other.gameObject.layer == LayerMask.NameToLayer("Players"))
+        //{
+        //    if (tag == "Lethal")
+        //    {
+        //        other.GetComponent<DamageBehaviour>().TakeDamage(origin);
+        //        Destroy(gameObject);
+        //    }
+        //    else
+        //    {
+        //        other.GetComponent<DamageBehaviour>().GetStunned();
+        //        SetDirection(Vector3.zero);
+        //        isFalling = true;
+        //    }
+        //}
 
-	private void UpdateTransform()
+        // if it has a damageBhv, it must  be a player! (or any other object that
+        // can be damaged
+        // so, apply damage
+        DamageBehaviour damageBhv = other.GetComponent<DamageBehaviour>();
+        if (!isFalling && damageBhv != null)
+        {
+            if (tag == "Lethal")
+            {
+                damageBhv.TakeDamage(origin);
+                Destroy(gameObject);
+            }
+            else
+            {
+                damageBhv.GetStunned();
+                SetDirection(Vector3.zero);
+                isFalling = true;
+            }
+        }
+    }
+
+    //ESSA PARTE É COPIADA DO PLAYER COM PEQUENAS ALTERAÇÕES//
+
+    private void UpdateTransform()
     {
         // update transform
         Vector3 initialPos  = this.transform.position;

@@ -120,5 +120,18 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
                 m_playerAnimCtl.SetDirection(PlayerAnimatorController.eDirections.Right);
                 break;
         }
+
+        switch (m_playerAttack.EquipWeap)
+        {
+            case PlayerAttack.eWeapon.Fists:
+                m_playerAnimCtl.SetAttackType(PlayerAnimatorController.eAttackType.Fists);
+                break;
+            case PlayerAttack.eWeapon.Pistol:
+                m_playerAnimCtl.SetAttackType(PlayerAnimatorController.eAttackType.Pistol);
+                break;
+            case PlayerAttack.eWeapon.Saber:
+                m_playerAnimCtl.SetAttackType(PlayerAnimatorController.eAttackType.Saber);
+                break;
+        }
     }
 }

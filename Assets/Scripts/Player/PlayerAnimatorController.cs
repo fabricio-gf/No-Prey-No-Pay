@@ -24,6 +24,13 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         Right
     }
 
+    public enum eAttackType
+    {
+        Fists   = 0,
+        Pistol  = 1,
+        Saber   = 2
+    }
+
     // -------------------------------- PUBLIC ATTRIBUTES -------------------------------- //
     public Animator m_animator;
 
@@ -42,6 +49,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
 
     // attack
     private string m_isAttackingBoolParam   = "IsAttacking";
+    private string m_attackTypeParam        = "AttackType";
 
     // on death
     private string   m_onDeathTriggerParam  = "OnDeath";
@@ -125,6 +133,12 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
                 m_transform.localScale = new Vector3(1, 1, 1);
                 break;
         }
+    }
+
+    // ======================================================================================
+    public void SetAttackType(eAttackType _attackType)
+    {
+        m_animator.SetFloat(m_attackTypeParam, (int) _attackType);
     }
 
     // ======================================================================================

@@ -58,7 +58,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
 
     public IEnumerator GetStunned()
     {
-        //this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
+        this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
         IsStunned = true;
         print(m_player + " is stunned");
@@ -68,6 +68,6 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
         m_player.enabled = !m_player.enabled;
         IsStunned = false;
 
-        //this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
+        this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
     }
 }
