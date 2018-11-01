@@ -52,10 +52,10 @@ public class MainMenuScreen : MonoBehaviour {
 		bool down = m_input.GetDown();
 		
 		if(down){
-			MoveSelection(1);
+			MoveSelection(-1);
 		}
 		if(up){
-			MoveSelection(-1);
+			MoveSelection(1);
 		}
 
 		// Button inputs

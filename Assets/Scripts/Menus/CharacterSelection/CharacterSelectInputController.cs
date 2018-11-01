@@ -23,16 +23,16 @@ public class CharacterSelectInputController : MenuInputController {
     {
 		for(int i = 0; i < 4; i++){
         // reset triggers when button released
-        m_submitTriggerList[i]     = !InputManager.GetMenuButton(i, InputManager.eMenuButton.SUBMIT)      || m_submitTriggerList[i];
-        m_previousTriggerList[i]   = !InputManager.GetMenuButton(i, InputManager.eMenuButton.PREVIOUS)    || m_previousTriggerList[i];
-        m_pauseTriggerList[i]      = !InputManager.GetMenuButton(i, InputManager.eMenuButton.PAUSE)       || m_pauseTriggerList[i];
-        m_changeColorTriggerList[i] = !InputManager.GetMenuButton(i, InputManager.eMenuButton.CHANGE_COLOR) || m_changeColorTriggerList[i];
+        m_submitTriggerList[i]     = !InputMgr.GetMenuButton(i, InputMgr.eMenuButton.SUBMIT)      || m_submitTriggerList[i];
+        m_previousTriggerList[i]   = !InputMgr.GetMenuButton(i, InputMgr.eMenuButton.PREVIOUS)    || m_previousTriggerList[i];
+        m_pauseTriggerList[i]      = !InputMgr.GetMenuButton(i, InputMgr.eMenuButton.PAUSE)       || m_pauseTriggerList[i];
+        m_changeColorTriggerList[i] = !InputMgr.GetMenuButton(i, InputMgr.eMenuButton.CHANGE_COLOR) || m_changeColorTriggerList[i];
 		}
 	}
 	    
     public bool GetSubmit(int player)
     {
-        if (m_submitTriggerList[player] && InputManager.GetMenuButton(player, InputManager.eMenuButton.SUBMIT))
+        if (m_submitTriggerList[player] && InputMgr.GetMenuButton(player, InputMgr.eMenuButton.SUBMIT))
         {
             m_submitTriggerList[player] = false;
             return true;
@@ -44,7 +44,7 @@ public class CharacterSelectInputController : MenuInputController {
 	
     public bool GetPrevious(int player)
     {
-        if (m_previousTriggerList[player] && InputManager.GetMenuButton(player, InputManager.eMenuButton.PREVIOUS))
+        if (m_previousTriggerList[player] && InputMgr.GetMenuButton(player, InputMgr.eMenuButton.PREVIOUS))
         {
             m_previousTriggerList[player] = false;
             return true;
@@ -56,7 +56,7 @@ public class CharacterSelectInputController : MenuInputController {
 	
     public bool GetPause(int player)
     {
-        if (m_pauseTriggerList[player] && InputManager.GetMenuButton(player, InputManager.eMenuButton.PAUSE))
+        if (m_pauseTriggerList[player] && InputMgr.GetMenuButton(player, InputMgr.eMenuButton.PAUSE))
         {
             m_pauseTriggerList[player] = false;
             return true;
@@ -68,7 +68,7 @@ public class CharacterSelectInputController : MenuInputController {
 
     public bool GetChangeColor(int player)
     {
-        if (m_changeColorTriggerList[player] && InputManager.GetMenuButton(player, InputManager.eMenuButton.CHANGE_COLOR))
+        if (m_changeColorTriggerList[player] && InputMgr.GetMenuButton(player, InputMgr.eMenuButton.CHANGE_COLOR))
         {
             m_changeColorTriggerList[player] = false;
             return true;

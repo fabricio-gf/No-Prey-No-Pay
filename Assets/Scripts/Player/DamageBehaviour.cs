@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageBehaviour : RuntimeMonoBehaviour {
+public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
     // ------------------------------- PROTECTED ATTRIBUTES ------------------------------ //
     protected int   m_nbLives;
     protected float m_stunDuration = 0.5f;
@@ -58,6 +58,8 @@ public class DamageBehaviour : RuntimeMonoBehaviour {
 
     public IEnumerator GetStunned()
     {
+        //this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
+
         IsStunned = true;
         print(m_player + " is stunned");
         m_player.enabled = !m_player.enabled;
@@ -65,5 +67,7 @@ public class DamageBehaviour : RuntimeMonoBehaviour {
         yield return new WaitForSeconds(m_stunDuration);
         m_player.enabled = !m_player.enabled;
         IsStunned = false;
+
+        //this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
     }
 }

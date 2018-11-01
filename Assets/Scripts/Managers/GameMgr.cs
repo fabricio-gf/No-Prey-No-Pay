@@ -48,20 +48,26 @@ public class GameMgr : MonoBehaviour
     }
 
     // ======================================================================================
-    public void QuitGame()
+    public static void QuitGame()
     {
         Application.Quit();
     }
 
     // ======================================================================================
-    public void RestartGame()
+    public static void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // ======================================================================================
+    public static void PauseGame()
+    {
+        IsPaused = true;
+    }
 
-    public void TogglePause(){
-        IsPaused = !IsPaused;
+    // ======================================================================================
+    public static void PlayGame()
+    {
+        IsPaused = false;
     }
 }

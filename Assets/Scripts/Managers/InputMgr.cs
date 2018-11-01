@@ -53,24 +53,26 @@ public class InputMgr : MonoBehaviour
     }
 
     // --------------------------------- PUBLIC ATTRIBUTES ------------------------------- //
-    [Header("Global")]
-    public float m_triggMinRatio    = .3f;
-    public bool m_pcDebugMode       = true;
+    public InputConfig m_configData;
 
-    [Header("Locomotion")]
-    public eXBoxButton m_dashButton;
+    //[Header("Global")]
+    private float m_triggMinRatio    = .3f;
+    private bool m_pcDebugMode       = true;
 
-    public eXBoxButton m_jumpButton;
+    //[Header("Locomotion")]
+    private eXBoxButton m_dashButton;
 
-    public eXBoxButton m_tossButton;
-    public eXBoxButton m_attackButton;
-    public eXBoxButton m_grabButton;
+    private eXBoxButton m_jumpButton;
 
-    [Header("Menu")]
-    public eXBoxButton m_submitButton;
-    public eXBoxButton m_previousButton;
-    public eXBoxButton m_pauseButton;
-    public eXBoxButton m_changeColorButton;
+    private eXBoxButton m_tossButton;
+    private eXBoxButton m_attackButton;
+    private eXBoxButton m_grabButton;
+
+    //[Header("Menu")]
+    private eXBoxButton m_submitButton;
+    private eXBoxButton m_previousButton;
+    private eXBoxButton m_pauseButton;
+    private eXBoxButton m_changeColorButton;
 
 
 
@@ -86,8 +88,11 @@ public class InputMgr : MonoBehaviour
         if (!Application.isEditor)
             m_pcDebugMode = false;
 
-        Debug.Assert(m_manager == null, this.gameObject.name + " - InputMgr : Mgr must be unique!");
+        Debug.Assert(m_manager == null, this.name + " - InputMgr : Mgr must be unique!");
         m_manager = this;
+
+        Debug.Assert(m_configData != null, this.name + " - InputMgr : Missing config data");
+        InitializeParams();
     }
 
     // ======================================================================================
@@ -96,6 +101,8 @@ public class InputMgr : MonoBehaviour
 #if UNITY_EDITOR
         if (m_manager.m_pcDebugMode && _player == 1)
             return GetDebugButton(_button);
+        
+        Debug.Assert(m_manager != null, "InputMgr - Missing InputMgrConfig in Project");
 #endif
 
         if (_player > 4 || _player <= 0)
@@ -123,6 +130,10 @@ public class InputMgr : MonoBehaviour
     // ======================================================================================
     public static bool GetMenuButton(eMenuButton _menuButton)
     {
+#if UNITY_EDITOR
+        Debug.Assert(m_manager != null, "InputMgr - Missing InputMgrConfig in Project");
+#endif
+
         bool isPressed = false;
 
         for (int player = 0; player < 4; player++)
@@ -162,11 +173,57 @@ public class InputMgr : MonoBehaviour
     }
 
     // ======================================================================================
+    public static bool GetMenuButton(int _player, eMenuButton _menuButton)
+    {
+#if UNITY_EDITOR
+        Debug.Assert(m_manager != null, "InputMgr - Missing InputMgrConfig in Project");
+#endif
+
+        if (_player > 4 || _player <= 0)
+            return false;
+
+        bool isPressed = false;
+
+        GamePadState gamePadState = GamePad.GetState((PlayerIndex)(_player - 1));
+
+        switch (_menuButton)
+        {
+            case eMenuButton.SUBMIT:
+                isPressed |= GetButton(gamePadState, m_manager.m_submitButton);
+                break;
+            case eMenuButton.PREVIOUS:
+                isPressed |= GetButton(gamePadState, m_manager.m_previousButton);
+                break;
+            case eMenuButton.PAUSE:
+                isPressed |= GetButton(gamePadState, m_manager.m_pauseButton);
+                break;
+            case eMenuButton.LEFT:
+                isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_LEFT) || gamePadState.ThumbSticks.Left.X < -m_manager.m_triggMinRatio;
+                break;
+            case eMenuButton.RIGHT:
+                isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_RIGHT) || gamePadState.ThumbSticks.Left.X > m_manager.m_triggMinRatio;
+                break;
+            case eMenuButton.UP:
+                isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_UP) || gamePadState.ThumbSticks.Left.Y < -m_manager.m_triggMinRatio;
+                break;
+            case eMenuButton.DOWN:
+                isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_DOWN) || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
+                break;
+            case eMenuButton.CHANGE_COLOR:
+                isPressed |= GetButton(gamePadState, m_manager.m_changeColorButton);
+                break;
+        }
+
+        return isPressed;
+    }
+    // ======================================================================================
     public static float GetAxis(int _player, eAxis _axis)
     {
 #if UNITY_EDITOR
         if (m_manager.m_pcDebugMode && _player == 1)
             return GetDebugAxis(_axis);
+        
+        Debug.Assert(m_manager != null, "InputMgr - Missing InputMgrConfig in Project");
 #endif
 
         if (_player > 4 || _player <= 0)
@@ -192,6 +249,10 @@ public class InputMgr : MonoBehaviour
     // ======================================================================================
     private static bool GetButton(GamePadState _gamePadState, eXBoxButton _xboxButton)
     {
+#if UNITY_EDITOR
+        Debug.Assert(m_manager != null, "InputMgr - Missing InputMgrConfig in Project");
+#endif
+
         switch (_xboxButton)
         {
             // TRIGGERS AS BUTTONS
@@ -267,5 +328,26 @@ public class InputMgr : MonoBehaviour
         }
 
         return 0f;
+    }
+
+    // ======================================================================================
+    private void InitializeParams()
+    {
+        // global
+        m_triggMinRatio     = m_configData.m_triggMinRatio;
+        m_pcDebugMode       = m_configData.m_pcDebugMode;
+
+        // locomotion
+        m_dashButton        = m_configData.m_dashButton;
+        m_jumpButton        = m_configData.m_jumpButton;
+        m_tossButton        = m_configData.m_tossButton;
+        m_attackButton      = m_configData.m_attackButton;
+        m_grabButton        = m_configData.m_grabButton;
+
+        // menu
+        m_submitButton      = m_configData.m_submitButton;
+        m_previousButton    = m_configData.m_previousButton;
+        m_pauseButton       = m_configData.m_pauseButton;
+        m_changeColorButton = m_configData.m_changeColorButton;
     }
 }

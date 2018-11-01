@@ -86,8 +86,8 @@ public class CharacterSelectionScreen : MonoBehaviour {
 
 	/*private void GetCharacterSwap(){
 		
-		bool right1 = InputManager.GetButton(1, InputManager.Buttons.RIGHT);
-		bool left1 = InputManager.GetButton(1, InputManager.Buttons.LEFT);
+		bool right1 = InputMgr.GetButton(1, InputMgr.Buttons.RIGHT);
+		bool left1 = InputMgr.GetButton(1, InputMgr.Buttons.LEFT);
 		
 		if(right1 && !DirectionPressed1){
 			ChangeCharacter(1, 1);
@@ -98,8 +98,8 @@ public class CharacterSelectionScreen : MonoBehaviour {
 			DirectionPressed1 = true;
 		}
 
-		bool right2 = InputManager.GetButton(2, InputManager.Buttons.RIGHT);
-		bool left2 = InputManager.GetButton(2, InputManager.Buttons.LEFT);
+		bool right2 = InputMgr.GetButton(2, InputMgr.Buttons.RIGHT);
+		bool left2 = InputMgr.GetButton(2, InputMgr.Buttons.LEFT);
 
 		if(right2 && !DirectionPressed2){
 			ChangeCharacter(2, 1);
@@ -110,8 +110,8 @@ public class CharacterSelectionScreen : MonoBehaviour {
 			DirectionPressed1 = true;
 		}
 
-		bool right3 = InputManager.GetButton(3, InputManager.Buttons.RIGHT);
-		bool left3 = InputManager.GetButton(3, InputManager.Buttons.LEFT);
+		bool right3 = InputMgr.GetButton(3, InputMgr.Buttons.RIGHT);
+		bool left3 = InputMgr.GetButton(3, InputMgr.Buttons.LEFT);
 		
 		if(right3 && !DirectionPressed3){
 			ChangeCharacter(3, 1);
@@ -122,8 +122,8 @@ public class CharacterSelectionScreen : MonoBehaviour {
 			DirectionPressed1 = true;
 		}
 		
-		bool right4 = InputManager.GetButton(4, InputManager.Buttons.RIGHT);
-		bool left4 = InputManager.GetButton(4, InputManager.Buttons.LEFT);
+		bool right4 = InputMgr.GetButton(4, InputMgr.Buttons.RIGHT);
+		bool left4 = InputMgr.GetButton(4, InputMgr.Buttons.LEFT);
 
 		if(right4 && !DirectionPressed4){
 			ChangeCharacter(4, 1);

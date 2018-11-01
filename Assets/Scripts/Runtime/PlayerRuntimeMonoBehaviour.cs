@@ -10,6 +10,9 @@ public class PlayerRuntimeMonoBehaviour : RuntimeMonoBehaviour
     // ======================================================================================
     // PUBLIC METHODS - PLAYER MSGS
     // ======================================================================================
+    // EXCLUSIVE EVENT MESSAGES
+    // It disables all other PlayerRuntimeMonoBehaviour in the GameObject and give full althority
+    // to the caller until a OnExclusiveEventEnd is called
     public void MSG_OnExclusiveEventStart(MonoBehaviour _respo)
     {
         if (_respo != this)

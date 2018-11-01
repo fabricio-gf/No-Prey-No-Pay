@@ -85,10 +85,12 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
 
 
     // ======================================================================================
-    // PUBLIC MEMBERS
+    // PROTECTED MEMBERS - RUNTIMEMONOBEHAVIOUR
     // ======================================================================================
     override protected void StartPhase ()
     {
+        base.StartPhase();
+
         InitializeValues();
 
         m_rb            = this.GetComponent<Rigidbody2D>();
@@ -119,6 +121,7 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     // ======================================================================================
     override protected void FixedUpdatePhase()
     {
+        base.FixedUpdatePhase();
         //UpdateLedgeGrabSubsystem();
 
         //if (IsTouchingLedge)
@@ -146,54 +149,68 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     }
 
     // ======================================================================================
+    protected override void OnPlay()
+    {
+        base.OnPlay();
+        m_rb.simulated = true;
+    }
+
+    // ======================================================================================
+    protected override void OnPause()
+    {
+        base.OnPause();
+        m_rb.simulated = false;
+    }
+
+    // ======================================================================================
     // PRIVATE MEMBERS - SUBSYSTEM HANDLERS
     // ======================================================================================
-    private GameObject m_debugBall;
+    //private GameObject m_debugBall;
     // THIS IS TERRIBLE! MUST BE REMADE!
     private void UpdateLedgeGrabSubsystem()
     {
-        if (IsWallSnapped)
-        {
-            if (MaxWallTouchingPoint < m_handPos.position.y || Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint) < .1f)
-            {
-                float horInput = m_input.GetHorizontal();
-                if (horInput * m_snappedWallNormal.x < 0)
-                {
-                    m_rb.isKinematic = true;
-                    m_rb.simulated = false;
+        //if (IsWallSnapped)
+        //{
+        //    if (MaxWallTouchingPoint < m_handPos.position.y || Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint) < .1f)
+        //    {
+        //        float horInput = m_input.GetHorizontal();
+        //        if (horInput * m_snappedWallNormal.x < 0)
+        //        {
+        //            m_rb.isKinematic = true;
+        //            m_rb.simulated = false;
 
-                    IsTouchingLedge = true;
-                    Debug.Log(MaxWallTouchingPoint);
+        //            IsTouchingLedge = true;
+        //            Debug.Log(MaxWallTouchingPoint);
 
-                    Debug.Log(Mathf.Lerp(transform.position.y,
-                                                                MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
-                                                                10 * GameMgr.DeltaTime));
-                    if (m_debugBall == null)
-                    {
-                        m_debugBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                        m_debugBall.transform.localScale = .1f * Vector3.one;
-                    }
-                    m_debugBall.transform.position = new Vector3(this.transform.position.x,
-                        MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
-                        0);
+        //            Debug.Log(Mathf.Lerp(transform.position.y,
+        //                                                        MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
+        //                                                        10 * GameMgr.DeltaTime));
+        //            if (m_debugBall == null)
+        //            {
+        //                m_debugBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //                m_debugBall.transform.localScale = .1f * Vector3.one;
+        //            }
+        //            m_debugBall.transform.position = new Vector3(this.transform.position.x,
+        //                MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
+        //                0);
 
-                    if (Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint) > .1f)
-                        transform.position = new Vector2(transform.position.x,
-                                                    Mathf.Lerp(transform.position.y,
-                                                                MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
-                                                                10 * GameMgr.DeltaTime));// / Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint)));
-                    else
-                    {
-                        transform.position = new Vector2(transform.position.x, MaxWallTouchingPoint - (m_rb.position.y - m_handPos.position.y));
-                    }
-                    return;
-                }
-            }
-        }
+        //            if (Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint) > .1f)
+        //                transform.position = new Vector2(transform.position.x,
+        //                                            Mathf.Lerp(transform.position.y,
+        //                                                        MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
+        //                                                        10 * GameMgr.DeltaTime));// / Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint)));
+        //            else
+        //            {
+        //                transform.position = new Vector2(transform.position.x, MaxWallTouchingPoint - (m_rb.position.y - m_handPos.position.y));
+        //            }
+        //            return;
+        //        }
+        //    }
+        //}
 
-        m_rb.isKinematic = false;
-        m_rb.simulated = true;
-        IsTouchingLedge = false;
+        //m_rb.isKinematic = false;
+        //m_rb.simulated = true;
+        //IsTouchingLedge = false;
     }
 
     // ======================================================================================
@@ -206,7 +223,7 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
         }
 
         // GET INPUT
-        bool doDash = m_input.GetDash();
+        bool doDash = m_input.GetDash() || (m_input.GetVertical() < -.5f && m_input.GetJump());
 
         // Try to Trigger Event, if possible
         if (doDash && !IsEjecting)
@@ -480,7 +497,7 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     // ======================================================================================
     private IEnumerator PlatformDown()
     {
-        if (m_collisionCtlr.Ground != SceneMgr.Ground)
+        if (m_collisionCtlr.Ground != SceneMgr.Ground && m_collisionCtlr.Ground.GetComponent<PlatformEffector2D>() != null)
         {
             Collider2D[] platformColliders = m_collisionCtlr.Ground.GetComponents<Collider2D>();
 
@@ -492,6 +509,10 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
 
             foreach (Collider2D col in platformColliders)
                 Physics2D.IgnoreCollision(m_collider, col, false);
+        }
+        else
+        {
+            IsDashing = false;
         }
     }
 }
