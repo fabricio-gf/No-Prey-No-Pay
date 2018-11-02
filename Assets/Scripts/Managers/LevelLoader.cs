@@ -11,6 +11,9 @@ public class LevelLoader : MonoBehaviour {
 
 	// PUBLIC ATTRIBUTES
 	public static LevelLoader instance;
+	public int StockLimit;
+	public float TimeLimit;
+	public int NumberOfWinsToEnd;
 
 	// PRIVATE ATTRIBUTES
 	private int NumActivePlayers;

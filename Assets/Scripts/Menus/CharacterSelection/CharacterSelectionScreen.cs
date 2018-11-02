@@ -15,6 +15,8 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	private int NumReadyPlayers = 0;
     [SerializeField] private CharacterSelectInputController m_input;
 
+	[SerializeField] private LevelLoader Loader;
+
 
 	// SERIALIZED ATTRIBUTES
 	[Header("Screen references")]
@@ -40,6 +42,8 @@ public class CharacterSelectionScreen : MonoBehaviour {
 		GetColorSwap();
 
 		GetPlayerConfirm();
+
+		GetGameStart();
 	}
 
 	/// <summary>
@@ -153,6 +157,15 @@ public class CharacterSelectionScreen : MonoBehaviour {
 		for(int i = 0; i < 4; i++){
 			if(ActivePlayers[i] && m_input.GetSubmit(i)){
 				ConfirmPlayer(i);
+			}
+		}
+	}
+
+	private void GetGameStart(){
+		for(int i = 0; i < 4; i++){
+			if(ActivePlayers[i] && m_input.GetPause(i)){
+				print("Start game " + i);
+				Loader.StartGame("Tavern");  //Temp string, gonna use scriptable object later or reference in level loader
 			}
 		}
 	}

@@ -9,24 +9,17 @@ public class RoundStarter : MonoBehaviour {
 	[SerializeField] private RoundReferee referee;
 
 	// public WeaponInfo[] WeaponsToSpawn;
-	public PlayerInfo[] PlayersToSpawn;
+	public List<PlayerInfo> PlayersToSpawn;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+	public int StockLimit;
+	public float TimeLimit;
 
-	void InitializeRound(){
-		//PSpawner.PlayersToSpawn = PlayersToSpawn;
-		//PSpawner.SpawnPlayers();
+	public void InitializeRound(){
+		PSpawner.PlayersToSpawn = PlayersToSpawn;
+		PSpawner.SpawnPlayers();
 
 		//spawn weapons
 
-		//start cowntdown
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		countdown.StartCountdown();
 	}
 }

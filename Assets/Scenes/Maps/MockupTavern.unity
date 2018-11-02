@@ -1304,7 +1304,7 @@ GameObject:
   - component: {fileID: 165835363}
   - component: {fileID: 165835364}
   m_Layer: 0
-  m_Name: MenuMgr
+  m_Name: PauseMgr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

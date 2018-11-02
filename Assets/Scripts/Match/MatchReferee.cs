@@ -5,6 +5,8 @@ using UnityEngine;
 public class MatchReferee : MonoBehaviour {
 
 	public int NumberOfWinsToEnd;
+	public int StockLimit;
+	public float TimeLimit;
 	private int[] Wins;
 	private int NumOfPlayers = 0;
 	public bool[] ConnectedPlayers = new bool[4];
@@ -27,8 +29,7 @@ public class MatchReferee : MonoBehaviour {
 	void InitializeScene(){
 		LevelLoader loader = GameObject.FindWithTag("LevelLoader").GetComponent<LevelLoader>();
 
-
-		// Set player infos
+		// Get player infos
 		ConnectedPlayers = loader.ConnectedPlayers;
 
 		List<PlayerInfo> infos = new List<PlayerInfo>();
@@ -40,7 +41,15 @@ public class MatchReferee : MonoBehaviour {
 			}
 		}
 
-		// RStarter.PlayersToSpawn = infos;
+		// Get match rules
+		NumberOfWinsToEnd = loader.NumberOfWinsToEnd;
+		RStarter.StockLimit = loader.StockLimit;
+		RStarter.TimeLimit =  loader.TimeLimit;
+
+		// Set RoundStarter
+		RStarter.PlayersToSpawn = infos;
+		//RStarter.WeaponsToSpawn = weapons;
+		RStarter.InitializeRound();
 
 		// Set winners info
 		Wins = new int[NumOfPlayers];
@@ -60,6 +69,10 @@ public class MatchReferee : MonoBehaviour {
 		Wins[PlayerNumber]++;
 		if(Wins[PlayerNumber] >= NumberOfWinsToEnd){
 			EndMatch();
+		}
+		else{
+			//RestartScene();
+			RStarter.InitializeRound();
 		}
 	}
 

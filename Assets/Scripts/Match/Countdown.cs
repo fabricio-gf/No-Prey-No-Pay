@@ -4,13 +4,33 @@ using UnityEngine;
 
 public class Countdown : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	private int CountdownTime = 3;
+	private int CurrentTime;
+
+	[SerializeField] private UnityEngine.UI.Text CountdownText;
+
+	[SerializeField] private RoundReferee Ref;
+
+	public void StartCountdown(){
+		CurrentTime = 3;
+		CountdownText.gameObject.SetActive(true);
+		InvokeRepeating("CountdownOneSecond", 1f, 1f);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	private void CountdownOneSecond(){
+		if(CurrentTime > 0){
+			CountdownText.text = CurrentTime.ToString();
+			CurrentTime--;
+		}
+		else{
+			CountdownText.text = "Brawl!";
+			Ref.StartRound();
+		}
+	}
+
+	IEnumerator HideCountdownText(){
+		yield return new WaitForSeconds(1f);
+		CountdownText.text = "";
+		CountdownText.gameObject.SetActive(false);
 	}
 }
