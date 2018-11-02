@@ -9,8 +9,6 @@ public class Countdown : MonoBehaviour {
 
 	[SerializeField] private UnityEngine.UI.Text CountdownText;
 
-	[SerializeField] private RoundReferee Ref;
-
 	public void StartCountdown(){
 		CurrentTime = 3;
 		CountdownText.gameObject.SetActive(true);
@@ -24,7 +22,7 @@ public class Countdown : MonoBehaviour {
 		}
 		else{
 			CountdownText.text = "Brawl!";
-			Ref.StartRound();
+			RoundReferee.instance.StartRound();
 		}
 	}
 
