@@ -1762,7 +1762,7 @@ GameObject:
   - component: {fileID: 526863648}
   m_Layer: 0
   m_Name: LevelLoader
-  m_TagString: Untagged
+  m_TagString: LevelLoader
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1777,8 +1777,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 786665570}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &526863648
 MonoBehaviour:
@@ -1791,7 +1791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d091bbeaa800e6478bd1e6b10ccc3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectedPlayers: 00000000
+  matchInfo: {fileID: 11400000, guid: 7a8db22a40ca87e49b34d17a6789a40a, type: 2}
   PlayerList:
   - {fileID: 11400000, guid: 2c699aa339d8de94d928d7def31c78c9, type: 2}
   - {fileID: 11400000, guid: 4c83777d5c1623f4f86ac488996cf395, type: 2}
@@ -2748,7 +2748,6 @@ Transform:
   m_Children:
   - {fileID: 1089833073}
   - {fileID: 746196068}
-  - {fileID: 526863647}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3974,6 +3973,7 @@ MonoBehaviour:
   - {fileID: 288061270}
   - {fileID: 1586941889}
   m_input: {fileID: 1196329481}
+  Loader: {fileID: 0}
   MainMenuScreen: {fileID: 199372013}
 --- !u!114 &1196329481
 MonoBehaviour:

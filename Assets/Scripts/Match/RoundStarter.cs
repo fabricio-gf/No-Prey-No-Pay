@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class RoundStarter : MonoBehaviour {
 
-	[SerializeField] private PlayerSpawner PSpawner;
+	[SerializeField] private PlayerSpawner playerSpawner;
 	[SerializeField] private Countdown countdown;
 
 	// public WeaponInfo[] WeaponsToSpawn;
 	public List<PlayerInfo> PlayersToSpawn;
-
 	public int StockLimit;
 	public float TimeLimit;
 
 	public void InitializeRound(){
-		PSpawner.PlayersToSpawn = PlayersToSpawn;
-		PSpawner.SpawnPlayers();
+		playerSpawner.SpawnPlayers(PlayersToSpawn);
 
 		//spawn weapons
 

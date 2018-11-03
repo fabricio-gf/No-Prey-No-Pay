@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class MatchReferee : MonoBehaviour {
 
-	public int NumberOfWinsToEnd;
-	public int StockLimit;
-	public float TimeLimit;
+	[SerializeField] private MatchInfo matchInfo;
 	private int[] Wins;
 	private int NumOfPlayers = 0;
-	public bool[] ConnectedPlayers = new bool[4];
-
-	[SerializeField] private PlayerSpawner PSpawner;
-	[SerializeField] private RoundStarter RStarter;
+	[SerializeField] private RoundStarter roundStarter;
 	
 	[SerializeField] private PlayerInfo[] PlayerInfos = new PlayerInfo[4];
 
@@ -27,31 +22,27 @@ public class MatchReferee : MonoBehaviour {
 	}
 
 	void InitializeScene(){
-		LevelLoader loader = GameObject.FindWithTag("LevelLoader").GetComponent<LevelLoader>();
-
-		// Get player infos
-		ConnectedPlayers = loader.ConnectedPlayers;
-
 		List<PlayerInfo> infos = new List<PlayerInfo>();
 
-		for(int i = 0; i < ConnectedPlayers.Length; i++){
-			if(ConnectedPlayers[i]){
+		// Get player infos
+		for(int i = 0; i < PlayerInfos.Length; i++){
+			if(PlayerInfos[i].isSelected){
 				infos.Add(PlayerInfos[i]);
 				NumOfPlayers++;
 			}
 		}
+		roundStarter.PlayersToSpawn = infos;
 
 		// Get match rules
-		NumberOfWinsToEnd = loader.NumberOfWinsToEnd;
-		RStarter.StockLimit = loader.StockLimit;
-		RStarter.TimeLimit =  loader.TimeLimit;
+		roundStarter.StockLimit = matchInfo.StockLimit;
+		roundStarter.TimeLimit =  matchInfo.TimeLimit;
 
-		// Set RoundStarter
-		RStarter.PlayersToSpawn = infos;
+		// Get weapon infos
 		//RStarter.WeaponsToSpawn = weapons;
-		RStarter.InitializeRound();
+		
+		roundStarter.InitializeRound();
 
-		// Set winners info
+		// Set winners initial info
 		Wins = new int[NumOfPlayers];
 		for(int i = 0; i < Wins.Length; i++){
 			Wins[i] = 0;
@@ -67,12 +58,12 @@ public class MatchReferee : MonoBehaviour {
 
 	public void EndRound(int PlayerNumber){
 		Wins[PlayerNumber]++;
-		if(Wins[PlayerNumber] >= NumberOfWinsToEnd){
+		if(Wins[PlayerNumber] >= matchInfo.NumberOfWinsToEnd){
 			EndMatch();
 		}
 		else{
 			//RestartScene();
-			RStarter.InitializeRound();
+			roundStarter.InitializeRound();
 		}
 	}
 

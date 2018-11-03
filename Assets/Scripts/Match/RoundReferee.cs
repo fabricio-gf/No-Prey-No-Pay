@@ -11,7 +11,7 @@ public class RoundReferee : MonoBehaviour {
 	[SerializeField] private ScoreDisplay Display;
 	[SerializeField] private GameObject VictoryWindow;
 
-	[SerializeField] private MatchReferee MRef;
+	[SerializeField] private MatchReferee matchReferee;
 
 	public int NumOfPlayers;
 	private GameObject[] Players;
@@ -24,6 +24,7 @@ public class RoundReferee : MonoBehaviour {
 	}
 
 	public void StartRound(){
+		print("ROUND STARTED");
 		/*
 		for(int i = 0; i < 4; i++){
 

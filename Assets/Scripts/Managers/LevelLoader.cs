@@ -11,14 +11,11 @@ public class LevelLoader : MonoBehaviour {
 
 	// PUBLIC ATTRIBUTES
 	public static LevelLoader instance;
-	public int StockLimit;
-	public float TimeLimit;
-	public int NumberOfWinsToEnd;
+	[SerializeField] private MatchInfo matchInfo;
 
 	// PRIVATE ATTRIBUTES
 	private int NumActivePlayers;
 	private int NumReadyPlayers;
-	[HideInInspector] public bool[] ConnectedPlayers = new bool[4];
 	private bool CanStart;
 
 	// SERIALIZED ATTRIBUTES
@@ -36,6 +33,22 @@ public class LevelLoader : MonoBehaviour {
 
 		DontDestroyOnLoad(this.gameObject);
 	}
+
+#if UNITY_EDITOR
+	// CHEAT CODES
+	public void Update(){
+		if(Input.GetKeyDown(KeyCode.Alpha1)){
+			matchInfo.StockLimit = 3;
+			matchInfo.TimeLimit = 0;
+			matchInfo.NumberOfWinsToEnd = 3;
+			PlayerList[0].isSelected = true;
+			PlayerList[0].SelectedColor = 2;
+			PlayerList[1].isSelected = true;
+			PlayerList[1].SelectedColor = 4;
+			SceneManager.LoadScene("Tavern");
+		}
+	}
+#endif
 
 	/// <summary>
 	/// Checks if all active players have selected a character, and changes the color of the "Press start" text to indicate the game can begin
@@ -71,7 +84,6 @@ public class LevelLoader : MonoBehaviour {
 		PlayerList[playerNumber].isSelected = true;
 		PlayerList[playerNumber].SelectedCharacter = (PlayerInfo.Character)character;
 		PlayerList[playerNumber].SelectedColor = color;
-		ConnectedPlayers[playerNumber] = true;
 
 		NumReadyPlayers ++;
 		CheckStartButton();
@@ -80,11 +92,9 @@ public class LevelLoader : MonoBehaviour {
 
 	public void RemovePlayerReady(int playerNumber){
 		PlayerList[playerNumber].isSelected = false;
-		ConnectedPlayers[playerNumber] = false;
 
 		NumReadyPlayers --;
 		CheckStartButton();
-
 	}
 	
 }

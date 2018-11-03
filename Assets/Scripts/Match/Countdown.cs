@@ -10,7 +10,7 @@ public class Countdown : MonoBehaviour {
 	[SerializeField] private UnityEngine.UI.Text CountdownText;
 
 	public void StartCountdown(){
-		CurrentTime = 3;
+		CurrentTime = CountdownTime;
 		CountdownText.gameObject.SetActive(true);
 		InvokeRepeating("CountdownOneSecond", 1f, 1f);
 	}
@@ -22,13 +22,15 @@ public class Countdown : MonoBehaviour {
 		}
 		else{
 			CountdownText.text = "Brawl!";
+			StartCoroutine(HideCountdownText());
 			RoundReferee.instance.StartRound();
+			CancelInvoke("CountdownOneSecond");
 		}
 	}
 
 	IEnumerator HideCountdownText(){
 		yield return new WaitForSeconds(1f);
-		CountdownText.text = "";
 		CountdownText.gameObject.SetActive(false);
+		CountdownText.text = "";
 	}
 }
