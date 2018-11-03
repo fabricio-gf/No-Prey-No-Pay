@@ -36,6 +36,9 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     public GameObject    ProjectilePrefab;
     protected Vector2       PistolOffset;
 
+    // attack: Saber
+    protected Vector2 StompOffset;
+    protected Vector2 StompHitboxSize;
     // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
     // attack origin
     private PlayerInputCtlr     m_input;
@@ -75,6 +78,11 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
         PistolOffset.x = 0.7f;
         PistolOffset.y = 0.75f;
+
+        StompOffset.x = 0;
+        StompOffset.y = -0.2f;
+        StompHitboxSize.x = 0.75f;
+        StompHitboxSize.y = 0.3f;
     }
 
     // ======================================================================================
@@ -82,6 +90,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     {
         // Attack Subsystem : triggers Attack and generates hitboxes
         UpdateAttackSubsystem();
+        UpdateStompSubsystem();
         
     }
 
@@ -103,6 +112,18 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
             StartAttack();
     }
 
+    // ======================================================================================
+    private void UpdateStompSubsystem()
+    {
+        if (!this.GetComponent<PlayerController>().IsJumping || this.GetComponent<PlayerController>().IsGrounded)
+        {
+            return;
+        }
+
+        // Try to Trigger Event, if possible
+        if (this.GetComponent<PlayerController>().IsJumping || !this.GetComponent<PlayerController>().IsGrounded)
+            Stomp();
+    }
     // ======================================================================================
     // PRIVATE MEMBERS - SUBSYSTEM EVENT STARTERS
     // ======================================================================================
@@ -147,6 +168,15 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         }
     }
 
+    // ======================================================================================
+    private void Stomp()
+    {
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * StompOffset.x, transform.localScale.y * StompOffset.y,0), new Vector3(StompHitboxSize.x, StompHitboxSize.y, 0.4f));
+        for (int i = 0; i < hitTargets.Length; i++)
+        {
+            hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
+        }
+    }
     // ======================================================================================
     // PRIVATE MEMBERS - COOLDOWN HANDLERS
     // ======================================================================================
@@ -215,6 +245,11 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         {
             Gizmos.color = Color.green;
             Gizmos.DrawCube(transform.position + (Vector3)PistolOffset, new Vector3(0.25f, 0.25f, 0));
+        }
+        if (this.GetComponent<PlayerController>().IsJumping || !this.GetComponent<PlayerController>().IsGrounded)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawCube(transform.position + (Vector3)StompOffset, (Vector3)StompHitboxSize);
         }
     }
 }
