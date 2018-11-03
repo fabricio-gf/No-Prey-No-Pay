@@ -20,4 +20,8 @@ public class RoundStarter : MonoBehaviour {
 		RoundReferee.instance.NumOfPlayers = PlayersToSpawn.Count;
 		countdown.StartCountdown();
 	}
+
+	public void RestartRound(){
+		
+	}
 }
