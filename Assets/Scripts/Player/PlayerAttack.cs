@@ -108,10 +108,16 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // ======================================================================================
     private void StartAttack()
     {
-        m_attackDirection = new Vector2(m_input.GetHorizontal(), m_input.GetVertical());
+        m_attackDirection = new Vector2(m_input.GetHorizontal(), 0);
 
         if (m_attackDirection.sqrMagnitude == 0)
-            m_attackDirection = new Vector2(m_control.ForwardDir == PlayerController.eDirection.Right ? 1 : -1, 0);
+        {
+            m_attackDirection = new Vector2( 0 , m_input.GetVertical());
+            if (m_attackDirection.sqrMagnitude == 0)
+                m_attackDirection = new Vector2(m_control.ForwardDir == PlayerController.eDirection.Right ? 1 : -1, 0);
+            else
+                m_attackDirection.Normalize();
+        }          
         else
             m_attackDirection.Normalize();
 
@@ -155,7 +161,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // ======================================================================================
     private void PunchAttack()
     {
-        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * PunchOffset.x, transform.localScale.y * PunchOffset.y, 0), new Vector3(PunchHitboxSize.x, PunchHitboxSize.y, 0.4f));
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * m_attackDirection.x * PunchOffset.x, m_attackDirection.y * 1 + transform.localScale.y * PunchOffset.y, 0), new Vector3(PunchHitboxSize.x, PunchHitboxSize.y, 0.4f));
         for (int i = 0; i < hitTargets.Length; i++)
         {
             StartCoroutine(hitTargets[i].GetComponent<DamageBehaviour>().GetStunned());
@@ -168,7 +174,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     {
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
-        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * SaberOffset.x, transform.localScale.y * SaberOffset.y, 0), new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 0.4f));
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * m_attackDirection.x * SaberOffset.x, m_attackDirection.y * 1 + transform.localScale.y * SaberOffset.y, 0), new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 0.4f));
         
         for (int i = 0; i < hitTargets.Length; i++)
         {
@@ -203,7 +209,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         if (EquipWeap == eWeapon.Saber)
         { 
             Gizmos.color = Color.red;
-            Gizmos.DrawCube(transform.position + (Vector3)SaberOffset, (Vector3)SaberHitboxSize);
+            Gizmos.DrawCube(transform.position + new Vector3(m_attackDirection.x*SaberOffset.x, m_attackDirection.y*1 + SaberOffset.y,0), (Vector3)SaberHitboxSize);
         }
         if (EquipWeap == eWeapon.Pistol)
         {
