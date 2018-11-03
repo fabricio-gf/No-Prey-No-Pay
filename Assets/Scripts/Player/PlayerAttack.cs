@@ -59,9 +59,9 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         m_input = this.GetComponent<PlayerInputCtlr>();
         IsAttacking = false;
 
-        playerLayer = LayerMask.GetMask("playerLayer");
+        playerLayer = LayerMask.GetMask("Players");
 
-        EquipWeap = eWeapon.Pistol;
+        EquipWeap = eWeapon.Saber;
 
         PunchOffset.x = 1.5f;
         PunchOffset.y = 0.75f;
@@ -80,7 +80,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // ======================================================================================
     override protected void FixedUpdatePhase()
     {
-        // Attack Subsystem : triggers Attack and generates hurtboxes
+        // Attack Subsystem : triggers Attack and generates hitboxes
         UpdateAttackSubsystem();
         
     }
@@ -155,7 +155,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // ======================================================================================
     private void PunchAttack()
     {
-        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * PunchOffset.x, PunchOffset.y, 0), 0.4f * Vector3.one, Quaternion.identity, playerLayer);
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * PunchOffset.x, transform.localScale.y * PunchOffset.y, 0), new Vector3(PunchHitboxSize.x, PunchHitboxSize.y, 0.4f));
         for (int i = 0; i < hitTargets.Length; i++)
         {
             StartCoroutine(hitTargets[i].GetComponent<DamageBehaviour>().GetStunned());
@@ -167,11 +167,9 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     private void SaberAttack()
     {
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
-        
-        print(transform.position + (Vector3)SaberOffset);
-        //Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * SaberOffset.x, transform.localScale.y*SaberOffset.y, 0), 0.4f * Vector3.one, Quaternion.identity, playerLayer);
-        Collider[] hitTargets = Physics.OverlapBox(transform.position + (Vector3)SaberOffset, new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 1), Quaternion.identity, playerLayer);
 
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * SaberOffset.x, transform.localScale.y * SaberOffset.y, 0), new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 0.4f));
+        
         for (int i = 0; i < hitTargets.Length; i++)
         {
             hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
