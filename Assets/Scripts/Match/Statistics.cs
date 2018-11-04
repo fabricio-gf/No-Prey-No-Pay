@@ -37,7 +37,7 @@ public class Statistics : MonoBehaviour {
 		statsDict[key].value[player] = value;
 	}
 
-	void ChooseStats(){
+	void DisplayStats(){
 		foreach(var s in statsDict.Values){
 			int max = -1, player = -1;
 			for(int i = 0; i < 4; i++){
