@@ -14,7 +14,9 @@ public class RoundReferee : MonoBehaviour {
 	[SerializeField] private MatchReferee matchReferee;
 
 	public int NumOfPlayers;
-	private GameObject[] Players;
+	private Transform[] Players;
+
+	[SerializeField] Transform PlayerParentObject;
 
 	public void Start(){
 		if (instance == null)
@@ -24,6 +26,11 @@ public class RoundReferee : MonoBehaviour {
 	}
 
 	public void StartRound(){
+		Players = new Transform[PlayerParentObject.childCount];
+		for(int i = 0; i < PlayerParentObject.childCount; i++){
+			Players[i]= PlayerParentObject.GetChild(i);
+		}
+		
 		print("ROUND STARTED");
 		/*
 		for(int i = 0; i < 4; i++){
