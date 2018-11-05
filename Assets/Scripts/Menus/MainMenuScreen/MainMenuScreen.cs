@@ -12,6 +12,7 @@ public class MainMenuScreen : MonoBehaviour {
 	private int index = 0;
 	private EventSystem eventSystem;
     [SerializeField] private MenuInputController m_input;
+	[SerializeField] private MenuCity MenuAnimator;
 
 
 	// SERIALIZED ATTRIBUTES
@@ -19,6 +20,7 @@ public class MainMenuScreen : MonoBehaviour {
 	[SerializeField] private GameObject CharacterSelectScreen;
 	[SerializeField] private GameObject SettingsScreen;
 	[SerializeField] private GameObject CreditsScreen;
+	[SerializeField] private GameObject ExitScreen;
 
 	[SerializeField] private GameObject SplashScreen;
 
@@ -26,6 +28,7 @@ public class MainMenuScreen : MonoBehaviour {
 	[SerializeField] private GameObject[] Buttons;
 
 	void Awake(){
+		m_input = transform.parent.GetComponent<MenuInputController>();
 	}
 
 	void Start(){
@@ -91,16 +94,19 @@ public class MainMenuScreen : MonoBehaviour {
 		switch (index)
 		{
 			case 0:
+				MenuAnimator.goPlay();
 				MenuActions.instance.ChangePanel(CharacterSelectScreen);
 				break;
 			/* case 1:
 				MenuActions.instance.ChangePanel(SettingsScreen);
 				break; */
 			case 1:
+				MenuAnimator.goCredits();
 				MenuActions.instance.ChangePanel(CreditsScreen);
 				break;
 			case 2:
-				MenuActions.instance.ExitGame();
+				MenuAnimator.goExit();
+				MenuActions.instance.ChangePanel(ExitScreen);
 				break;
 			default:
 				break;

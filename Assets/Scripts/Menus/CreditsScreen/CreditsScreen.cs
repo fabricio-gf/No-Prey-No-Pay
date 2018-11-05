@@ -8,11 +8,14 @@ using UnityEngine;
 public class CreditsScreen : MonoBehaviour {
 
     [SerializeField] private MenuInputController m_input;
+	[SerializeField] private MenuCity MenuAnimator;
+
 
 	[Header("Screen references")]
 	[SerializeField] private GameObject MainMenuScreen;
 	
 	void Awake(){
+		m_input = transform.parent.GetComponent<MenuInputController>();
 	}
 
 	void Update () {

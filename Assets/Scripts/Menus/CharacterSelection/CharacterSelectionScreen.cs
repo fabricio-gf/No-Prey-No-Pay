@@ -14,8 +14,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	private bool[] ActivePlayers;
 	private int NumReadyPlayers = 0;
     [SerializeField] private CharacterSelectInputController m_input;
-
-	[SerializeField] private LevelLoader Loader;
+	[SerializeField] private MenuCity MenuAnimator;
 
 
 	// SERIALIZED ATTRIBUTES
@@ -23,6 +22,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	[SerializeField] private GameObject MainMenuScreen;
 
 	void Awake(){
+		m_input = GetComponent<CharacterSelectInputController>();
 	}
 	void Start () {
 		ActivePlayers = new bool[4];
@@ -85,59 +85,9 @@ public class CharacterSelectionScreen : MonoBehaviour {
 		
 		if(inactive == 4 && NumReadyPlayers == 0 && m_input.GetPrevious()){
 			MenuActions.instance.ChangePanel(MainMenuScreen);
+			MenuAnimator.goBack();
 		}
 	}
-
-	/*private void GetCharacterSwap(){
-		
-		bool right1 = InputMgr.GetButton(1, InputMgr.Buttons.RIGHT);
-		bool left1 = InputMgr.GetButton(1, InputMgr.Buttons.LEFT);
-		
-		if(right1 && !DirectionPressed1){
-			ChangeCharacter(1, 1);
-			DirectionPressed1 = true;
-		}
-		if(left1 && !DirectionPressed1){
-			ChangeCharacter(1, -1);
-			DirectionPressed1 = true;
-		}
-
-		bool right2 = InputMgr.GetButton(2, InputMgr.Buttons.RIGHT);
-		bool left2 = InputMgr.GetButton(2, InputMgr.Buttons.LEFT);
-
-		if(right2 && !DirectionPressed2){
-			ChangeCharacter(2, 1);
-			DirectionPressed1 = true;
-		}
-		if(left2 && !DirectionPressed2){
-			ChangeCharacter(2, -1);
-			DirectionPressed1 = true;
-		}
-
-		bool right3 = InputMgr.GetButton(3, InputMgr.Buttons.RIGHT);
-		bool left3 = InputMgr.GetButton(3, InputMgr.Buttons.LEFT);
-		
-		if(right3 && !DirectionPressed3){
-			ChangeCharacter(3, 1);
-			DirectionPressed1 = true;
-		}
-		if(left3 && !DirectionPressed3){
-			ChangeCharacter(3, -1);
-			DirectionPressed1 = true;
-		}
-		
-		bool right4 = InputMgr.GetButton(4, InputMgr.Buttons.RIGHT);
-		bool left4 = InputMgr.GetButton(4, InputMgr.Buttons.LEFT);
-
-		if(right4 && !DirectionPressed4){
-			ChangeCharacter(4, 1);
-			DirectionPressed1 = true;
-		}
-		if(left4 && !DirectionPressed4){
-			ChangeCharacter(4, -1);
-			DirectionPressed1 = true;
-		}
-	}*/
 
 	/// <summary>
 	/// Detects if a player has swapped the color of it's current selected character
@@ -165,7 +115,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 		for(int i = 0; i < 4; i++){
 			if(ActivePlayers[i] && m_input.GetPause(i)){
 				print("Start game " + i);
-				Loader.StartGame("Tavern");  //Temp string, gonna use scriptable object later or reference in level loader
+				LevelLoader.instance.StartGame("Tavern");  //Temp string, gonna use scriptable object later or reference in level loader
 			}
 		}
 	}

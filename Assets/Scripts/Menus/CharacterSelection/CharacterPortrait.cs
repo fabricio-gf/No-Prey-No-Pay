@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Controls the visual elements present in each character portrait in the selection screen
@@ -8,7 +9,8 @@ using UnityEngine;
 public class CharacterPortrait : MonoBehaviour {
 
 	// PUBLIC ATTRIBUTES
-	public GameObject[] Characters;
+	public Sprite[] Characters;
+	[SerializeField] Image Char;
 	public int charIndex = 0;
 	public int colorIndex = 1;
 
@@ -28,8 +30,8 @@ public class CharacterPortrait : MonoBehaviour {
 		colorIndex++;
 		if(colorIndex > 4) colorIndex = 1;
 
-		Characters[charIndex].GetComponent<ChangeColor>().color = colorIndex;
-		Characters[charIndex].GetComponent<ChangeColor>().ManualValidate();
+		Char.GetComponent<ChangeColor>().color = colorIndex;
+		Char.GetComponent<ChangeColor>().ManualValidate();
 	}
 
 	/// <summary>
@@ -37,7 +39,7 @@ public class CharacterPortrait : MonoBehaviour {
 	/// </summary>
 	/// <param name="direction">1 for right, -1 for left</param>
 	public void ChangeCharacter(int direction){
-		Characters[charIndex].SetActive(false);
+
 		charIndex += direction;
 		if(charIndex >= Characters.Length){
 			charIndex = 0;
@@ -45,14 +47,14 @@ public class CharacterPortrait : MonoBehaviour {
 		else if(charIndex < 0){
 			charIndex = Characters.Length-1;
 		}
-		Characters[charIndex].SetActive(true);
+		Char.sprite = Characters[charIndex];
 	}
 
 	/// <summary>
 	/// Hides the "press Start to join" image and shows the characters
 	/// </summary>
 	public void ShowCharacter(){
-		Characters[charIndex].SetActive(true);		
+		Char.gameObject.SetActive(true);		
 		PressStart.SetActive(false);
 		Phase1 = Phase3 = false;
 		Phase2 = true;
@@ -63,7 +65,7 @@ public class CharacterPortrait : MonoBehaviour {
 	/// </summary>
 	public void HideCharacter(){
 		PressStart.SetActive(true);
-		Characters[charIndex].SetActive(false);	
+		Char.gameObject.SetActive(false);	
 		Phase2 = Phase3 = false;
 		Phase1 = true;			
 	}
@@ -73,7 +75,7 @@ public class CharacterPortrait : MonoBehaviour {
 	/// </summary>
 	public void ConfirmCharacter(){
 		Selected.SetActive(true);
-		Characters[charIndex].SetActive(false);	
+		Char.gameObject.SetActive(false);	
 		Phase1 = Phase2 = false;
 		Phase3 = true;
 	}
@@ -82,7 +84,7 @@ public class CharacterPortrait : MonoBehaviour {
 	/// Hides the "selected" image and shows the characters
 	/// </summary>
 	public void UnconfirmCharacter(){
-		Characters[charIndex].SetActive(true);		
+		Char.gameObject.SetActive(true);		
 		Selected.SetActive(false);
 		Phase1 = Phase3 = false;
 		Phase2 = true;

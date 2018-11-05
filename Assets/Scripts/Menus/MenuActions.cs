@@ -9,12 +9,7 @@ using UnityEngine;
 public class MenuActions : MonoBehaviour {
 
 	public static MenuActions instance;
-
-	/* [Header("References")]
-	[SerializeField] private GameObject MusicManager;
-	[SerializeField] private GameObject SFXManager;
-	[SerializeField] private GameObject VoiceManager;
-	[SerializeField] private GameObject NarratorManager; */
+	[SerializeField] public static MenuCity MenuAnimator;
 
 	[SerializeField] private GameObject ActivePanel;
 	private GameObject ActiveWindow;
