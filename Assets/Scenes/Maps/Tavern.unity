@@ -1277,7 +1277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnPoints:
-  - {x: 6.75, y: -1.49}
+  - {x: 6.55, y: -1.49}
   - {x: 0.46, y: 4.76}
   - {x: 2.03, y: 0.8}
   - {x: -5.15, y: -2.97}
@@ -4059,7 +4059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_objectsToSpawn:
   - {fileID: 1456881402690132, guid: 2bb9aca08dc8b4d4e9687b50faf3d605, type: 2}
-  - {fileID: 1691850874402382, guid: 564905977822e054aa3de05529d3a7a5, type: 2}
+  - {fileID: 1630203810340552, guid: 564905977822e054aa3de05529d3a7a5, type: 2}
   m_spawnCooldown: 5
 --- !u!1 &1703804679
 GameObject:
