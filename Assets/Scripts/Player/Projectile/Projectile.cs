@@ -2,40 +2,71 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : RuntimeMonoBehaviour {
+public class Projectile : RuntimeMonoBehaviour
+{
 
 
     // --------------------------- PROTECTED CONFIG ATTRIBUTES --------------------------- //
-     protected Vector3                 DirectionVector     = Vector3.zero;
-	[SerializeField]
-    protected bool                    isFalling           = true;
-	[SerializeField]
-    protected float                   m_gravSpeed         = 0;
-	protected float                   m_collisionEpsilon  = 0.001f;
+    protected Vector3 DirectionVector = Vector3.zero;
+    [SerializeField]
+    protected bool isFalling = true;
+    [SerializeField]
+    protected float m_gravSpeed = 0;
+    protected float m_collisionEpsilon = 0.01f;
+    private float timeToLive = 2;
     protected PlayerInputCtlr.ePlayer origin;
 
-	[Range(0, 1)]
-    protected float                    m_gravityRatio      = .4f;
+    [Range(0, 1)]
+    protected float m_gravityRatio = .4f;
 
-	[Header("Dimensions")]
-    protected float                    m_width             = .1f;
-    protected float                    m_height            = .1f;
+    [Header("Dimensions")]
+    protected float m_width = 0.2f;
+    protected float m_height = 0.2f;
 
     // ------------------------------------- ACCESSORS ----------------------------------- //
     public bool IsGrounded { get; protected set; }
     public bool IsWallSnapped { get; protected set; }
 
-    protected override void StartPhase(){
+    void OnCollisionEnter(Collision collision)
+    {
+        print("hit");
+        var hit = collision.gameObject;
+        var health = hit.GetComponent<DamageBehaviour>();
+        if (health != null)
+        {
+            health.TakeDamage(origin);
+        }
+
+        Destroy(gameObject);
+    }
+
+
+    protected override void StartPhase()
+    {
 	}
 
-	// Update is called once per frame
-	protected override void UpdatePhase () {
+	//Update is called once per frame
+	override protected void FixedUpdatePhase()
+    {
 		if(!isFalling){
-			transform.Translate(DirectionVector * Time.deltaTime);
+			transform.Translate(DirectionVector * GameMgr.DeltaTime);
 			return;
 		}
-		//UpdateTransform();
-	}
+    }
+
+    /*private void UpdateCollision()
+    {
+        Collider[] hitTargets = Physics.OverlapBox(transform.position, new Vector3(m_width, m_height, 0.4f));
+        if (hitTargets.Length != 0)
+        {
+            print("hit");
+            for (int i = 0; i < hitTargets.Length; i++)
+            {
+                hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(origin);
+            }
+            Destroy(gameObject);
+        }
+    }*/
 
 	public void SetDirection(Vector3 direction){
 		DirectionVector = direction;
@@ -46,13 +77,14 @@ public class Projectile : RuntimeMonoBehaviour {
         origin = player;
     }
 
-	// ideally direction == 1 is right, and direction == -1 is left
-	// it can also be changed to a bool with 0 and 1
-	public void MoveProjectile(Vector3 direction){
-		SetDirection(direction);
-		isFalling = false;
-	}
-
+    // ideally direction == 1 is right, and direction == -1 is left
+    // it can also be changed to a bool with 0 and 1
+    public void MoveProjectile(Vector3 direction)
+    {
+        SetDirection(direction);
+        isFalling = false;
+    }
+}    /*
 	public void MoveProjectileAtAngle(){
 		float randomAngle = Random.Range(-30f,30f);
 		// throw
@@ -68,7 +100,7 @@ public class Projectile : RuntimeMonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(!isFalling && other.tag == "Player"){
+		if(!isFalling && other.tag == "Hurtbox"){
 			if(tag == "Lethal"){
 				other.GetComponent<DamageBehaviour>().TakeDamage(origin);
 				Destroy(gameObject);
@@ -81,25 +113,9 @@ public class Projectile : RuntimeMonoBehaviour {
 		}
 	}
 
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // OBS : JOAO CODE FOR TEST ONLY!!!!!! --> BUT IS WORKING PERFECTLY FOR PLAYER DETECTION!
+    
     void OnTriggerEnter2D(Collider2D other)
     {
-        //if (!isFalling && other.gameObject.layer == LayerMask.NameToLayer("Players"))
-        //{
-        //    if (tag == "Lethal")
-        //    {
-        //        other.GetComponent<DamageBehaviour>().TakeDamage(origin);
-        //        Destroy(gameObject);
-        //    }
-        //    else
-        //    {
-        //        other.GetComponent<DamageBehaviour>().GetStunned();
-        //        SetDirection(Vector3.zero);
-        //        isFalling = true;
-        //    }
-        //}
-
         // if it has a damageBhv, it must  be a player! (or any other object that
         // can be damaged
         // so, apply damage
@@ -119,6 +135,29 @@ public class Projectile : RuntimeMonoBehaviour {
             }
         }
     }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+
+        if (col.gameObject.name == "Player" + origin)
+        {
+            Physics2D.IgnoreCollision(col.gameObject.GetComponent<Collider2D>(),
+                this.gameObject.GetComponent<Collider2D>(), true);
+        }
+
+        //Entidade "danificável"
+        DamageBehaviour target = col.gameObject.GetComponent<DamageBehaviour>();
+        if (target != null && target.name != "Player" + origin)
+        {
+            target.TakeDamage(origin);
+        }
+        Destroy(this.gameObject);
+        Destroy(this);
+
+        /*if (col.gameObject.layer == LayerMask.NameToLayer ("Ground")) {
+			Die ();
+		}*/
+    /*}
 
     //ESSA PARTE É COPIADA DO PLAYER COM PEQUENAS ALTERAÇÕES//
 
@@ -150,71 +189,4 @@ m_gravSpeed += Physics.gravity.magnitude * m_gravityRatio;
         
         return true;
     }
-
-    // ======================================================================================
-    /*private bool UpdateCollisions(Vector2 _startPos, Vector2 _endPos)
-    {
-        Vector3 finalPos = CheckCollision(_startPos, _endPos);
-
-        if (IsWallSnapped)
-        {
-             = 0;
-        }
-
-        this.transform.position = finalPos;
-
-        return true;
-    }*/
-
-    // ======================================================================================
-    /*private Vector3 CheckCollision(Vector3 _startPos, Vector3 _endPos)
-    {
-        RaycastHit hitInfo;
-        Vector3 direction   = _endPos - _startPos;
-        Vector3 finalEndPos = _endPos;
-
-        if (direction.y < 0)
-        {
-            if (Physics.Raycast(_startPos, direction + m_collisionEpsilon * direction.normalized, out hitInfo, direction.magnitude + m_collisionEpsilon, ~(1 << this.gameObject.layer)))
-            {
-                GameObject gnd = hitInfo.collider.gameObject;
-
-                if (gnd != null)
-                {
-                    finalEndPos.y = gnd.transform.up() + m_collisionEpsilon;
-                }
-            }
-        }
-
-        finalEndPos.x = Mathf.Clamp(finalEndPos.x, SceneMgr.MinX + m_width / 2, SceneMgr.MaxX - m_width / 2);
-        finalEndPos.y = Mathf.Clamp(finalEndPos.y, SceneMgr.MinY, SceneMgr.MaxY - m_height);
-        return finalEndPos;
-    }
-
-    private bool CheckWalls ()
-    {
-        Vector3 lWall = this.transform.position - ( m_collisionEpsilon + m_width / 2 ) * Vector3.right;
-        Vector3 rWall = this.transform.position + ( m_collisionEpsilon + m_width / 2 ) * Vector3.right;
-
-        if (lWall.x <= SceneMgr.MinX || rWall.x >= SceneMgr.MaxX)
-            return true;
-
-        return Physics.Raycast(this.transform.position, -(m_collisionEpsilon - m_width / 2) * Vector3.right) || Physics.Raycast(this.transform.position, -(m_collisionEpsilon - m_width / 2) * Vector3.right + (m_collisionEpsilon + m_width / 2) * Vector3.right);
-    }*/
-
-    // ======================================================================================
-    // PUBLIC MEMBERS - ICollidable INTERFACE FOR COLLISION DETECTION
-    // ======================================================================================
-    public void OnTouchingWall(Vector2 _normal)
-    {
-        IsWallSnapped = true;
-        IsGrounded = IsGrounded;
-    }
-
-    // ======================================================================================
-    public void OnTouchingGround(Vector2 _normal)
-    {
-        IsWallSnapped = IsWallSnapped;
-        IsGrounded = true;
-    }
-}
+}*/

@@ -126,26 +126,27 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
 
         //if (IsTouchingLedge)
         //    return;
+            // Dash Subsystem : triggers Dash and runs it until the end
+            UpdateDashSubsystem();
+            // Jump Subsystem : triggers Jump and WallEjection and runs it until the end
+            UpdateJumpSubsystem();
+            // Walk Subsystem : horizontal locomotion in the ground and in the air
+            UpdateWalkSubsystem();
+            // Gravity Subystem : applies gravity in normal conditions
+            UpdateGravitySubsystem();
+        
+            // OBS: 2 Special unstopabble events are handled by the system:
+            // Dash
+            // Ejection
+        
+            if (Velocity.x > 0)
+                ForwardDir = eDirection.Right;
+            else if (Velocity.x < 0)
+                ForwardDir = eDirection.Left;
 
-        // Dash Subsystem : triggers Dash and runs it until the end
-        UpdateDashSubsystem();
-        // Jump Subsystem : triggers Jump and WallEjection and runs it until the end
-        UpdateJumpSubsystem();
-        // Walk Subsystem : horizontal locomotion in the ground and in the air
-        UpdateWalkSubsystem();
-        // Gravity Subystem : applies gravity in normal conditions
-        UpdateGravitySubsystem();
-
-        // OBS: 2 Special unstopabble events are handled by the system:
-        // Dash
-        // Ejection
-        if (Velocity.x > 0)
-            ForwardDir = eDirection.Right;
-        else if (Velocity.x < 0)
-            ForwardDir = eDirection.Left;
-
-        if (Velocity.y < 0 && IsGrounded)
-            StartCoroutine(PlatformDown());
+            if (Velocity.y < 0 && IsGrounded)
+                StartCoroutine(PlatformDown());
+        
     }
 
     // ======================================================================================
@@ -336,7 +337,15 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     // ======================================================================================
     private void UpdateWalk()
     {
-        float   speedInput  = m_input.GetHorizontal();
+        float speedInput;
+        if (!this.GetComponent<PlayerAttack>().IsAttacking)
+        {
+            speedInput = m_input.GetHorizontal();
+        }
+        else
+        {
+            speedInput = 0;
+        }
         if (IsWallSnapped && speedInput * m_snappedWallNormal.x < 0)
             return;
 
@@ -368,7 +377,15 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     // ======================================================================================
     private void UpdateFalling()
     {
-        float speedInput = m_input.GetHorizontal();
+        float speedInput;
+        if (!this.GetComponent<PlayerAttack>().IsAttacking)
+        {
+            speedInput = m_input.GetHorizontal();
+        }
+        else
+        {
+            speedInput = 0;
+        }
         if (IsWallSnapped && speedInput * m_snappedWallNormal.x < 0)
             return;
 

@@ -20,7 +20,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
     // ======================================================================================
     override protected void StartPhase()
     {
-        m_player = this.GetComponent<PlayerInputCtlr>();
+        m_player = this.GetComponentInParent<PlayerInputCtlr>();
         m_nbLives = 3;
 
         IsDead      = false;

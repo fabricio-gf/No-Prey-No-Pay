@@ -33,9 +33,12 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     protected Vector2 SaberHitboxSize;
 
     // attack: Pistol
-    public GameObject    ProjectilePrefab;
-    protected Vector2       PistolOffset;
+    public GameObject ProjectilePrefab;
+    protected Vector2 PistolOffset;
 
+    // attack: Saber
+    protected Vector2 StompOffset;
+    protected Vector2 StompHitboxSize;
     // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
     // attack origin
     private PlayerInputCtlr     m_input;
@@ -47,7 +50,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
     // ------------------------------------- ACCESSORS ----------------------------------- //
     public bool IsAttacking { get; protected set; }
-    public eWeapon EquipWeap { get; protected set; }
+    public eWeapon EquipWeap { get; set; }
 
 
     // ======================================================================================
@@ -59,7 +62,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         m_input = this.GetComponent<PlayerInputCtlr>();
         IsAttacking = false;
 
-        playerLayer = LayerMask.GetMask("playerLayer");
+        playerLayer = LayerMask.GetMask("Players");
 
         EquipWeap = eWeapon.Pistol;
 
@@ -75,13 +78,20 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
         PistolOffset.x = 0.7f;
         PistolOffset.y = 0.75f;
+
+        StompOffset.x = 0;
+        StompOffset.y = -0.2f;
+        StompHitboxSize.x = 0.35f;
+        StompHitboxSize.y = 0.3f;
     }
 
     // ======================================================================================
     override protected void FixedUpdatePhase()
     {
-        // Attack Subsystem : triggers Attack and generates hurtboxes
+        // Attack Subsystem : triggers Attack and generates hitboxes
         UpdateAttackSubsystem();
+        //Stomp Subsystem : creates the stomp hitbox if necessary
+        UpdateStompSubsystem();
         
     }
 
@@ -104,14 +114,32 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     }
 
     // ======================================================================================
+    private void UpdateStompSubsystem()
+    {
+        if (this.GetComponent<PlayerController>().IsGrounded || this.GetComponent<PlayerController>().Velocity.y > 0)
+        {
+            return;
+        }
+
+        // Try to Trigger Event, if possible
+        if (!this.GetComponent<PlayerController>().IsGrounded && this.GetComponent<PlayerController>().Velocity.y < 0)
+            Stomp();
+    }
+    // ======================================================================================
     // PRIVATE MEMBERS - SUBSYSTEM EVENT STARTERS
     // ======================================================================================
     private void StartAttack()
     {
-        m_attackDirection = new Vector2(m_input.GetHorizontal(), m_input.GetVertical());
+        m_attackDirection = new Vector2(m_input.GetHorizontal(), 0);
 
         if (m_attackDirection.sqrMagnitude == 0)
-            m_attackDirection = new Vector2(m_control.ForwardDir == PlayerController.eDirection.Right ? 1 : -1, 0);
+        {
+            m_attackDirection = new Vector2( 0 , m_input.GetVertical());
+            if (m_attackDirection.sqrMagnitude == 0)
+                m_attackDirection = new Vector2(m_control.ForwardDir == PlayerController.eDirection.Right ? 1 : -1, 0);
+            else
+                m_attackDirection.Normalize();
+        }          
         else
             m_attackDirection.Normalize();
 
@@ -142,6 +170,16 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     }
 
     // ======================================================================================
+    private void Stomp()
+    {
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * StompOffset.x, transform.localScale.y * StompOffset.y,0), new Vector3(StompHitboxSize.x, StompHitboxSize.y, 0.4f));
+        for (int i = 0; i < hitTargets.Length; i++)
+        {
+            if(hitTargets[i].GetComponent<DamageBehaviour>() != null)
+            hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
+        }
+    }
+    // ======================================================================================
     // PRIVATE MEMBERS - COOLDOWN HANDLERS
     // ======================================================================================
     private IEnumerator AttackDelay()
@@ -155,10 +193,11 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // ======================================================================================
     private void PunchAttack()
     {
-        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * PunchOffset.x, PunchOffset.y, 0), 0.4f * Vector3.one, Quaternion.identity, playerLayer);
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * m_attackDirection.x * PunchOffset.x, m_attackDirection.y * 1 + transform.localScale.y * PunchOffset.y, 0), new Vector3(PunchHitboxSize.x, PunchHitboxSize.y, 0.4f));
         for (int i = 0; i < hitTargets.Length; i++)
         {
-            StartCoroutine(hitTargets[i].GetComponent<DamageBehaviour>().GetStunned());
+            if (hitTargets[i].GetComponent<DamageBehaviour>() != null)
+                StartCoroutine(hitTargets[i].GetComponent<DamageBehaviour>().GetStunned());
         }
         
         StartCoroutine(AttackDelay());
@@ -167,14 +206,13 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     private void SaberAttack()
     {
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
-        
-        print(transform.position + (Vector3)SaberOffset);
-        //Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * SaberOffset.x, transform.localScale.y*SaberOffset.y, 0), 0.4f * Vector3.one, Quaternion.identity, playerLayer);
-        Collider[] hitTargets = Physics.OverlapBox(transform.position + (Vector3)SaberOffset, new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 1), Quaternion.identity, playerLayer);
 
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * m_attackDirection.x * SaberOffset.x, m_attackDirection.y * 1 + transform.localScale.y * SaberOffset.y, 0), new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 0.4f));
+        
         for (int i = 0; i < hitTargets.Length; i++)
         {
-            hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
+            if (hitTargets[i].GetComponent<DamageBehaviour>() != null)
+                hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
         }
 
         this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
@@ -186,9 +224,12 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
         GameObject obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
-        obj.GetComponent<Projectile>().MoveProjectile(new Vector3(transform.localScale.x * 30, 0, 0));
+        obj.GetComponent<Projectile>().MoveProjectile(new Vector3(30, 0, 0));
         obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
+        //obj.GetComponent<Rigidbody>().gravityScale = 0;
+        obj.GetComponent<Rigidbody>().velocity = obj.transform.forward * 30;
 
+        Destroy(obj, 2.0f);
         this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
 
         StartCoroutine(AttackDelay());
@@ -205,12 +246,17 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         if (EquipWeap == eWeapon.Saber)
         { 
             Gizmos.color = Color.red;
-            Gizmos.DrawCube(transform.position + (Vector3)SaberOffset, (Vector3)SaberHitboxSize);
+            Gizmos.DrawCube(transform.position + new Vector3(m_attackDirection.x*SaberOffset.x, m_attackDirection.y*1 + SaberOffset.y,0), (Vector3)SaberHitboxSize);
         }
         if (EquipWeap == eWeapon.Pistol)
         {
             Gizmos.color = Color.green;
             Gizmos.DrawCube(transform.position + (Vector3)PistolOffset, new Vector3(0.25f, 0.25f, 0));
+        }
+        if (!this.GetComponent<PlayerController>().IsGrounded && this.GetComponent<PlayerController>().Velocity.y < 0)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawCube(transform.position + (Vector3)StompOffset, (Vector3)StompHitboxSize);
         }
     }
 }

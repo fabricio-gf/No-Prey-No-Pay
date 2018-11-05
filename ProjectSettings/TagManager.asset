@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Platform
   - LevelLoader
+  - Lethal
+  - Hurtbox
   layers:
   - Default
   - TransparentFX
@@ -20,8 +22,8 @@ TagManager:
   - PostProcessing
   - Platforms
   - Players
-  - 
-  - 
+  - Hurtbox
+  - Itens
   - 
   - 
   - 
