@@ -33,8 +33,8 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     protected Vector2 SaberHitboxSize;
 
     // attack: Pistol
-    public GameObject    ProjectilePrefab;
-    protected Vector2       PistolOffset;
+    public GameObject ProjectilePrefab;
+    protected Vector2 PistolOffset;
 
     // attack: Saber
     protected Vector2 StompOffset;
@@ -50,7 +50,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
     // ------------------------------------- ACCESSORS ----------------------------------- //
     public bool IsAttacking { get; protected set; }
-    public eWeapon EquipWeap { get; protected set; }
+    public eWeapon EquipWeap { get; set; }
 
 
     // ======================================================================================
@@ -64,7 +64,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
         playerLayer = LayerMask.GetMask("Players");
 
-        EquipWeap = eWeapon.Saber;
+        EquipWeap = eWeapon.Pistol;
 
         PunchOffset.x = 1.5f;
         PunchOffset.y = 0.75f;
@@ -81,7 +81,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
         StompOffset.x = 0;
         StompOffset.y = -0.2f;
-        StompHitboxSize.x = 0.75f;
+        StompHitboxSize.x = 0.35f;
         StompHitboxSize.y = 0.3f;
     }
 
@@ -90,6 +90,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     {
         // Attack Subsystem : triggers Attack and generates hitboxes
         UpdateAttackSubsystem();
+        //Stomp Subsystem : creates the stomp hitbox if necessary
         UpdateStompSubsystem();
         
     }
@@ -115,13 +116,13 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // ======================================================================================
     private void UpdateStompSubsystem()
     {
-        if (!this.GetComponent<PlayerController>().IsJumping || this.GetComponent<PlayerController>().IsGrounded)
+        if (this.GetComponent<PlayerController>().IsGrounded || this.GetComponent<PlayerController>().Velocity.y > 0)
         {
             return;
         }
 
         // Try to Trigger Event, if possible
-        if (this.GetComponent<PlayerController>().IsJumping || !this.GetComponent<PlayerController>().IsGrounded)
+        if (!this.GetComponent<PlayerController>().IsGrounded && this.GetComponent<PlayerController>().Velocity.y < 0)
             Stomp();
     }
     // ======================================================================================
@@ -174,6 +175,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * StompOffset.x, transform.localScale.y * StompOffset.y,0), new Vector3(StompHitboxSize.x, StompHitboxSize.y, 0.4f));
         for (int i = 0; i < hitTargets.Length; i++)
         {
+            if(hitTargets[i].GetComponent<DamageBehaviour>() != null)
             hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
         }
     }
@@ -194,7 +196,8 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * m_attackDirection.x * PunchOffset.x, m_attackDirection.y * 1 + transform.localScale.y * PunchOffset.y, 0), new Vector3(PunchHitboxSize.x, PunchHitboxSize.y, 0.4f));
         for (int i = 0; i < hitTargets.Length; i++)
         {
-            StartCoroutine(hitTargets[i].GetComponent<DamageBehaviour>().GetStunned());
+            if (hitTargets[i].GetComponent<DamageBehaviour>() != null)
+                StartCoroutine(hitTargets[i].GetComponent<DamageBehaviour>().GetStunned());
         }
         
         StartCoroutine(AttackDelay());
@@ -208,7 +211,8 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         
         for (int i = 0; i < hitTargets.Length; i++)
         {
-            hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
+            if (hitTargets[i].GetComponent<DamageBehaviour>() != null)
+                hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
         }
 
         this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
@@ -220,9 +224,12 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
         GameObject obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
-        obj.GetComponent<Projectile>().MoveProjectile(new Vector3(transform.localScale.x * 30, 0, 0));
+        //obj.GetComponent<Projectile>().MoveProjectile(new Vector3(30, 0, 0));
         obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
+        //obj.GetComponent<Rigidbody>().gravityScale = 0;
+        obj.GetComponent<Rigidbody>().velocity = obj.transform.forward * 30;
 
+        Destroy(obj, 2.0f);
         this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
 
         StartCoroutine(AttackDelay());
@@ -246,7 +253,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawCube(transform.position + (Vector3)PistolOffset, new Vector3(0.25f, 0.25f, 0));
         }
-        if (this.GetComponent<PlayerController>().IsJumping || !this.GetComponent<PlayerController>().IsGrounded)
+        if (!this.GetComponent<PlayerController>().IsGrounded && this.GetComponent<PlayerController>().Velocity.y < 0)
         {
             Gizmos.color = Color.cyan;
             Gizmos.DrawCube(transform.position + (Vector3)StompOffset, (Vector3)StompHitboxSize);

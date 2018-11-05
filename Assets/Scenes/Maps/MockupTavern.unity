@@ -1201,7 +1201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101971569}
   - component: {fileID: 101971570}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1346,6 +1346,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseWindow: {fileID: 14584198}
+--- !u!1 &176553361 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1172074447708136, guid: b96589adb7f33cb4f9afe2d310210de1,
+    type: 2}
+  m_PrefabInternal: {fileID: 491008438}
+--- !u!114 &176553362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 176553361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437618fcbbf464e4ba01061df3e9e1b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponList: []
 --- !u!4 &190447350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4310202769031826, guid: b96589adb7f33cb4f9afe2d310210de1,
@@ -1360,7 +1377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 192413251}
   - component: {fileID: 192413252}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1790,6 +1807,16 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 0.16851312
       objectReference: {fileID: 0}
+    - target: {fileID: 114022378633654854, guid: b96589adb7f33cb4f9afe2d310210de1,
+        type: 2}
+      propertyPath: ProjectilePrefab
+      value: 
+      objectReference: {fileID: 1317788579653328, guid: 9506392adbd31534e9bdfbb396edc1c0,
+        type: 2}
+    - target: {fileID: 1172074447708136, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114638147735832760, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
@@ -1836,8 +1863,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 592212545}
-  - component: {fileID: 592212546}
   - component: {fileID: 592212547}
+  - component: {fileID: 592212546}
   m_Layer: 11
   m_Name: Hurtbox
   m_TagString: Hurtbox
@@ -1865,11 +1892,11 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 592212544}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.54, y: 0.73, z: 3}
-  m_Center: {x: 0.12, y: 0.54, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &592212547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2562,6 +2589,12 @@ Prefab:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114022378633654854, guid: b96589adb7f33cb4f9afe2d310210de1,
+        type: 2}
+      propertyPath: ProjectilePrefab
+      value: 
+      objectReference: {fileID: 1317788579653328, guid: 9506392adbd31534e9bdfbb396edc1c0,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114638147735832760, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
@@ -2580,7 +2613,7 @@ GameObject:
   m_Component:
   - component: {fileID: 841124761}
   - component: {fileID: 841124762}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3076,7 +3109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_objectsToSpawn:
   - {fileID: 1456881402690132, guid: 2bb9aca08dc8b4d4e9687b50faf3d605, type: 2}
-  - {fileID: 1691850874402382, guid: 564905977822e054aa3de05529d3a7a5, type: 2}
+  - {fileID: 1630203810340552, guid: 564905977822e054aa3de05529d3a7a5, type: 2}
   m_spawnCooldown: 5
 --- !u!1 &1742522335
 GameObject:
@@ -3087,7 +3120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1742522336}
   - component: {fileID: 1742522337}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4015,6 +4048,12 @@ Prefab:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114022378633654854, guid: b96589adb7f33cb4f9afe2d310210de1,
+        type: 2}
+      propertyPath: ProjectilePrefab
+      value: 
+      objectReference: {fileID: 1317788579653328, guid: 9506392adbd31534e9bdfbb396edc1c0,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114638147735832760, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
@@ -4130,7 +4169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1932531120}
   - component: {fileID: 1932531121}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11728,6 +11767,12 @@ Prefab:
       propertyPath: m_Length
       value: 0.48954603
       objectReference: {fileID: 0}
+    - target: {fileID: 114022378633654854, guid: b96589adb7f33cb4f9afe2d310210de1,
+        type: 2}
+      propertyPath: ProjectilePrefab
+      value: 
+      objectReference: {fileID: 1317788579653328, guid: 9506392adbd31534e9bdfbb396edc1c0,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114638147735832760, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
