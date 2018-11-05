@@ -11,9 +11,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3dd52a7b9a8acc4b9dc316f41337253, type: 3}
   m_Name: SoundLib
   m_EditorClassIdentifier: 
-  m_matchBkgMusic: {fileID: 8300000, guid: db724156c2505274fbc6923b0863e5fc, type: 3}
-  m_fistAttkSFX: {fileID: 8300000, guid: 877b330c01e34a34d993febd787fd294, type: 3}
-  m_saberAttkSFX: {fileID: 8300000, guid: d5e78645d033a294f96565fb482262dd, type: 3}
-  m_pistolAttkSFX: {fileID: 8300000, guid: a54676a69877c0548b730474286a8d0c, type: 3}
-  m_dashSFX: {fileID: 8300000, guid: a3c33e401c5ac7044a4758a8dc515fe8, type: 3}
-  m_deathSFX: {fileID: 8300000, guid: 12c4ee4640514a142b5fbb19d1d4ea7c, type: 3}
+  m_matchBkgMusic:
+    m_clip: {fileID: 8300000, guid: db724156c2505274fbc6923b0863e5fc, type: 3}
+    m_volume: 0.3
+  m_fistAttkSFX:
+    m_clip: {fileID: 8300000, guid: 877b330c01e34a34d993febd787fd294, type: 3}
+    m_volume: 1
+  m_saberAttkSFX:
+    m_clip: {fileID: 8300000, guid: d5e78645d033a294f96565fb482262dd, type: 3}
+    m_volume: 1
+  m_pistolAttkSFX:
+    m_clip: {fileID: 8300000, guid: a54676a69877c0548b730474286a8d0c, type: 3}
+    m_volume: 0.32
+  m_dashSFX:
+    m_clip: {fileID: 8300000, guid: a3c33e401c5ac7044a4758a8dc515fe8, type: 3}
+    m_volume: 1
+  m_deathSFX:
+    m_clip: {fileID: 8300000, guid: 12c4ee4640514a142b5fbb19d1d4ea7c, type: 3}
+    m_volume: 1
