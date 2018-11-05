@@ -30,7 +30,9 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
     //private float                       m_minSpeedToWalkAnim    = .2f;
 
     // ------------------------------------- ACCESSORS ----------------------------------- //
-    public eStates      State           { get; protected set; }
+    public eStates      State               { get; protected set; }
+    public PlayerAttack.eWeapon HandWeapon  { get { return m_playerAttack.EquipWeap; } }
+
 
     // ======================================================================================
     // PUBLIC MEMBERS

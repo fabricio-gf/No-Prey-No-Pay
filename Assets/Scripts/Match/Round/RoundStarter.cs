@@ -16,7 +16,6 @@ public class RoundStarter : MonoBehaviour {
 		playerSpawner.SpawnPlayers(PlayersToSpawn);
 
 		//spawn weapons
-
 		RoundReferee.instance.NumOfPlayers = PlayersToSpawn.Count;
 		countdown.StartCountdown();
 	}

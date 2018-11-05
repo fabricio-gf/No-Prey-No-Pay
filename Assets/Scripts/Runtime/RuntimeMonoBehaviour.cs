@@ -11,6 +11,11 @@ public class RuntimeMonoBehaviour : MonoBehaviour
     public void Start ()
     {
         StartPhase();
+
+        if (!m_isPaused)
+            OnPlay();
+        else
+            OnPause();
 	}
 
     // ======================================================================================

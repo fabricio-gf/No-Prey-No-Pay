@@ -54,5 +54,6 @@ MonoBehaviour:
   StockLimit: 0
   Display: {fileID: 0}
   VictoryWindow: {fileID: 0}
-  MRef: {fileID: 0}
+  matchReferee: {fileID: 0}
   NumOfPlayers: 0
+  PlayerParentObject: {fileID: 0}

@@ -2566,6 +2566,16 @@ Prefab:
       propertyPath: MRef
       value: 
       objectReference: {fileID: 1068999106}
+    - target: {fileID: 114048663668661962, guid: a667fcd6e3abf8e4d82f10aca865b3b7,
+        type: 2}
+      propertyPath: PlayerParentObject
+      value: 
+      objectReference: {fileID: 768566840}
+    - target: {fileID: 114048663668661962, guid: a667fcd6e3abf8e4d82f10aca865b3b7,
+        type: 2}
+      propertyPath: matchReferee
+      value: 
+      objectReference: {fileID: 1068999106}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a667fcd6e3abf8e4d82f10aca865b3b7, type: 2}
   m_IsPrefabAsset: 0
@@ -2744,6 +2754,48 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a9274034349f2049b108c4d1b955c8c, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1011990378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011990379}
+  - component: {fileID: 1011990380}
+  m_Layer: 0
+  m_Name: SoundMgr
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1011990379
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1011990378}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1956567919}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1011990380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1011990378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83ec8c36b7b0c014cba37d57d644d051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_soundLib: {fileID: 11400000, guid: d966abe3257583e4d9696504ef0ecf62, type: 2}
+  m_soundSpawnner: {fileID: 436870289}
 --- !u!4 &1068999105 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4836967884442966, guid: e33d0370c5f5cc341bd07e9b2a9565aa,
@@ -4084,6 +4136,7 @@ Transform:
   - {fileID: 1641911904}
   - {fileID: 1910783280}
   - {fileID: 1088189376}
+  - {fileID: 1011990379}
   m_Father: {fileID: 1996205187}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
