@@ -224,7 +224,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
         GameObject obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
-        //obj.GetComponent<Projectile>().MoveProjectile(new Vector3(30, 0, 0));
+        obj.GetComponent<Projectile>().MoveProjectile(new Vector3(30, 0, 0));
         obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
         //obj.GetComponent<Rigidbody>().gravityScale = 0;
         obj.GetComponent<Rigidbody>().velocity = obj.transform.forward * 30;

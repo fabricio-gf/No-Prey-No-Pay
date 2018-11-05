@@ -41,11 +41,11 @@ public class Projectile : RuntimeMonoBehaviour
     }
 
 
-    /*protected override void StartPhase()
+    protected override void StartPhase()
     {
 	}
 
-	// Update is called once per frame
+	//Update is called once per frame
 	override protected void FixedUpdatePhase()
     {
 		if(!isFalling){
@@ -68,9 +68,9 @@ public class Projectile : RuntimeMonoBehaviour
         }
     }*/
 
-	/*public void SetDirection(Vector3 direction){
+	public void SetDirection(Vector3 direction){
 		DirectionVector = direction;
-	}*/
+	}
 
     public void SetOrigin(PlayerInputCtlr.ePlayer player)
     {
@@ -79,11 +79,11 @@ public class Projectile : RuntimeMonoBehaviour
 
     // ideally direction == 1 is right, and direction == -1 is left
     // it can also be changed to a bool with 0 and 1
-    /*public void MoveProjectile(Vector3 direction)
+    public void MoveProjectile(Vector3 direction)
     {
         SetDirection(direction);
         isFalling = false;
-    }*/
+    }
 }    /*
 	public void MoveProjectileAtAngle(){
 		float randomAngle = Random.Range(-30f,30f);

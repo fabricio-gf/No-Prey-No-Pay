@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 212469515911650310}
   - component: {fileID: 65665693538284402}
   - component: {fileID: 54363524083394240}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Projectile
   m_TagString: Lethal
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4260287849330710}
   - component: {fileID: 65886371142814294}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

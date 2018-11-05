@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4767654338636336}
   - component: {fileID: 212352891837496526}
-  m_Layer: 10
+  m_Layer: 12
   m_Name: npnp_pistol_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,8 @@ GameObject:
   - component: {fileID: 4741926312327354}
   - component: {fileID: 114942372941731438}
   - component: {fileID: 61213187676079952}
-  m_Layer: 10
+  - component: {fileID: 50681432690924390}
+  m_Layer: 12
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,6 +72,26 @@ Transform:
   m_Father: {fileID: 4741926312327354}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -16.209002}
+--- !u!50 &50681432690924390
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1456881402690132}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!61 &61213187676079952
 BoxCollider2D:
   m_ObjectHideFlags: 1
