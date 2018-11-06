@@ -15,8 +15,11 @@ public class SplashScreen : MonoBehaviour {
 	[SerializeField] private GameObject MainMenuScreen;
 	
 	void Awake(){
-		m_input = transform.parent.GetComponent<MenuInputController>();
-	}
+        if (m_input == null)
+		    m_input = transform.parent.GetComponent<MenuInputController>();
+
+        Debug.Assert(m_input != null, this.gameObject.name + " - SplashScreen : Missing MenuInputController");
+    }
 
 	void Update () {
 		if(m_input.GetPause()){

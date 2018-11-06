@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class MatchReferee : MonoBehaviour {
 
+    // SINGLETON
+    private MatchReferee instance;
+
+    // PRIVATE ATTRIBUTES
 	[SerializeField] private MatchInfo matchInfo;
 	private int[] Wins;
 	private int NumOfPlayers = 0;
-	[SerializeField] private RoundStarter roundStarter;
 	
 	[SerializeField] private PlayerInfo[] PlayerInfos = new PlayerInfo[4];
 
@@ -15,32 +18,24 @@ public class MatchReferee : MonoBehaviour {
 
 	private bool MatchEnded = false;
 
-	// Use this for initialization
-	void Start () {
+    // INTERNAL MEMBERS
+    void Awake()
+    {
+        Debug.Assert(instance == null ,this.gameObject.name + " - MatchReferee : must be unique!");
+        instance = this;
+    }
+
+    // Use this for initialization
+    void Start () {
 		//DontDestroyOnLoad(gameObject);
 		InitializeScene();
 	}
 
 	void InitializeScene(){
-		List<PlayerInfo> infos = new List<PlayerInfo>();
-
-		// Get player infos
-		for(int i = 0; i < PlayerInfos.Length; i++){
-			if(PlayerInfos[i].isSelected){
-				infos.Add(PlayerInfos[i]);
-				NumOfPlayers++;
-			}
-		}
-		roundStarter.PlayersToSpawn = infos;
-
-		// Get match rules
-		roundStarter.StockLimit = matchInfo.StockLimit;
-		roundStarter.TimeLimit =  matchInfo.TimeLimit;
-
 		// Get weapon infos
 		//RStarter.WeaponsToSpawn = weapons;
 		
-		roundStarter.InitializeRound();
+		RoundStarter.InitializeRound(GetAtivePlayerInfos());
 
 		// Set winners initial info
 		Wins = new int[NumOfPlayers];
@@ -62,9 +57,9 @@ public class MatchReferee : MonoBehaviour {
 			EndMatch();
 		}
 		else{
-			//RestartScene();
-			roundStarter.InitializeRound();
-		}
+            //RestartScene();
+            RoundStarter.InitializeRound(GetAtivePlayerInfos());
+        }
 	}
 
 	public void EndMatch(){
@@ -76,4 +71,21 @@ public class MatchReferee : MonoBehaviour {
 	private void ToggleVictoryWindow(){
 		VictoryWindow.SetActive(!VictoryWindow.activeSelf);
 	}
+
+    private List<PlayerInfo> GetAtivePlayerInfos ()
+    {
+        List<PlayerInfo> infos = new List<PlayerInfo>();
+
+        // Get player infos
+        for (int i = 0; i < PlayerInfos.Length; i++)
+        {
+            if (PlayerInfos[i].isSelected)
+            {
+                infos.Add(PlayerInfos[i]);
+                NumOfPlayers++;
+            }
+        }
+
+        return infos;
+    }
 }
