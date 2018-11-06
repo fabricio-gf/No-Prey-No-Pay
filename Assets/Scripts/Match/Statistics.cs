@@ -21,6 +21,14 @@ public class Statistics : MonoBehaviour {
 
 	private List<string>[] HighestStats = new List<string>[4];
 
+	[SerializeField] private Sprite[] CharacterSprites;
+	[SerializeField] private Sprite[] OverlaySprites;
+	[SerializeField] private PlayerInfo[] infos;
+
+	void Start(){
+		InitializeDictionary();
+	}
+
 	void InitializeDictionary(){
 		foreach(var s in StatsList){
 			s.value = new int[4];
@@ -50,10 +58,26 @@ public class Statistics : MonoBehaviour {
 		}
 
 		for(int i = 0; i < 4; i++){
-			int index = Random.Range(0, HighestStats[i].Count);
-			StatsCard[i].Find("TitleText").GetComponent<Text>().text = statsDict[HighestStats[i][index]].title;
-			StatsCard[i].Find("DescriptionText").GetComponent<Text>().text = statsDict[HighestStats[i][index]].description;
-			StatsCard[i].Find("ValueText").GetComponent<Text>().text = statsDict[HighestStats[i][index]].value.ToString();
+			if(infos[i].isSelected){
+
+				StatsCard[i].gameObject.SetActive(true);
+				
+				// change portrait sprite and color
+				Transform portrait = StatsCard[i].Find("PlayerPortrait");
+				portrait.GetComponent<Image>().sprite = CharacterSprites[(int)infos[i].SelectedCharacter];
+				portrait.Find("SuitOverlay").GetComponent<Image>().sprite = OverlaySprites[(int)infos[i].SelectedCharacter];
+				portrait.GetComponent<ChangeColor>().color = infos[i].SelectedColor;
+				portrait.GetComponent<ChangeColor>().ManualValidate();
+
+				//change texts for title, description and value of highest achievement (chosen randomly between the highest ones)
+				int index = Random.Range(0, HighestStats[i].Count);
+				StatsCard[i].Find("TitleText").GetComponent<Text>().text = statsDict[HighestStats[i][index]].title;
+				StatsCard[i].Find("DescriptionText").GetComponent<Text>().text = statsDict[HighestStats[i][index]].description;
+				StatsCard[i].Find("ValueText").GetComponent<Text>().text = statsDict[HighestStats[i][index]].value.ToString();
+			}
+			else{
+				StatsCard[i].gameObject.SetActive(false);
+			}
 		}
 	}
 
