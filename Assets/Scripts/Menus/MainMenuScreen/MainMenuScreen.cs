@@ -12,13 +12,16 @@ public class MainMenuScreen : MonoBehaviour {
 	private int index = 0;
 	private EventSystem eventSystem;
     [SerializeField] private MenuInputController m_input;
+	[SerializeField] private MenuCity MenuAnimator;
 
 
 	// SERIALIZED ATTRIBUTES
 	[Header("Screen references")]
 	[SerializeField] private GameObject CharacterSelectScreen;
 	[SerializeField] private GameObject SettingsScreen;
+	[SerializeField] private GameObject ControlsScreen;
 	[SerializeField] private GameObject CreditsScreen;
+	[SerializeField] private GameObject ExitScreen;
 
 	[SerializeField] private GameObject SplashScreen;
 
@@ -26,6 +29,7 @@ public class MainMenuScreen : MonoBehaviour {
 	[SerializeField] private GameObject[] Buttons;
 
 	void Awake(){
+		m_input = transform.parent.GetComponent<MenuInputController>();
 	}
 
 	void Start(){
@@ -50,11 +54,19 @@ public class MainMenuScreen : MonoBehaviour {
 		// Directional inputs
 		bool up = m_input.GetUp();
 		bool down = m_input.GetDown();
+		bool left = m_input.GetLeft();
+		bool right = m_input.GetRight();
 		
-		if(down){
+		if(down && (index == 0 || index == 1)){
+			MoveSelection(2);
+		}
+		if(up && (index == 2 || index == 3)){
+			MoveSelection(-2);
+		}
+		if(left && (index == 1 || index == 3)){
 			MoveSelection(-1);
 		}
-		if(up){
+		if(right && (index == 0 || index == 2)){
 			MoveSelection(1);
 		}
 
@@ -64,7 +76,7 @@ public class MainMenuScreen : MonoBehaviour {
 		}
 
 		if(m_input.GetPrevious()){
-			MenuActions.instance.ChangePanel(SplashScreen);
+			//MenuActions.instance.ChangePanel(SplashScreen);
 		}
 	}
 
@@ -91,16 +103,20 @@ public class MainMenuScreen : MonoBehaviour {
 		switch (index)
 		{
 			case 0:
+				MenuAnimator.goPlay();
 				MenuActions.instance.ChangePanel(CharacterSelectScreen);
 				break;
-			/* case 1:
-				MenuActions.instance.ChangePanel(SettingsScreen);
-				break; */
 			case 1:
-				MenuActions.instance.ChangePanel(CreditsScreen);
+				MenuAnimator.goControls();
+				MenuActions.instance.ChangePanel(ControlsScreen);
 				break;
 			case 2:
-				MenuActions.instance.ExitGame();
+				MenuAnimator.goCredits();
+				MenuActions.instance.ChangePanel(CreditsScreen);
+				break;
+			case 3:
+				MenuAnimator.goExit();
+				MenuActions.instance.ChangePanel(ExitScreen);
 				break;
 			default:
 				break;

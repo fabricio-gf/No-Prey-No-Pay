@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Controls the settings screen behaviour
-/// </summary>
-public class CreditsScreen : MonoBehaviour {
+public class ControlsScreen : MonoBehaviour {
 
-    [SerializeField] private MenuInputController m_input;
+	[SerializeField] private MenuInputController m_input;
 	[SerializeField] private MenuCity MenuAnimator;
+
 
 
 	[Header("Screen references")]
@@ -20,8 +18,8 @@ public class CreditsScreen : MonoBehaviour {
 
 	void Update () {
 		if(m_input.GetPrevious()){
-			MenuAnimator.goBack();
 			MenuActions.instance.ChangePanel(MainMenuScreen);
+			MenuAnimator.goBack();
 		}
 	}
 }

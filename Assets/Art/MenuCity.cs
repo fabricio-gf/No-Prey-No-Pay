@@ -17,23 +17,26 @@ public class MenuCity : MonoBehaviour {
 	}
 
 	public void goPlay(){
-		anim.SetTrigger("play");
+		anim.SetBool("inPlay", true);
 	}
 
 	public void goControls(){
-		anim.SetTrigger("controls");
+		anim.SetBool("inControls", true);
 	}
 
 	public void goCredits(){
-		anim.SetTrigger("credits");
+		anim.SetBool("inCredits", true);
 	}
 
 	public void goExit(){
-		anim.SetTrigger("exit");
+		anim.SetBool("inExit", true);
 	}
 
 	public void goBack(){
-		anim.SetTrigger("back");
+		anim.SetBool("inPlay", false);
+		anim.SetBool("inControls", false);
+		anim.SetBool("inCredits", false);
+		anim.SetBool("inExit", false);
 	}
 
 }
