@@ -17,6 +17,7 @@ public class MenuCity : MonoBehaviour {
 	}
 
 	public void goPlay(){
+		print("entrou 1");
 		anim.SetTrigger("play");
 	}
 
@@ -33,6 +34,8 @@ public class MenuCity : MonoBehaviour {
 	}
 
 	public void goBack(){
+		print("entrou 2");
+
 		anim.SetTrigger("back");
 	}
 

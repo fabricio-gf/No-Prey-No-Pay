@@ -20,7 +20,7 @@ public class LevelLoader : MonoBehaviour {
 
 	// SERIALIZED ATTRIBUTES
 	[SerializeField] private PlayerInfo[] PlayerList = new PlayerInfo[4];	
-	[SerializeField] private UnityEngine.UI.Text StartText;
+	[SerializeField] private UnityEngine.UI.Image StartText;
 	[SerializeField] private Color StartTextActiveColor;
 	[SerializeField] private Color StartTextNonActiveColor;
 

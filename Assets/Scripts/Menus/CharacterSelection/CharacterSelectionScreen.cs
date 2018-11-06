@@ -51,7 +51,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// </summary>
 	private void GetNewPlayers(){
 		for(int i = 0; i < 4; i++){
-			if(!ActivePlayers[i] && Portraits[i].Phase1 && m_input.GetPause(i)){
+			if(!ActivePlayers[i] && Portraits[i].Phase1 && m_input.GetSubmit(i)){
 				AddPlayer(i);
 			}
 		}
@@ -82,10 +82,13 @@ public class CharacterSelectionScreen : MonoBehaviour {
 				}
 			}
 		}
-		
-		if(inactive == 4 && NumReadyPlayers == 0 && m_input.GetPrevious()){
-			MenuActions.instance.ChangePanel(MainMenuScreen);
-			MenuAnimator.goBack();
+		if(inactive == 4 && NumReadyPlayers == 0){
+			for(int i = 0; i < 4; i++){
+				if(m_input.GetPrevious(i)){
+					MenuActions.instance.ChangePanel(MainMenuScreen);
+					MenuAnimator.goBack();
+				}
+			}
 		}
 	}
 
@@ -114,7 +117,6 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	private void GetGameStart(){
 		for(int i = 0; i < 4; i++){
 			if(ActivePlayers[i] && m_input.GetPause(i)){
-				print("Start game " + i);
 				LevelLoader.instance.StartGame("Tavern");  //Temp string, gonna use scriptable object later or reference in level loader
 			}
 		}

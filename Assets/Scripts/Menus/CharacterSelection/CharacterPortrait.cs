@@ -9,18 +9,19 @@ using UnityEngine.UI;
 public class CharacterPortrait : MonoBehaviour {
 
 	// PUBLIC ATTRIBUTES
-	public Sprite[] Characters;
-	[SerializeField] Image Char;
-	public int charIndex = 0;
-	public int colorIndex = 1;
+	[SerializeField] private Sprite[] Characters;
+	[SerializeField] private GameObject Poster;
+	[SerializeField] private Image Char;
+	
+	[HideInInspector] public int charIndex = 0;
+	[HideInInspector] public int colorIndex = 1;
 
-	public bool Phase1 = true;
-	public bool Phase2 = false;
-	public bool Phase3 = false;
+	[HideInInspector] public bool Phase1 = true;
+	[HideInInspector] public bool Phase2 = false;
+	[HideInInspector] public bool Phase3 = false;
 
 	// SERIALIZED ATTRIBUTES
 	[Header("Portrait images references")]
-	[SerializeField] private GameObject PressStart;
 	[SerializeField] private GameObject Selected;
 
 	/// <summary>
@@ -54,8 +55,7 @@ public class CharacterPortrait : MonoBehaviour {
 	/// Hides the "press Start to join" image and shows the characters
 	/// </summary>
 	public void ShowCharacter(){
-		Char.gameObject.SetActive(true);		
-		PressStart.SetActive(false);
+		Poster.SetActive(true);		
 		Phase1 = Phase3 = false;
 		Phase2 = true;
 	}
@@ -64,8 +64,7 @@ public class CharacterPortrait : MonoBehaviour {
 	/// Hides the characters and shows the "Press start to join" image
 	/// </summary>
 	public void HideCharacter(){
-		PressStart.SetActive(true);
-		Char.gameObject.SetActive(false);	
+		Poster.SetActive(false);	
 		Phase2 = Phase3 = false;
 		Phase1 = true;			
 	}
@@ -75,7 +74,6 @@ public class CharacterPortrait : MonoBehaviour {
 	/// </summary>
 	public void ConfirmCharacter(){
 		Selected.SetActive(true);
-		Char.gameObject.SetActive(false);	
 		Phase1 = Phase2 = false;
 		Phase3 = true;
 	}
@@ -83,8 +81,7 @@ public class CharacterPortrait : MonoBehaviour {
 	/// <summary>
 	/// Hides the "selected" image and shows the characters
 	/// </summary>
-	public void UnconfirmCharacter(){
-		Char.gameObject.SetActive(true);		
+	public void UnconfirmCharacter(){		
 		Selected.SetActive(false);
 		Phase1 = Phase3 = false;
 		Phase2 = true;

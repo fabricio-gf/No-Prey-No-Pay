@@ -3271,6 +3271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25131a98f8e1dfb448183c7b4bbd54e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: 0
   suit:
   - {fileID: 114737232679802850}
   - {fileID: 114055229442114750}
@@ -3282,6 +3283,7 @@ MonoBehaviour:
   - {fileID: 114650096593282628}
   - {fileID: 114185198203160738}
   - {fileID: 114588180660338008}
+  overlays: []
   yellow: {r: 0.745283, g: 0.63323087, b: 0.13007298, a: 1}
   red: {r: 0.735849, g: 0.13064809, b: 0.09371662, a: 1}
   blue: {r: 0.13725491, g: 0.1882353, b: 0.43529412, a: 1}

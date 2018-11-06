@@ -67,7 +67,7 @@ public class MainMenuScreen : MonoBehaviour {
 		}
 
 		if(m_input.GetPrevious()){
-			MenuActions.instance.ChangePanel(SplashScreen);
+			//MenuActions.instance.ChangePanel(SplashScreen);
 		}
 	}
 

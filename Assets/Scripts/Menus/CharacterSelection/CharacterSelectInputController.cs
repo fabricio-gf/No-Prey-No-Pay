@@ -52,7 +52,6 @@ public class CharacterSelectInputController : MenuInputController {
 
         return false;
     }
-
 	
     public bool GetPause(int player)
     {
