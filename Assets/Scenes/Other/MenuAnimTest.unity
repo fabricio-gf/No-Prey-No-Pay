@@ -3600,11 +3600,13 @@ MonoBehaviour:
   MenuAnimator: {fileID: 1963534924}
   CharacterSelectScreen: {fileID: 1619674335}
   SettingsScreen: {fileID: 1968551516}
+  ControlsScreen: {fileID: 313329725}
   CreditsScreen: {fileID: 1136315935}
   ExitScreen: {fileID: 1260349857}
   SplashScreen: {fileID: 437863413}
   Buttons:
   - {fileID: 36536658}
+  - {fileID: 131702027}
   - {fileID: 2034958018}
   - {fileID: 350866089}
 --- !u!4 &1484031008

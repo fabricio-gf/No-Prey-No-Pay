@@ -19,6 +19,7 @@ public class MainMenuScreen : MonoBehaviour {
 	[Header("Screen references")]
 	[SerializeField] private GameObject CharacterSelectScreen;
 	[SerializeField] private GameObject SettingsScreen;
+	[SerializeField] private GameObject ControlsScreen;
 	[SerializeField] private GameObject CreditsScreen;
 	[SerializeField] private GameObject ExitScreen;
 
@@ -53,11 +54,19 @@ public class MainMenuScreen : MonoBehaviour {
 		// Directional inputs
 		bool up = m_input.GetUp();
 		bool down = m_input.GetDown();
+		bool left = m_input.GetLeft();
+		bool right = m_input.GetRight();
 		
-		if(down){
+		if(down && (index == 0 || index == 1)){
+			MoveSelection(2);
+		}
+		if(up && (index == 2 || index == 3)){
+			MoveSelection(-2);
+		}
+		if(left && (index == 1 || index == 3)){
 			MoveSelection(-1);
 		}
-		if(up){
+		if(right && (index == 0 || index == 2)){
 			MoveSelection(1);
 		}
 
@@ -97,14 +106,15 @@ public class MainMenuScreen : MonoBehaviour {
 				MenuAnimator.goPlay();
 				MenuActions.instance.ChangePanel(CharacterSelectScreen);
 				break;
-			/* case 1:
-				MenuActions.instance.ChangePanel(SettingsScreen);
-				break; */
 			case 1:
+				MenuAnimator.goControls();
+				MenuActions.instance.ChangePanel(ControlsScreen);
+				break;
+			case 2:
 				MenuAnimator.goCredits();
 				MenuActions.instance.ChangePanel(CreditsScreen);
 				break;
-			case 2:
+			case 3:
 				MenuAnimator.goExit();
 				MenuActions.instance.ChangePanel(ExitScreen);
 				break;
