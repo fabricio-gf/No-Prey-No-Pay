@@ -21,8 +21,8 @@ public class ExitScreen : MonoBehaviour {
 			MenuActions.instance.ExitGame();
 		}
 		if(m_input.GetPrevious()){
-			MenuActions.instance.ChangePanel(MainMenuScreen);
 			MenuAnimator.goBack();
+			MenuActions.instance.ChangePanel(MainMenuScreen);
 		}
 	}
 }

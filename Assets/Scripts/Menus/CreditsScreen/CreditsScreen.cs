@@ -19,7 +19,9 @@ public class CreditsScreen : MonoBehaviour {
 	}
 
 	void Update () {
+		print(m_input.GetPrevious());
 		if(m_input.GetPrevious()){
+			MenuAnimator.goBack();
 			MenuActions.instance.ChangePanel(MainMenuScreen);
 		}
 	}

@@ -256,7 +256,7 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 2d0ec7d139329934bbaa21f2ae4b1d19,
+    m_HighlightedSprite: {fileID: 21300000, guid: 1eadbbc8d2c887f48a0f64dbe670e0e8,
       type: 3}
     m_PressedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -384,7 +384,7 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300002, guid: 2d0ec7d139329934bbaa21f2ae4b1d19,
+    m_HighlightedSprite: {fileID: 21300002, guid: 1eadbbc8d2c887f48a0f64dbe670e0e8,
       type: 3}
     m_PressedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -1032,7 +1032,7 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300006, guid: 2d0ec7d139329934bbaa21f2ae4b1d19,
+    m_HighlightedSprite: {fileID: 21300006, guid: 1eadbbc8d2c887f48a0f64dbe670e0e8,
       type: 3}
     m_PressedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -3600,11 +3600,13 @@ MonoBehaviour:
   MenuAnimator: {fileID: 1963534924}
   CharacterSelectScreen: {fileID: 1619674335}
   SettingsScreen: {fileID: 1968551516}
+  ControlsScreen: {fileID: 313329725}
   CreditsScreen: {fileID: 1136315935}
   ExitScreen: {fileID: 1260349857}
   SplashScreen: {fileID: 437863413}
   Buttons:
   - {fileID: 36536658}
+  - {fileID: 131702027}
   - {fileID: 2034958018}
   - {fileID: 350866089}
 --- !u!4 &1484031008
@@ -4858,7 +4860,7 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300004, guid: 2d0ec7d139329934bbaa21f2ae4b1d19,
+    m_HighlightedSprite: {fileID: 21300004, guid: 1eadbbc8d2c887f48a0f64dbe670e0e8,
       type: 3}
     m_PressedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
