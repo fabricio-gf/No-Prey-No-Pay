@@ -7,8 +7,17 @@ using UnityEngine.UI;
 /// Controls the visual elements present in each character portrait in the selection screen
 /// </summary>
 public class CharacterPortrait : MonoBehaviour {
+    public enum eColor
+    {
+        YELLOW = 1,
+        RED = 2,
+        BLUE = 3,
+        GREEN = 4
+    }
 
-	// PUBLIC ATTRIBUTES
+    // PUBLIC ATTRIBUTES
+    public eColor InitialColor;
+
 	[SerializeField] private Sprite[] Characters;
 	[SerializeField] private GameObject Poster;
 	[SerializeField] private Image Char;
@@ -24,10 +33,15 @@ public class CharacterPortrait : MonoBehaviour {
 	[Header("Portrait images references")]
 	[SerializeField] private GameObject Selected;
 
-	/// <summary>
-	/// Changes the color of the selected character
-	/// </summary>
-	public void ChangeColor(){
+    public void Start()
+    {
+        colorIndex = (int) InitialColor;
+    }
+
+    /// <summary>
+    /// Changes the color of the selected character
+    /// </summary>
+    public void ChangeColor(){
 		colorIndex++;
 		if(colorIndex > 4) colorIndex = 1;
 
