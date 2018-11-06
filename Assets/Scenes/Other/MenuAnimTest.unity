@@ -2667,6 +2667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8a456ae08c40c4b9a1ceb993c3e6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InitialColor: 0
   Characters:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
   Poster: {fileID: 1420717660}
@@ -3277,6 +3278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8a456ae08c40c4b9a1ceb993c3e6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InitialColor: 0
   Characters:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
   Poster: {fileID: 1208048636}
@@ -3333,6 +3335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8a456ae08c40c4b9a1ceb993c3e6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InitialColor: 0
   Characters:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
   Poster: {fileID: 355999175}
@@ -3807,6 +3810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8a456ae08c40c4b9a1ceb993c3e6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InitialColor: 0
   Characters:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
   Poster: {fileID: 19870217}
