@@ -29,10 +29,12 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     protected Vector2 PunchHitboxSize;
 
     // attack: Saber
+    public GameObject ThrowSaberPrefab;
     protected Vector2 SaberOffset;
     protected Vector2 SaberHitboxSize;
 
     // attack: Pistol
+    public GameObject ThrowPistolPrefab;
     public GameObject ProjectilePrefab;
     protected Vector2 PistolOffset;
 
@@ -202,6 +204,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         
         StartCoroutine(AttackDelay());
     }
+    // ======================================================================================
 
     private void SaberAttack()
     {
@@ -218,6 +221,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
         StartCoroutine(AttackDelay());
     }
+    // ======================================================================================
 
     private void PistolAttack()
     {
@@ -234,7 +238,39 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
         StartCoroutine(AttackDelay());
     }
+    // ======================================================================================
 
+    private void ThrowWeapon()
+    {
+        if(EquipWeap != eWeapon.Fists)
+        {
+            //this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
+            GameObject obj;
+            switch (EquipWeap)
+            {
+                case eWeapon.Saber:
+                    obj = Instantiate(ThrowSaberPrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
+                    break;
+                case eWeapon.Pistol:
+                    obj = Instantiate(ThrowPistolPrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
+                    break;
+                default:
+                    obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
+                    break;
+            }
+
+            obj.GetComponent<Projectile>().MoveProjectile(new Vector3(10, 0, 0));
+            obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
+
+            EquipWeap = eWeapon.Fists;
+
+            //this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
+
+            StartCoroutine(AttackDelay());
+        }
+    }
+
+    // ======================================================================================
     void OnDrawGizmosSelected()
     {
         // draws gizmos for punch and saber hitboxes

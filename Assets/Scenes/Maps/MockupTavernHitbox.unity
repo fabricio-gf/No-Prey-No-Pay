@@ -1363,6 +1363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponList: []
+  Pistol: {fileID: 1456881402690132, guid: 2bb9aca08dc8b4d4e9687b50faf3d605, type: 2}
+  Saber: {fileID: 1630203810340552, guid: 564905977822e054aa3de05529d3a7a5, type: 2}
 --- !u!4 &190447350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4310202769031826, guid: b96589adb7f33cb4f9afe2d310210de1,
