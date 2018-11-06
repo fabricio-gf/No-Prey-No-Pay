@@ -16,6 +16,8 @@ public class CharacterSelectionScreen : MonoBehaviour {
     [SerializeField] private CharacterSelectInputController m_input;
 	[SerializeField] private MenuCity MenuAnimator;
 
+    private bool[] ReadyPlayers;
+
 
 	// SERIALIZED ATTRIBUTES
 	[Header("Screen references")]
@@ -26,8 +28,10 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	}
 	void Start () {
 		ActivePlayers = new bool[4];
+        ReadyPlayers = new bool[4];
 		for(int i = 0; i < 4; i++){
 			ActivePlayers[i] = false;
+            ReadyPlayers[i] = false;
 		}	
 	}
 	
@@ -116,7 +120,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 
 	private void GetGameStart(){
 		for(int i = 0; i < 4; i++){
-			if(ActivePlayers[i] && m_input.GetPause(i)){
+			if(ReadyPlayers[i] && m_input.GetPause(i)){
 				LevelLoader.instance.StartGame("Tavern");  //Temp string, gonna use scriptable object later or reference in level loader
 			}
 		}
@@ -128,6 +132,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// <param name="controller">Controller number [0,3]</param>
 	public void AddPlayer(int controller){
 		ActivePlayers[controller] = true;
+        ReadyPlayers[controller] = false;
 		Portraits[controller].ShowCharacter();
 		LevelLoader.instance.AddPlayerActive();
 	}
@@ -138,6 +143,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// <param name="controller">Controller number [0,3]</param>
 	public void RemovePlayer(int controller){
 		ActivePlayers[controller] = false;
+        ReadyPlayers[controller] = false;
 		Portraits[controller].HideCharacter();
 		LevelLoader.instance.RemovePlayerActive();
 	}
@@ -152,6 +158,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// <param name="controller">Controller number [0,3]</param>
 	public void ConfirmPlayer(int controller){
 		ActivePlayers[controller] = false;
+        ReadyPlayers[controller] = true;
 		NumReadyPlayers++;
 		Portraits[controller].ConfirmCharacter();
 		LevelLoader.instance.AddPlayerReady(controller, Portraits[controller].charIndex, Portraits[controller].colorIndex);
@@ -163,6 +170,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	/// <param name="controller">Controller number [0,3]</param>
 	public void UnconfirmPlayer(int controller){
 		ActivePlayers[controller] = true;
+        ReadyPlayers[controller] = false;
 		NumReadyPlayers--;
 		Portraits[controller].UnconfirmCharacter();
 		LevelLoader.instance.RemovePlayerReady(controller);

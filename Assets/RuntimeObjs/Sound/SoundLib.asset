@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: SoundLib
   m_EditorClassIdentifier: 
   m_matchBkgMusic:
-    m_clip: {fileID: 8300000, guid: db724156c2505274fbc6923b0863e5fc, type: 3}
+    m_clip: {fileID: 8300000, guid: cb46b487a3b937a4c85bb2e70d84ecb4, type: 3}
     m_volume: 0.3
   m_fistAttkSFX:
     m_clip: {fileID: 8300000, guid: 877b330c01e34a34d993febd787fd294, type: 3}
