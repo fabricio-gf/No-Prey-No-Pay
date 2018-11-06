@@ -206,9 +206,10 @@ GameObject:
   - component: {fileID: 114638147735832760}
   - component: {fileID: 114419402381204092}
   - component: {fileID: 114022802572005622}
+  - component: {fileID: 114420529779521970}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2380,7 +2381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d148c440b5417e49b191673515bdada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 1928193362142504, guid: ed9ed033baf5d5942ab0e4b50455eb1c,
+  ThrowSaberPrefab: {fileID: 0}
+  ThrowPistolPrefab: {fileID: 0}
+  ProjectilePrefab: {fileID: 1317788579653328, guid: 9506392adbd31534e9bdfbb396edc1c0,
     type: 2}
 --- !u!114 &114022802572005622
 MonoBehaviour:
@@ -2982,6 +2985,20 @@ MonoBehaviour:
   blue: {r: 0.13725491, g: 0.1882353, b: 0.43529412, a: 1}
   green: {r: 0.09545213, g: 0.5188679, b: 0.22482918, a: 1}
   color: 1
+--- !u!114 &114420529779521970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1172074447708136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437618fcbbf464e4ba01061df3e9e1b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponList: []
+  Pistol: {fileID: 1456881402690132, guid: 2bb9aca08dc8b4d4e9687b50faf3d605, type: 2}
+  Saber: {fileID: 1630203810340552, guid: 564905977822e054aa3de05529d3a7a5, type: 2}
 --- !u!114 &114429449081275680
 MonoBehaviour:
   m_ObjectHideFlags: 1

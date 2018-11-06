@@ -16,6 +16,13 @@ public class WeaponPick : MonoBehaviour {
     private float m_grabCooldown = 0.5f;
     private bool IsGrabing = false;
 
+    // drop parameters
+    private Vector2 throwOffset = new Vector2(0, 0.7f);
+
+    // ------------------------------------- PREFABS ------------------------------------ //
+    public GameObject Pistol;
+    public GameObject Saber;
+
     // Use this for initialization
     void Start () {
         m_input = this.GetComponent<PlayerInputCtlr>();
@@ -38,9 +45,6 @@ public class WeaponPick : MonoBehaviour {
 
     private void PickupWeapon()
     {
-        print("watch start");
-        var watch = System.Diagnostics.Stopwatch.StartNew();
-
         int currWeapon = 0;
 
         float closestDist = Vector2.Distance(this.transform.position, WeaponList[0].transform.position);
@@ -60,14 +64,28 @@ public class WeaponPick : MonoBehaviour {
 
         if (m_attack.EquipWeap != PlayerAttack.eWeapon.Fists)
         {
+            GameObject obj;
+            switch (m_attack.EquipWeap)
+            {
+                case PlayerAttack.eWeapon.Pistol:
+                    obj = Instantiate(Pistol, transform.position + (Vector3)throwOffset, Quaternion.identity);
+                    break;
+                case PlayerAttack.eWeapon.Saber:
+                    obj = Instantiate(Saber, transform.position + (Vector3)throwOffset, Quaternion.identity);
+                    break;
+                default:
+                    obj = Instantiate(Saber, transform.position + (Vector3)throwOffset, Quaternion.identity);
+                    break;
+            }
+
+            obj.GetComponent<Rigidbody2D>().velocity = new Vector3(1f, 5f, 0);
+            obj.GetComponent<Rigidbody2D>().gravityScale = 1;
+            Destroy(obj, 5f);
+
             m_attack.EquipWeap = (PlayerAttack.eWeapon)WeaponList[currWeapon].GetComponent<Pickable>().m_weapnType;
             WeaponObject = WeaponList[currWeapon];
             WeaponList.Remove(WeaponObject);
             Destroy(WeaponObject);
-
-            //WeaponObject.transform.position = this.transform.position + new Vector3(0, 0.25f, 0);
-            //ToggleWeaponActive(WeaponObject, true);
-            //WeaponObject.GetComponent<Projectile>().MoveProjectileAtAngle();
         }
         else
         {
@@ -78,9 +96,6 @@ public class WeaponPick : MonoBehaviour {
         }
 
         StartCoroutine(GrabDelay());
-        watch.Stop();
-        var elapsedMs = watch.ElapsedMilliseconds;
-        print("time elapsed " + elapsedMs);
     }
 
     private IEnumerator GrabDelay()
