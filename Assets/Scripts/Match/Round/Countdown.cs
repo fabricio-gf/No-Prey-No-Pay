@@ -23,7 +23,7 @@ public class Countdown : MonoBehaviour {
 		else{
 			CountdownText.text = "Brawl!";
 			StartCoroutine(HideCountdownText());
-			RoundReferee.instance.StartRound();
+			RoundReferee.StartRound();
 			CancelInvoke("CountdownOneSecond");
 		}
 	}

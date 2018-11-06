@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class RoundStarter : MonoBehaviour {
 
-	[SerializeField] private PlayerSpawner playerSpawner;
+    // SINGLETON
+    private static RoundStarter instance;
+    
 	[SerializeField] private Countdown countdown;
+    
+    public void Awake()
+    {
+        Debug.Assert(instance == null, this.gameObject.name + " - RoundStarter : must be unique!");
+        instance = this;
+    }
 
-	// public WeaponInfo[] WeaponsToSpawn;
-	public List<PlayerInfo> PlayersToSpawn;
-	public int StockLimit;
-	public float TimeLimit;
+    public static void InitializeRound(List<PlayerInfo> playersToSpawn){
+		PlayerSpawner.SpawnPlayers(playersToSpawn);
 
-	public void InitializeRound(){
-		playerSpawner.SpawnPlayers(PlayersToSpawn);
-
-		//spawn weapons
-		RoundReferee.instance.NumOfPlayers = PlayersToSpawn.Count;
-		countdown.StartCountdown();
+        //spawn weapons
+        instance.countdown.StartCountdown();
 	}
 
-	public void RestartRound(){
+	public static void RestartRound(){
 		
 	}
 }

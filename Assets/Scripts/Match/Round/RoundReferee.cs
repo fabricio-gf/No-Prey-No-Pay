@@ -4,43 +4,34 @@ using UnityEngine;
 
 public class RoundReferee : MonoBehaviour {
 
+    // SINGLETON
 	public static RoundReferee instance;
 
+    // PUBLIC ATTRIBUTES
 	public float StockLimit;
 
+    // PRIVATE ATTRIBUTES
 	[SerializeField] private ScoreDisplay Display;
 	[SerializeField] private GameObject VictoryWindow;
 
-	[SerializeField] private MatchReferee matchReferee;
+    public void Awake(){
+        // init singleton
+        Debug.Assert(instance == null, this.gameObject.name + " - RoundReferee : must be unique!");
+        instance = this;
+    }
 
-	public int NumOfPlayers;
-	private Transform[] Players;
+    public void Start(){
+    }
 
-	[SerializeField] Transform PlayerParentObject;
-
-	public void Start(){
-		if (instance == null)
-			instance = this;
-		else if (instance != this)
-			Destroy(gameObject);
-	}
-
-	public void StartRound(){
-		Players = new Transform[PlayerParentObject.childCount];
-		for(int i = 0; i < PlayerParentObject.childCount; i++){
-			Players[i]= PlayerParentObject.GetChild(i);
-		}
-		
+	public static void StartRound(){
 		print("ROUND STARTED");
-		/*
-		for(int i = 0; i < 4; i++){
 
-		}
-		 */
+        GameMgr.PlayGame();
+
+        foreach (GameObject player in PlayerSpawner.SpawnnedPlayers)
+        {
+            player.SendMessage("MSG_StartRound", instance);
+        }
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }
