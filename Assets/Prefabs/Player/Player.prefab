@@ -203,7 +203,6 @@ GameObject:
   - component: {fileID: 114940547338769198}
   - component: {fileID: 114429449081275680}
   - component: {fileID: 114022378633654854}
-  - component: {fileID: 114638147735832760}
   - component: {fileID: 114419402381204092}
   - component: {fileID: 114022802572005622}
   - component: {fileID: 114420529779521970}
@@ -908,11 +907,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4690538395352638}
-  - component: {fileID: 65592770298933812}
   - component: {fileID: 114422425363104586}
+  - component: {fileID: 65686679887162896}
   m_Layer: 11
   m_Name: Hurtbox
-  m_TagString: Untagged
+  m_TagString: Hurtbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2076,7 +2075,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1704539420282102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.117, y: 0.577, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.88754, z: 1}
   m_Children: []
   m_Father: {fileID: 4310202769031826}
@@ -2367,7 +2366,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 1.1}
   m_EdgeRadius: 0
---- !u!65 &65592770298933812
+--- !u!65 &65686679887162896
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2377,8 +2376,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.777717, y: 0.8623076, z: 1}
+  m_Center: {x: 0.23816042, y: 0.75731534, z: 0}
 --- !u!95 &95156286990574582
 Animator:
   serializedVersion: 3
@@ -2424,8 +2423,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d148c440b5417e49b191673515bdada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThrowSaberPrefab: {fileID: 0}
-  ThrowPistolPrefab: {fileID: 0}
+  ThrowSaberPrefab: {fileID: 1339840608367656, guid: 08ebcce40582124459828e4d5da0baf5,
+    type: 2}
+  ThrowPistolPrefab: {fileID: 1973819658520202, guid: 0101d7507e4d16d458995f7e15e824ac,
+    type: 2}
   ProjectilePrefab: {fileID: 1317788579653328, guid: 9506392adbd31534e9bdfbb396edc1c0,
     type: 2}
 --- !u!114 &114022802572005622
@@ -3278,17 +3279,6 @@ MonoBehaviour:
   m_Bones: []
   m_BoneTransforms:
   - {fileID: 4168498809340286}
---- !u!114 &114638147735832760
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1172074447708136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db2d51eed70394b46b66d4af935f9ca3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114687936329247916
 MonoBehaviour:
   m_ObjectHideFlags: 1

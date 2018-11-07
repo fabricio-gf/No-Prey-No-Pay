@@ -56,6 +56,11 @@ public class MainMenuScreen : MonoBehaviour {
 		bool down = m_input.GetDown();
 		bool left = m_input.GetLeft();
 		bool right = m_input.GetRight();
+		print("up " + up);
+		print("down " + down);
+		print("left " + left);
+		print("right " + right);
+
 		
 		if(down && (index == 0 || index == 1)){
 			MoveSelection(2);
@@ -69,6 +74,7 @@ public class MainMenuScreen : MonoBehaviour {
 		if(right && (index == 0 || index == 2)){
 			MoveSelection(1);
 		}
+		print("index" + index);
 
 		// Button inputs
 		if(m_input.GetSubmit()){

@@ -161,10 +161,10 @@ public class InputMgr : MonoBehaviour
                     isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_RIGHT)  || gamePadState.ThumbSticks.Left.X > m_manager.m_triggMinRatio;
                     break;
                 case eMenuButton.UP:
-                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_UP)     || gamePadState.ThumbSticks.Left.Y < -m_manager.m_triggMinRatio;
+                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_UP)     || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
                     break;
                 case eMenuButton.DOWN:
-                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_DOWN)   || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
+                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_DOWN)   || gamePadState.ThumbSticks.Left.Y < -m_manager.m_triggMinRatio;
                     break;
                 case eMenuButton.CHANGE_COLOR:
                     isPressed |= GetButton(gamePadState, m_manager.m_changeColorButton);

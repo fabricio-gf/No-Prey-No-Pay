@@ -29,7 +29,6 @@ public class Pickable : MonoBehaviour {
     //void OnTriggerEnter2D(Collider2D other){
     void OnTriggerEnter2D(Collider2D other)
     {
-        print("Hello");
         if (other.CompareTag("Player"))
         {
             other.GetComponent<WeaponPick>().WeaponList.Add(this.gameObject);

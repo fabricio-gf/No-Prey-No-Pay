@@ -31,7 +31,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
     public void TakeDamage(PlayerInputCtlr.ePlayer player)
     {
         print(m_player.m_nbPlayer + " is taking damage");
-        if (GameMgr.IsPaused || GameMgr.IsGameOver)
+        if (GameMgr.IsPaused || GameMgr.IsGameOver || IsDead)
         {
             return;
         }
@@ -44,6 +44,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
             if (m_nbLives <= 0)
             {
                 m_player.enabled = !m_player.enabled;
+                IsDead = true;
                 //m_deathSFX.Play();
                 //gameReferee.addScore(100, (int)player);
                 //gameReferee.murderWitness((int)m_player.m_nbPlayer);
@@ -63,7 +64,6 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
         IsStunned = true;
         print(m_player + " is stunned");
         m_player.enabled = !m_player.enabled;
-        //m_animator.SetState(PlayerAnimatorController.eStates.Dead);
         yield return new WaitForSeconds(m_stunDuration);
         m_player.enabled = !m_player.enabled;
         IsStunned = false;
