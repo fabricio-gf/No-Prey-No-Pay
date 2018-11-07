@@ -14,6 +14,7 @@ public class SoundLib : ScriptableObject
     }
 
     [Header("BKG Musics")]
+    public sSoundEvent m_menuBkgMusic;
     public sSoundEvent m_matchBkgMusic;
 
     [Header("Player SFX")]
