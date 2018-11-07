@@ -289,8 +289,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
             }
 
             obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
-            obj.GetComponent<Rigidbody>().velocity = new Vector3(m_attackDirection.x * 5f, m_attackDirection.y * 5f + 5f, 0);
-            print(new Vector3(transform.localScale.x * m_attackDirection.x * 5f, transform.localScale.y * m_attackDirection.y * 2f, 0));
+            obj.GetComponent<Rigidbody>().velocity = new Vector3(m_attackDirection.x * 10f, m_attackDirection.y * 9f + 1f, 0);
 
             EquipWeap = eWeapon.Fists;
 
