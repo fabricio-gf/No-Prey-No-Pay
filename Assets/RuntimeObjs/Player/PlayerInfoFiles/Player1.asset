@@ -14,4 +14,4 @@ MonoBehaviour:
   isSelected: 0
   ControllerNumber: 0
   SelectedCharacter: 0
-  SelectedColor: 3
+  SelectedColor: 1
