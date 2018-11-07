@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1647,6 +1647,7 @@ MonoBehaviour:
   - {x: -5.15, y: -3.56}
   CharPrefabs:
   - {fileID: 1172074447708136, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
+  - {fileID: 1172074447708136, guid: 148f7db580a6d5e42a22affffb503320, type: 2}
   PlayerParentObject: {fileID: 768566840}
 --- !u!1001 &111385333
 Prefab:
@@ -3825,6 +3826,13 @@ Prefab:
       propertyPath: m_input
       value: 
       objectReference: {fileID: 1794527283}
+    - target: {fileID: 114112389737388874, guid: cde1785f4074b934fb833307d44af1ec,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Player X won!
+
+        Press A to continue'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cde1785f4074b934fb833307d44af1ec, type: 2}
   m_IsPrefabAsset: 0

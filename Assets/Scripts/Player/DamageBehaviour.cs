@@ -21,7 +21,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
     override protected void StartPhase()
     {
         m_player = this.GetComponentInParent<PlayerInputCtlr>();
-        m_nbLives = 3;
+        m_nbLives = 1;
 
         IsDead      = false;
         IsStunned   = false;

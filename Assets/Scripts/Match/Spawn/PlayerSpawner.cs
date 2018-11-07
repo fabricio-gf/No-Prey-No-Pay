@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class PlayerSpawner : MonoBehaviour {
     // SINGLETON
     private static PlayerSpawner instance;
 
-	[SerializeField] private Vector2[] SpawnPoints = new Vector2[4];
+	[SerializeField] private List<Vector2> SpawnPoints = new List<Vector2>(4);
 	[SerializeField] private GameObject[] CharPrefabs;
 	[SerializeField] private Transform PlayerParentObject;
 
@@ -26,10 +27,11 @@ public class PlayerSpawner : MonoBehaviour {
     public static void SpawnPlayers(List<PlayerInfo> PlayersToSpawn) {
 
         instance.m_spawnnedPlayers.Clear();
+        List<Vector2> shuffledSpawns = instance.SpawnPoints.OrderBy( x => Random.value ).ToList( );
 
         int i = 0;
 		foreach(var pi in PlayersToSpawn){
-			var obj = Instantiate(instance.CharPrefabs[(int)pi.SelectedCharacter], instance.SpawnPoints[i], Quaternion.identity, instance.PlayerParentObject);
+			var obj = Instantiate(instance.CharPrefabs[(int)pi.SelectedCharacter], shuffledSpawns[i], Quaternion.identity, instance.PlayerParentObject);
 			obj.GetComponent<ChangeColor>().color = pi.SelectedColor;
 			obj.GetComponent<ChangeColor>().ManualValidate();
 			obj.GetComponent<PlayerInputCtlr>().m_nbPlayer = (PlayerInputCtlr.ePlayer)(pi.ControllerNumber+1);

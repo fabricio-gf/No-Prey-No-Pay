@@ -66,6 +66,7 @@ public class LevelLoader : MonoBehaviour {
 
 	public void StartGame(string scene){
 		if(CanStart){
+			print(scene);
 			SceneManager.LoadScene(scene);
 		}
 	}

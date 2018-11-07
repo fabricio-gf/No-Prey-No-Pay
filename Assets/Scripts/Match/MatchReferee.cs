@@ -46,7 +46,7 @@ public class MatchReferee : MonoBehaviour {
 	public void EndRound(int PlayerNumber){
 		Wins[PlayerNumber]++;
 		if(Wins[PlayerNumber] >= matchInfo.NumberOfWinsToEnd){
-			EndMatch();
+			EndMatch(PlayerNumber);
 		}
 		else{
             instance.RoundVictoryWindow.SetActive(true);
@@ -56,8 +56,9 @@ public class MatchReferee : MonoBehaviour {
         }
 	}
 
-	public void EndMatch(){
+	public void EndMatch(int p_number){
 		ToggleMatchVictoryWindow();
+		MatchVictoryWindow.GetComponent<MatchVictory>().UpdateVictoryText(p_number+1);
 		GameMgr.PauseGame();
 	}
 

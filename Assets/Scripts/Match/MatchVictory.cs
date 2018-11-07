@@ -15,7 +15,7 @@ public class MatchVictory : MonoBehaviour {
 	}
 
 	public void UpdateVictoryText(int player){
-		VictoryText.text = "Player " + player + " wins the match!";
+		VictoryText.text = "Player " + player + " wins the match!\nPress A to continue";
 	}
 
 	public void DeactivateVictoryWindow(){
