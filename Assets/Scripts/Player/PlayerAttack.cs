@@ -66,14 +66,14 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
         playerLayer = LayerMask.GetMask("Players");
 
-        EquipWeap = eWeapon.Pistol;
+        EquipWeap = eWeapon.Fists;
 
         PunchOffset.x = 1.5f;
         PunchOffset.y = 0.75f;
         PunchHitboxSize.x = 0.3f;
         PunchHitboxSize.y = 0.5f;
 
-        SaberOffset.x = 0.7f;
+        SaberOffset.x = 0.75f;
         SaberOffset.y = 0.75f;
         SaberHitboxSize.x = 0.75f;
         SaberHitboxSize.y = 0.3f;
@@ -94,7 +94,8 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         UpdateAttackSubsystem();
         //Stomp Subsystem : creates the stomp hitbox if necessary
         UpdateStompSubsystem();
-        
+        //Throw Subsystem : Instantiates a throwable projectile and changes weapons
+        UpdateThrowSubsystem();
     }
 
     // ======================================================================================
@@ -113,6 +114,22 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         // Try to Trigger Event, if possible
         if (doAttack && !IsAttacking)
             StartAttack();
+    }
+
+    // ======================================================================================
+    private void UpdateThrowSubsystem()
+    {
+        if (IsAttacking)
+        {
+            return;
+        }
+
+        // GET INPUT
+        bool doThrow = m_input.GetToss();
+
+        // Try to Trigger Event, if possible
+        if (doThrow && !IsAttacking)
+            ThrowWeapon();
     }
 
     // ======================================================================================
@@ -241,7 +258,20 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
     private void ThrowWeapon()
     {
-        if(EquipWeap != eWeapon.Fists)
+        m_attackDirection = new Vector2(m_input.GetHorizontal(), 0);
+
+        if (m_attackDirection.sqrMagnitude == 0)
+        {
+            m_attackDirection = new Vector2(0, m_input.GetVertical());
+            if (m_attackDirection.sqrMagnitude == 0)
+                m_attackDirection = new Vector2(m_control.ForwardDir == PlayerController.eDirection.Right ? 1 : -1, 0);
+            else
+                m_attackDirection.Normalize();
+        }
+        else
+            m_attackDirection.Normalize();
+
+        if (EquipWeap != eWeapon.Fists)
         {
             //this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
             GameObject obj;
@@ -258,8 +288,9 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
                     break;
             }
 
-            obj.GetComponent<Projectile>().MoveProjectile(new Vector3(10, 0, 0));
             obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
+            obj.GetComponent<Rigidbody>().velocity = new Vector3(m_attackDirection.x * 5f, m_attackDirection.y * 5f + 5f, 0);
+            print(new Vector3(transform.localScale.x * m_attackDirection.x * 5f, transform.localScale.y * m_attackDirection.y * 2f, 0));
 
             EquipWeap = eWeapon.Fists;
 
