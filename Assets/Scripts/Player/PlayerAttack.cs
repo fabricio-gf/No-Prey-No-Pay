@@ -43,6 +43,9 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // attack: Saber
     protected Vector2 StompOffset;
     protected Vector2 StompHitboxSize;
+
+    // stomp
+    protected float StompBounciness = 10f;
     // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
     // attack origin
     private PlayerInputCtlr     m_input;
@@ -88,9 +91,9 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         ThrowPistolOffset.y = 1.35f;
 
         StompOffset.x = 0;
-        StompOffset.y = -0.2f;
+        StompOffset.y = 0.1f;
         StompHitboxSize.x = 0.35f;
-        StompHitboxSize.y = 0.3f;
+        StompHitboxSize.y = 0.01f;
     }
 
     // ======================================================================================
@@ -202,6 +205,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         {
             if(hitTargets[i].GetComponent<DamageBehaviour>() != null)
             hitTargets[i].GetComponent<DamageBehaviour>().TakeDamage(this.m_input.m_nbPlayer);
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0,StompBounciness,0);
         }
     }
     // ======================================================================================
