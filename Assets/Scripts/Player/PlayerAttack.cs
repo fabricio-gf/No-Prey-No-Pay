@@ -73,12 +73,12 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
         EquipWeap = eWeapon.Fists;
 
-        PunchOffset.x = 1.5f;
+        PunchOffset.x = 0.75f;
         PunchOffset.y = 0.75f;
         PunchHitboxSize.x = 0.3f;
         PunchHitboxSize.y = 0.5f;
 
-        SaberOffset.x = 0.75f;
+        SaberOffset.x = 0.85f;
         SaberOffset.y = 0.75f;
         ThrowSaberOffset.x = 1.1f;
         ThrowSaberOffset.y = 0.75f;
@@ -222,7 +222,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // ======================================================================================
     private void PunchAttack()
     {
-        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * m_attackDirection.x * PunchOffset.x, m_attackDirection.y * 1 + transform.localScale.y * PunchOffset.y, 0), new Vector3(PunchHitboxSize.x, PunchHitboxSize.y, 0.4f));
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(m_attackDirection.x * PunchOffset.x, m_attackDirection.y * 1 + transform.localScale.y * PunchOffset.y, 0), new Vector3(PunchHitboxSize.x, PunchHitboxSize.y, 0.4f));
         for (int i = 0; i < hitTargets.Length; i++)
         {
             if (hitTargets[i].GetComponent<DamageBehaviour>() != null)
@@ -237,7 +237,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     {
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
-        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(transform.localScale.x * m_attackDirection.x * SaberOffset.x, m_attackDirection.y * 1 + transform.localScale.y * SaberOffset.y, 0), new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 0.4f));
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(m_attackDirection.x * SaberOffset.x, m_attackDirection.y * 1 + transform.localScale.y * SaberOffset.y, 0), new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 0.4f));
         
         for (int i = 0; i < hitTargets.Length; i++)
         {
@@ -315,12 +315,12 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         if (EquipWeap == eWeapon.Fists)
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawCube(transform.position + (Vector3)PunchOffset, (Vector3)PunchHitboxSize);
+            Gizmos.DrawCube(transform.position + new Vector3(m_attackDirection.x * PunchOffset.x, m_attackDirection.y * 1 + transform.localScale.y * PunchOffset.y, 0), (Vector3)PunchHitboxSize);
         }
         if (EquipWeap == eWeapon.Saber)
         { 
             Gizmos.color = Color.red;
-            Gizmos.DrawCube(transform.position + new Vector3(m_attackDirection.x*SaberOffset.x, m_attackDirection.y*1 + SaberOffset.y,0), (Vector3)SaberHitboxSize);
+            Gizmos.DrawCube(transform.position + new Vector3(m_attackDirection.x * SaberOffset.x, m_attackDirection.y * 1 + transform.localScale.y * SaberOffset.y, 0), (Vector3)SaberHitboxSize);
         }
         if (EquipWeap == eWeapon.Pistol)
         {
