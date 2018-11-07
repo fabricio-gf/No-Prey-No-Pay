@@ -56,6 +56,9 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
     // ======================================================================================
     protected void UpdateStateMachine()
     {
+        if (State == eStates.Dead)
+            return;
+
         if (m_playerAttack.IsAttacking)
             State       = eStates.Attack;
         else if (m_playerCtl.IsDashing)
@@ -135,5 +138,10 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
                 m_playerAnimCtl.SetAttackType(PlayerAnimatorController.eAttackType.Saber);
                 break;
         }
+    }
+
+    public void MSG_Death()
+    {
+        State = eStates.Dead;
     }
 }

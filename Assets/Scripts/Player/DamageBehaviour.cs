@@ -31,7 +31,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
     public void TakeDamage(PlayerInputCtlr.ePlayer player)
     {
         print(m_player.m_nbPlayer + " is taking damage");
-        if (GameMgr.IsPaused || GameMgr.IsGameOver || IsDead)
+        if (!IsActive())
         {
             return;
         }
@@ -45,6 +45,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
             {
                 m_player.enabled = !m_player.enabled;
                 IsDead = true;
+                m_player.gameObject.SendMessage("MSG_Death");
                 //m_deathSFX.Play();
                 //gameReferee.addScore(100, (int)player);
                 //gameReferee.murderWitness((int)m_player.m_nbPlayer);
@@ -69,5 +70,10 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
         IsStunned = false;
 
         this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
+    }
+
+    protected override bool IsActive()
+    {
+        return base.IsActive() && !IsDead;//GameMgr.IsPaused || GameMgr.IsGameOver || IsDead;
     }
 }

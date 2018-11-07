@@ -135,6 +135,8 @@ public class InputMgr : MonoBehaviour
     {
 #if UNITY_EDITOR
         Debug.Assert(m_manager != null, "InputMgr - Missing InputMgrConfig in Project");
+        if (m_manager.m_pcDebugMode && _menuButton == eMenuButton.SUBMIT)
+            return Input.GetKey(KeyCode.Return);
 #endif
 
         bool isPressed = false;

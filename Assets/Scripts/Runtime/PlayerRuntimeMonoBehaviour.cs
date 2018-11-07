@@ -6,6 +6,7 @@ public class PlayerRuntimeMonoBehaviour : RuntimeMonoBehaviour
 {
     // --------------------------------- PRIVATE ATTRIBUTES ------------------------------ //
     private bool m_waitingExclusiveEvt  = false;
+    private bool m_isAlive = true;
 
     // ======================================================================================
     // PUBLIC METHODS - PLAYER MSGS
@@ -27,10 +28,17 @@ public class PlayerRuntimeMonoBehaviour : RuntimeMonoBehaviour
     }
 
     // ======================================================================================
+    public void MSG_Death()
+    {
+        m_isAlive = false;
+    }
+
+    // ======================================================================================
     // PROTECTED METHODS
     // ======================================================================================
     protected override bool IsActive()
     {
-        return base.IsActive() && !m_waitingExclusiveEvt;
+        return base.IsActive() && !m_waitingExclusiveEvt && m_isAlive;
     }
+
 }
