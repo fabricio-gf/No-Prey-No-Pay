@@ -31,11 +31,13 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // attack: Saber
     public GameObject ThrowSaberPrefab;
     protected Vector2 SaberOffset;
+    protected Vector2 ThrowSaberOffset;
     protected Vector2 SaberHitboxSize;
 
     // attack: Pistol
     public GameObject ThrowPistolPrefab;
     public GameObject ProjectilePrefab;
+    protected Vector2 ThrowPistolOffset;
     protected Vector2 PistolOffset;
 
     // attack: Saber
@@ -75,11 +77,15 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
         SaberOffset.x = 0.75f;
         SaberOffset.y = 0.75f;
+        ThrowSaberOffset.x = 1.1f;
+        ThrowSaberOffset.y = 0.75f;
         SaberHitboxSize.x = 0.75f;
         SaberHitboxSize.y = 0.3f;
 
         PistolOffset.x = 0.7f;
         PistolOffset.y = 0.75f;
+        ThrowPistolOffset.x = 1f;
+        ThrowPistolOffset.y = 1.35f;
 
         StompOffset.x = 0;
         StompOffset.y = -0.2f;
@@ -245,9 +251,8 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
         GameObject obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
-        obj.GetComponent<Projectile>().MoveProjectile(new Vector3(30, 0, 0));
         obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
-        obj.GetComponent<Rigidbody>().velocity = obj.transform.forward * 30;
+        obj.GetComponent<Rigidbody2D>().velocity = new Vector3(m_attackDirection.x * 30f, m_attackDirection.y * 25f, 0);
 
         Destroy(obj, 2.0f);
         this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
@@ -278,10 +283,10 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
             switch (EquipWeap)
             {
                 case eWeapon.Saber:
-                    obj = Instantiate(ThrowSaberPrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
+                    obj = Instantiate(ThrowSaberPrefab, transform.position + new Vector3(transform.localScale.x * ThrowSaberOffset.x, ThrowSaberOffset.y, 0), Quaternion.identity);
                     break;
                 case eWeapon.Pistol:
-                    obj = Instantiate(ThrowPistolPrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
+                    obj = Instantiate(ThrowPistolPrefab, transform.position + new Vector3(transform.localScale.x * ThrowPistolOffset.x, ThrowPistolOffset.y, 0), Quaternion.identity);
                     break;
                 default:
                     obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
@@ -289,7 +294,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
             }
 
             obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
-            obj.GetComponent<Rigidbody>().velocity = new Vector3(m_attackDirection.x * 10f, m_attackDirection.y * 9f + 1f, 0);
+            obj.GetComponent<Rigidbody2D>().velocity = new Vector3(m_attackDirection.x * 10f, m_attackDirection.y * 9f + 1f, 0);
 
             EquipWeap = eWeapon.Fists;
 
