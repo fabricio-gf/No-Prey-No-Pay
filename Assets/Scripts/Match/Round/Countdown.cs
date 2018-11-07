@@ -10,7 +10,7 @@ public class Countdown : MonoBehaviour {
 	[SerializeField] private UnityEngine.UI.Text CountdownText;
 
 	public void StartCountdown(){
-		GameMgr.PauseGame();
+		//GameMgr.PauseGame();
 		CurrentTime = CountdownTime;
 		CountdownText.gameObject.SetActive(true);
 		InvokeRepeating("CountdownOneSecond", 1f, 1f);

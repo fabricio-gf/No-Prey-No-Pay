@@ -52,7 +52,7 @@ public class MatchReferee : MonoBehaviour {
             instance.RoundVictoryWindow.SetActive(true);
         	RoundVictory roundVictory = instance.RoundVictoryWindow.GetComponent<RoundVictory>();
         	roundVictory.UpdateVictoryText(PlayerNumber + 1);
-            RoundStarter.RestartRound();
+            //RoundStarter.RestartRound();
         }
 	}
 

@@ -12,6 +12,7 @@ public class PlayerSpawner : MonoBehaviour {
 	[SerializeField] private Transform PlayerParentObject;
 
     private List<GameObject> m_spawnnedPlayers = new List<GameObject>();
+    private List<PlayerInfo> m_spawnnedPlayersInfo = new List<PlayerInfo>();
 
     // ACCESSORS
     public static List<GameObject> SpawnnedPlayers { get { return instance.m_spawnnedPlayers; } }
@@ -36,18 +37,23 @@ public class PlayerSpawner : MonoBehaviour {
 
             instance.m_spawnnedPlayers.Add(obj);
 		}
+
+        instance.m_spawnnedPlayersInfo = PlayersToSpawn;
 	}
 
 	public static void RespawnPlayers(){
 		for(int i = 0; i < instance.m_spawnnedPlayers.Count; i++){
-			instance.m_spawnnedPlayers[i].transform.position = instance.SpawnPoints[i];
-			instance.m_spawnnedPlayers[i].GetComponent<WeaponPick>().WeaponList = new List<GameObject>();
-			instance.m_spawnnedPlayers[i].GetComponent<PlayerStateMachine>().MSG_Respawn();
-			instance.m_spawnnedPlayers[i].transform.Find("Hurtbox").GetComponent<DamageBehaviour>().RestartPhase();
-			instance.m_spawnnedPlayers[i].GetComponent<PlayerInputCtlr>().enabled = true;
-			//reset other things here
+            //instance.m_spawnnedPlayers[i].transform.position = instance.SpawnPoints[i];
+            //instance.m_spawnnedPlayers[i].GetComponent<WeaponPick>().WeaponList = new List<GameObject>();
+            //instance.m_spawnnedPlayers[i].GetComponent<PlayerStateMachine>().MSG_Respawn();
+            //instance.m_spawnnedPlayers[i].transform.Find("Hurtbox").GetComponent<DamageBehaviour>().RestartPhase();
+            //instance.m_spawnnedPlayers[i].GetComponent<PlayerInputCtlr>().enabled = true;
+            ////reset other things here
+            Destroy(instance.m_spawnnedPlayers[i]);
 		}
-	}
+
+        SpawnPlayers(instance.m_spawnnedPlayersInfo);
+    }
 
 	void OnDrawGizmosSelected(){
 		Gizmos.color = Color.red;
