@@ -11,6 +11,7 @@ public class RoundVictory : MonoBehaviour {
 	void Update(){
 		if(m_input.GetPause()){
 			RoundStarter.RestartRound();
+			DeactivateVictoryWindow();
 		}
 	}
 

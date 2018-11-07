@@ -27,6 +27,13 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
         IsStunned   = false;
     }
 
+    public void RestartPhase(){
+        m_nbLives = 3;
+
+        IsDead      = false;
+        IsStunned   = false;
+    }
+
     // ======================================================================================
     public void TakeDamage(PlayerInputCtlr.ePlayer player)
     {
@@ -43,7 +50,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
 
             if (m_nbLives <= 0)
             {
-                m_player.enabled = !m_player.enabled;
+                //m_player.enabled = !m_player.enabled;
                 IsDead = true;
                 m_player.gameObject.SendMessage("MSG_Death");
                 //m_deathSFX.Play();

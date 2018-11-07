@@ -5,7 +5,7 @@ using UnityEngine;
 public class MatchReferee : MonoBehaviour {
 
     // SINGLETON
-    private MatchReferee instance;
+    public static MatchReferee instance;
 
     // PRIVATE ATTRIBUTES
 	[SerializeField] private MatchInfo matchInfo;
@@ -14,9 +14,8 @@ public class MatchReferee : MonoBehaviour {
 	
 	[SerializeField] private PlayerInfo[] PlayerInfos = new PlayerInfo[4];
 
-	[SerializeField] private GameObject VictoryWindow;
-
-	private bool MatchEnded = false;
+	[SerializeField] private GameObject RoundVictoryWindow;
+	[SerializeField] private GameObject MatchVictoryWindow;
 
     // INTERNAL MEMBERS
     void Awake()
@@ -44,32 +43,26 @@ public class MatchReferee : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		if(MatchEnded == true){
-			// get inputs here
-		}
-	}
-
 	public void EndRound(int PlayerNumber){
 		Wins[PlayerNumber]++;
 		if(Wins[PlayerNumber] >= matchInfo.NumberOfWinsToEnd){
 			EndMatch();
 		}
 		else{
-            //RestartScene();
-            RoundStarter.InitializeRound(GetAtivePlayerInfos());
+            instance.RoundVictoryWindow.SetActive(true);
+        	RoundVictory roundVictory = instance.RoundVictoryWindow.GetComponent<RoundVictory>();
+        	roundVictory.UpdateVictoryText(PlayerNumber + 1);
+            RoundStarter.RestartRound();
         }
 	}
 
 	public void EndMatch(){
-		ToggleVictoryWindow();
-		//show stats
-		MatchEnded = true;
+		ToggleMatchVictoryWindow();
+		GameMgr.PauseGame();
 	}
 
-	private void ToggleVictoryWindow(){
-		VictoryWindow.SetActive(!VictoryWindow.activeSelf);
+	private void ToggleMatchVictoryWindow(){
+		MatchVictoryWindow.SetActive(!MatchVictoryWindow.activeSelf);
 	}
 
     private List<PlayerInfo> GetAtivePlayerInfos ()

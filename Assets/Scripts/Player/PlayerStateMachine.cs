@@ -144,4 +144,8 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
     {
         State = eStates.Dead;
     }
+
+    public void MSG_Respawn(){
+        State = eStates.Idle;
+    }
 }

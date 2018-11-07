@@ -45,7 +45,7 @@ public class LevelLoader : MonoBehaviour {
 			PlayerList[0].SelectedColor = 2;
 			PlayerList[1].isSelected = true;
 			PlayerList[1].SelectedColor = 4;
-			SceneManager.LoadScene("Tavern");
+			SceneManager.LoadScene("TavernGold");
 		}
 	}
 #endif

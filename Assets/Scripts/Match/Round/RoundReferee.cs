@@ -22,9 +22,6 @@ public class RoundReferee : MonoBehaviour {
         instance = this;
     }
 
-    public void Start(){
-    }
-
 	public static void StartRound(){
 		print("ROUND STARTED");
 
@@ -50,8 +47,6 @@ public class RoundReferee : MonoBehaviour {
     {
         GameMgr.PauseGame();
 
-        instance.VictoryWindow.SetActive(true);
-        RoundVictory roundVictory = instance.VictoryWindow.GetComponent<RoundVictory>();
-        roundVictory.UpdateVictoryText(_player + 1);
+        MatchReferee.instance.EndRound(_player);
     }
 }

@@ -34,7 +34,6 @@ public class WeaponPick : MonoBehaviour {
         // get pick up item input
         if (InputMgr.GetButton((int)m_input.m_nbPlayer, InputMgr.eButton.GRAB) && !IsGrabing)
         {
-            print(WeaponList.Count);
             if (WeaponList.Count > 0)
             {
                 PickupWeapon();

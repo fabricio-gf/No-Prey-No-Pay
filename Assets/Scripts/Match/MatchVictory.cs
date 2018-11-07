@@ -9,11 +9,8 @@ public class MatchVictory : MonoBehaviour {
 	[SerializeField] private MenuInputController m_input;
 
 	void Update(){
-		if(m_input.GetPause()){
-			LevelLoader.instance.GoToMenu();
-		}
-		if(m_input.GetChangeColor()){
-			LevelLoader.instance.StartGame("Tavern");
+		if(m_input.GetSubmit()){
+			Statistics.instance.DisplayStats();
 		}
 	}
 
