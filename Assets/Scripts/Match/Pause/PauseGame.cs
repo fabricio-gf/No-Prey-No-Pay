@@ -15,7 +15,8 @@ public class PauseGame : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		GetPauseInput();
+        if (!GameMgr.IsGameOver)
+		    GetPauseInput();
 	}
 
 	void GetPauseInput()

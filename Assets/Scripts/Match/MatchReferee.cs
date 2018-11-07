@@ -58,7 +58,7 @@ public class MatchReferee : MonoBehaviour {
 
 	public void EndMatch(){
 		ToggleMatchVictoryWindow();
-		GameMgr.PauseGame();
+		GameMgr.EndGame();
 	}
 
 	private void ToggleMatchVictoryWindow(){
