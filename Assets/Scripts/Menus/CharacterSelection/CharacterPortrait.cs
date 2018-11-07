@@ -19,8 +19,12 @@ public class CharacterPortrait : MonoBehaviour {
     public eColor InitialColor;
 
 	[SerializeField] private Sprite[] Characters;
+	[SerializeField] private Sprite[] SuitOverlays;
+	[SerializeField] private Sprite[] ReadyOverlays;
 	[SerializeField] private GameObject Poster;
 	[SerializeField] private Image Char;
+	[SerializeField] private Image SuitOverlay;
+	[SerializeField] private Image Ready;
 	
 	[HideInInspector] public int charIndex = 0;
 	[HideInInspector] public int colorIndex = 1;
@@ -63,6 +67,10 @@ public class CharacterPortrait : MonoBehaviour {
 			charIndex = Characters.Length-1;
 		}
 		Char.sprite = Characters[charIndex];
+		SuitOverlay.sprite = SuitOverlays[charIndex];
+		Ready.sprite = ReadyOverlays[charIndex];
+		Char.GetComponent<ChangeColor>().color = colorIndex;
+		Char.GetComponent<ChangeColor>().ManualValidate();
 	}
 
 	/// <summary>

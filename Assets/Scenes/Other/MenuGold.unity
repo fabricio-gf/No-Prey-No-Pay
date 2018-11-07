@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1301,7 +1301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &412288816
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2442,7 +2442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &931061436
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2689,7 +2689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000289917, y: 0.000049591064}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1090789643
@@ -2706,8 +2706,17 @@ MonoBehaviour:
   InitialColor: 4
   Characters:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
+  - {fileID: 21300000, guid: f6817f5cbb0c2594f8fc0cb7fb8c5752, type: 3}
+  SuitOverlays:
+  - {fileID: 21300000, guid: 85a065407ab16584aa276ccfd9969d73, type: 3}
+  - {fileID: 21300000, guid: e3b1815f27f06054b919eb6e674b90c7, type: 3}
+  ReadyOverlays:
+  - {fileID: 21300000, guid: 12f9deb8f96b7b0468aa3fd76958cc9b, type: 3}
+  - {fileID: 21300000, guid: 58c44221d6502924da27646ce309dcfc, type: 3}
   Poster: {fileID: 1420717660}
   Char: {fileID: 1693329981}
+  SuitOverlay: {fileID: 1903759066}
+  Ready: {fileID: 784918894}
   charIndex: 0
   colorIndex: 1
   Phase1: 1
@@ -2729,7 +2738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1093397879
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3246,7 +3255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1353222154
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3300,7 +3309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00018310547, y: 0.000045776367}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1363071353
@@ -3317,8 +3326,17 @@ MonoBehaviour:
   InitialColor: 3
   Characters:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
+  - {fileID: 21300000, guid: f6817f5cbb0c2594f8fc0cb7fb8c5752, type: 3}
+  SuitOverlays:
+  - {fileID: 21300000, guid: 85a065407ab16584aa276ccfd9969d73, type: 3}
+  - {fileID: 21300000, guid: e3b1815f27f06054b919eb6e674b90c7, type: 3}
+  ReadyOverlays:
+  - {fileID: 21300000, guid: 12f9deb8f96b7b0468aa3fd76958cc9b, type: 3}
+  - {fileID: 21300000, guid: 58c44221d6502924da27646ce309dcfc, type: 3}
   Poster: {fileID: 1208048636}
   Char: {fileID: 1124816305}
+  SuitOverlay: {fileID: 696532547}
+  Ready: {fileID: 1066981798}
   charIndex: 0
   colorIndex: 1
   Phase1: 1
@@ -3374,8 +3392,17 @@ MonoBehaviour:
   InitialColor: 1
   Characters:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
+  - {fileID: 21300000, guid: f6817f5cbb0c2594f8fc0cb7fb8c5752, type: 3}
+  SuitOverlays:
+  - {fileID: 21300000, guid: 85a065407ab16584aa276ccfd9969d73, type: 3}
+  - {fileID: 21300000, guid: e3b1815f27f06054b919eb6e674b90c7, type: 3}
+  ReadyOverlays:
+  - {fileID: 21300000, guid: 12f9deb8f96b7b0468aa3fd76958cc9b, type: 3}
+  - {fileID: 21300000, guid: 58c44221d6502924da27646ce309dcfc, type: 3}
   Poster: {fileID: 355999175}
   Char: {fileID: 547105087}
+  SuitOverlay: {fileID: 409095269}
+  Ready: {fileID: 1980446466}
   charIndex: 0
   colorIndex: 1
   Phase1: 1
@@ -3832,7 +3859,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000076293945, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1599349323
@@ -3849,8 +3876,17 @@ MonoBehaviour:
   InitialColor: 2
   Characters:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
+  - {fileID: 21300000, guid: f6817f5cbb0c2594f8fc0cb7fb8c5752, type: 3}
+  SuitOverlays:
+  - {fileID: 21300000, guid: 85a065407ab16584aa276ccfd9969d73, type: 3}
+  - {fileID: 21300000, guid: e3b1815f27f06054b919eb6e674b90c7, type: 3}
+  ReadyOverlays:
+  - {fileID: 21300000, guid: 12f9deb8f96b7b0468aa3fd76958cc9b, type: 3}
+  - {fileID: 21300000, guid: 58c44221d6502924da27646ce309dcfc, type: 3}
   Poster: {fileID: 19870217}
   Char: {fileID: 596620627}
+  SuitOverlay: {fileID: 768072234}
+  Ready: {fileID: 486412246}
   charIndex: 0
   colorIndex: 1
   Phase1: 1

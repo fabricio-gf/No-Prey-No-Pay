@@ -23,6 +23,9 @@ public class RoundStarter : MonoBehaviour {
 	}
 
 	public static void RestartRound(){
-		
+		PlayerSpawner.RespawnPlayers();
+
+        //respawn weapons
+        instance.countdown.StartCountdown();
 	}
 }

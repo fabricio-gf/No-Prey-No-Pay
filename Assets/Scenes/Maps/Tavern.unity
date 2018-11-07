@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2047,6 +2047,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224314794127745440, guid: 9836b01180b0e634180b45325e8860d3,
     type: 2}
   m_PrefabInternal: {fileID: 604305478}
+--- !u!114 &274802489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 274802487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ace532999cc494d8f36c8c14431ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &411068886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2593,6 +2604,11 @@ Prefab:
       propertyPath: VictoryText
       value: 
       objectReference: {fileID: 1916495687}
+    - target: {fileID: 114650502591274126, guid: 9836b01180b0e634180b45325e8860d3,
+        type: 2}
+      propertyPath: m_input
+      value: 
+      objectReference: {fileID: 274802489}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9836b01180b0e634180b45325e8860d3, type: 2}
   m_IsPrefabAsset: 0
@@ -3529,6 +3545,11 @@ Prefab:
       propertyPath: VictoryText
       value: 
       objectReference: {fileID: 1794527282}
+    - target: {fileID: 114920275735640268, guid: cde1785f4074b934fb833307d44af1ec,
+        type: 2}
+      propertyPath: m_input
+      value: 
+      objectReference: {fileID: 1794527283}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cde1785f4074b934fb833307d44af1ec, type: 2}
   m_IsPrefabAsset: 0
@@ -3538,6 +3559,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1794527281}
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &1794527283 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114259770958850774, guid: cde1785f4074b934fb833307d44af1ec,
+    type: 2}
+  m_PrefabInternal: {fileID: 1794527281}
+  m_Script: {fileID: 11500000, guid: 38ace532999cc494d8f36c8c14431ce5, type: 3}
 --- !u!224 &1797312883 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224413644931903806, guid: 712ebfad32fdf7043b9ede6185863bb5,

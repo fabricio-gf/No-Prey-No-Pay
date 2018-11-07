@@ -38,6 +38,13 @@ public class PlayerSpawner : MonoBehaviour {
 		}
 	}
 
+	public static void RespawnPlayers(){
+		for(int i = 0; i < instance.m_spawnnedPlayers.Count; i++){
+			instance.m_spawnnedPlayers[i].transform.position = instance.SpawnPoints[i];
+			//reset other things here
+		}
+	}
+
 	void OnDrawGizmosSelected(){
 		Gizmos.color = Color.red;
 		for(int i = 0; i < 4; i++){

@@ -70,6 +70,10 @@ public class LevelLoader : MonoBehaviour {
 		}
 	}
 
+	public void GoToMenu(){
+		SceneManager.LoadScene("MenuGold");
+	}
+
 	public void AddPlayerActive(){
 		NumActivePlayers ++;
 		CheckStartButton();

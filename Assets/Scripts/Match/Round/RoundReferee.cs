@@ -33,7 +33,7 @@ public class RoundReferee : MonoBehaviour {
         instance.alivePlayers = new HashSet<int>();
         foreach (GameObject player in PlayerSpawner.SpawnnedPlayers)
         {
-            player.SendMessage("MSG_StartRound", instance);
+            player.SendMessage("MSG_StartRound", instance); 
             instance.alivePlayers.Add((int) player.GetComponent<PlayerInputCtlr>().m_nbPlayer);
         }
 	}

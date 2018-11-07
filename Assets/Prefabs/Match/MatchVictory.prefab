@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114920275735640268}
   - component: {fileID: 222131929936860238}
   - component: {fileID: 114100757866142790}
+  - component: {fileID: 114259770958850774}
   m_Layer: 5
   m_Name: MatchVictory
   m_TagString: Untagged
@@ -152,6 +153,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114259770958850774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1631226860845134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ace532999cc494d8f36c8c14431ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114920275735640268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,6 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092636d6480e072469f632e2a66879d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VictoryText: {fileID: 0}
+  m_input: {fileID: 0}
 --- !u!222 &222056578190141688
 CanvasRenderer:
   m_ObjectHideFlags: 1
