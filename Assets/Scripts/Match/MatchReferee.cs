@@ -59,7 +59,7 @@ public class MatchReferee : MonoBehaviour {
 	public void EndMatch(int p_number){
 		ToggleMatchVictoryWindow();
 		MatchVictoryWindow.GetComponent<MatchVictory>().UpdateVictoryText(p_number+1);
-		GameMgr.PauseGame();
+		GameMgr.EndGame();
 	}
 
 	private void ToggleMatchVictoryWindow(){

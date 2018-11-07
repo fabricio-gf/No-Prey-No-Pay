@@ -83,4 +83,9 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
     {
         return base.IsActive() && !IsDead;//GameMgr.IsPaused || GameMgr.IsGameOver || IsDead;
     }
+
+    public void CallStun()
+    {
+        StartCoroutine(GetStunned());
+    }
 }

@@ -70,4 +70,11 @@ public class GameMgr : MonoBehaviour
     {
         IsPaused = false;
     }
+
+    // ======================================================================================
+    public static void EndGame()
+    {
+        IsGameOver = true;
+        PauseGame();
+    }
 }
