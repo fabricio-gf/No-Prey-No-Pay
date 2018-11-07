@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: InputConfig
   m_EditorClassIdentifier: 
   m_triggMinRatio: 0.3
-  m_pcDebugMode: 1
+  m_pcDebugMode: 0
   m_dashButton: 14
   m_jumpButton: 0
   m_tossButton: 1

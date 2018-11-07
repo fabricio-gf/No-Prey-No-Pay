@@ -41,7 +41,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 
 		GetExitPlayers();
 
-		//GetCharacterSwap();
+		GetCharacterSwap();
 
 		GetColorSwap();
 
@@ -97,7 +97,21 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Detects if a player has swapped the color of it's current selected character
+	/// Detects if a player has swapped its current selected character
+	/// </summary>
+	private void GetCharacterSwap(){
+		for(int i = 0; i < 4; i++){
+			if(ActivePlayers[i] && m_input.GetLeft(i)){
+				Portraits[i].ChangeCharacter(-1);
+			}
+			else if(ActivePlayers[i] && m_input.GetRight(i)){
+				Portraits[i].ChangeCharacter(1);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Detects if a player has swapped the color of its current selected character
 	/// </summary>
 	private void GetColorSwap(){
 		for(int i = 0; i < 4; i++){
@@ -121,7 +135,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	private void GetGameStart(){
 		for(int i = 0; i < 4; i++){
 			if(ReadyPlayers[i] && m_input.GetPause(i)){
-				LevelLoader.instance.StartGame("Tavern");  //Temp string, gonna use scriptable object later or reference in level loader
+				LevelLoader.instance.StartGame("TavernGold");  //Temp string, gonna use scriptable object later or reference in level loader
 			}
 		}
 	}

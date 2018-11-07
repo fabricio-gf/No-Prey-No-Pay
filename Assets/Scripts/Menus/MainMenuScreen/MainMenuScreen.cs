@@ -72,7 +72,6 @@ public class MainMenuScreen : MonoBehaviour {
 
 		// Button inputs
 		if(m_input.GetSubmit()){
-			print("submit");
 			SelectButton();
 		}
 
