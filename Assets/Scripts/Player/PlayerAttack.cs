@@ -107,7 +107,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         UpdateAttackSubsystem();
         if(stompEnable)
             //Stomp Subsystem : creates the stomp hitbox if necessary
-            UpdateStompSubsystem();
+            //UpdateStompSubsystem();
         //Throw Subsystem : Instantiates a throwable projectile and changes weapons
         UpdateThrowSubsystem();
     }
