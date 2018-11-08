@@ -60,6 +60,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
     
     // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
     private Transform m_transform;
+    private eDirections m_currDir;
 
     // ======================================================================================
     // PUBLIC MEMBERS
@@ -72,6 +73,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         Debug.Assert(m_animator != null, this.gameObject.name + " - PlayerAnimatorController : MISSING ANIMATOR!");
 
         m_transform = this.transform;
+        m_currDir = eDirections.Right; 
     }
 
     // ======================================================================================
@@ -132,14 +134,21 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
     public void SetDirection(eDirections _direction)
     {
         // TODO : Create Blend Trees for != directions
-        switch(_direction)
+        //switch(_direction)
+        //{
+        //    case eDirections.Left:
+        //        m_transform.localScale = new Vector3(-1, 1, 1);
+        //        break;
+        //    case eDirections.Right:
+        //        m_transform.localScale = new Vector3(1, 1, 1);
+        //        break;
+        //}
+        if (m_currDir != _direction)
         {
-            case eDirections.Left:
-                m_transform.localScale = new Vector3(-1, 1, 1);
-                break;
-            case eDirections.Right:
-                m_transform.localScale = new Vector3(1, 1, 1);
-                break;
+            Vector3 scale = m_transform.localScale;
+            scale.x *= -1;
+            m_transform.localScale = scale;
+            m_currDir = _direction;
         }
     }
 

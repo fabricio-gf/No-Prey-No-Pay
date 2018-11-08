@@ -65,6 +65,7 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     // dash subsystem
     private Vector2             m_dashTargetPos      = Vector2.zero;
     private Vector2             m_dashDirection      = Vector2.zero;
+    private bool                m_inAirDashPermission          = false;
 
     // fine tunning : events
     private float               m_minDashEventRatio  = .1f;
@@ -166,55 +167,6 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
     // ======================================================================================
     // PRIVATE MEMBERS - SUBSYSTEM HANDLERS
     // ======================================================================================
-    //private GameObject m_debugBall;
-    // THIS IS TERRIBLE! MUST BE REMADE!
-    private void UpdateLedgeGrabSubsystem()
-    {
-        //if (IsWallSnapped)
-        //{
-        //    if (MaxWallTouchingPoint < m_handPos.position.y || Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint) < .1f)
-        //    {
-        //        float horInput = m_input.GetHorizontal();
-        //        if (horInput * m_snappedWallNormal.x < 0)
-        //        {
-        //            m_rb.isKinematic = true;
-        //            m_rb.simulated = false;
-
-        //            IsTouchingLedge = true;
-        //            Debug.Log(MaxWallTouchingPoint);
-
-        //            Debug.Log(Mathf.Lerp(transform.position.y,
-        //                                                        MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
-        //                                                        10 * GameMgr.DeltaTime));
-        //            if (m_debugBall == null)
-        //            {
-        //                m_debugBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //                m_debugBall.transform.localScale = .1f * Vector3.one;
-        //            }
-        //            m_debugBall.transform.position = new Vector3(this.transform.position.x,
-        //                MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
-        //                0);
-
-        //            if (Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint) > .1f)
-        //                transform.position = new Vector2(transform.position.x,
-        //                                            Mathf.Lerp(transform.position.y,
-        //                                                        MaxWallTouchingPoint - (m_handPos.position.y - this.transform.position.y),
-        //                                                        10 * GameMgr.DeltaTime));// / Mathf.Abs(m_handPos.position.y - MaxWallTouchingPoint)));
-        //            else
-        //            {
-        //                transform.position = new Vector2(transform.position.x, MaxWallTouchingPoint - (m_rb.position.y - m_handPos.position.y));
-        //            }
-        //            return;
-        //        }
-        //    }
-        //}
-
-        //m_rb.isKinematic = false;
-        //m_rb.simulated = true;
-        //IsTouchingLedge = false;
-    }
-
-    // ======================================================================================
     private void UpdateDashSubsystem()
     {
         if (IsDashing)
@@ -226,8 +178,9 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
         // GET INPUT
         bool doDash = m_input.GetDash() || (m_input.GetVertical() < -.5f && m_input.GetJump());
 
+        m_inAirDashPermission = IsGrounded || m_inAirDashPermission;
         // Try to Trigger Event, if possible
-        if (doDash && !IsEjecting)
+        if (doDash && !IsEjecting && m_inAirDashPermission)
             StartDash();
     }
 
@@ -250,7 +203,7 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
         // Try to Trigger Event, if possible
         if (doJump && IsGrounded)
             StartJump();
-        else if (doJump && IsWallSliding)
+        else if (doJump && !IsGrounded && IsWallSnapped) // && IsWallSliding 
             StartEjection();
     }
 
@@ -292,7 +245,8 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
             m_dashDirection = new Vector2(ForwardDir == eDirection.Right ? 1 : -1, 0);
         else
             m_dashDirection.Normalize();
-        
+
+
         if (!IsWallSnapped || m_dashDirection.x * m_snappedWallNormal.x > 0)
         {
             m_dashTargetPos = m_rb.position + m_dashDirection * m_dashDist;
@@ -304,6 +258,8 @@ public class PlayerController : PlayerRuntimeMonoBehaviour, ICollidable
 
             // stop any other action
             IsJumping = false;
+
+            m_inAirDashPermission = false;
         }
     }
 

@@ -27,7 +27,7 @@ public class Assimetric : MonoBehaviour {
 
 	public void refresh(){
 		if (reference.localScale.x != direction){
-			if (reference.localScale.x == 1.0f) anim.mesh = dirMeshes;
+			if (reference.localScale.x > 0f) anim.mesh = dirMeshes;
 			else anim.mesh = esqMeshes;
 
 			direction = reference.localScale.x;
