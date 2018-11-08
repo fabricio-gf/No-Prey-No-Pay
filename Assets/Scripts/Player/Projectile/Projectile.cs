@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
 
     // --------------------------- PROTECTED CONFIG ATTRIBUTES --------------------------- //
     protected PlayerInputCtlr.ePlayer origin;
-
+    protected float m_rotationSpeed;
 
     [Header("Dimensions")]
     protected float m_width = 0.2f;
@@ -16,6 +16,16 @@ public class Projectile : MonoBehaviour
 
     public GameObject PistolPref;
     public GameObject SaberPref;
+
+    private void Awake()
+    {
+        m_rotationSpeed = 0f;
+    }
+
+    private void Update()
+    {
+        transform.Rotate(new Vector3(0, 0, m_rotationSpeed));
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -81,5 +91,11 @@ public class Projectile : MonoBehaviour
     public void SetOrigin(PlayerInputCtlr.ePlayer player)
     {
         origin = player;
+    }
+
+
+    public void SetRotationSpeed(float rotationSpeed)
+    {
+        m_rotationSpeed = rotationSpeed;
     }
 }    
