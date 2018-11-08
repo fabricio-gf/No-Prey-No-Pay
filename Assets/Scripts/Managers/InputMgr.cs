@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using XInputDotNetPure; // Required in C#
 
 public class InputMgr : MonoBehaviour
@@ -78,6 +80,7 @@ public class InputMgr : MonoBehaviour
 
     // --------------------------------- PRIVATE ATTRIBUTES ------------------------------ //
     private static InputMgr m_manager;
+    private PlayerIndex[] m_playerBind = { PlayerIndex.One, PlayerIndex.Two, PlayerIndex.Three, PlayerIndex.Four };
 
 
     // ======================================================================================
@@ -94,7 +97,7 @@ public class InputMgr : MonoBehaviour
         Debug.Assert(m_configData != null, this.name + " - InputMgr : Missing config data");
         InitializeParams();
     }
-
+    
     // ======================================================================================
     public static bool GetButton(int _player, eButton _button)
     {
@@ -132,6 +135,8 @@ public class InputMgr : MonoBehaviour
     {
 #if UNITY_EDITOR
         Debug.Assert(m_manager != null, "InputMgr - Missing InputMgrConfig in Project");
+        if (m_manager.m_pcDebugMode && _menuButton == eMenuButton.SUBMIT)
+            return Input.GetKey(KeyCode.Return);
 #endif
 
         bool isPressed = false;
@@ -158,10 +163,10 @@ public class InputMgr : MonoBehaviour
                     isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_RIGHT)  || gamePadState.ThumbSticks.Left.X > m_manager.m_triggMinRatio;
                     break;
                 case eMenuButton.UP:
-                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_UP)     || gamePadState.ThumbSticks.Left.Y < -m_manager.m_triggMinRatio;
+                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_UP)     || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
                     break;
                 case eMenuButton.DOWN:
-                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_DOWN)   || gamePadState.ThumbSticks.Left.Y > m_manager.m_triggMinRatio;
+                    isPressed |= GetButton(gamePadState, eXBoxButton.DPAD_DOWN)   || gamePadState.ThumbSticks.Left.Y < -m_manager.m_triggMinRatio;
                     break;
                 case eMenuButton.CHANGE_COLOR:
                     isPressed |= GetButton(gamePadState, m_manager.m_changeColorButton);
@@ -216,6 +221,7 @@ public class InputMgr : MonoBehaviour
 
         return isPressed;
     }
+    
     // ======================================================================================
     public static float GetAxis(int _player, eAxis _axis)
     {
@@ -230,6 +236,9 @@ public class InputMgr : MonoBehaviour
             return 0f;
 
         GamePadState gamePadState = GamePad.GetState((PlayerIndex)(_player - 1));
+
+        if (!gamePadState.IsConnected)
+            return 0f;
 
         switch (_axis)
         {
@@ -252,6 +261,8 @@ public class InputMgr : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Assert(m_manager != null, "InputMgr - Missing InputMgrConfig in Project");
 #endif
+        if (!_gamePadState.IsConnected)
+            return false;
 
         switch (_xboxButton)
         {

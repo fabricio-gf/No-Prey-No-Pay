@@ -20,7 +20,7 @@ public class LevelLoader : MonoBehaviour {
 
 	// SERIALIZED ATTRIBUTES
 	[SerializeField] private PlayerInfo[] PlayerList = new PlayerInfo[4];	
-	[SerializeField] private UnityEngine.UI.Text StartText;
+	[SerializeField] private UnityEngine.UI.Image StartText;
 	[SerializeField] private Color StartTextActiveColor;
 	[SerializeField] private Color StartTextNonActiveColor;
 
@@ -45,7 +45,7 @@ public class LevelLoader : MonoBehaviour {
 			PlayerList[0].SelectedColor = 2;
 			PlayerList[1].isSelected = true;
 			PlayerList[1].SelectedColor = 4;
-			SceneManager.LoadScene("Tavern");
+			SceneManager.LoadScene("TavernGold");
 		}
 	}
 #endif
@@ -66,8 +66,13 @@ public class LevelLoader : MonoBehaviour {
 
 	public void StartGame(string scene){
 		if(CanStart){
+			print(scene);
 			SceneManager.LoadScene(scene);
 		}
+	}
+
+	public void GoToMenu(){
+		SceneManager.LoadScene("MenuGold");
 	}
 
 	public void AddPlayerActive(){

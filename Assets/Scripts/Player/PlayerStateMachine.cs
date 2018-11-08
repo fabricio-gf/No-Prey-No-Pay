@@ -18,9 +18,11 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
         WallEjecting,       // Wall
         //LedgeGrabbed,
         //LedgeMoving,
+        Stunned,
         Dead,
     }
 
+    public DamageBehaviour m_damageBhv;
     // ------------------------------- PROTECTED ATTRIBUTES ------------------------------ //
     protected PlayerController          m_playerCtl;
     protected PlayerAttack              m_playerAttack;
@@ -56,7 +58,11 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
     // ======================================================================================
     protected void UpdateStateMachine()
     {
-        if (m_playerAttack.IsAttacking)
+        if (m_damageBhv.IsDead)
+            State       = eStates.Dead;
+        else if (m_damageBhv.IsStunned)
+            State       = eStates.Stunned;
+        else if (m_playerAttack.IsAttacking)
             State       = eStates.Attack;
         else if (m_playerCtl.IsDashing)
             State       = eStates.Dashing;
@@ -111,6 +117,12 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
             case eStates.Dashing:
                 m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Dashing);
                 break;
+            case eStates.Dead:
+                m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Dead);
+                break;
+            case eStates.Stunned:
+                m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Stunned);
+                break;
         }
 
         switch (m_playerCtl.ForwardDir)
@@ -135,5 +147,15 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
                 m_playerAnimCtl.SetAttackType(PlayerAnimatorController.eAttackType.Saber);
                 break;
         }
+    }
+    
+    //public void MSG_Death()
+    //{
+    //    State = eStates.Dead;
+    //}
+
+    public void MSG_Respawn()
+    {
+        State = eStates.Idle;
     }
 }

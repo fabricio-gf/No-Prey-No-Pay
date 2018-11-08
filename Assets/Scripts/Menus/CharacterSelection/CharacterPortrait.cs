@@ -1,35 +1,56 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Controls the visual elements present in each character portrait in the selection screen
 /// </summary>
 public class CharacterPortrait : MonoBehaviour {
+    public enum eColor
+    {
+        YELLOW = 1,
+        RED = 2,
+        BLUE = 3,
+        GREEN = 4
+    }
 
-	// PUBLIC ATTRIBUTES
-	public GameObject[] Characters;
-	public int charIndex = 0;
-	public int colorIndex = 1;
+    // PUBLIC ATTRIBUTES
+    public eColor InitialColor;
 
-	public bool Phase1 = true;
-	public bool Phase2 = false;
-	public bool Phase3 = false;
+	[SerializeField] private Sprite[] Characters;
+	[SerializeField] private Sprite[] SuitOverlays;
+	[SerializeField] private Sprite[] ReadyOverlays;
+	[SerializeField] private GameObject Poster;
+	[SerializeField] private Image Char;
+	[SerializeField] private Image SuitOverlay;
+	[SerializeField] private Image Ready;
+	
+	[HideInInspector] public int charIndex = 0;
+	[HideInInspector] public int colorIndex = 1;
+
+	[HideInInspector] public bool Phase1 = true;
+	[HideInInspector] public bool Phase2 = false;
+	[HideInInspector] public bool Phase3 = false;
 
 	// SERIALIZED ATTRIBUTES
 	[Header("Portrait images references")]
-	[SerializeField] private GameObject PressStart;
 	[SerializeField] private GameObject Selected;
 
-	/// <summary>
-	/// Changes the color of the selected character
-	/// </summary>
-	public void ChangeColor(){
+    public void Start()
+    {
+        colorIndex = (int) InitialColor;
+    }
+
+    /// <summary>
+    /// Changes the color of the selected character
+    /// </summary>
+    public void ChangeColor(){
 		colorIndex++;
 		if(colorIndex > 4) colorIndex = 1;
 
-		Characters[charIndex].GetComponent<ChangeColor>().color = colorIndex;
-		Characters[charIndex].GetComponent<ChangeColor>().ManualValidate();
+		Char.GetComponent<ChangeColor>().color = colorIndex;
+		Char.GetComponent<ChangeColor>().ManualValidate();
 	}
 
 	/// <summary>
@@ -37,7 +58,7 @@ public class CharacterPortrait : MonoBehaviour {
 	/// </summary>
 	/// <param name="direction">1 for right, -1 for left</param>
 	public void ChangeCharacter(int direction){
-		Characters[charIndex].SetActive(false);
+
 		charIndex += direction;
 		if(charIndex >= Characters.Length){
 			charIndex = 0;
@@ -45,15 +66,18 @@ public class CharacterPortrait : MonoBehaviour {
 		else if(charIndex < 0){
 			charIndex = Characters.Length-1;
 		}
-		Characters[charIndex].SetActive(true);
+		Char.sprite = Characters[charIndex];
+		SuitOverlay.sprite = SuitOverlays[charIndex];
+		Ready.sprite = ReadyOverlays[charIndex];
+		Char.GetComponent<ChangeColor>().color = colorIndex;
+		Char.GetComponent<ChangeColor>().ManualValidate();
 	}
 
 	/// <summary>
 	/// Hides the "press Start to join" image and shows the characters
 	/// </summary>
 	public void ShowCharacter(){
-		Characters[charIndex].SetActive(true);		
-		PressStart.SetActive(false);
+		Poster.SetActive(true);		
 		Phase1 = Phase3 = false;
 		Phase2 = true;
 	}
@@ -62,8 +86,7 @@ public class CharacterPortrait : MonoBehaviour {
 	/// Hides the characters and shows the "Press start to join" image
 	/// </summary>
 	public void HideCharacter(){
-		PressStart.SetActive(true);
-		Characters[charIndex].SetActive(false);	
+		Poster.SetActive(false);	
 		Phase2 = Phase3 = false;
 		Phase1 = true;			
 	}
@@ -73,7 +96,6 @@ public class CharacterPortrait : MonoBehaviour {
 	/// </summary>
 	public void ConfirmCharacter(){
 		Selected.SetActive(true);
-		Characters[charIndex].SetActive(false);	
 		Phase1 = Phase2 = false;
 		Phase3 = true;
 	}
@@ -81,8 +103,7 @@ public class CharacterPortrait : MonoBehaviour {
 	/// <summary>
 	/// Hides the "selected" image and shows the characters
 	/// </summary>
-	public void UnconfirmCharacter(){
-		Characters[charIndex].SetActive(true);		
+	public void UnconfirmCharacter(){		
 		Selected.SetActive(false);
 		Phase1 = Phase3 = false;
 		Phase2 = true;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: SoundLib
   m_EditorClassIdentifier: 
   m_matchBkgMusic:
-    m_clip: {fileID: 8300000, guid: db724156c2505274fbc6923b0863e5fc, type: 3}
+    m_clip: {fileID: 8300000, guid: 4b49989d87a712e4caf89cc60a3317b7, type: 3}
     m_volume: 0.3
   m_fistAttkSFX:
     m_clip: {fileID: 8300000, guid: 877b330c01e34a34d993febd787fd294, type: 3}
@@ -29,3 +29,12 @@ MonoBehaviour:
   m_deathSFX:
     m_clip: {fileID: 8300000, guid: 12c4ee4640514a142b5fbb19d1d4ea7c, type: 3}
     m_volume: 1
+  m_menuBkgMusic:
+    m_clip: {fileID: 8300000, guid: d4f5b89153ab55f4b9ab1362ba599fda, type: 3}
+    m_volume: 0.3
+  m_menuClickSFX:
+    m_clip: {fileID: 0}
+    m_volume: 0
+  m_menuSwapSFX:
+    m_clip: {fileID: 0}
+    m_volume: 0

@@ -17,7 +17,7 @@ public class GameMgr : MonoBehaviour
     // ======================================================================================
     public void Start()
     {
-        IsPaused = false;
+        PlayGame();
     }
 
     // ======================================================================================
@@ -69,5 +69,12 @@ public class GameMgr : MonoBehaviour
     public static void PlayGame()
     {
         IsPaused = false;
+    }
+
+    // ======================================================================================
+    public static void EndGame()
+    {
+        IsGameOver = true;
+        PauseGame();
     }
 }

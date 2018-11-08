@@ -14,8 +14,8 @@ MonoBehaviour:
   m_gravityRatio: 4
   m_gravityMaxSpeed: 10
   m_jumpMaxSpeed: 15
-  m_ratioToWalk: 0.45
-  m_walkAcc: 9
+  m_ratioToWalk: 0.6
+  m_walkAcc: 10
   m_walkMaxSpeed: 10
   m_slideMaxSpeed: 4
   m_ejectDist: 1.6

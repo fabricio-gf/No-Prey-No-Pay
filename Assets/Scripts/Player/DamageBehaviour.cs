@@ -20,7 +20,14 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
     // ======================================================================================
     override protected void StartPhase()
     {
-        m_player = this.GetComponent<PlayerInputCtlr>();
+        m_player = this.GetComponentInParent<PlayerInputCtlr>();
+        m_nbLives = 1;
+
+        IsDead      = false;
+        IsStunned   = false;
+    }
+
+    public void RestartPhase(){
         m_nbLives = 3;
 
         IsDead      = false;
@@ -31,7 +38,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
     public void TakeDamage(PlayerInputCtlr.ePlayer player)
     {
         print(m_player.m_nbPlayer + " is taking damage");
-        if (GameMgr.IsPaused || GameMgr.IsGameOver)
+        if (!IsActive())
         {
             return;
         }
@@ -43,7 +50,9 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
 
             if (m_nbLives <= 0)
             {
-                m_player.enabled = !m_player.enabled;
+                //m_player.enabled = !m_player.enabled;
+                IsDead = true;
+                m_player.gameObject.SendMessage("MSG_Death");
                 //m_deathSFX.Play();
                 //gameReferee.addScore(100, (int)player);
                 //gameReferee.murderWitness((int)m_player.m_nbPlayer);
@@ -63,11 +72,20 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
         IsStunned = true;
         print(m_player + " is stunned");
         m_player.enabled = !m_player.enabled;
-        //m_animator.SetState(PlayerAnimatorController.eStates.Dead);
         yield return new WaitForSeconds(m_stunDuration);
         m_player.enabled = !m_player.enabled;
         IsStunned = false;
 
         this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
+    }
+
+    protected override bool IsActive()
+    {
+        return base.IsActive() && !IsDead;//GameMgr.IsPaused || GameMgr.IsGameOver || IsDead;
+    }
+
+    public void CallStun()
+    {
+        StartCoroutine(GetStunned());
     }
 }

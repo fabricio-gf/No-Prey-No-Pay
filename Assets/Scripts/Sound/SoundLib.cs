@@ -13,6 +13,7 @@ public class SoundLib : ScriptableObject
         public float        m_volume;
     }
 
+    [Header("----------- ROUND -----------")]
     [Header("BKG Musics")]
     public sSoundEvent m_matchBkgMusic;
 
@@ -23,4 +24,13 @@ public class SoundLib : ScriptableObject
 
     public sSoundEvent m_dashSFX;
     public sSoundEvent m_deathSFX;
+
+
+    [Header("----------- MENU -----------")]
+    [Header("BKG Musics")]
+    public sSoundEvent m_menuBkgMusic;
+
+    [Header("SFX")]
+    public sSoundEvent m_menuClickSFX;
+    public sSoundEvent m_menuSwapSFX;
 }

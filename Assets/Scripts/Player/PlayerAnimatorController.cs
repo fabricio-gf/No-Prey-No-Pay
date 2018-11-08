@@ -16,6 +16,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         //LedgeMoving,
         WallEjecting,
         Dead,
+        Stunned
     }
 
     public enum eDirections
@@ -50,6 +51,9 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
     // attack
     private string m_isAttackingBoolParam   = "IsAttacking";
     private string m_attackTypeParam        = "AttackType";
+
+    // stun
+    private string m_isStunnedBoolParam     = "IsStunned";
 
     // on death
     private string   m_onDeathTriggerParam  = "OnDeath";
@@ -117,6 +121,10 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
             case eStates.Dead:
                 StartDead();
                 break;
+
+            case eStates.Stunned:
+                StartStunned();
+                break;
         }
     }
 
@@ -155,6 +163,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
         m_animator.SetBool(m_isEjectingBoolParam, false);
+        m_animator.SetBool(m_isStunnedBoolParam, false);
     }
 
     // ======================================================================================
@@ -169,6 +178,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
         m_animator.SetBool(m_isEjectingBoolParam, false);
+        m_animator.SetBool(m_isStunnedBoolParam, false);
     }
 
     // ======================================================================================
@@ -183,6 +193,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
         m_animator.SetBool(m_isEjectingBoolParam, false);
+        m_animator.SetBool(m_isStunnedBoolParam, false);
     }
 
     // ======================================================================================
@@ -197,6 +208,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
         m_animator.SetBool(m_isEjectingBoolParam, false);
+        m_animator.SetBool(m_isStunnedBoolParam, false);
     }
 
     // ======================================================================================
@@ -211,6 +223,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
         m_animator.SetBool(m_isEjectingBoolParam, false);
+        m_animator.SetBool(m_isStunnedBoolParam, false);
     }
 
     // ======================================================================================
@@ -225,6 +238,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
         m_animator.SetBool(m_isEjectingBoolParam, false);
+        m_animator.SetBool(m_isStunnedBoolParam, false);
     }
 
     // ======================================================================================
@@ -239,6 +253,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
         m_animator.SetBool(m_isEjectingBoolParam, false);
+        m_animator.SetBool(m_isStunnedBoolParam, false);
     }
 
     // ======================================================================================
@@ -253,25 +268,17 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
         m_animator.SetBool(m_isEjectingBoolParam, true);
+        m_animator.SetBool(m_isStunnedBoolParam, false);
     }
-
+    
     // ======================================================================================
-    protected void StartLedgeGrabbed()
+    protected void StartDead()
     {
-        m_animator.SetBool(m_isDashingBoolParam, false);
-        m_animator.SetBool(m_isFallingBoolParam, false);
-        m_animator.SetBool(m_isJumpingBoolParam, false);
-        m_animator.SetBool(m_isRunningBoolParam, false);
-        m_animator.SetBool(m_isAttackingBoolParam, false);
-        m_animator.SetBool(m_isSlidingBoolParam, false);
-        m_animator.SetBool(m_isLedgeGrabbed, true);
-        m_animator.SetBool(m_isLedgeMoving, false);
-        m_animator.SetBool(m_isEjectingBoolParam, false);
-        // TODO
+        m_animator.SetTrigger(m_onDeathTriggerParam);
     }
 
     // ======================================================================================
-    protected void StartLedgeMoving()
+    protected void StartStunned()
     {
         m_animator.SetBool(m_isDashingBoolParam, false);
         m_animator.SetBool(m_isFallingBoolParam, false);
@@ -280,15 +287,9 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_animator.SetBool(m_isAttackingBoolParam, false);
         m_animator.SetBool(m_isSlidingBoolParam, false);
         m_animator.SetBool(m_isLedgeGrabbed, false);
-        m_animator.SetBool(m_isLedgeMoving, true);
+        m_animator.SetBool(m_isLedgeMoving, false);
         m_animator.SetBool(m_isEjectingBoolParam, false);
-        // TODO
-    }
-
-    // ======================================================================================
-    protected void StartDead()
-    {
-        m_animator.SetTrigger(m_onDeathTriggerParam);
+        m_animator.SetBool(m_isStunnedBoolParam, true);
     }
 
     // ======================================================================================

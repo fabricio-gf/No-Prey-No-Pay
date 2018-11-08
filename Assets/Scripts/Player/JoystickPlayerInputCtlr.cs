@@ -11,8 +11,25 @@ public class JoystickPlayerInputCtlr : PlayerInputCtlr
     private bool m_attackTrigger    = false;
     private bool m_grabTrigger      = false;
 
+    private bool m_waitingStart     = true;
+
     // ======================================================================================
     // PUBLIC MEMBERS
+    // ======================================================================================
+    protected override void StartPhase()
+    {
+        base.StartPhase();
+        m_waitingStart = true;
+
+        m_dashTrigger   = false;
+        m_jumpTrigger   = false;
+        m_tossTrigger   = false;
+        m_attackTrigger = false;
+        m_grabTrigger   = false;
+}
+
+    // ======================================================================================
+    // PROTECTED MEMBERS
     // ======================================================================================
     override protected void UpdatePhase()
     {
@@ -87,12 +104,24 @@ public class JoystickPlayerInputCtlr : PlayerInputCtlr
     // ======================================================================================
     override public float GetHorizontal()
     {
-        return InputMgr.GetAxis((int) m_nbPlayer, InputMgr.eAxis.HORIZONTAL);
+        return IsActive() ? InputMgr.GetAxis((int) m_nbPlayer, InputMgr.eAxis.HORIZONTAL) : 0f;
     }
 
     // ======================================================================================
     override public float GetVertical()
     {
-        return InputMgr.GetAxis((int) m_nbPlayer, InputMgr.eAxis.VERTICAL);
+        return IsActive() ? InputMgr.GetAxis((int) m_nbPlayer, InputMgr.eAxis.VERTICAL) : 0f;
+    }
+
+    // ======================================================================================
+    public void MSG_StartRound()
+    {
+        m_waitingStart = false;
+    }
+
+    // ======================================================================================
+    protected override bool IsActive()
+    {
+        return base.IsActive() && !m_waitingStart;
     }
 }

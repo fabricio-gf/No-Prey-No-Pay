@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1211,6 +1211,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &132961944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1172074447708136, guid: b96589adb7f33cb4f9afe2d310210de1,
+    type: 2}
+  m_PrefabInternal: {fileID: 491008438}
+--- !u!114 &132961956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 132961944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 437618fcbbf464e4ba01061df3e9e1b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponList: []
+  Pistol: {fileID: 1456881402690132, guid: 2bb9aca08dc8b4d4e9687b50faf3d605, type: 2}
+  Saber: {fileID: 1630203810340552, guid: 564905977822e054aa3de05529d3a7a5, type: 2}
 --- !u!1 &133180242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,6 +1809,12 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 114022378633654854, guid: b96589adb7f33cb4f9afe2d310210de1,
+        type: 2}
+      propertyPath: ProjectilePrefab
+      value: 
+      objectReference: {fileID: 1317788579653328, guid: 9506392adbd31534e9bdfbb396edc1c0,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
   m_IsPrefabAsset: 0
@@ -2811,7 +2836,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   matchInfo: {fileID: 11400000, guid: 7a8db22a40ca87e49b34d17a6789a40a, type: 2}
-  roundStarter: {fileID: 1338340401}
   PlayerInfos:
   - {fileID: 11400000, guid: 2c699aa339d8de94d928d7def31c78c9, type: 2}
   - {fileID: 11400000, guid: 4c83777d5c1623f4f86ac488996cf395, type: 2}
@@ -3168,15 +3192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6f6b0c563ed624da77dfce299e35b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpawner: {fileID: 1230953579}
   countdown: {fileID: 1797312884}
-  PlayersToSpawn:
-  - {fileID: 11400000, guid: 2c699aa339d8de94d928d7def31c78c9, type: 2}
-  - {fileID: 11400000, guid: 4c83777d5c1623f4f86ac488996cf395, type: 2}
-  - {fileID: 11400000, guid: b8668df8dd58eb746b2822a22c95189f, type: 2}
-  - {fileID: 11400000, guid: aaea152946e3dfc418574f288d6a4cd6, type: 2}
-  StockLimit: 0
-  TimeLimit: 0
 --- !u!1 &1422350321
 GameObject:
   m_ObjectHideFlags: 0
@@ -3286,9 +3302,6 @@ MonoBehaviour:
   StockLimit: 0
   Display: {fileID: 0}
   VictoryWindow: {fileID: 274802487}
-  matchReferee: {fileID: 0}
-  NumOfPlayers: 0
-  PlayerParentObject: {fileID: 768566840}
 --- !u!1 &1641911903
 GameObject:
   m_ObjectHideFlags: 0
@@ -3372,7 +3385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_objectsToSpawn:
   - {fileID: 1456881402690132, guid: 2bb9aca08dc8b4d4e9687b50faf3d605, type: 2}
-  - {fileID: 1691850874402382, guid: 564905977822e054aa3de05529d3a7a5, type: 2}
+  - {fileID: 1630203810340552, guid: 564905977822e054aa3de05529d3a7a5, type: 2}
   m_spawnCooldown: 5
 --- !u!1 &1742522335
 GameObject:

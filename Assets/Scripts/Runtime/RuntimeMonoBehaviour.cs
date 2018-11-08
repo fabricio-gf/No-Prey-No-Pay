@@ -21,22 +21,8 @@ public class RuntimeMonoBehaviour : MonoBehaviour
     // ======================================================================================
     public void Update ()
     {
-        // handle pause state
-        if (m_isPaused && (!GameMgr.IsPaused) && IsActive())
-        {
-            m_isPaused = false;
-            OnPlay();
-        }
-        else if (!m_isPaused && (GameMgr.IsPaused || !IsActive()))
-        {
-            m_isPaused = true;
-            OnPause();
-        }
-
-        // return if paused or inactive
-        if (m_isPaused)
+        if (IsPaused())
             return;
-
 
         UpdatePhase();
 	}
@@ -44,7 +30,7 @@ public class RuntimeMonoBehaviour : MonoBehaviour
     // ======================================================================================
     public void FixedUpdate()
     {
-        if (GameMgr.IsPaused || !IsActive())
+        if (IsPaused())
             return;
 
         FixedUpdatePhase();
@@ -88,5 +74,26 @@ public class RuntimeMonoBehaviour : MonoBehaviour
     protected virtual void OnPlay()
     {
 
+    }
+
+    // ======================================================================================
+    // PROTECTED MEMBERS
+    // ======================================================================================
+    protected bool IsPaused()
+    {
+        // handle pause state
+        if (m_isPaused && (!GameMgr.IsPaused) && IsActive())
+        {
+            m_isPaused = false;
+            OnPlay();
+        }
+        else if (!m_isPaused && (GameMgr.IsPaused || !IsActive()))
+        {
+            m_isPaused = true;
+            OnPause();
+        }
+
+        // return if paused or inactive
+        return m_isPaused;
     }
 }
