@@ -9,6 +9,7 @@ public class WeaponPick : MonoBehaviour {
     // player trying to grab
     private PlayerInputCtlr m_input;
     private PlayerAttack    m_attack;
+    private WeaponWatcher   m_weapon;
 
     // Weapons list
     public List<GameObject> WeaponList = new List<GameObject>();
@@ -23,8 +24,10 @@ public class WeaponPick : MonoBehaviour {
     public GameObject Pistol;
     public GameObject Saber;
 
+
     // Use this for initialization
     void Start () {
+        m_weapon = this.GetComponentInChildren<WeaponWatcher>();
         m_input = this.GetComponent<PlayerInputCtlr>();
         m_attack = this.GetComponent<PlayerAttack>();
     }
@@ -40,6 +43,19 @@ public class WeaponPick : MonoBehaviour {
             }
         }
         IsGrabing = InputMgr.GetButton((int)m_input.m_nbPlayer, InputMgr.eButton.GRAB);
+
+        switch (m_attack.EquipWeap)
+        {
+            case PlayerAttack.eWeapon.Pistol:
+                m_weapon.PickPistol();
+                break;
+            case PlayerAttack.eWeapon.Saber:
+                m_weapon.PickSaber();
+                break;
+            default:
+                m_weapon.Drop();
+                break;
+        }
     }
 
     private void PickupWeapon()
@@ -84,6 +100,7 @@ public class WeaponPick : MonoBehaviour {
 
             obj.GetComponent<Rigidbody2D>().velocity = new Vector3(1f, 5f, 0);
             obj.GetComponent<Rigidbody2D>().gravityScale = 1;
+            obj.GetComponent<Pickable>().SetRotationSpeed(10f);
             Destroy(obj, 5f);
 
             m_attack.ReloadShots();

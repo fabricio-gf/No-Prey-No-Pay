@@ -102,12 +102,12 @@ TextureImporter:
       name: npnp_jack_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 161
-        width: 50
-        height: 80
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 5
+        y: 156
+        width: 60
+        height: 85
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5294118}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -122,12 +122,12 @@ TextureImporter:
       name: npnp_jack_1
       rect:
         serializedVersion: 2
-        x: 125
-        y: 174
-        width: 73
-        height: 55
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 120
+        y: 169
+        width: 83
+        height: 65
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -142,12 +142,12 @@ TextureImporter:
       name: npnp_jack_2
       rect:
         serializedVersion: 2
-        x: 249
-        y: 155
-        width: 80
-        height: 83
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 244.00002
+        y: 150
+        width: 89.999985
+        height: 91
+      alignment: 9
+      pivot: {x: 0.49999994, y: 0.510989}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: npnp_jack_3
       rect:
         serializedVersion: 2
-        x: 339
-        y: 158
-        width: 37
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 334
+        y: 153
+        width: 47
+        height: 27
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -183,11 +183,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 97
-        width: 23
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        y: 92
+        width: 28
+        height: 56
+      alignment: 9
+      pivot: {x: 0.4107143, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,12 +202,12 @@ TextureImporter:
       name: npnp_jack_5
       rect:
         serializedVersion: 2
-        x: 125
-        y: 109
-        width: 30
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 120
+        y: 104
+        width: 40
+        height: 48
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -222,12 +222,12 @@ TextureImporter:
       name: npnp_jack_6
       rect:
         serializedVersion: 2
-        x: 209
-        y: 97
-        width: 36
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 204
+        y: 92
+        width: 46
+        height: 66
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -242,12 +242,12 @@ TextureImporter:
       name: npnp_jack_7
       rect:
         serializedVersion: 2
-        x: 398
-        y: 115
-        width: 22
-        height: 58
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 393
+        y: 110
+        width: 29
+        height: 68
+      alignment: 9
+      pivot: {x: 0.55172414, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -262,12 +262,12 @@ TextureImporter:
       name: npnp_jack_8
       rect:
         serializedVersion: 2
-        x: 4
-        y: 48
-        width: 37
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 43
+        width: 46
+        height: 42
+      alignment: 9
+      pivot: {x: 0.48913044, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -282,12 +282,12 @@ TextureImporter:
       name: npnp_jack_9
       rect:
         serializedVersion: 2
-        x: 55
-        y: 4
-        width: 45
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 50
+        y: 0
+        width: 55
+        height: 73
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.49315068}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -302,12 +302,12 @@ TextureImporter:
       name: npnp_jack_10
       rect:
         serializedVersion: 2
-        x: 122
-        y: 25
-        width: 43
-        height: 61
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 116.99999
+        y: 20
+        width: 53.000008
+        height: 71
+      alignment: 9
+      pivot: {x: 0.50000006, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -322,12 +322,12 @@ TextureImporter:
       name: npnp_jack_11
       rect:
         serializedVersion: 2
-        x: 220
-        y: 39
-        width: 31
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 215
+        y: 34
+        width: 40.999985
+        height: 40
+      alignment: 9
+      pivot: {x: 0.5000002, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -342,12 +342,12 @@ TextureImporter:
       name: npnp_jack_12
       rect:
         serializedVersion: 2
-        x: 277
-        y: 50
-        width: 40
-        height: 56
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 272
+        y: 45
+        width: 50
+        height: 66
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -362,12 +362,12 @@ TextureImporter:
       name: npnp_jack_13
       rect:
         serializedVersion: 2
-        x: 193
-        y: 4
-        width: 37
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 188
+        y: 0
+        width: 47
+        height: 26
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.48076925}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -382,12 +382,12 @@ TextureImporter:
       name: npnp_jack_14
       rect:
         serializedVersion: 2
-        x: 314
+        x: 307.76993
         y: 0
-        width: 108
-        height: 41
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 114.23007
+        height: 47.871677
+      alignment: 9
+      pivot: {x: 0.52726984, y: 0.42822814}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -409,6 +409,6 @@ TextureImporter:
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
-  userData: 
+  userData: 636773007367955673
   assetBundleName: 
   assetBundleVariant: 

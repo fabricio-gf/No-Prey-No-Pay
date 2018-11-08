@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickable : MonoBehaviour {
+public class Pickable : MonoBehaviour
+{
+    private float m_rotationSpeed;
 
     [HideInInspector]
     public enum WeaponType
@@ -16,6 +18,7 @@ public class Pickable : MonoBehaviour {
 
     private void Awake()
     {
+        m_rotationSpeed = 0;
         switch (name)
         {
             case "Gun(Clone)":
@@ -26,6 +29,12 @@ public class Pickable : MonoBehaviour {
                 break;
         }
     }
+
+    private void Update()
+    {
+        transform.Rotate(new Vector3(0, 0, m_rotationSpeed));
+    }
+
     //void OnTriggerEnter2D(Collider2D other){
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -33,6 +42,8 @@ public class Pickable : MonoBehaviour {
         {
             other.GetComponent<WeaponPick>().WeaponList.Add(this.gameObject);
         }
+        else
+            m_rotationSpeed = 0;
     }
 
     //	void OnTriggerExit2D(Collider2D other){
@@ -43,4 +54,10 @@ public class Pickable : MonoBehaviour {
             other.GetComponent<WeaponPick>().WeaponList.Remove(this.gameObject);
         }
     }
+
+    public void SetRotationSpeed (float rotationSpeed)
+    {
+        m_rotationSpeed = rotationSpeed;
+    }
+
 }

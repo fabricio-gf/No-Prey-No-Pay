@@ -21,6 +21,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
     // ------------------------------------ PUBLIC --------------------------------------- //
     public bool stompEnable = true;
+    public bool canShoot { get { return m_bulletsShot < m_numberOfBullets; } }
 
     // --------------------------- PROTECTED CONFIG ATTRIBUTES --------------------------- //
     // attack params
@@ -310,6 +311,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
             obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
             obj.GetComponent<Rigidbody2D>().velocity = new Vector3(m_attackDirection.x * 10f, m_attackDirection.y * 9f + 1f, 0);
+            obj.GetComponent<Projectile>().SetRotationSpeed(10f);
 
             EquipWeap = eWeapon.Fists;
 
