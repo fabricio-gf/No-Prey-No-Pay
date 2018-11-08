@@ -39,11 +39,7 @@ public class SpawnMgr : RuntimeMonoBehaviour
             m_timer -= GameMgr.DeltaTime;
             if (m_timer <= 0)
             {
-                Object      objToSpawn      = m_objectsToSpawn[Random.Range(0, m_objectsToSpawn.Length)];
-                SpawnPoint  pointToSpawn    = spawnPoints[Random.Range(0, spawnPoints.Count)];
-
-                pointToSpawn.SpawnObj(objToSpawn);
-
+                SpawnRandomObj(spawnPoints[Random.Range(0, spawnPoints.Count)]);
                 m_timer = m_spawnCooldown;
             }
         }
@@ -56,8 +52,11 @@ public class SpawnMgr : RuntimeMonoBehaviour
         Debug.Assert(m_manager != null, "SpawnMgr - Manager missing in Scene!");
 #endif
 
-        if (_spawnPoint != null)
-            m_manager.m_spawnPoints.Add(_spawnPoint);
+        if (_spawnPoint == null)
+            return;
+
+        m_manager.m_spawnPoints.Add(_spawnPoint);
+        m_manager.SpawnRandomObj(_spawnPoint);      // automatic 1st spawn
     }
 
 
@@ -73,5 +72,12 @@ public class SpawnMgr : RuntimeMonoBehaviour
                 spawnPoints.Add(sp);
 
         return spawnPoints;
+    }
+
+    private void SpawnRandomObj(SpawnPoint _point)
+    {
+        Object objToSpawn       = m_objectsToSpawn[Random.Range(0, m_objectsToSpawn.Length)];
+
+        _point.SpawnObj(objToSpawn);
     }
 }
