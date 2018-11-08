@@ -18,8 +18,8 @@ MonoBehaviour:
   m_walkAcc: 10
   m_walkMaxSpeed: 10
   m_slideMaxSpeed: 4
-  m_ejectDist: 1.6
-  m_ejectMaxSpeed: 10
+  m_ejectDist: 2
+  m_ejectMaxSpeed: 12
   m_dashDist: 2
   m_dashMaxSpeed: 30
   m_walkMinSpeedRatio: 0.05
