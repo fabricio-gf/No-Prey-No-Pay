@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Other/Menu.unity
     guid: 302c7e6389906b84fbb37f6b314f586e
   - enabled: 1
-    path: Assets/Scenes/Maps/SampleScene.unity
+    path: Assets/Scenes/Test/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Maps/Tavern.unity
+    path: Assets/Scenes/Gold/TavernGold.unity
     guid: 9a2a2829d9373ca4c898cd5cbe78111a
+  - enabled: 1
+    path: Assets/Scenes/Gold/MenuGold.unity
+    guid: 8b8f395b13e45394abdf1211e7062bfd
   m_configObjects: {}

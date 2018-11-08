@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
             }
             else
             {
-                other.GetComponent<DamageBehaviour>().CallStun();
+                other.GetComponentInChildren<DamageBehaviour>().CallStun();
                 GameObject obj;
                 switch (name)
                 {

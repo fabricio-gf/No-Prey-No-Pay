@@ -19,6 +19,9 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         Saber
     };
 
+    // ------------------------------------ PUBLIC --------------------------------------- //
+    public bool stompEnable = true;
+
     // --------------------------- PROTECTED CONFIG ATTRIBUTES --------------------------- //
     // attack params
     protected float   m_attackCooldown  = 0.4f;
@@ -37,6 +40,8 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // attack: Pistol
     public GameObject ThrowPistolPrefab;
     public GameObject ProjectilePrefab;
+    protected int     m_numberOfBullets;
+    protected int     m_bulletsShot;
     protected Vector2 ThrowPistolOffset;
     protected Vector2 PistolOffset;
 
@@ -50,7 +55,6 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // attack origin
     private PlayerInputCtlr     m_input;
     private PlayerController    m_control;
-    private LayerMask           playerLayer;
 
     // attack subsystem
     private Vector2             m_attackDirection = Vector2.zero;
@@ -69,8 +73,6 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         m_input = this.GetComponent<PlayerInputCtlr>();
         IsAttacking = false;
 
-        playerLayer = LayerMask.GetMask("Players");
-
         EquipWeap = eWeapon.Fists;
 
         PunchOffset.x = 0.75f;
@@ -85,6 +87,8 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         SaberHitboxSize.x = 0.75f;
         SaberHitboxSize.y = 0.3f;
 
+        m_numberOfBullets = 1;
+        m_bulletsShot = 0;
         PistolOffset.x = 0.7f;
         PistolOffset.y = 0.75f;
         ThrowPistolOffset.x = 1f;
@@ -101,8 +105,9 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     {
         // Attack Subsystem : triggers Attack and generates hitboxes
         UpdateAttackSubsystem();
-        //Stomp Subsystem : creates the stomp hitbox if necessary
-        UpdateStompSubsystem();
+        if(stompEnable)
+            //Stomp Subsystem : creates the stomp hitbox if necessary
+            UpdateStompSubsystem();
         //Throw Subsystem : Instantiates a throwable projectile and changes weapons
         UpdateThrowSubsystem();
     }
@@ -254,11 +259,16 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     {
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
-        GameObject obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(transform.localScale.x * PistolOffset.x, PistolOffset.y, 0), Quaternion.identity);
-        obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
-        obj.GetComponent<Rigidbody2D>().velocity = new Vector3(m_attackDirection.x * 30f, m_attackDirection.y * 25f, 0);
+        if(m_bulletsShot < m_numberOfBullets)
+        {
+            m_bulletsShot++;
+            GameObject obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(m_attackDirection.x * PistolOffset.x,m_attackDirection.y * 0.8f + PistolOffset.y, 0), Quaternion.identity);
+            obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
+            obj.GetComponent<Rigidbody2D>().velocity = new Vector3(m_attackDirection.x * 30f, m_attackDirection.y * 25f, 0);
 
-        Destroy(obj, 2.0f);
+            Destroy(obj, 2.0f);
+        }
+        
         this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
 
         StartCoroutine(AttackDelay());
@@ -267,6 +277,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
     private void ThrowWeapon()
     {
+        m_bulletsShot = 0;
         m_attackDirection = new Vector2(m_input.GetHorizontal(), 0);
 
         if (m_attackDirection.sqrMagnitude == 0)
@@ -306,6 +317,11 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
             StartCoroutine(AttackDelay());
         }
+    }
+
+    public void ReloadShots()
+    {
+        m_bulletsShot = 0;
     }
 
     // ======================================================================================

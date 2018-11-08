@@ -44,6 +44,11 @@ public class WeaponPick : MonoBehaviour {
 
     private void PickupWeapon()
     {
+        if(WeaponList[0] == null)
+        {
+            WeaponList.RemoveAt(0);
+            return;
+        }
         int currWeapon = 0;
 
         float closestDist = Vector2.Distance(this.transform.position, WeaponList[0].transform.position);
@@ -81,6 +86,7 @@ public class WeaponPick : MonoBehaviour {
             obj.GetComponent<Rigidbody2D>().gravityScale = 1;
             Destroy(obj, 5f);
 
+            m_attack.ReloadShots();
             m_attack.EquipWeap = (PlayerAttack.eWeapon)WeaponList[currWeapon].GetComponent<Pickable>().m_weapnType;
             WeaponObject = WeaponList[currWeapon];
             WeaponList.Remove(WeaponObject);
