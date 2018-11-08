@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
     // ------------------------------- PROTECTED ATTRIBUTES ------------------------------ //
     protected int   m_nbLives;
-    protected float m_stunDuration = 0.5f;
+    protected float m_stunDuration = 1f;
 
     // -------------------------------- PRIVATE ATTRIBUTES ------------------------------- //
     // damaged player
