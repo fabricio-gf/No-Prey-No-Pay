@@ -84,6 +84,7 @@ public class WeaponPick : MonoBehaviour {
 
             obj.GetComponent<Rigidbody2D>().velocity = new Vector3(1f, 5f, 0);
             obj.GetComponent<Rigidbody2D>().gravityScale = 1;
+            obj.GetComponent<Pickable>().speed=10f;
             Destroy(obj, 5f);
 
             m_attack.ReloadShots();

@@ -13,10 +13,13 @@ public class Pickable : MonoBehaviour
         SABER
     };
 
+    public float speed;
+
     public WeaponType m_weapnType { get; private set; }
 
     private void Awake()
     {
+        speed = 0f;
         switch (name)
         {
             case "Gun(Clone)":
@@ -28,12 +31,22 @@ public class Pickable : MonoBehaviour
         }
     }
     
+    private void Update()
+    {
+        transform.Rotate(new Vector3(0, 0, speed));
+    }
+
     //void OnTriggerEnter2D(Collider2D other){
     void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.CompareTag("Player"))
         {
             other.GetComponent<WeaponPick>().WeaponList.Add(this.gameObject);
+        }
+        else
+        {
+            speed = 0;
         }
     }
 

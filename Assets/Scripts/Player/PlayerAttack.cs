@@ -310,7 +310,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
             obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
             obj.GetComponent<Rigidbody2D>().velocity = new Vector3(m_attackDirection.x * 10f, m_attackDirection.y * 9f + 1f, 0);
-
+            obj.GetComponent<Projectile>().SetRotationSpeed(-20f);
             EquipWeap = eWeapon.Fists;
 
             //this.gameObject.SendMessage("MSG_OnExclusiveEventEnd", this);
