@@ -61,6 +61,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
             else
             {
                 // m_damageSFX.Play();
+                m_player.gameObject.SendMessage("MSG_Damage");
             }
         }
     }
@@ -68,6 +69,7 @@ public class DamageBehaviour : PlayerRuntimeMonoBehaviour {
     public IEnumerator GetStunned()
     {
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
+        m_player.gameObject.SendMessage("MSG_Stun", m_stunDuration);
 
         IsStunned = true;
         print(m_player + " is stunned");

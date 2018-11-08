@@ -252,6 +252,18 @@ public class InputMgr : MonoBehaviour
         return 0f;
     }
 
+    // ======================================================================================
+    public static void VibrateController(int _player, float _leftForce, float _rightForce)
+    {
+#if UNITY_EDITOR
+        Debug.Assert(m_manager != null, "InputMgr - Missing InputMgrConfig in Project");
+#endif
+
+        if (_player > 4 || _player <= 0)
+            return;
+
+        GamePad.SetVibration((PlayerIndex) _player - 1, _leftForce, _rightForce);
+    }
 
     // ======================================================================================
     // PRIVATE METHODS
