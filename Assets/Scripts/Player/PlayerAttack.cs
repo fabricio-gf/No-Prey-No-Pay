@@ -20,7 +20,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     };
 
     // ------------------------------------ PUBLIC --------------------------------------- //
-    public bool stompEnable = true;
+    public bool stompEnable = false;
 
     // --------------------------- PROTECTED CONFIG ATTRIBUTES --------------------------- //
     // attack params
@@ -75,17 +75,17 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
         EquipWeap = eWeapon.Fists;
 
-        PunchOffset.x = 0.75f;
+        PunchOffset.x = 1.0f;
         PunchOffset.y = 0.75f;
-        PunchHitboxSize.x = 0.3f;
-        PunchHitboxSize.y = 0.5f;
+        PunchHitboxSize.x = 0.4f;
+        PunchHitboxSize.y = 0.8f;
 
         SaberOffset.x = 0.85f;
-        SaberOffset.y = 0.75f;
+        SaberOffset.y = 0.95f;
         ThrowSaberOffset.x = 1.1f;
         ThrowSaberOffset.y = 0.75f;
-        SaberHitboxSize.x = 0.75f;
-        SaberHitboxSize.y = 0.3f;
+        SaberHitboxSize.x = 1.1f;
+        SaberHitboxSize.y = 1.3f;
 
         m_numberOfBullets = 1;
         m_bulletsShot = 0;
@@ -95,8 +95,8 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         ThrowPistolOffset.y = 1.35f;
 
         StompOffset.x = 0;
-        StompOffset.y = 0.1f;
-        StompHitboxSize.x = 0.35f;
+        StompOffset.y = 0.3f;
+        StompHitboxSize.x = 0.20f;
         StompHitboxSize.y = 0.01f;
     }
 
