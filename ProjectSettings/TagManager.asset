@@ -48,3 +48,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UIPannels
+    uniqueID: 3233545749
+    locked: 0
+  - name: UIModels
+    uniqueID: 2020859927
+    locked: 0

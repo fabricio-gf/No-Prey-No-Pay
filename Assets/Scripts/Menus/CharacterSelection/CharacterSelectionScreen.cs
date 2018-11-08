@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Controls general behaviour in character selection screen, like inputs
 /// </summary>
-public class CharacterSelectionScreen : MonoBehaviour {
+public class CharacterSelectionScreen : ScenePicker {
 
 	// PUBLIC ATTRIBUTES
 	public CharacterPortrait[] Portraits;
@@ -135,7 +135,7 @@ public class CharacterSelectionScreen : MonoBehaviour {
 	private void GetGameStart(){
 		for(int i = 0; i < 4; i++){
 			if(ReadyPlayers[i] && m_input.GetPause(i)){
-				LevelLoader.instance.StartGame("TavernGold");  //Temp string, gonna use scriptable object later or reference in level loader
+				LevelLoader.instance.StartGame(scenePath);  //Temp string, gonna use scriptable object later or reference in level loader
 			}
 		}
 	}
