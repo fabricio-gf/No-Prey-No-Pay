@@ -11,6 +11,7 @@ public class MatchVictory : MonoBehaviour {
 	void Update(){
 		if(m_input.GetSubmit()){
 			Statistics.instance.DisplayStats();
+			DeactivateVictoryWindow();
 		}
 	}
 
