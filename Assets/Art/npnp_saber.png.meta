@@ -90,11 +90,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 45.5
+        y: 43.5
         width: 174
-        height: 45.5
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 47.5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.52105266}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -110,11 +110,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0.5
+        y: 0
         width: 174
-        height: 45.5
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 48.5
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47938144}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -136,6 +136,6 @@ TextureImporter:
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
-  userData: 
+  userData: 636769480705466814
   assetBundleName: 
   assetBundleVariant: 
