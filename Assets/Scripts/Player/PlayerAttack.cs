@@ -81,7 +81,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         EquipWeap = eWeapon.Fists;
 
         PunchOffset.x = 1f;
-        PunchOffset.y = 1f;
+        PunchOffset.y = 0.8f;
         PunchHitboxSize.x = 0.6f;
         PunchHitboxSize.y = 0.6f;
         m_fistStartDelay = 0.3f;
@@ -237,7 +237,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     {
         yield return new WaitForSeconds(m_fistStartDelay);
 
-        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(m_attackDirection.x * PunchOffset.x, m_attackDirection.y * 1 + transform.localScale.y * PunchOffset.y, 0), new Vector3(PunchHitboxSize.x, PunchHitboxSize.y, 0.4f));
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(m_attackDirection.x * PunchOffset.x, m_attackDirection.y * 1.3f + transform.localScale.y * PunchOffset.y, 0), new Vector3(PunchHitboxSize.x, PunchHitboxSize.y, 0.4f));
         for (int i = 0; i < hitTargets.Length; i++)
         {
             if (hitTargets[i].GetComponent<DamageBehaviour>() != null)
