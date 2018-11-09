@@ -253,7 +253,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
         yield return new WaitForSeconds(m_saberStartDelay);
-        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(m_attackDirection.x * SaberOffset.x, m_attackDirection.y * 1 + transform.localScale.y * SaberOffset.y, 0), new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 0.4f));
+        Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(m_attackDirection.x * SaberOffset.x, m_attackDirection.y * 1.1f + transform.localScale.y * SaberOffset.y, 0), new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 0.4f));
         
         for (int i = 0; i < hitTargets.Length; i++)
         {
@@ -273,7 +273,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         if (m_bulletsShot < m_numberOfBullets)
         {
             m_bulletsShot++;
-            GameObject obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(m_attackDirection.x * PistolOffset.x,m_attackDirection.y * 0.8f + PistolOffset.y, 0), Quaternion.identity);
+            GameObject obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(m_attackDirection.x * PistolOffset.x,m_attackDirection.y * 1.2f + PistolOffset.y, 0), Quaternion.identity);
             obj.GetComponent<Projectile>().SetOrigin(this.m_input.m_nbPlayer);
             obj.GetComponent<Rigidbody2D>().velocity = new Vector3(m_attackDirection.x * 30f, m_attackDirection.y * 25f, 0);
 
