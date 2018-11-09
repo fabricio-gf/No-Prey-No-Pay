@@ -54,6 +54,6 @@ public class PlayerAutomaticStateMachine : MonoBehaviour
     {
         m_animator.SetState(m_states[m_actualState].m_state);
         m_animator.SetDirection(m_states[m_actualState].m_facingDir);
-        m_animator.StartAttack(m_states[m_actualState].m_attkType, m_states[m_actualState].m_upAttkDir, false, false);
+        m_animator.StartAttack(m_states[m_actualState].m_attkType, m_states[m_actualState].m_upAttkDir, false);
     }
 }

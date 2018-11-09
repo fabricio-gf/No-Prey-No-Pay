@@ -51,6 +51,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
     private string m_isAttackingBoolParam   = "IsAttacking";
     private string m_attackTypeParam        = "AttackType";
     private string m_upDirectionParam       = "UpDirection";
+    private string m_onAirParam             = "OnAirInAttk";
 
     // stun
     private string m_isStunnedBoolParam     = "IsStunned";
@@ -149,11 +150,10 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
     }
 
     // ======================================================================================
-    public void StartAttack(eAttackType _attackType, float _upDirection, bool _jumping, bool _falling)
+    public void StartAttack(eAttackType _attackType, float _upDirection, bool _onAir)
     {
         m_animator.SetBool(m_isAttackingBoolParam, true);
-        m_animator.SetBool(m_isJumpingBoolParam, _jumping);
-        m_animator.SetBool(m_isFallingBoolParam, _falling);
+        m_animator.SetFloat(m_onAirParam, _onAir ? 1.0f : 0.0f);
 
         m_animator.SetFloat(m_attackTypeParam, (int)_attackType);
         m_animator.SetFloat(m_upDirectionParam, _upDirection);

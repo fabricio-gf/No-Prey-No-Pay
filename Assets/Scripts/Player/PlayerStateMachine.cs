@@ -94,20 +94,17 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
         switch (State)
         {
             case eStates.Attack:
-
-                bool isJumping = m_playerCtl.IsJumping && m_playerCtl.Velocity.y > 0;
-                bool isFalling = m_playerCtl.IsJumping && m_playerCtl.Velocity.y <= 0;
-
+                
                 switch (m_playerAttack.EquipWeap)
                 {
                     case PlayerAttack.eWeapon.Fists:
-                        m_playerAnimCtl.StartAttack(PlayerAnimatorController.eAttackType.Fists, m_playerAttack.AttackDirection.y, isJumping, isFalling);
+                        m_playerAnimCtl.StartAttack(PlayerAnimatorController.eAttackType.Fists, m_playerAttack.AttackDirection.y, m_playerCtl.IsJumping);
                         break;
                     case PlayerAttack.eWeapon.Pistol:
-                        m_playerAnimCtl.StartAttack(PlayerAnimatorController.eAttackType.Pistol, m_playerAttack.AttackDirection.y, isJumping, isFalling);
+                        m_playerAnimCtl.StartAttack(PlayerAnimatorController.eAttackType.Pistol, m_playerAttack.AttackDirection.y, m_playerCtl.IsJumping);
                         break;
                     case PlayerAttack.eWeapon.Saber:
-                        m_playerAnimCtl.StartAttack(PlayerAnimatorController.eAttackType.Saber, m_playerAttack.AttackDirection.y, isJumping, isFalling);
+                        m_playerAnimCtl.StartAttack(PlayerAnimatorController.eAttackType.Saber, m_playerAttack.AttackDirection.y, m_playerCtl.IsJumping);
                         break;
                 }
                 break;
