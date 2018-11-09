@@ -122,7 +122,6 @@ GameObject:
   - component: {fileID: 223211040106399132}
   - component: {fileID: 114740383735412650}
   - component: {fileID: 114419378559096752}
-  - component: {fileID: 114389804004743374}
   m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
@@ -3098,70 +3097,6 @@ MonoBehaviour:
   m_Bones: []
   m_BoneTransforms:
   - {fileID: 4035130857219696}
---- !u!114 &114389804004743374
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1132399607116430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7448d19641f774ebaee7650b337b0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_blinkDuration: 8
-  m_blinks:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.063532025
-      value: 1.0068016
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.15708308
-      value: 1.0045335
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.22245218
-      value: 0.004211366
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.2768039
-      value: 0.004211426
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
-    m_RotationOrder: 4
-  m_blinkThres: 0.7
 --- !u!114 &114392404336237646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3296,6 +3231,7 @@ MonoBehaviour:
   - {fileID: 114485913252321138}
   - {fileID: 114061814104457396}
   overlays: []
+  spritesParent: {fileID: 0}
   hoverText: {fileID: 114531855129118730}
   yellow: {r: 0.5943396, g: 0.5265023, b: 0.2270826, a: 1}
   red: {r: 0.49056602, g: 0.1515805, b: 0.13189746, a: 1}

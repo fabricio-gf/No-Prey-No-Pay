@@ -2653,6 +2653,7 @@ MonoBehaviour:
   - {fileID: 114665914627096370}
   - {fileID: 114727159152990762}
   overlays: []
+  spritesParent: {fileID: 0}
   hoverText: {fileID: 0}
   yellow: {r: 0.5943396, g: 0.5265023, b: 0.2270826, a: 1}
   red: {r: 0.49056602, g: 0.1515805, b: 0.13189746, a: 1}

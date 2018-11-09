@@ -97,4 +97,12 @@ public class MatchReferee : MonoBehaviour {
 
         return infos;
     }
+
+    public static int GetNbWins(int _player)
+    {
+        if (_player >= instance.NumOfPlayers)
+            return 0;
+
+        return instance.Wins[_player];
+    }
 }
