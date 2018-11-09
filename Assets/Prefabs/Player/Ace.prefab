@@ -312,7 +312,6 @@ GameObject:
   - component: {fileID: 223933103856422462}
   - component: {fileID: 114467600281647622}
   - component: {fileID: 114070340949672408}
-  - component: {fileID: 114745081399826368}
   m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
@@ -374,6 +373,7 @@ GameObject:
   - component: {fileID: 114328086694676496}
   - component: {fileID: 114024127139424104}
   - component: {fileID: 114912940017191994}
+  - component: {fileID: 114825407229120408}
   m_Layer: 10
   m_Name: Ace
   m_TagString: Player
@@ -4141,71 +4141,6 @@ MonoBehaviour:
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4294480677844190}
   m_AttachedIK: {fileID: 114317141890885172}
---- !u!114 &114745081399826368
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1156004317891156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7448d19641f774ebaee7650b337b0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_objToBlink: {fileID: 0}
-  m_blinkDuration: 5
-  m_blinks:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.025120772
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.21449275
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.2695694
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.4222412
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
-    m_RotationOrder: 4
-  m_blinkThres: 0.5
 --- !u!114 &114745259466206720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4307,6 +4242,71 @@ MonoBehaviour:
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4792467931945686}
   m_AttachedIK: {fileID: 114745259466206720}
+--- !u!114 &114825407229120408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1172074447708136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7448d19641f774ebaee7650b337b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_objToBlink: {fileID: 1156004317891156}
+  m_blinkDuration: 5
+  m_blinks:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.025120772
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.21449275
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2695694
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4222412
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 4
+  m_blinkThres: 0.5
 --- !u!114 &114834141515929814
 MonoBehaviour:
   m_ObjectHideFlags: 1

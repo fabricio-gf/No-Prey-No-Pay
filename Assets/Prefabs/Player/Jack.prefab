@@ -144,6 +144,7 @@ GameObject:
   - component: {fileID: 114311784213081278}
   - component: {fileID: 114375185183451572}
   - component: {fileID: 114022399784403720}
+  - component: {fileID: 114398042611503458}
   m_Layer: 10
   m_Name: Jack
   m_TagString: Player
@@ -1043,7 +1044,6 @@ GameObject:
   - component: {fileID: 223118259240992190}
   - component: {fileID: 114230759554188118}
   - component: {fileID: 114711483763654812}
-  - component: {fileID: 114530967480219888}
   m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
@@ -3579,6 +3579,71 @@ MonoBehaviour:
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4241133257057868}
   m_AttachedIK: {fileID: 0}
+--- !u!114 &114398042611503458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1136427775829066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7448d19641f774ebaee7650b337b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_objToBlink: {fileID: 1681074216305236}
+  m_blinkDuration: 5
+  m_blinks:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.025120772
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.21449275
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.2695694
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4222412
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 1
+    m_RotationOrder: 4
+  m_blinkThres: 0.5
 --- !u!114 &114413288933418338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3846,71 +3911,6 @@ MonoBehaviour:
     m_RestoreDefaultPose: 1
     targetPosition: {x: 1.776, y: 0.09500003, z: 0}
     flip: 1
---- !u!114 &114530967480219888
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1681074216305236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7448d19641f774ebaee7650b337b0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_objToBlink: {fileID: 0}
-  m_blinkDuration: 5
-  m_blinks:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.025120772
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.21449275
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.2695694
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.4222412
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
-    m_RotationOrder: 4
-  m_blinkThres: 0.5
 --- !u!114 &114552679105206434
 MonoBehaviour:
   m_ObjectHideFlags: 1
