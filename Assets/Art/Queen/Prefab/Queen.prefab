@@ -3166,6 +3166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: 0
+  hasHoverText: 0
   suit:
   - {fileID: 114910567920806860}
   - {fileID: 114239044852920600}
@@ -3174,6 +3175,8 @@ MonoBehaviour:
   - {fileID: 114632654908267478}
   - {fileID: 114404257244239124}
   overlays: []
+  spriteRenderers: []
+  hoverText: {fileID: 0}
   yellow: {r: 0.5943396, g: 0.5265023, b: 0.2270826, a: 1}
   red: {r: 0.49056602, g: 0.1515805, b: 0.13189746, a: 1}
   blue: {r: 0.18222678, g: 0.2206873, b: 0.4245283, a: 1}
