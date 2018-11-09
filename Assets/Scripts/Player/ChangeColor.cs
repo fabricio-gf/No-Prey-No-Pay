@@ -67,17 +67,18 @@ public class ChangeColor : MonoBehaviour {
                     hoverText.color = green;
         }
 
-        foreach (SpriteRenderer s in sprites)
-        {
-            if (color == 1)
-                s.color = yellow;
-            else if (color == 2)
-                s.color = red;
-            else if (color == 3)
-                s.color = blue;
-            else if (color == 4)
-                s.color = green;
-        }
+        if (sprites != null)
+            foreach (SpriteRenderer s in sprites)
+            {
+                if (color == 1)
+                    s.color = yellow;
+                else if (color == 2)
+                    s.color = red;
+                else if (color == 3)
+                    s.color = blue;
+                else if (color == 4)
+                    s.color = green;
+            }
     }
 
 	public void ManualValidate(){
