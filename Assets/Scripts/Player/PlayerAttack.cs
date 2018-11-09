@@ -25,7 +25,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
     // --------------------------- PROTECTED CONFIG ATTRIBUTES --------------------------- //
     // attack params
-    protected float   m_attackCooldown  = 0.4f;
+    protected float   m_attackCooldown  = 0.2f;
     protected Vector2 m_throwOffset;
 
     // attack: Fists
@@ -80,25 +80,25 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
 
         EquipWeap = eWeapon.Fists;
 
-        PunchOffset.x = 0.75f;
-        PunchOffset.y = 0.75f;
-        PunchHitboxSize.x = 0.3f;
-        PunchHitboxSize.y = 0.5f;
+        PunchOffset.x = 1f;
+        PunchOffset.y = 1f;
+        PunchHitboxSize.x = 0.6f;
+        PunchHitboxSize.y = 0.6f;
         m_fistStartDelay = 0.3f;
 
-        SaberOffset.x = 0.85f;
-        SaberOffset.y = 0.75f;
+        SaberOffset.x = 1f;
+        SaberOffset.y = 1f;
         ThrowSaberOffset.x = 1.1f;
         ThrowSaberOffset.y = 0.75f;
-        SaberHitboxSize.x = 0.75f;
-        SaberHitboxSize.y = 0.3f;
+        SaberHitboxSize.x = 1f;
+        SaberHitboxSize.y = 1f;
         m_saberStartDelay = 0.3f;
 
         m_numberOfBullets = 1;
         m_bulletsShot = 0;
         PistolOffset.x = 0.9f;
         PistolOffset.y = 0.95f;
-        ThrowPistolOffset.x = 1f;
+        ThrowPistolOffset.x = 1.1f;
         ThrowPistolOffset.y = 1.35f;
         m_pistolStartDelay = 0.3f;
 
