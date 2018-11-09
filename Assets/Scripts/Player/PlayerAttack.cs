@@ -63,6 +63,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // ------------------------------------- ACCESSORS ----------------------------------- //
     public bool IsAttacking { get; protected set; }
     public eWeapon EquipWeap { get; set; }
+    public Vector2 AttackDirection { get { return m_attackDirection; } }
 
 
     // ======================================================================================

@@ -10,7 +10,6 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         Jumping,
         Falling,
         Dashing,
-        Attack,
         WallSliding,
         //LedgeGrabbed,
         //LedgeMoving,
@@ -51,6 +50,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
     // attack
     private string m_isAttackingBoolParam   = "IsAttacking";
     private string m_attackTypeParam        = "AttackType";
+    private string m_upDirectionParam       = "UpDirection";
 
     // stun
     private string m_isStunnedBoolParam     = "IsStunned";
@@ -73,7 +73,7 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         Debug.Assert(m_animator != null, this.gameObject.name + " - PlayerAnimatorController : MISSING ANIMATOR!");
 
         m_transform = this.transform;
-        m_currDir = eDirections.Right; 
+        m_currDir = eDirections.Right;
     }
 
     // ======================================================================================
@@ -99,10 +99,6 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
 
             case eStates.Dashing:
                 StartDashing();
-                break;
-
-            case eStates.Attack:
-                StartAttacking();
                 break;
 
             // TODO
@@ -153,9 +149,21 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
     }
 
     // ======================================================================================
-    public void SetAttackType(eAttackType _attackType)
+    public void StartAttack(eAttackType _attackType, float _upDirection, bool _jumping, bool _falling)
     {
-        m_animator.SetFloat(m_attackTypeParam, (int) _attackType);
+        m_animator.SetBool(m_isAttackingBoolParam, true);
+        m_animator.SetBool(m_isJumpingBoolParam, _jumping);
+        m_animator.SetBool(m_isFallingBoolParam, _falling);
+
+        m_animator.SetFloat(m_attackTypeParam, (int)_attackType);
+        m_animator.SetFloat(m_upDirectionParam, _upDirection);
+
+    }
+
+    // ======================================================================================
+    public void StopAttack()
+    {
+        m_animator.SetBool(m_isAttackingBoolParam, false);
     }
 
     // ======================================================================================
@@ -242,7 +250,6 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_animator.SetBool(m_isFallingBoolParam, false);
         m_animator.SetBool(m_isJumpingBoolParam, false);
         m_animator.SetBool(m_isRunningBoolParam, false);
-        m_animator.SetBool(m_isAttackingBoolParam, true);
         m_animator.SetBool(m_isSlidingBoolParam, false);
         m_animator.SetBool(m_isLedgeGrabbed, false);
         m_animator.SetBool(m_isLedgeMoving, false);
