@@ -1763,7 +1763,7 @@ MonoBehaviour:
   overlays:
   - {fileID: 409095269}
   - {fileID: 1980446466}
-  spritesParent: {fileID: 0}
+  spriteRenderers: []
   hoverText: {fileID: 0}
   yellow: {r: 0.8301887, g: 0.7383252, b: 0.33285868, a: 1}
   red: {r: 0.8584906, g: 0.40781265, b: 0.38470095, a: 1}
@@ -1863,7 +1863,7 @@ MonoBehaviour:
   overlays:
   - {fileID: 768072234}
   - {fileID: 486412246}
-  spritesParent: {fileID: 0}
+  spriteRenderers: []
   hoverText: {fileID: 0}
   yellow: {r: 0.8301887, g: 0.7383252, b: 0.33285868, a: 1}
   red: {r: 0.8584906, g: 0.40781265, b: 0.38470095, a: 1}
@@ -2969,7 +2969,7 @@ MonoBehaviour:
   overlays:
   - {fileID: 696532547}
   - {fileID: 1066981798}
-  spritesParent: {fileID: 0}
+  spriteRenderers: []
   hoverText: {fileID: 0}
   yellow: {r: 0.8301887, g: 0.7383252, b: 0.33285868, a: 1}
   red: {r: 0.8584906, g: 0.40781265, b: 0.38470095, a: 1}
@@ -4102,7 +4102,7 @@ MonoBehaviour:
   overlays:
   - {fileID: 1903759066}
   - {fileID: 784918894}
-  spritesParent: {fileID: 0}
+  spriteRenderers: []
   hoverText: {fileID: 0}
   yellow: {r: 0.8301887, g: 0.7383252, b: 0.33285868, a: 1}
   red: {r: 0.8584906, g: 0.40781265, b: 0.38470095, a: 1}

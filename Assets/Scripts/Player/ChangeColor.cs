@@ -10,7 +10,7 @@ public class ChangeColor : MonoBehaviour {
     public bool hasHoverText;
 	public SpriteMeshInstance[] suit;
     public Image[] overlays;
-    public Transform spritesParent;
+    public SpriteRenderer[] spriteRenderers;
     public Text hoverText;
 	[Header("Colors")]
 	public Color yellow;
@@ -21,15 +21,6 @@ public class ChangeColor : MonoBehaviour {
 
 	[Range(1,4)]
 	public int color;
-
-
-    private SpriteRenderer[] sprites;
-
-    public void Awake()
-    {
-        if (spritesParent != null)
-            sprites = spritesParent.GetComponentsInChildren<SpriteRenderer>();
-    }
 
     void OnValidate(){
         if (ui){
@@ -67,8 +58,8 @@ public class ChangeColor : MonoBehaviour {
                     hoverText.color = green;
         }
 
-        if (sprites != null)
-            foreach (SpriteRenderer s in sprites)
+        if (spriteRenderers != null)
+            foreach (SpriteRenderer s in spriteRenderers)
             {
                 if (color == 1)
                     s.color = yellow;
@@ -115,5 +106,18 @@ public class ChangeColor : MonoBehaviour {
             else if (color == 4)
                 hoverText.color = green;
         }
-	}
+
+        if (spriteRenderers != null)
+            foreach (SpriteRenderer s in spriteRenderers)
+            {
+                if (color == 1)
+                    s.color = yellow;
+                else if (color == 2)
+                    s.color = red;
+                else if (color == 3)
+                    s.color = blue;
+                else if (color == 4)
+                    s.color = green;
+            }
+    }
 }
