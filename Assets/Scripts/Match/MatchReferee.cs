@@ -54,7 +54,7 @@ public class MatchReferee : MonoBehaviour {
         while (!GameMgr.IsRoundEnd)
             yield return null;
 
-
+        PlayerNumber--;
         Wins[PlayerNumber]++;
         if (Wins[PlayerNumber] >= matchInfo.NumberOfWinsToEnd)
         {

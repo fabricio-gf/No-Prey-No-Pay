@@ -40,8 +40,9 @@ public class RoundReferee : MonoBehaviour {
         instance.alivePlayers.Remove(_player);
 
         if (instance.alivePlayers.Count == 1){
-            instance.alivePlayers.GetEnumerator().MoveNext();
-            EndRound(instance.alivePlayers.GetEnumerator().Current);
+            HashSet<int>.Enumerator it = instance.alivePlayers.GetEnumerator();
+            it.MoveNext();
+            EndRound(it.Current);
         }
     }
 
