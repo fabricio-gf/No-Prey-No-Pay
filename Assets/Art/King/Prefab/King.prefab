@@ -3389,6 +3389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: 0
+  hasHoverText: 0
   suit:
   - {fileID: 114670133846508640}
   - {fileID: 114806898041739708}
@@ -3402,6 +3403,8 @@ MonoBehaviour:
   - {fileID: 114208608877197800}
   - {fileID: 114572229828520926}
   overlays: []
+  spriteRenderers: []
+  hoverText: {fileID: 0}
   yellow: {r: 0.6037736, g: 0.5285468, b: 0.19651122, a: 1}
   red: {r: 0.7075472, g: 0.25016904, b: 0.2236116, a: 1}
   blue: {r: 0.084905654, g: 0.12847562, b: 0.33962262, a: 1}
@@ -4564,7 +4567,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 43687856322577438, guid: 62ebecda387cdf24c996c848c4a50d09, type: 2}
   m_Bones:
   - {fileID: 4390481643424856}
   m_BlendShapeWeights: []
@@ -5140,7 +5143,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 43687856322577438, guid: 62ebecda387cdf24c996c848c4a50d09, type: 2}
   m_Bones:
   - {fileID: 4235757171832042}
   m_BlendShapeWeights: []
