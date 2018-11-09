@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8fcd17cff0bb2442be678ad00d03161, type: 3}
   m_Name: Player2
   m_EditorClassIdentifier: 
-  isSelected: 0
+  isSelected: 1
   ControllerNumber: 1
   SelectedCharacter: 0
   SelectedColor: 2

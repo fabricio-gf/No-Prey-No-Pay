@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class ChangeColor : MonoBehaviour {
 
     public bool ui;
+    public bool hasHoverText;
 	public SpriteMeshInstance[] suit;
     public Image[] overlays;
+    public Text hoverText;
 	[Header("Colors")]
 	public Color yellow;
 	public Color red;
@@ -44,6 +46,16 @@ public class ChangeColor : MonoBehaviour {
                     s.color = green;
             }
         }
+        if(hasHoverText){
+            if (color == 1)
+                    hoverText.color = yellow;
+                else if (color == 2)
+                    hoverText.color = red;
+                else if (color == 3)
+                    hoverText.color = blue;
+                else if (color == 4)
+                    hoverText.color = green;
+        }
     }
 
 	public void ManualValidate(){
@@ -69,6 +81,16 @@ public class ChangeColor : MonoBehaviour {
                 else if (color == 4)
                     s.color = green;
             }
+        }
+        if(hasHoverText){
+            if (color == 1)
+                hoverText.color = yellow;
+            else if (color == 2)
+                hoverText.color = red;
+            else if (color == 3)
+                hoverText.color = blue;
+            else if (color == 4)
+                hoverText.color = green;
         }
 	}
 }

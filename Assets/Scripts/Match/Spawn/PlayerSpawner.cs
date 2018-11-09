@@ -32,6 +32,8 @@ public class PlayerSpawner : MonoBehaviour {
         int i = 0;
 		foreach(var pi in PlayersToSpawn){
 			var obj = Instantiate(instance.CharPrefabs[(int)pi.SelectedCharacter], shuffledSpawns[i], Quaternion.identity, instance.PlayerParentObject);
+            obj.GetComponent<ChangeColor>().hasHoverText = true;
+            obj.GetComponent<ChangeColor>().hoverText.text = "P" + (i+1);
 			obj.GetComponent<ChangeColor>().color = pi.SelectedColor;
 			obj.GetComponent<ChangeColor>().ManualValidate();
 			obj.GetComponent<PlayerInputCtlr>().m_nbPlayer = (PlayerInputCtlr.ePlayer)(pi.ControllerNumber+1);
