@@ -51,6 +51,11 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
     // ======================================================================================
     override protected void UpdatePhase()
     {
+        if (State == eStates.Dead)
+        {
+            this.enabled = false;
+            return;
+        }
         UpdateStateMachine();
         UpdateAnimator();
     }

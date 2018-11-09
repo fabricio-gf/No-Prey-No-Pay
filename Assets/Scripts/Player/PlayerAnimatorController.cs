@@ -77,6 +77,11 @@ public class PlayerAnimatorController : RuntimeMonoBehaviour
         m_currDir = eDirections.Right;
     }
 
+    protected override void UpdatePhase()
+    {
+        base.UpdatePhase();
+        m_animator.speed = GameMgr.TimeRatio;
+    }
     // ======================================================================================
     public void SetState(eStates _state)
     {
