@@ -3453,8 +3453,14 @@ MonoBehaviour:
     value: 
   CharacterSprites:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
+  - {fileID: 21300000, guid: f6817f5cbb0c2594f8fc0cb7fb8c5752, type: 3}
+  - {fileID: 21300000, guid: da27b97e84407b044a2910f80f5e5ac5, type: 3}
+  - {fileID: 21300000, guid: 927ebe361aacd044f8e5ebb13c61d791, type: 3}
   OverlaySprites:
   - {fileID: 21300000, guid: 85a065407ab16584aa276ccfd9969d73, type: 3}
+  - {fileID: 21300000, guid: e3b1815f27f06054b919eb6e674b90c7, type: 3}
+  - {fileID: 21300000, guid: 92e3e9c316b352a4c8ee6a13537ed5b1, type: 3}
+  - {fileID: 21300000, guid: 8c21997be8ee12d45a4e73dba355e549, type: 3}
   infos:
   - {fileID: 11400000, guid: 2c699aa339d8de94d928d7def31c78c9, type: 2}
   - {fileID: 11400000, guid: 4c83777d5c1623f4f86ac488996cf395, type: 2}
