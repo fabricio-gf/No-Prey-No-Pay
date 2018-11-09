@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1758,10 +1758,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: 1
+  hasHoverText: 0
   suit: []
   overlays:
   - {fileID: 409095269}
   - {fileID: 1980446466}
+  spritesParent: {fileID: 0}
+  hoverText: {fileID: 0}
   yellow: {r: 0.8301887, g: 0.7383252, b: 0.33285868, a: 1}
   red: {r: 0.8584906, g: 0.40781265, b: 0.38470095, a: 1}
   blue: {r: 0.3517711, g: 0.4267903, b: 0.8018868, a: 1}
@@ -1855,10 +1858,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: 1
+  hasHoverText: 0
   suit: []
   overlays:
   - {fileID: 768072234}
   - {fileID: 486412246}
+  spritesParent: {fileID: 0}
+  hoverText: {fileID: 0}
   yellow: {r: 0.8301887, g: 0.7383252, b: 0.33285868, a: 1}
   red: {r: 0.8584906, g: 0.40781265, b: 0.38470095, a: 1}
   blue: {r: 0.3517711, g: 0.4267903, b: 0.8018868, a: 1}
@@ -2958,10 +2964,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: 1
+  hasHoverText: 0
   suit: []
   overlays:
   - {fileID: 696532547}
   - {fileID: 1066981798}
+  spritesParent: {fileID: 0}
+  hoverText: {fileID: 0}
   yellow: {r: 0.8301887, g: 0.7383252, b: 0.33285868, a: 1}
   red: {r: 0.8584906, g: 0.40781265, b: 0.38470095, a: 1}
   blue: {r: 0.3517711, g: 0.4267903, b: 0.8018868, a: 1}
@@ -4088,10 +4097,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui: 1
+  hasHoverText: 0
   suit: []
   overlays:
   - {fileID: 1903759066}
   - {fileID: 784918894}
+  spritesParent: {fileID: 0}
+  hoverText: {fileID: 0}
   yellow: {r: 0.8301887, g: 0.7383252, b: 0.33285868, a: 1}
   red: {r: 0.8584906, g: 0.40781265, b: 0.38470095, a: 1}
   blue: {r: 0.3517711, g: 0.4267903, b: 0.8018868, a: 1}
