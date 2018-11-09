@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9952,6 +9952,7 @@ GameObject:
   - component: {fileID: 2069503811}
   - component: {fileID: 2069503806}
   - component: {fileID: 2069503816}
+  - component: {fileID: 2069503807}
   m_Layer: 9
   m_Name: OneSided Platforms
   m_TagString: Platform
@@ -10034,6 +10035,16 @@ CompositeCollider2D:
         Y: 35164824
       - X: 46099596
         Y: 35164824
+  - m_Collider: {fileID: 2069503807}
+    m_ColliderPaths:
+    - - X: -5240826
+        Y: -16949458
+      - X: -48675680
+        Y: -16949458
+      - X: -48675680
+        Y: -19686666
+      - X: -5240826
+        Y: -19686666
   m_CompositePaths:
     m_Paths:
     - - {x: -5.3973713, y: 3.8411021}
@@ -10052,6 +10063,10 @@ CompositeCollider2D:
       - {x: -0.3213763, y: 0.0053972}
       - {x: -0.3213763, y: -0.327198}
       - {x: 4.656568, y: -0.327198}
+    - - {x: -0.5240826, y: -1.6949458}
+      - {x: -4.867568, y: -1.6949458}
+      - {x: -4.867568, y: -1.9686667}
+      - {x: -0.5240826, y: -1.9686667}
   m_VertexDistance: 0.0005
 --- !u!50 &2069503805
 Rigidbody2D:
@@ -10097,6 +10112,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 3.3938217, y: 0.4591241}
+  m_EdgeRadius: 0
+--- !u!61 &2069503807
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2069503802}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 1
+  m_Offset: {x: -2.6958253, y: -1.8318062}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4.3434854, y: 0.27372074}
   m_EdgeRadius: 0
 --- !u!251 &2069503810
 PlatformEffector2D:

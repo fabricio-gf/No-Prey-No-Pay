@@ -98,7 +98,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         m_bulletsShot = 0;
         PistolOffset.x = 0.9f;
         PistolOffset.y = 0.95f;
-        ThrowPistolOffset.x = 1f;
+        ThrowPistolOffset.x = 1.1f;
         ThrowPistolOffset.y = 1.35f;
         m_pistolStartDelay = 0.3f;
 
