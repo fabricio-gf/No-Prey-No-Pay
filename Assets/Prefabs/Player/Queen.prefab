@@ -1922,8 +1922,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199904115453350}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -0.07, y: 0.54, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4314249490740306}
   - {fileID: 4727153831500864}
@@ -2208,7 +2208,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1704539420282102}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.88754, z: 1}
   m_Children: []
@@ -2484,7 +2484,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.26119095, y: 0.09788424}
+  m_Offset: {x: 0.1, y: 0.55}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2495,7 +2495,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.30857825, y: 1.0326635}
+  m_Size: {x: 0.4, y: 1.1}
   m_EdgeRadius: 0
 --- !u!65 &65686679887162896
 BoxCollider:
@@ -3443,7 +3443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.36115944
+  m_Length: 0.3611593
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4361064855326440}
   m_AttachedIK: {fileID: 114109992815961324}
@@ -3458,6 +3458,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e0139775035b74ab7706b6544acd0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_intensity:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114598030669016420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3662,7 +3686,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.15368876
+  m_Length: 0.15368874
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4683238977517388}
   m_AttachedIK: {fileID: 0}
@@ -3963,7 +3987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Length: 0.3611593
+  m_Length: 0.36115932
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4160462881356342}
   m_AttachedIK: {fileID: 114392404336237646}
