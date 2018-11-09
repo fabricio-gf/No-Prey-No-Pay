@@ -29,11 +29,13 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     protected Vector2 m_throwOffset;
 
     // attack: Fists
+    protected float   m_fistStartDelay;
     protected Vector2 PunchOffset;
     protected Vector2 PunchHitboxSize;
 
     // attack: Saber
     public GameObject ThrowSaberPrefab;
+    protected float   m_saberStartDelay;
     protected Vector2 SaberOffset;
     protected Vector2 ThrowSaberOffset;
     protected Vector2 SaberHitboxSize;
@@ -43,6 +45,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     public GameObject ProjectilePrefab;
     protected int     m_numberOfBullets;
     protected int     m_bulletsShot;
+    protected float   m_pistolStartDelay;
     protected Vector2 ThrowPistolOffset;
     protected Vector2 PistolOffset;
 
@@ -80,6 +83,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         PunchOffset.y = 0.75f;
         PunchHitboxSize.x = 0.3f;
         PunchHitboxSize.y = 0.5f;
+        m_fistStartDelay = 0.3f;
 
         SaberOffset.x = 0.85f;
         SaberOffset.y = 0.75f;
@@ -87,13 +91,15 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         ThrowSaberOffset.y = 0.75f;
         SaberHitboxSize.x = 0.75f;
         SaberHitboxSize.y = 0.3f;
+        m_saberStartDelay = 0.3f;
 
         m_numberOfBullets = 1;
         m_bulletsShot = 0;
-        PistolOffset.x = 0.7f;
-        PistolOffset.y = 0.75f;
+        PistolOffset.x = 0.9f;
+        PistolOffset.y = 0.95f;
         ThrowPistolOffset.x = 1f;
         ThrowPistolOffset.y = 1.35f;
+        m_pistolStartDelay = 0.3f;
 
         StompOffset.x = 0;
         StompOffset.y = 0.1f;
@@ -185,17 +191,17 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
             {
                 case eWeapon.Fists:
                     {
-                        PunchAttack();
+                        StartCoroutine(PunchAttack());
                         break;
                     }
                 case eWeapon.Saber:
                     {
-                        SaberAttack();
+                        StartCoroutine(SaberAttack());
                         break;
                     }
                 case eWeapon.Pistol:
                     {
-                        PistolAttack();
+                        StartCoroutine(PistolAttack());
                         break;
                     }
             }
@@ -226,8 +232,10 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     // ======================================================================================
     // PRIVATE MEMBERS - WEAPON ROUTINES
     // ======================================================================================
-    private void PunchAttack()
+    private IEnumerator PunchAttack()
     {
+        yield return new WaitForSeconds(m_fistStartDelay);
+
         Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(m_attackDirection.x * PunchOffset.x, m_attackDirection.y * 1 + transform.localScale.y * PunchOffset.y, 0), new Vector3(PunchHitboxSize.x, PunchHitboxSize.y, 0.4f));
         for (int i = 0; i < hitTargets.Length; i++)
         {
@@ -239,10 +247,11 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     }
     // ======================================================================================
 
-    private void SaberAttack()
+    private IEnumerator SaberAttack()
     {
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
 
+        yield return new WaitForSeconds(m_saberStartDelay);
         Collider[] hitTargets = Physics.OverlapBox(transform.position + new Vector3(m_attackDirection.x * SaberOffset.x, m_attackDirection.y * 1 + transform.localScale.y * SaberOffset.y, 0), new Vector3(SaberHitboxSize.x, SaberHitboxSize.y, 0.4f));
         
         for (int i = 0; i < hitTargets.Length; i++)
@@ -256,11 +265,11 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
     }
     // ======================================================================================
 
-    private void PistolAttack()
+    private IEnumerator PistolAttack()
     {
         this.gameObject.SendMessage("MSG_OnExclusiveEventStart", this);
-
-        if(m_bulletsShot < m_numberOfBullets)
+        yield return new WaitForSeconds(m_fistStartDelay);
+        if (m_bulletsShot < m_numberOfBullets)
         {
             m_bulletsShot++;
             GameObject obj = Instantiate(ProjectilePrefab, transform.position + new Vector3(m_attackDirection.x * PistolOffset.x,m_attackDirection.y * 0.8f + PistolOffset.y, 0), Quaternion.identity);
