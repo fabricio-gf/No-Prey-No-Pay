@@ -13,5 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSelected: 0
   ControllerNumber: 0
-  SelectedCharacter: 0
-  SelectedColor: 1
+  SelectedCharacter: 2
+  SelectedColor: 3

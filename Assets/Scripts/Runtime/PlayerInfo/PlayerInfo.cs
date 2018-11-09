@@ -7,9 +7,9 @@ public class PlayerInfo : ScriptableObject {
 
 	public enum Character{
 		ACE,
+		QUEEN,
 		JACK,
-		KING,
-		QUEEN
+		KING
 	}
 
 	public bool isSelected;
