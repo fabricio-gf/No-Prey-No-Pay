@@ -37,6 +37,7 @@ public class SoundMgr : RuntimeMonoBehaviour
 
         m_bckMusicSource                = this.gameObject.AddComponent<AudioSource>();
         m_bckMusicSource.playOnAwake    = false;
+        m_bckMusicSource.loop           = true;
         m_bckMusicSource.clip           = m_soundLib.m_matchBkgMusic.m_clip;
         m_bckMusicSource.volume         = m_soundLib.m_matchBkgMusic.m_volume;
     }
@@ -101,13 +102,15 @@ public class SoundMgr : RuntimeMonoBehaviour
     protected override void OnPlay()
     {
         base.OnPlay();
-        m_bckMusicSource.Play();
+        if (!m_bckMusicSource.isPlaying)
+            m_bckMusicSource.Play();
     }
 
     // ======================================================================================
     protected override void OnPause()
     {
         base.OnPause();
-        m_bckMusicSource.Pause();
+        if (!GameMgr.IsRoundEnd)
+            m_bckMusicSource.Pause();
     }
 }

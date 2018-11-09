@@ -28,6 +28,7 @@ public class GameMgr : MonoBehaviour
         m_manager = this;
         PlayGame();
         TimeRatio = 1f;
+        IsRoundEnd = false;
     }
 
     // ======================================================================================
