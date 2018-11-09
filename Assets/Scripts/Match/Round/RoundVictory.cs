@@ -16,7 +16,7 @@ public class RoundVictory : MonoBehaviour {
 	}
 
 	public void UpdateVictoryText(int player){
-		VictoryText.text = "Player " + player + " wins the round!";
+		VictoryText.text = "Player " + player + " wins the round!\nPress Start to continue";
 	}
 
 	public void DeactivateVictoryWindow(){
