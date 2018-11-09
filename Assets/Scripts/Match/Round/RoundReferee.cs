@@ -47,8 +47,6 @@ public class RoundReferee : MonoBehaviour {
 
     public static void EndRound(int _player)
     {
-        GameMgr.PauseGame();
-
         MatchReferee.instance.EndRound(_player);
     }
 }
