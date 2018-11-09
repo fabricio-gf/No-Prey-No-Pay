@@ -43,20 +43,35 @@ public class MatchReferee : MonoBehaviour {
 		}
 	}
 	
-	public void EndRound(int PlayerNumber){
-		Wins[PlayerNumber]++;
-		if(Wins[PlayerNumber] >= matchInfo.NumberOfWinsToEnd){
-			EndMatch(PlayerNumber);
-		}
-		else{
-            instance.RoundVictoryWindow.SetActive(true);
-        	RoundVictory roundVictory = instance.RoundVictoryWindow.GetComponent<RoundVictory>();
-        	roundVictory.UpdateVictoryText(PlayerNumber + 1);
-            //RoundStarter.RestartRound();
-        }
+	public void EndRound(int PlayerNumber)
+    {
+        GameMgr.EndRound();
+        StartCoroutine(WaitRoundEnd(PlayerNumber));
 	}
 
+    private IEnumerator WaitRoundEnd(int PlayerNumber)
+    {
+        while (!GameMgr.IsRoundEnd)
+            yield return null;
+
+
+        Wins[PlayerNumber]++;
+        if (Wins[PlayerNumber] >= matchInfo.NumberOfWinsToEnd)
+        {
+            EndMatch(PlayerNumber);
+        }
+        else
+        {
+            instance.RoundVictoryWindow.SetActive(true);
+            RoundVictory roundVictory = instance.RoundVictoryWindow.GetComponent<RoundVictory>();
+            roundVictory.UpdateVictoryText(PlayerNumber + 1);
+            //RoundStarter.RestartRound();
+        }
+    }
+
 	public void EndMatch(int p_number){
+        GameMgr.EndRound();
+
 		ToggleMatchVictoryWindow();
 		MatchVictoryWindow.GetComponent<MatchVictory>().UpdateVictoryText(p_number+1);
 		GameMgr.EndGame();

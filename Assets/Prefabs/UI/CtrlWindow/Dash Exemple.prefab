@@ -3434,10 +3434,12 @@ MonoBehaviour:
   - m_state: 0
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
   - m_state: 5
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
 --- !u!114 &114998037757111440
 MonoBehaviour:

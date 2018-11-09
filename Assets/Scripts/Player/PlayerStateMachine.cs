@@ -51,6 +51,11 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
     // ======================================================================================
     override protected void UpdatePhase()
     {
+        if (State == eStates.Dead)
+        {
+            this.enabled = false;
+            return;
+        }
         UpdateStateMachine();
         UpdateAnimator();
     }
@@ -94,7 +99,19 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
         switch (State)
         {
             case eStates.Attack:
-                m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Attack);
+                
+                switch (m_playerAttack.EquipWeap)
+                {
+                    case PlayerAttack.eWeapon.Fists:
+                        m_playerAnimCtl.StartAttack(PlayerAnimatorController.eAttackType.Fists, m_playerAttack.AttackDirection.y, m_playerCtl.IsJumping);
+                        break;
+                    case PlayerAttack.eWeapon.Pistol:
+                        m_playerAnimCtl.StartAttack(PlayerAnimatorController.eAttackType.Pistol, m_playerAttack.AttackDirection.y, m_playerCtl.IsJumping);
+                        break;
+                    case PlayerAttack.eWeapon.Saber:
+                        m_playerAnimCtl.StartAttack(PlayerAnimatorController.eAttackType.Saber, m_playerAttack.AttackDirection.y, m_playerCtl.IsJumping);
+                        break;
+                }
                 break;
             case eStates.Idle:
                 m_playerAnimCtl.SetState(PlayerAnimatorController.eStates.Idle);
@@ -132,19 +149,6 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
                 break;
             case PlayerController.eDirection.Right:
                 m_playerAnimCtl.SetDirection(PlayerAnimatorController.eDirections.Right);
-                break;
-        }
-
-        switch (m_playerAttack.EquipWeap)
-        {
-            case PlayerAttack.eWeapon.Fists:
-                m_playerAnimCtl.SetAttackType(PlayerAnimatorController.eAttackType.Fists);
-                break;
-            case PlayerAttack.eWeapon.Pistol:
-                m_playerAnimCtl.SetAttackType(PlayerAnimatorController.eAttackType.Pistol);
-                break;
-            case PlayerAttack.eWeapon.Saber:
-                m_playerAnimCtl.SetAttackType(PlayerAnimatorController.eAttackType.Saber);
                 break;
         }
     }

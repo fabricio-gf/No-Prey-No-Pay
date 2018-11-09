@@ -17174,10 +17174,12 @@ MonoBehaviour:
   - m_state: 0
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
   - m_state: 5
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
 --- !u!114 &114190614382883842
 MonoBehaviour:
@@ -19190,10 +19192,12 @@ MonoBehaviour:
   - m_state: 0
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
   - m_state: 5
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
 --- !u!114 &114425003080870546
 MonoBehaviour:
@@ -20700,10 +20704,12 @@ MonoBehaviour:
   - m_state: 0
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
   - m_state: 5
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
 --- !u!114 &114581769019385828
 MonoBehaviour:
@@ -21533,10 +21539,12 @@ MonoBehaviour:
   - m_state: 0
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
   - m_state: 5
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
 --- !u!114 &114690182473576856
 MonoBehaviour:
@@ -22252,10 +22260,12 @@ MonoBehaviour:
   - m_state: 0
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
   - m_state: 5
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
 --- !u!114 &114773785348353306
 MonoBehaviour:
@@ -23180,10 +23190,12 @@ MonoBehaviour:
   - m_state: 0
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
   - m_state: 5
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
 --- !u!114 &114862998125689558
 MonoBehaviour:
@@ -23656,10 +23668,12 @@ MonoBehaviour:
   - m_state: 0
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
   - m_state: 5
     m_attkType: 0
     m_facingDir: 1
+    m_upAttkDir: 0
     m_duration: 0.4
 --- !u!114 &114923226465489650
 MonoBehaviour:
