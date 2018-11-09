@@ -2784,14 +2784,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
   - {fileID: 21300000, guid: f6817f5cbb0c2594f8fc0cb7fb8c5752, type: 3}
   - {fileID: 21300000, guid: da27b97e84407b044a2910f80f5e5ac5, type: 3}
+  - {fileID: 21300000, guid: 927ebe361aacd044f8e5ebb13c61d791, type: 3}
   SuitOverlays:
   - {fileID: 21300000, guid: 85a065407ab16584aa276ccfd9969d73, type: 3}
   - {fileID: 21300000, guid: e3b1815f27f06054b919eb6e674b90c7, type: 3}
   - {fileID: 21300000, guid: 92e3e9c316b352a4c8ee6a13537ed5b1, type: 3}
+  - {fileID: 21300000, guid: 8c21997be8ee12d45a4e73dba355e549, type: 3}
   ReadyOverlays:
   - {fileID: 21300000, guid: 12f9deb8f96b7b0468aa3fd76958cc9b, type: 3}
   - {fileID: 21300000, guid: 58c44221d6502924da27646ce309dcfc, type: 3}
   - {fileID: 21300000, guid: 14ca4e4c29442ec4b90b247e8814ad78, type: 3}
+  - {fileID: 21300000, guid: c1ab50d73d25b67469a25794563b58b4, type: 3}
   Poster: {fileID: 1420717660}
   Char: {fileID: 1693329981}
   SuitOverlay: {fileID: 1903759066}
@@ -3410,14 +3413,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
   - {fileID: 21300000, guid: f6817f5cbb0c2594f8fc0cb7fb8c5752, type: 3}
   - {fileID: 21300000, guid: da27b97e84407b044a2910f80f5e5ac5, type: 3}
+  - {fileID: 21300000, guid: 927ebe361aacd044f8e5ebb13c61d791, type: 3}
   SuitOverlays:
   - {fileID: 21300000, guid: 85a065407ab16584aa276ccfd9969d73, type: 3}
   - {fileID: 21300000, guid: e3b1815f27f06054b919eb6e674b90c7, type: 3}
   - {fileID: 21300000, guid: 92e3e9c316b352a4c8ee6a13537ed5b1, type: 3}
+  - {fileID: 21300000, guid: 8c21997be8ee12d45a4e73dba355e549, type: 3}
   ReadyOverlays:
   - {fileID: 21300000, guid: 12f9deb8f96b7b0468aa3fd76958cc9b, type: 3}
   - {fileID: 21300000, guid: 58c44221d6502924da27646ce309dcfc, type: 3}
   - {fileID: 21300000, guid: 14ca4e4c29442ec4b90b247e8814ad78, type: 3}
+  - {fileID: 21300000, guid: c1ab50d73d25b67469a25794563b58b4, type: 3}
   Poster: {fileID: 1208048636}
   Char: {fileID: 1124816305}
   SuitOverlay: {fileID: 696532547}
@@ -3479,14 +3485,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
   - {fileID: 21300000, guid: f6817f5cbb0c2594f8fc0cb7fb8c5752, type: 3}
   - {fileID: 21300000, guid: da27b97e84407b044a2910f80f5e5ac5, type: 3}
+  - {fileID: 21300000, guid: 927ebe361aacd044f8e5ebb13c61d791, type: 3}
   SuitOverlays:
   - {fileID: 21300000, guid: 85a065407ab16584aa276ccfd9969d73, type: 3}
   - {fileID: 21300000, guid: e3b1815f27f06054b919eb6e674b90c7, type: 3}
   - {fileID: 21300000, guid: 92e3e9c316b352a4c8ee6a13537ed5b1, type: 3}
+  - {fileID: 21300000, guid: 8c21997be8ee12d45a4e73dba355e549, type: 3}
   ReadyOverlays:
   - {fileID: 21300000, guid: 12f9deb8f96b7b0468aa3fd76958cc9b, type: 3}
   - {fileID: 21300000, guid: 58c44221d6502924da27646ce309dcfc, type: 3}
   - {fileID: 21300000, guid: 14ca4e4c29442ec4b90b247e8814ad78, type: 3}
+  - {fileID: 21300000, guid: c1ab50d73d25b67469a25794563b58b4, type: 3}
   Poster: {fileID: 355999175}
   Char: {fileID: 547105087}
   SuitOverlay: {fileID: 409095269}
@@ -3965,15 +3974,18 @@ MonoBehaviour:
   Characters:
   - {fileID: 21300000, guid: adaac3e11fc956c4ba3855189a5dc090, type: 3}
   - {fileID: 21300000, guid: f6817f5cbb0c2594f8fc0cb7fb8c5752, type: 3}
-  - {fileID: 21300000, guid: f6817f5cbb0c2594f8fc0cb7fb8c5752, type: 3}
+  - {fileID: 21300000, guid: da27b97e84407b044a2910f80f5e5ac5, type: 3}
+  - {fileID: 21300000, guid: 927ebe361aacd044f8e5ebb13c61d791, type: 3}
   SuitOverlays:
   - {fileID: 21300000, guid: 85a065407ab16584aa276ccfd9969d73, type: 3}
   - {fileID: 21300000, guid: e3b1815f27f06054b919eb6e674b90c7, type: 3}
-  - {fileID: 21300000, guid: da27b97e84407b044a2910f80f5e5ac5, type: 3}
+  - {fileID: 21300000, guid: 92e3e9c316b352a4c8ee6a13537ed5b1, type: 3}
+  - {fileID: 21300000, guid: 8c21997be8ee12d45a4e73dba355e549, type: 3}
   ReadyOverlays:
   - {fileID: 21300000, guid: 12f9deb8f96b7b0468aa3fd76958cc9b, type: 3}
   - {fileID: 21300000, guid: 58c44221d6502924da27646ce309dcfc, type: 3}
   - {fileID: 21300000, guid: 14ca4e4c29442ec4b90b247e8814ad78, type: 3}
+  - {fileID: 21300000, guid: c1ab50d73d25b67469a25794563b58b4, type: 3}
   Poster: {fileID: 19870217}
   Char: {fileID: 596620627}
   SuitOverlay: {fileID: 768072234}

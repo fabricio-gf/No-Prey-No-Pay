@@ -1806,6 +1806,7 @@ MonoBehaviour:
   - {fileID: 1172074447708136, guid: b96589adb7f33cb4f9afe2d310210de1, type: 2}
   - {fileID: 1172074447708136, guid: 148f7db580a6d5e42a22affffb503320, type: 2}
   - {fileID: 1136427775829066, guid: f79713503e79f72479cbf626fe34a48e, type: 2}
+  - {fileID: 1136427775829066, guid: b565c3a098d30c34c88d2d8c2a35b170, type: 2}
   PlayerParentObject: {fileID: 768566840}
 --- !u!1001 &111385333
 Prefab:
