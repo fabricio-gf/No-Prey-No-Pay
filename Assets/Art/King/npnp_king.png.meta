@@ -1,0 +1,519 @@
+fileFormatVersion: 2
+guid: 4997d71e4ae493641bd379920ecc496b
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: npnp_king_0
+    21300002: npnp_king_1
+    21300004: npnp_king_2
+    21300006: npnp_king_3
+    21300008: npnp_king_4
+    21300010: npnp_king_5
+    21300012: npnp_king_6
+    21300014: npnp_king_7
+    21300016: npnp_king_8
+    21300018: npnp_king_9
+    21300020: npnp_king_10
+    21300022: npnp_king_11
+    21300024: npnp_king_12
+    21300026: npnp_king_13
+    21300028: npnp_king_14
+    21300030: npnp_king_15
+    21300032: npnp_king_16
+    21300034: npnp_king_17
+    21300036: npnp_king_18
+    21300038: npnp_king_19
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: npnp_king_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 190
+        width: 47
+        height: 25
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.56}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c217c2e07a963e0499e0b41feaeb832f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_1
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 180
+        width: 47
+        height: 35
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.5714286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dda8ae61b89c61940ab5d3e1f606caf5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_2
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 121.99999
+        width: 56
+        height: 93.00001
+      alignment: 9
+      pivot: {x: 0.5, y: 0.52688175}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7fb6c80999e6994b9ab3173144167f9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_3
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 169
+        width: 42
+        height: 39
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90f73d5a508f56e4b9bf5adb472bb82d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_4
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 193
+        width: 47
+        height: 22
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.5681818}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d5ea9c3af16f644aaa0dd5c0222aad2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_5
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 142
+        width: 80
+        height: 70
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: baa5626eb02e02e4489f1abd28ed1587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 142.93016
+        width: 113
+        height: 40.19496
+      alignment: 9
+      pivot: {x: 0.46902654, y: 0.47443357}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1a38e7ffd2f235439a21c7481a3c4b2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_7
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 154
+        width: 47
+        height: 28
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35ed903cff54b254e9b5e8392e56f433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 69
+        width: 48
+        height: 65
+      alignment: 9
+      pivot: {x: 0.48958334, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abab9a3476c90b546804c3fcf7c9d57f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_9
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 61
+        width: 53
+        height: 71
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0779d1a28f63a4a4d96715a4492f9265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_10
+      rect:
+        serializedVersion: 2
+        x: 179.99998
+        y: 99
+        width: 27.000015
+        height: 54
+      alignment: 9
+      pivot: {x: 0.50000024, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 441797bebfa84e747b7fd085978c172a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_11
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 93
+        width: 37.999985
+        height: 58
+      alignment: 9
+      pivot: {x: 0.50000024, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9caaf9abf11d634d9da4ff9727b1cdc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_12
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 102
+        width: 41
+        height: 35
+      alignment: 9
+      pivot: {x: 0.49999997, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c45815b8229c8be4a98e629ae8df9460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_13
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 105
+        width: 45
+        height: 31
+      alignment: 9
+      pivot: {x: 0.5222222, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa7110b333fe08a469a99e6679d82630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_14
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 8
+        width: 43
+        height: 80
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b7a59242d37eac4c81a7b9f6acd94db
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_15
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 18
+        width: 46.000015
+        height: 65
+      alignment: 9
+      pivot: {x: 0.49999985, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c316230c8568294c98ccc713c8c2bff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_16
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 16
+        width: 37
+        height: 81
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7150f61293f0d7a48a60a98b609699f5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_17
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 37
+        width: 42
+        height: 41
+      alignment: 9
+      pivot: {x: 0.5595238, y: 0.49999997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cbf278b73c183949bf2f0578bbe4a1f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_18
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 0
+        width: 36
+        height: 38
+      alignment: 9
+      pivot: {x: 0.5, y: 0.43421054}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5f5cc99ac1343a46bb789830bfdbd1e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: npnp_king_19
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 10.000001
+        width: 34.999992
+        height: 33
+      alignment: 9
+      pivot: {x: 0.5000001, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06602cc9f8f5547468976b521ac98622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: b77c06a87740db243979592100338cd2
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 636773365485066259
+  assetBundleName: 
+  assetBundleVariant: 
