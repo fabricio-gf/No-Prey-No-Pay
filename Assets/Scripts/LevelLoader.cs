@@ -72,6 +72,7 @@ public class LevelLoader : MonoBehaviour {
 	}
 
 	public void GoToMenu(){
+		ResetReadyPlayers();
 		SceneManager.LoadScene("MenuGold");
 	}
 
@@ -100,6 +101,14 @@ public class LevelLoader : MonoBehaviour {
 
 		NumReadyPlayers --;
 		CheckStartButton();
+	}
+
+	private void ResetReadyPlayers(){
+		for(int i = 0; i < 4; i++){
+			PlayerList[i].isSelected = false;
+			//PlayerList[i].SelectedCharacter = (PlayerInfo.Character)i;
+			PlayerList[i].SelectedColor = i+1;
+		}
 	}
 	
 }
