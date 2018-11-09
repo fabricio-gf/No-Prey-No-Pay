@@ -80,7 +80,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         PunchOffset.x = 0.75f;
         PunchOffset.y = 0.75f;
         PunchHitboxSize.x = 0.3f;
-        PunchHitboxSize.y = 0.5f;
+        PunchHitboxSize.y = 0.3f;
 
         SaberOffset.x = 0.85f;
         SaberOffset.y = 0.75f;
@@ -92,7 +92,7 @@ public class PlayerAttack : PlayerRuntimeMonoBehaviour
         m_numberOfBullets = 1;
         m_bulletsShot = 0;
         PistolOffset.x = 0.7f;
-        PistolOffset.y = 0.75f;
+        PistolOffset.y = 0.95f;
         ThrowPistolOffset.x = 1f;
         ThrowPistolOffset.y = 1.35f;
 
