@@ -10,6 +10,7 @@ public class PlayerAutomaticStateMachine : MonoBehaviour
         public PlayerAnimatorController.eStates     m_state;
         public PlayerAnimatorController.eAttackType m_attkType;
         public PlayerAnimatorController.eDirections m_facingDir;
+        public bool                                 m_attack;
         public float                                m_upAttkDir;
         public float                                m_duration;
     }
@@ -52,8 +53,10 @@ public class PlayerAutomaticStateMachine : MonoBehaviour
     // ======================================================================================
     private void UpdateAnimator()
     {
-        m_animator.SetState(m_states[m_actualState].m_state);
         m_animator.SetDirection(m_states[m_actualState].m_facingDir);
-        m_animator.StartAttack(m_states[m_actualState].m_attkType, m_states[m_actualState].m_upAttkDir, false);
+        if (m_states[m_actualState].m_attack)
+            m_animator.StartAttack(m_states[m_actualState].m_attkType, m_states[m_actualState].m_upAttkDir, false);
+        else
+            m_animator.SetState(m_states[m_actualState].m_state);
     }
 }
