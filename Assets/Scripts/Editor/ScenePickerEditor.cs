@@ -10,6 +10,7 @@ public class ScenePickerEditor : Editor
         var oldScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(picker.scenePath);
 
         serializedObject.Update();
+        DrawDefaultInspector();
 
         EditorGUI.BeginChangeCheck();
         var newScene = EditorGUILayout.ObjectField("scene", oldScene, typeof(SceneAsset), false) as SceneAsset;
