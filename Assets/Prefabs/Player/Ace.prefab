@@ -374,6 +374,7 @@ GameObject:
   - component: {fileID: 114024127139424104}
   - component: {fileID: 114912940017191994}
   - component: {fileID: 114825407229120408}
+  - component: {fileID: 114646089555806690}
   m_Layer: 10
   m_Name: Ace
   m_TagString: Player
@@ -4057,6 +4058,17 @@ MonoBehaviour:
   handF: {fileID: 114259393448995146}
   saber: {fileID: 1283999928839384}
   pistol: {fileID: 1478393481356668}
+--- !u!114 &114646089555806690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1172074447708136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8fe6e82f22ab946a0b32826a07bfec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114648052259735764
 MonoBehaviour:
   m_ObjectHideFlags: 1

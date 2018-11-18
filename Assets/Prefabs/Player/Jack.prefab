@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 114375185183451572}
   - component: {fileID: 114022399784403720}
   - component: {fileID: 114398042611503458}
+  - component: {fileID: 114206772287121398}
   m_Layer: 10
   m_Name: Jack
   m_TagString: Player
@@ -3183,6 +3184,17 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: PX
+--- !u!114 &114206772287121398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1136427775829066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8fe6e82f22ab946a0b32826a07bfec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114211980437694460
 MonoBehaviour:
   m_ObjectHideFlags: 1

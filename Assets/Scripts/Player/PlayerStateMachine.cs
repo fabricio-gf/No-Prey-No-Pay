@@ -53,9 +53,9 @@ public class PlayerStateMachine : RuntimeMonoBehaviour
     {
         if (State == eStates.Dead)
         {
-            this.enabled = false;
             return;
         }
+
         UpdateStateMachine();
         UpdateAnimator();
     }
