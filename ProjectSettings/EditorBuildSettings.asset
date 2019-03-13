@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Gold/MenuGold.unity
+    guid: 8b8f395b13e45394abdf1211e7062bfd
+  - enabled: 1
+    path: Assets/Scenes/Gold/ControlsGold.unity
+    guid: 45bf16783cb84f34fb4459c8a4c021d3
+  - enabled: 1
+    path: Assets/Scenes/Gold/TavernGold.unity
+    guid: 9a2a2829d9373ca4c898cd5cbe78111a
+  - enabled: 1
+    path: Assets/Scenes/Gold/MenuGold.unity
+    guid: 8b8f395b13e45394abdf1211e7062bfd
+  - enabled: 1
+    path: Assets/Scenes/Gold/ControlsGold.unity
+    guid: 45bf16783cb84f34fb4459c8a4c021d3
   m_configObjects: {}

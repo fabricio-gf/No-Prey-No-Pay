@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Floor
+  - Wall
+  - Platform
+  - LevelLoader
+  - Lethal
+  - Hurtbox
+  - NonLethal
   layers:
   - Default
   - TransparentFX
@@ -14,11 +21,11 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Platforms
+  - Players
+  - Hurtbox
+  - Itens
+  - Bullets
   - 
   - 
   - 
@@ -40,4 +47,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UIPannels
+    uniqueID: 3233545749
+    locked: 0
+  - name: UIModels
+    uniqueID: 2020859927
     locked: 0

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3dd52a7b9a8acc4b9dc316f41337253, type: 3}
+  m_Name: SoundLib
+  m_EditorClassIdentifier: 
+  m_matchBkgMusic:
+    m_clip: {fileID: 8300000, guid: 4b49989d87a712e4caf89cc60a3317b7, type: 3}
+    m_volume: 0.3
+  m_fistAttkSFX:
+    m_clip: {fileID: 8300000, guid: 877b330c01e34a34d993febd787fd294, type: 3}
+    m_volume: 1
+  m_saberAttkSFX:
+    m_clip: {fileID: 8300000, guid: d5e78645d033a294f96565fb482262dd, type: 3}
+    m_volume: 1
+  m_pistolAttkSFX:
+    m_clip: {fileID: 8300000, guid: a54676a69877c0548b730474286a8d0c, type: 3}
+    m_volume: 0.32
+  m_dashSFX:
+    m_clip: {fileID: 8300000, guid: a3c33e401c5ac7044a4758a8dc515fe8, type: 3}
+    m_volume: 1
+  m_deathSFX:
+    m_clip: {fileID: 8300000, guid: 12c4ee4640514a142b5fbb19d1d4ea7c, type: 3}
+    m_volume: 1
+  m_menuBkgMusic:
+    m_clip: {fileID: 8300000, guid: d4f5b89153ab55f4b9ab1362ba599fda, type: 3}
+    m_volume: 0.3
+  m_menuClickSFX:
+    m_clip: {fileID: 0}
+    m_volume: 0
+  m_menuSwapSFX:
+    m_clip: {fileID: 0}
+    m_volume: 0

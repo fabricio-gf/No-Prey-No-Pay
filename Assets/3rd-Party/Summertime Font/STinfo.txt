@@ -1,0 +1,23 @@
+Hi!  My name is Sara, and I'm a fontaholic.  It's been three months since my last download (not counting yesterday), but I'm afraid I've now slipped into the area of fontmaking, with help from my friend Apostrophe who has taught me a little bit of how to do this.  He's not responsible for my failings, only for some of the things I do right.
+
+This font, Summertime, was originally created for a splash page I never got around to making.  Maybe next summer... Like all my fonts, here I have consciously aimed at a handmade look, with rough edges here and there and elements which go together but don't precisely match.  This particular font is not a replica of any specific lettering style; it's just what came out of my digital pen while I was thinking about a nostalgic concept.  It is meant to evoke the voice of hand-drawn illustration and poster advertising alphabets from the late 19th-early 20th century, but even more the 1960s-70s craft-fair-and-flower-stand hand-rendered revivals of those alphabet styles, which hold special summertime memories for me from my childhood.
+
+At some point, I hope to add to this family a set of highly decorated capitals and another set of complementary dings.  I don't know when I'll get around to those; I only have one letter drawn in the decorated caps set at this point, and maybe two or three of the dings.
+
+There are no Cyrillic characters and only very few Greek characters.  This is because I don't speak Russian or Greek and don't feel comfortable trying to mess with symbols I don't really know intimately.  The Greek characters here are ones I find myself using often.
+
+I still don't really know what I'm doing as a fontographer, but I do like making letterforms.  I tend to design with the idea that the people who will use my fonts will use them the way I use them, as outlines in Illustrator.  This makes my fonts kind of a pain for everyone else to use.  Someday, if I ever do learn everything I'm supposed to, I will go back and make these early efforts more professional.  Meanwhile, though, because I don't really know what I'm doing, I've decided to stuff everything that doesn't fit into the standard character set into an alternate set, the Extra Character set.  (And by the way, this font features normal and oblique faces for both the standard set and the Extra Character set.) Therefore, if you're looking for a non-English character that's outside of the usual 256-character list, it's probably somewhere but maybe not where you'd expect, so you should pay careful attention to the character maps in your type manager.  Of course, if you only use Microsoft Word, you don't have to worry about any of this; you will find all the characters I made in the TrueType font's "Insert Symbol" menu/map.  But the rest of you are kind of on your own.
+
+Now about that copyright...I copyrighted this font ONLY to protect it from resale, but you may use it however else you wish.  Go ahead:  Use it commercially or personally!  Reorganize the character map!  Make new characters!  Do whatever you like, only DO NOT try to make money off of any sale of the font itself or any variation thereof, and don't even think of renaming it.  I spent some time devising original letterforms for this project.  I specifically did this for my own amusement, to increase the number of free fonts in the world, and to accomplish a specific project which I have not yet finished.  I did not make this font in order to create new things for people to buy, or to create new ways for lazy people to profit without working.
+
+I have lots of friends who are lawyers.  Consequently, even though we all have better things to do in this life than enforce my copyrights, if I do catch you infringing one, it will not go well for you.  If you want to give a free copy of this font to every single person on the planet, or if you want to alter this design or try to take it to a level of excellence I don't have time to pursue, go for it!  I will not consider either an infringement.  The only ways you can infringe this copyright are to either say you made it up from scratch, rename it, or to try to sell it or any variation you come up with without my express written permission.  And I'm telling you now, you will only get that permission if you plan to sell it to benefit a secular charity. 
+
+Anyway, that said, I truly hope you enjoy this font and that you will use it in good health.  
+
+Cheers, and best wishes!
+
+Sara
+Fine Art - Illustration - Graphic Design
+website:  http://www.saraarts.com
+e-mail:  sara@saraarts.com
+

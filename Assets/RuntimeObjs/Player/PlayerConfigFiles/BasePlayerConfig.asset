@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1694a6ba9d162eb4e95327592f6fdaf2, type: 3}
+  m_Name: BasePlayerConfig
+  m_EditorClassIdentifier: 
+  m_gravityRatio: 5
+  m_gravityMaxSpeed: 10
+  m_jumpMaxSpeed: 15
+  m_ratioToWalk: 0.6
+  m_walkAcc: 10
+  m_walkMaxSpeed: 10
+  m_slideMaxSpeed: 4
+  m_ejectDist: 2
+  m_ejectMaxSpeed: 12
+  m_dashDist: 2
+  m_dashMaxSpeed: 30
+  m_walkMinSpeedRatio: 0.05
+  m_ejectMinSpeedRatio: 0.4
+  m_dashMinSpeedRatio: 0.3
